@@ -55,32 +55,32 @@ include('connection.php');
                     ";
                     // LIMIT $startRecord, $recordsPerPage
 
-                    $result = $con->query($sql);
+                    $result = mysqli_query($con, $sql);
 
                     // check if there is data in the table
-                    if (!$result) {
-                        die('Invalid Query: ');
-                    }
+                    if (mysqli_num_rows($result) > 0) {
+                        foreach ($result as $patients) {
+                    ?>
+                            <tr>
+                                <td><?= $patients['firstName'] ?></td>
+                                <td><?= $patients['lastName'] ?></td>
+                                <td><?= $patients['gender'] ?></td>
+                                <td><?= $patients['disease'] ?></td>
+                                <td><?= $patients['dob'] ?></td>
+                                <td><?= $patients['age'] ?></td>
+                                <td><?= $patients['barangay'] ?></td>
+                                <td><?= $patients['municipality'] ?></td>
+                                <td>
+                                    <a class="btn btn-info btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">View</a>
+                                    <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
+                                </td>
 
-                    while ($row = $result->fetch_object()) {
-                        // <td>$row->outcome</td>
-                        echo "
-                        <tr>
-                        <td>$row->firstName</td>
-                        <td>$row->lastName</td>
-                        <td>$row->gender</td>
-                        <td>$row->disease</td>
-                        <td>$row->dob</td>
-                        <td>$row->age</td>
-                        <td>$row->barangay</td>
-                        <td>$row->municipality</td>
-                        <td>
-                            <a class='btn btn-info btn-sm' href='/phpsandbox/publichealth/viewPatient.php?patientId=$row->patientId'>View</a>
-                            <a class='btn btn-primary btn-sm' href='/phpsandbox/publichealth/editPatient.php?patientId=$row->patientId'>Edit</a>
-                            <a class='btn btn-danger btn-sm' href='/phpsandbox/publichealth/deletePatient.php?patientId=$row->patientId'>Remove</a>
-                        </td>
-                        </tr>
-                    ";
+                            </tr>
+                    <?php
+                        }
+                    } else {
+                        echo "No data found";
                     }
                     ?>
                 </tbody>
