@@ -1,97 +1,45 @@
 <?php
-include('./formcomponents/head.php');
 include('./components/head.php');
-include('./components/sidebar.php');
-
 ?>
-<main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Form Layouts</h1>
-        <section class="section">
-            <div class="lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Floating labels Form</h5>
-                        <!-- Floating Labels Form -->
-                        <form class="row g-3">
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                                    <label for="floatingName">Your Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                                    <label for="floatingName">Your Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                                    <label for="floatingName">Your Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email">
-                                    <label for="floatingEmail">Your Email</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="floatingCity" placeholder="City">
-                                        <label for="floatingCity">City</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="floatingCity" placeholder="City">
-                                        <label for="floatingCity">City</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" id="floatingSelect" aria-label="State">
-                                        <option selected>New York</option>
-                                        <option value="1">Oregon</option>
-                                        <option value="2">DC</option>
-                                    </select>
-                                    <label for="floatingSelect">State</label>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingZip" placeholder="Zip">
-                                    <label for="floatingZip">Zip</label>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
-                            </div>
-                        </form>
-                        <!-- End floating Labels Form -->
-                    </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <?php
+        include('./components/sidebar.php');
+        ?>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <?php
+                include('./components/topbar.php');
+                ?>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <?php
+                    include('./components/forms.php');
+                    ?>
                 </div>
+                <!-- /.container-fluid -->
             </div>
-        </section>
+            <!-- End of Main Content -->
+            <?php
+            include('./components/footer.php');
+            ?>
+        </div>
+        <!-- End of Content Wrapper -->
     </div>
-</main>
+    <!-- End of Page Wrapper -->
 
-
-<?php
-include('./components/footer.php');
-include('./components/script.php');
-?>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <?php
+    include('./components/logoutmodal.php');
+    include('./components/script.php');
+    ?>
