@@ -24,7 +24,7 @@
                     });
                 }
             };
-            xhr.open('GET', 'get_barangay.php?municipality=' + selectedMunicipality, true);
+            xhr.open('GET', 'http://localhost/admin2gh/components/get_barangay.php?municipality=' + selectedMunicipality, true);
             xhr.send();
         }
     }
