@@ -26,9 +26,7 @@ include('./components/head.php');
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     <?php
-                    // include('./components/pageheading.php');
                     include('./components/tableAdmins.php');
-
                     ?>
                 </div>
                 <!-- /.container-fluid -->
