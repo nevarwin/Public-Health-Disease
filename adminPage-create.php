@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('./components/head.php');
 ?>
 
@@ -23,13 +22,11 @@ include('./components/head.php');
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Admins</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Create Admin</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     <?php
-                    include('./components/message.php');
-                    include('./components/createAdminForm.php');
-
+                    include('./components/adminForm-create.php');
                     ?>
                 </div>
                 <!-- /.container-fluid -->
