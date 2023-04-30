@@ -9,7 +9,7 @@ include('connection.php');
             <h2 class="m-0 font-weight-bold text-primary">
                 Admin's Data
             </h2>
-            <a href="http://localhost/admin2gh/createAdmin.php" class="btn btn-primary" role="button">Add new Admin</a>
+            <a href="http://localhost/admin2gh/adminPage-create.php" class="btn btn-primary" role="button">Add new Admin</a>
         </div>
     </div>
 
@@ -64,8 +64,8 @@ include('connection.php');
                                 <td><?= $admins['municipality']; ?></td>
                                 <td><?= $admins['created_at']; ?></td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="/phpsandbox/publichealth/editAdmin.php?id=<?= $admins['id']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="/phpsandbox/publichealth/deleteAdmin.php?id=<?= $admins['id']; ?>">Remove</a>
+                                    <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/adminPage-update.php?id=<?= $admins['id']; ?>">Update</a>
+                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/adminForm-remove.php?id=<?= $admins['id']; ?>">Remove</a>
                                 </td>
                             </tr>
                     <?php
@@ -73,24 +73,6 @@ include('connection.php');
                     } else {
                         echo "<tr><td colspan='8' class='text-center'>No data found</td></tr>";
                     }
-
-                    // while ($row = $result->fetch_object()) {
-                    //     echo "
-                    //     <tr>
-                    //     <td>$row->name</td>
-                    //     <td>$row->email</td>
-                    //     <td>$row->contact_number</td>
-                    //     <td>$row->address</td>
-                    //     <td>$row->barangay</td>
-                    //     <td>$row->municipality</td>
-                    //     <td>$row->created_at</td>
-                    //     <td>
-                    //         <a class='btn btn-primary btn-sm' href='/phpsandbox/publichealth/editAdmin.php?id=$row->id'>Edit</a>
-                    //         <a class='btn btn-danger btn-sm' href='/phpsandbox/publichealth/deleteAdmin.php?id=$row->id'>Remove</a>
-                    //     </td>
-                    //     </tr>
-                    // ";
-                    // }
                     ?>
                 </tbody>
             </table>
