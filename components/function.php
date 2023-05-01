@@ -12,6 +12,6 @@ function check_login($con) {
     }
 
     //redirect to login
-    header('location: admin.php');
+    header('location: http://localhost/admin2gh/adminTable.php');
     die;
 }
