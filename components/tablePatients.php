@@ -9,7 +9,7 @@ include('connection.php');
             <h2 class="m-0 font-weight-bold text-primary">
                 Patient's Data
             </h2>
-            <a href="/phpsandbox/publichealth/createPatient.php" class="btn btn-primary" role="button">Add new Patient</a>
+            <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary" role="button">Add new Patient</a>
         </div>
     </div>
     <div class="card-body">
@@ -17,6 +17,7 @@ include('connection.php');
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Patient Id</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Gender</th>
@@ -30,6 +31,7 @@ include('connection.php');
                 </thead>
                 <tfoot>
                     <tr>
+                        <th>Patient Id</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Gender</th>
@@ -62,6 +64,7 @@ include('connection.php');
                         foreach ($result as $patients) {
                     ?>
                             <tr>
+                                <td><?= $patients['patientId'] ?></td>
                                 <td><?= $patients['firstName'] ?></td>
                                 <td><?= $patients['lastName'] ?></td>
                                 <td><?= $patients['gender'] ?></td>
@@ -72,8 +75,8 @@ include('connection.php');
                                 <td><?= $patients['municipality'] ?></td>
                                 <td>
                                     <a class="btn btn-info btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">View</a>
-                                    <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/patientTable.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
+                                    <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
                                 </td>
 
                             </tr>
