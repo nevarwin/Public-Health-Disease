@@ -30,6 +30,17 @@ $address = $row['address'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
 
+// Converting the munid and barangayid to its string from their rescpetive table
+$sql = "SELECT * FROM municipality WHERE munId = '$municipality'";
+$result = mysqli_query($con, $sql);
+$municipalityRow = mysqli_fetch_assoc($result);
+$municipality = $municipalityRow['municipality'];
+
+$sql = "SELECT * FROM barangay WHERE id = '$barangay'";
+$result = mysqli_query($con, $sql);
+$barangayRow = mysqli_fetch_assoc($result);
+$barangay = $barangayRow['barangay'];
+
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
@@ -60,8 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Error updating record: ";
         }
 
-        header("location: /phpsandbox/publichealth/admin.php");
-        $con->close();
+        echo "
+        <script> 
+        alert('Admin Successfully Updated');
+        window.location= 'http://localhost/admin2gh/adminTable.php';
+        </script>
+        ";
     } while (false);
 }
 
@@ -97,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
         <div class="col-sm-6">
             <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                <option value=""> Select Municipality</option>
+                <option value='<?= $municipality ?>'><?= $municipality ?></option>
                 <?php
                 // Connect to database and fetch municipalities
                 include('connection.php');
@@ -116,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
         <div class="col-sm-6">
             <select class="form-select" id="barangay" name="barangay">
-                <option>Select Barangay</option>
+                <option value="<?= $barangay ?>"><?= $barangay ?></option>
             </select>
         </div>
     </div>
