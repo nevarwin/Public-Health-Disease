@@ -57,12 +57,6 @@ $barangay = $barangayRow['barangay'];
         </div>
     </div>
     <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Password</label>
-        <div class="col-sm-6">
-            <p> <?= $password ?> </p>
-        </div>
-    </div>
-    <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
         <div class="col-sm-6">
             <p> <?= $contact ?> </p>
