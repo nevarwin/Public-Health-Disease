@@ -9,6 +9,15 @@ if (isset($_GET['patientId'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $sql = "SELECT * FROM patients WHERE patientId = $patientId";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $fieldValue = $row['patientId'];
+
+    // Insert the deleted field into the deleted_fields table
+    $query = "INSERT INTO deleted_fields (patientId) VALUES ('$fieldValue')";
+    mysqli_query($con, $query);
+
     $sql = "DELETE FROM patients WHERE patientId = $patientId";
     $result = mysqli_query($con, $sql);
 
@@ -20,6 +29,8 @@ if (isset($_GET['patientId'])) {
         </script>
         ";
     }
+
+    // Redirect to the admin page
     echo
     "<script>
     alert('Patient Successfully Removed');

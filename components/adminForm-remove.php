@@ -9,6 +9,16 @@ if (isset($_GET['id'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $sql = "SELECT * FROM clients WHERE id = $id";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $fieldValue = $row['id'];
+
+    // Insert the deleted field into the deleted_fields table
+    $query = "INSERT INTO deleted_fields (clientId) VALUES ('$fieldValue')";
+    mysqli_query($con, $query);
+
+
     $sql = "DELETE FROM clients WHERE id = $id";
     $result = mysqli_query($con, $sql);
 
@@ -22,12 +32,8 @@ if (isset($_GET['id'])) {
     }
     echo
     "<script>
-    let confirmDelete = confirm('Are you sure you want to delete this data?');
-    if (confirmDelete) {
-            window.location.href = 'http://localhost/admin2gh/components/adminForm-remove.php?id=$id';
-        } else {
-            window.location.href = 'http://localhost/admin2gh/adminTable.php';
-        }
+    alert('Patient Successfully Removed');
+    window.location= 'http://localhost/admin2gh/adminTable.php';
     </script>";
 
     // '<script>
