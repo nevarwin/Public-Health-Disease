@@ -53,6 +53,37 @@ $contact = $row['contact'];
 $address = $row['address'];
 $addressDRU = $row['addressOfDRU'];
 
+// Converting the dropdowns to its string from their rescpetive table
+$sql = "SELECT * FROM genders WHERE genderId = '$gender'";
+$result = mysqli_query($con, $sql);
+$genderRow = mysqli_fetch_assoc($result);
+$gender = $genderRow['gender'];
+
+$sql = "SELECT * FROM municipality WHERE munId = '$municipality'";
+$result = mysqli_query($con, $sql);
+$municipalityRow = mysqli_fetch_assoc($result);
+$municipality = $municipalityRow['municipality'];
+
+$sql = "SELECT * FROM barangay WHERE id = '$barangay'";
+$result = mysqli_query($con, $sql);
+$barangayRow = mysqli_fetch_assoc($result);
+$barangay = $barangayRow['barangay'];
+
+$sql = "SELECT * FROM municipality WHERE munId = '$municipalityDRU'";
+$result = mysqli_query($con, $sql);
+$municipalityDRURow = mysqli_fetch_assoc($result);
+$municipalityDRU = $municipalityDRURow['municipality'];
+
+$sql = "SELECT * FROM barangay WHERE id = '$barangayDRU'";
+$result = mysqli_query($con, $sql);
+$barangayDRURow = mysqli_fetch_assoc($result);
+$barangayDRU = $barangayDRURow['barangay'];
+
+$sql = "SELECT * FROM diseases WHERE diseaseId = '$disease'";
+$result = mysqli_query($con, $sql);
+$diseaseRow = mysqli_fetch_assoc($result);
+$disease = $diseaseRow['disease'];
+
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -81,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
         // added new data into the db
-        $sql = "UPDATE patients SET `creationDate`='$currentDate', `firstName`='$fName', `lastName`='$lName', `middleName`='$mName', `munCityOfDRU`='$municipalityDRU', `addressOfDRU`='$addressDRU', `gender`='$gender', `dob`='$dob', `municipality`='$municipality', `barangay`='$barangay', `address`='$address', `disease`='$disease' WHERE patientId=$patientId";
+        $sql = "UPDATE patients SET `creationDate`='$currentDate', `firstName`='$fName', `lastName`='$lName', `middleName`='$mName', `munCityOfDRU`='$municipalityDRU', `brgyOfDRU`='$barangayDRU', `addressOfDRU`='$addressDRU', `gender`='$gender', `dob`='$dob', `municipality`='$municipality', `barangay`='$barangay', `address`='$address', `disease`='$disease', `contact`='$contact' WHERE patientId=$patientId";
 
         $result = mysqli_query($con, $sql);
 
@@ -107,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!-- Name Form Group -->
 <div class="row d-flex justify-content-center">
     <div class="col-md-7">
-        <h2>New Patient</h2>
+        <h2>Update Patient</h2>
 
         <form action="" method="post">
             <div class="input-group mb-3">
@@ -123,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class='col-sm-3 col-form-label' for="gender">Gender</label>
                 <div class="col-sm-6">
                     <select class="form-select" id="gender" name="gender">
-                        <option value="">Select gender</option>
+                        <option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
                         <?php
                         // Connect to database and fetch municipalities
                         include("connection.php");
@@ -163,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="input-group mb-3">
                 <span class="input-group-text">Municipality</span>
                 <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                    <option value="<?php echo $municipality; ?>">Select municipality</option>
+                    <option value="<?php echo $municipality; ?>"><?php echo $municipality; ?></option>
                     <?php
                     // Connect to database and fetch municipalities
                     include("connection.php");
@@ -178,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Barangay Dropdown -->
                 <span class="input-group-text">Barangay</span>
                 <select class="form-select" id="barangay" name="barangay">
-                    <option value="<?php echo $barangay; ?>">Select Barangay</option>
+                    <option value="<?php echo $barangay; ?>"><?php echo $barangay; ?></option>
                 </select>
             </div>
             <!-- Address -->
@@ -192,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="input-group mb-3">
                 <span class="input-group-text">Municipality of DRU</span>
                 <select class="form-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
-                    <option value="">Select municipality of DRU</option>
+                    <option value="<?php echo $municipalityDRU; ?>"><?php echo $municipalityDRU; ?></option>
                     <?php
                     // Connect to database and fetch municipalities
                     include("connection.php");
@@ -207,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Barangay of DRU Dropdown -->
                 <span class="input-group-text">Barangay of DRU</span>
                 <select class="form-select" id="barangayDRU" name="barangayDRU">
-                    <option value="">Select Barangay of DRU</option>
+                    <option value=""><?php echo $barangayDRU; ?></option>
                 </select>
             </div>
             <!-- Address of DRU -->
@@ -222,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class='col-sm-3 col-form-label' for="disease">Disease</label>
                 <div class="col-sm-6">
                     <select class="form-select" id="disease" name="disease">
-                        <option value="">Select Disease</option>
+                        <option value="<?php echo $disease; ?>"><?php echo $disease; ?></option>
                         <?php
                         // Connect to database and fetch disease
                         include("connection.php");
