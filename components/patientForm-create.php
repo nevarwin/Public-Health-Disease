@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (strcmp($diseaseName, $value) == 0) {
             echo "
             <script> 
-            alert('Patient Successfully Updated');
+            alert('Patient Successfully Created');
             window.location= 'http://localhost/admin2gh/patientTable.php';
             </script>
             ";
