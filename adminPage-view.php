@@ -25,7 +25,7 @@ include('./components/head.php');
                         <h1 class="h3 mb-0 text-gray-800">View Profile</h1>
                     </div>
                     <?php
-                    include('./components/adminForm-view.php');
+                    include('./components/adminForm-viewProfile.php');
                     ?>
                 </div>
                 <!-- /.container-fluid -->
