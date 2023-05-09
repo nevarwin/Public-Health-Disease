@@ -2,7 +2,8 @@
 // session_start();
 include('barangayScript.php');
 include("connection.php");
-// include("function.php");
+include('alertMessage.php');
+include('ageScript.php');
 
 // $user_data = check_login($con);
 
@@ -43,6 +44,7 @@ $lName = $row['lastName'];
 $mName = $row['middleName'];
 $gender = $row['gender'];
 $dob = $row['dob'];
+$age = $row['age'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
 $municipalityDRU = $row['munCityOfDRU'];
@@ -79,11 +81,6 @@ $result = mysqli_query($con, $sql);
 $barangayDRURow = mysqli_fetch_assoc($result);
 $barangayDRU = $barangayDRURow['barangay'];
 
-$sql = "SELECT * FROM diseases WHERE diseaseId = '$disease'";
-$result = mysqli_query($con, $sql);
-$diseaseRow = mysqli_fetch_assoc($result);
-$disease = $diseaseRow['disease'];
-
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -93,26 +90,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mName = $_POST['mName'];
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
+    $age = $_POST['age'];
     $municipality = $_POST['municipality'];
     $barangay = $_POST['barangay'];
     $municipalityDRU = $_POST['municipalityDRU'];
     $barangayDRU = $_POST['barangayDRU'];
-    $disease = $_POST['disease'];
-    // $outcome = $_POST['outcome'];
     $contact = $_POST['contact'];
     $address = $_POST['address'];
     $addressDRU = $_POST['addressDRU'];
-    // $dateDied = $_POST['dateDied'];
-    $currentDate = date("Y-m-d H:i:s");
 
     // check if the data is empty
     do {
-        if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($address) or empty($gender)) {
+        if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($contact) or empty($address) or empty($gender)) {
             $errorMessage = "All fields are required";
             break;
         }
         // added new data into the db
-        $sql = "UPDATE patients SET `creationDate`='$currentDate', `firstName`='$fName', `lastName`='$lName', `middleName`='$mName', `munCityOfDRU`='$municipalityDRU', `brgyOfDRU`='$barangayDRU', `addressOfDRU`='$addressDRU', `gender`='$gender', `dob`='$dob', `municipality`='$municipality', `barangay`='$barangay', `address`='$address', `disease`='$disease', `contact`='$contact' WHERE patientId=$patientId";
+        $sql = "UPDATE patients SET `firstName`='$fName', `lastName`='$lName', `middleName`='$mName', `munCityOfDRU`='$municipalityDRU', `brgyOfDRU`='$barangayDRU', `addressOfDRU`='$addressDRU', `gender`='$gender', `dob`='$dob', `age`='$age',`municipality`='$municipality', `barangay`='$barangay', `address`='$address', `contact`='$contact' WHERE patientId=$patientId";
 
         $result = mysqli_query($con, $sql);
 
@@ -168,19 +162,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
             </div>
-
             <!-- DOB -->
             <div class="row mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Date of Birthday</label>
                 <div class="col-sm-6">
-                    <input type="date" class='form-control' name='dob' id="dob" onchange="calculateAge()" value='<?php echo $dob; ?>'>
+                    <input type="date" class='form-control' name='dob' id="dob" onchange="updateVariable(event)" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dob; ?>'>
                 </div>
             </div>
             <!-- Age minus the DOB -->
             <div class="row mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Age</label>
                 <div class="col-sm-6">
-                    <input type="number" class='form-control' id="age" name='age' disabled>
+                    <input type="text" class='form-control' id="age" name='age' value='<?php echo $age; ?>'>
                 </div>
             </div>
             <!-- Contact Number -->
@@ -248,52 +241,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
                 </div>
             </div>
-            <!-- Disease Dropdown -->
-            <div class="row mb-3">
-                <label class='col-sm-3 col-form-label' for="disease">Disease</label>
-                <div class="col-sm-6">
-                    <select class="form-select" id="disease" name="disease">
-                        <option value="<?php echo $disease; ?>"><?php echo $disease; ?></option>
-                        <?php
-                        // Connect to database and fetch disease
-                        include("connection.php");
-                        $result = mysqli_query($con, 'SELECT * FROM diseases');
-
-                        // Display each disease in a dropdown option
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option value="' . $row['diseaseId'] . '">' . $row['disease'] . '</option>';
-                        }
-
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <!-- Outcome Dropdown
-                <div class="row mb-3">
-                    <label class='col-sm-3 col-form-label' for="outcome">Outcome</label>
-                    <div class="col-sm-6">
-                        <select class="form-select" id="outcome" name="outcome">
-                            <option value="">Select Outcome</option>
-                            <?php
-                            // Connect to database and fetch municipalities
-                            include("connection.php");
-                            $result = mysqli_query($con, 'SELECT * FROM outcomes');
-
-                            // Display each municipalities in a dropdown option
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . $row['outcomeId'] . '">' . $row['outcome'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                DateDied 
-                <div class="row mb-3">
-                    <label for="" class='col-sm-3 col-form-label'>Date Died</label>
-                    <div class="col-sm-6">
-                        <input type="date" class='form-control' name='dateDied' value='<?php echo $dateDied; ?>'>
-                    </div>
-                </div> -->
 
             <?php
             if (!empty($successMessage)) {
