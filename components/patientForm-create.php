@@ -1,12 +1,8 @@
 <?php
-// session_start();
 include("connection.php");
 include('barangayScript.php');
 include('alertMessage.php');
 include('ageScript.php');
-// include("function.php");
-
-// $user_data = check_login($con);
 
 // patient name
 $fName = '';
@@ -24,24 +20,20 @@ $alert = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get the data from the Form
     $patientId = $_POST['patientId'];
-    // $_SESSION['patiendId'] = $patientId;
     $fName = $_POST['fName'];
     $lName = $_POST['lName'];
     $mName = $_POST['mName'];
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $age = $_POST['age'];
-    echo $age;
     $municipality = $_POST['municipality'];
     $barangay = $_POST['barangay'];
     $municipalityDRU = $_POST['municipalityDRU'];
     $barangayDRU = $_POST['barangayDRU'];
     $disease = $_POST['disease'];
-    // $outcome = $_POST['outcome'];
     $contact = $_POST['contact'];
     $address = $_POST['address'];
     $addressDRU = $_POST['addressDRU'];
-    // $dateDied = $_POST['dateDied'];
     $currentDate = date("Y-m-d H:i:s");
 
     // check if the data is empty
@@ -59,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         VALUES 
         ('$currentDate', '$fName', '$lName', '$mName' , '$municipalityDRU', '$addressDRU','$gender', '$dob', '$age', '$municipality', '$barangay', '$address', '$disease', '$barangayDRU', '$contact')";
         $result = mysqli_query($con, $sql);
+        $insert_id = mysqli_insert_id($con);
 
         if (!$result) {
             $errorMessage = mysqli_error($con);
@@ -68,31 +61,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
 
+        // Converting the disease to its string from their respective table
         $diseaseName = $_POST['disease'];
         $sql = "SELECT * FROM diseases WHERE diseaseId = '$diseaseName'";
-        $result = mysqli_query($con, $sql);
-        $row = mysqli_fetch_assoc($result);
+        $diseaseNameResult = mysqli_query($con, $sql);
+        $row = mysqli_fetch_assoc($diseaseNameResult);
         $value = $row['diseaseId'];
         $diseaseValue = strtolower($row['disease']);
 
-        echo ($value); //13
-        echo gettype($value); //string
-        echo ($diseaseName); //13
-        echo ($diseaseValue); //rabies
-        echo gettype($diseaseValue); //string
+        $query = "SELECT patientId FROM patients";
+        $patientIdResult = mysqli_query($con, $query);
+        $patientValue = mysqli_fetch_assoc($patientIdResult);
+        $patientId = $patientValue['patientId'];
+
+        echo "Patient id $patientId";
 
         if (strcmp($diseaseName, $value) == 0) {
 
-            // $link = "/admin2gh/components/{$diseaseValue}Form-create.php";
-            // echo ($link);
+            // $link = "localhost/admin2gh/{$diseaseValue}Page-create.php";
+            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
             // header("Location: $link");
-            // exit(0);
+            // echo ($link);
 
-            // check if certain disease form is present *not working
+
+            // // check if certain disease form is present *not working
             // if (file_exists($link)) {
             //     echo ('Link Exist!');
-            //     // header("Location: $link");
-            //     // exit(0);
             // } else {
             //     echo ('Link does not exist!');
             // }
@@ -119,6 +113,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <?php
         if (!empty($errorMessage)) {
+            echo $alert;
+        }
+        if (!empty($successMessage)) {
             echo $alert;
         }
         ?>
@@ -151,7 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
             </div>
-
             <!-- DOB -->
             <div class="row mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Date of Birthday</label>
@@ -252,11 +248,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-            <?php
-            if (!empty($successMessage)) {
-                echo $alert;
-            }
-            ?>
             <br>
             <div id="form-extension"></div>
             <br>
