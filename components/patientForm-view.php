@@ -1,10 +1,6 @@
 <?php
-// session_start();
 include('barangayScript.php');
 include("connection.php");
-// include("function.php");
-
-// $user_data = check_login($con);
 
 // patient name
 $patientId = '';
@@ -22,7 +18,7 @@ $successMessage = '';
 // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 //GET Method: show the data of the client
 if (!isset($_GET["patientId"])) {
-    header('location:/phpsandbox/publichealthd/patient.php');
+    header('location: http://localhost/admin2gh/patientTable.php');
     exit;
 }
 
@@ -34,7 +30,7 @@ $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
 
 if (!$row) {
-    header('location: /phpsandbox/publichealth/patient.php');
+    header('location: http://localhost/admin2gh/patientTable.php');
     exit;
 }
 
@@ -43,15 +39,16 @@ $lName = $row['lastName'];
 $mName = $row['middleName'];
 $gender = $row['gender'];
 $dob = $row['dob'];
+$age = $row['age'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
 $municipalityDRU = $row['munCityOfDRU'];
 $barangayDRU = $row['brgyOfDRU'];
 $disease = $row['disease'];
-// $outcome = $row['outcome'];
 $contact = $row['contact'];
 $address = $row['address'];
 $addressDRU = $row['addressOfDRU'];
+$creationDate = $row['creationDate'];
 
 // Converting the dropdowns to its string from their rescpetive table
 $sql = "SELECT * FROM genders WHERE genderId = '$gender'";
@@ -87,151 +84,149 @@ $disease = $diseaseRow['disease'];
 $sql = "SELECT * FROM rabiesinfotbl WHERE patientId = $patientId";
 $result = mysqli_query($con, $sql);
 $rabies = mysqli_fetch_assoc($result);
-print_r($rabies);
+// print_r($rabies);
 
-// check if the form is submitted using the post method
-// initialize data above into the post
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // get the data from the Form
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-    $mName = $_POST['mName'];
-    $gender = $_POST['gender'];
-    $dob = $_POST['dob'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
-    $municipalityDRU = $_POST['municipalityDRU'];
-    $barangayDRU = $_POST['barangayDRU'];
-    $disease = $_POST['disease'];
-    // $outcome = $_POST['outcome'];
-    $contact = $_POST['contact'];
-    $address = $_POST['address'];
-    $addressDRU = $_POST['addressDRU'];
-    // $dateDied = $_POST['dateDied'];
-    $currentDate = date("Y-m-d H:i:s");
-}
 
 ?>
-
-<!-- Name Form Group -->
-<div class="row d-flex justify-content-center">
-    <div class="col-md-7">
-        <h2>View Patient</h2>
-
-        <form action="" method="post">
-            <div class="input-group mb-3">
-                <input type="text" disabled class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
-                <span class="input-group-text">Patient Name</span>
-                <input disabled class='form-control' name='lName' placeholder='<?php echo $fName; ?>'>
-                <input disabled class='form-control' name='fName' placeholder='<?php echo $lName; ?>'>
-                <input disabled class='form-control' name='mName' placeholder='<?php echo $mName; ?>'>
-            </div>
-
-            <!-- Gender Dropdown -->
-            <div class="row mb-3">
-                <label class='col-sm-3 col-form-label' for="gender">Gender</label>
-                <div class="col-sm-6">
-                    <p> <?php echo $gender; ?> </p>
-                </div>
-            </div>
-
-            <!-- DOB -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Date of Birthday</label>
-                <div class="col-sm-6">
-                    <input type="date" class='form-control' name='dob' id="dob" onchange="calculateAge()" value='<?php echo $dob; ?>'>
-                </div>
-            </div>
-            <!-- Age minus the DOB -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Age</label>
-                <div class="col-sm-6">
-                    <input type="text" class='form-control' id="age" name='age' value="<?php $age ?>">
-                </div>
-            </div>
-            <!-- Contact Number -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
-                <div class="col-sm-6">
-                    <input type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
-                </div>
-            </div>
-            <!-- Municipality Dropdown -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Municipality</label>
-                <input placeholder="<?php echo $municipality; ?>" disabled>
-            </div>
-            <div class='row mb-3'>
-                <!-- Barangay Dropdown -->
-                <label for="" class='col-sm-3 col-form-label'>Barangay</label>
-                <input placeholder="<?php echo $barangay; ?>" disabled>
-            </div>
-            <!-- Municipality Dropdown -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Municipality of DRU</label>
-                <input placeholder="<?php echo $municipalityDRU; ?>" disabled>
-            </div>
-            <div class='row mb-3'>
-                <!-- Barangay Dropdown -->
-                <label for="" class='col-sm-3 col-form-label'>Barangay of DRU</label>
-                <input placeholder="<?php echo $barangayDRU; ?>" disabled>
-            </div>
-            <!-- Address -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
-                <input placeholder="<?php echo $addressDRU; ?>" disabled>
-            </div>
-            <!-- Disease Dropdown -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Disease</label>
-                <input placeholder="<?php echo $disease; ?>" disabled>
-            </div>
-            <!-- Outcome Dropdown
-                <div class="row mb-3">
-                    <label class='col-sm-3 col-form-label' for="outcome">Outcome</label>
-                    <div class="col-sm-6">
-                        <select class="form-select" id="outcome" name="outcome">
-                            <option value="">Select Outcome</option>
-                            <?php
-                            // Connect to database and fetch municipalities
-                            include("connection.php");
-                            $result = mysqli_query($con, 'SELECT * FROM outcomes');
-
-                            // Display each municipalities in a dropdown option
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . $row['outcomeId'] . '">' . $row['outcome'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                DateDied 
-                <div class="row mb-3">
-                    <label for="" class='col-sm-3 col-form-label'>Date Died</label>
-                    <div class="col-sm-6">
-                        <input type="date" class='form-control' name='dateDied' value='<?php echo $dateDied; ?>'>
-                    </div>
-                </div> -->
-
-            <?php
-            if (!empty($successMessage)) {
-                echo "
-                    <div class='row mb-3'>
-                    <div class='offset-sm-3 col-sm-6'>
-                    <div class='alert alert-success alert-dimissible fade show' role='alert'>
-                    <strong>$successMessage</strong>
-                    <button type = 'button' class = 'btn-close' data-bs-dismissible = 'alert' aria-label = 'close'></button>
-                    </div>
-                    </div>
-                    </div>
-                    ";
-            }
-            ?>
-            <div class="row mb-3">
-                <div class="col-sm-3 d-grid">
-                    <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Back</a>
-                </div>
-            </div>
-        </form>
+<div class="container-fluid">
+    <div class="align-items-center justify-content-between mb-4">
+        <h1 class="h3 text-gray-800 text-center">Patient Records</h1>
     </div>
-</div>
+
+    <div class="row"> <!-- Begin of Row -->
+
+        <div class="col-xl-7 col-md-6 mb-3">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="text-xs font-weight-bold text-success">PATIENT NAME</div>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo $fName . " " . $lName . " " . $mName; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <div class="text-xs font-weight-bold text-success">PATIENT ID</div>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo $patientId; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div><!-- End of Row -->
+    <div class="row"><!-- Begin Row -->
+        <!-- First Column -->
+        <div class="col-lg-4">
+            <!-- Details -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">Details <a style="margin-left: 225px; text-decoration:none;" class="text-secondary" href="http://localhost/patientrecords/admissioncontrol/patient_edit_option/1">
+                            <i class="fa fa-edit"></i></a> </h6>
+                </div>
+                <div class="card-body"> <!--Card Body begin tag  -->
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $address ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Birthday</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $dob ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangay ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Gender</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $gender ?></div>
+                    </div>
+                    <div style="margin-bottom:18px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Contact Number</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $contact ?></div>
+                    </div>
+                    <div style="margin-bottom:18px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality of DRU</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipalityDRU ?></div>
+                    </div>
+                    <div style="margin-bottom:18px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay of DRU</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangayDRU ?></div>
+                    </div>
+
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address of DRU</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $addressDRU ?></div>
+                    </div>
+
+                    <div style="margin-bottom:18px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date Added</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $creationDate; ?></div>
+                    </div>
+                </div><!--Card body end tag -->
+            </div>
+        </div>
+        <!-- Second Column -->
+        <div id="findings" class="col-xl-6 col-lg-4">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-success">Disease Information <a style="margin-left: 450px; text-decoration:none;" class="text-secondary" href="<?php echo "rabiesPage-update.php?patientId={$patientId}"; ?>"> <i class="fa fa-plus"></i></a></h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        <?php
+                        include("{$disease}Form-view.php");
+                        ?>
+                    </div>
+                </div>
+            </div><!-- End of Row -->
+        </div>
+    </div>
