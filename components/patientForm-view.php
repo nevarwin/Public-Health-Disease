@@ -24,13 +24,25 @@ if (!isset($_GET["patientId"])) {
 
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM patients WHERE patientId = $patientId";
+// $sql = "SELECT * FROM patients WHERE patientId = $patientId";
+
+$sql = "SELECT *
+    FROM patients
+    LEFT JOIN municipality AS m1 ON patients.municipality = m1.munId
+    LEFT JOIN barangay AS b1 ON patients.barangay = b1.id
+    LEFT JOIN diseases ON patients.disease = diseases.diseaseId
+    LEFT JOIN genders ON patients.gender = genders.genderId
+    WHERE patients.patientId = $patientId
+";
 // execute the sql query
 $result = mysqli_query($con, $sql);
-$row = $result->fetch_assoc();
+if (!$result) {
+    echo 'error in result' . mysqli_error($con);;
+}
+$row = mysqli_fetch_assoc($result);
 
 if (!$row) {
-    header('location: http://localhost/admin2gh/patientTable.php');
+    // header('location: http://localhost/admin2gh/patientTable.php');
     exit;
 }
 
@@ -50,22 +62,6 @@ $address = $row['address'];
 $addressDRU = $row['addressOfDRU'];
 $creationDate = $row['creationDate'];
 
-// Converting the dropdowns to its string from their rescpetive table
-$sql = "SELECT * FROM genders WHERE genderId = '$gender'";
-$result = mysqli_query($con, $sql);
-$genderRow = mysqli_fetch_assoc($result);
-$gender = $genderRow['gender'];
-
-$sql = "SELECT * FROM municipality WHERE munId = '$municipality'";
-$result = mysqli_query($con, $sql);
-$municipalityRow = mysqli_fetch_assoc($result);
-$municipality = $municipalityRow['municipality'];
-
-$sql = "SELECT * FROM barangay WHERE id = '$barangay'";
-$result = mysqli_query($con, $sql);
-$barangayRow = mysqli_fetch_assoc($result);
-$barangay = $barangayRow['barangay'];
-
 $sql = "SELECT * FROM municipality WHERE munId = '$municipalityDRU'";
 $result = mysqli_query($con, $sql);
 $municipalityDRURow = mysqli_fetch_assoc($result);
@@ -75,11 +71,6 @@ $sql = "SELECT * FROM barangay WHERE id = '$barangayDRU'";
 $result = mysqli_query($con, $sql);
 $barangayDRURow = mysqli_fetch_assoc($result);
 $barangayDRU = $barangayDRURow['barangay'];
-
-$sql = "SELECT * FROM diseases WHERE diseaseId = '$disease'";
-$result = mysqli_query($con, $sql);
-$diseaseRow = mysqli_fetch_assoc($result);
-$disease = $diseaseRow['disease'];
 
 $sql = "SELECT * FROM rabiesinfotbl WHERE patientId = $patientId";
 $result = mysqli_query($con, $sql);
@@ -217,7 +208,7 @@ $rabies = mysqli_fetch_assoc($result);
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-success">Disease Information <a style="margin-left: 450px; text-decoration:none;" class="text-secondary" href="<?php echo "rabiesPage-update.php?patientId={$patientId}"; ?>"> <i class="fa fa-plus"></i></a></h6>
+                    <h6 class="m-0 font-weight-bold text-success">Disease Information <a style="margin-left: 450px; text-decoration:none;" class="text-secondary" href="<?php echo "{$disease}Page-update.php?patientId={$patientId}"; ?>"> <i class="fa fa-plus"></i></a></h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
