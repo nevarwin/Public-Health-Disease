@@ -17,6 +17,7 @@ include('connection.php');
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Position</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact Number</th>
@@ -29,6 +30,7 @@ include('connection.php');
                 </thead>
                 <tfoot>
                     <tr>
+                        <th>Position</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact Number</th>
@@ -42,8 +44,9 @@ include('connection.php');
                 <tbody>
                     <?php
                     // read all the data from db table
-                    $sql = "SELECT clients.*, barangay.barangay, municipality.municipality
+                    $sql = "SELECT clients.*, barangay.barangay, municipality.municipality, positions.position
                     FROM clients
+                    LEFT JOIN positions ON clients.positionId = positions.positionId
                     LEFT JOIN barangay ON clients.barangay = barangay.id 
                     LEFT JOIN municipality ON clients.municipality = municipality.munId
                     ";
@@ -55,6 +58,7 @@ include('connection.php');
                         foreach ($result as $admins) {
                     ?>
                             <tr>
+                                <td><?= $admins['position']; ?></td>
                                 <td><?= $admins['name']; ?></td>
                                 <td><?= $admins['email']; ?></td>
                                 <td><?= $admins['contact_number']; ?></td>
