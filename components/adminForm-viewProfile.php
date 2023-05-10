@@ -18,7 +18,7 @@ $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
 
 if (!$row) {
-    header('location: /phpsandbox/publichealth/admin.php');
+    // header('location: /phpsandbox/publichealth/admin.php');
     exit;
 }
 
@@ -29,6 +29,7 @@ $contact = $row['contact_number'];
 $address = $row['address'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
+$position = $row['positionId'];
 
 // Converting the munid and barangayid to its string from their respetive table
 $sql = "SELECT * FROM municipality WHERE munId = '$municipality'";
@@ -41,9 +42,20 @@ $result = mysqli_query($con, $sql);
 $barangayRow = mysqli_fetch_assoc($result);
 $barangay = $barangayRow['barangay'];
 
+$sql = "SELECT * FROM positions WHERE positionId = '$position'";
+$result = mysqli_query($con, $sql);
+$positionRow = mysqli_fetch_assoc($result);
+$position = $positionRow['position'];
+
 ?>
 <form action="" method="post">
     <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
+    <div class="row mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Position</label>
+        <div class="col-sm-6">
+            <p> <?= $position ?> </p>
+        </div>
+    </div>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Name</label>
         <div class="col-sm-6">
@@ -82,9 +94,16 @@ $barangay = $barangayRow['barangay'];
             <p><?= $address ?></p>
         </div>
     </div>
+    <?php
+    if ($user_data['positionId'] != 1) {
+        $link = "http://localhost/admin2gh/patientTable.php";
+    } else {
+        $link = "http://localhost/admin2gh/adminTable.php";
+    }
+    ?>
     <div class="row mb-3">
         <div class="col-sm-3 d-grid">
-            <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Back</a>
+            <a href="<?= $link ?> " class="btn btn-outline-primary" role="button">Back</a>
         </div>
     </div>
 </form>
