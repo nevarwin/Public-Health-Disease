@@ -81,9 +81,15 @@ include('connection.php');
                                 <td>
                                     <a class="btn btn-info btn-sm" href="http://localhost/admin2gh/patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
                                     <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
-                                </td>
 
+                                    <?php
+                                    if ($user_data['positionId'] == 1 or $user_data['positionId'] == 2) {
+                                    ?>
+                                        <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
+                                    <?php
+                                    }
+                                    ?>
+                                </td>
                             </tr>
                     <?php
                         }
