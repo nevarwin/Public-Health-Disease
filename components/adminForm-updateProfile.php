@@ -12,13 +12,21 @@ if (!isset($_GET["id"])) {
 
 $id = $_GET['id'];
 // read row 
-$sql = "SELECT * FROM clients WHERE id = $id";
+$sql = "SELECT clients.*, municipality.municipality, barangay.barangay
+        FROM clients
+        LEFT JOIN municipality ON clients.municipality = municipality.munId
+        LEFT JOIN barangay ON clients.barangay = barangay.id
+        WHERE clients.id = $id";
+
 // execute the sql query
 $result = mysqli_query($con, $sql);
-$row = $result->fetch_assoc();
+if (!$result) {
+    echo 'error in result' . mysqli_error($con);;
+}
+
+$row = mysqli_fetch_assoc($result);
 
 if (!$row) {
-    header('location: /phpsandbox/publichealth/admin.php');
     exit;
 }
 
@@ -29,16 +37,6 @@ $address = $row['address'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
 
-// Converting the munid and barangayid to its string from their rescpetive table
-$sql = "SELECT * FROM municipality WHERE munId = '$municipality'";
-$result = mysqli_query($con, $sql);
-$municipalityRow = mysqli_fetch_assoc($result);
-$municipality = $municipalityRow['municipality'];
-
-$sql = "SELECT * FROM barangay WHERE id = '$barangay'";
-$result = mysqli_query($con, $sql);
-$barangayRow = mysqli_fetch_assoc($result);
-$barangay = $barangayRow['barangay'];
 
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -72,17 +70,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Error updating record: ";
         }
 
+        if ($user_data['positionId'] != 1) {
+            $link = "http://localhost/admin2gh/patientTable.php";
+        } else {
+            $link = "http://localhost/admin2gh/adminTable.php";
+        }
+
         echo "
         <script> 
-        alert('Admin Successfully Updated');
-        window.location= 'http://localhost/admin2gh/adminTable.php';
+            alert('Admin Successfully Updated');
+            window.location= '$link';
         </script>
         ";
     } while (false);
 }
 
 ?>
-<form action="" method="post">
+<form action="" method="post" onsubmit="return validateForm(event)">
     <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Name</label>
@@ -93,25 +97,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Email</label>
         <div class="col-sm-6">
-            <input type="text" class='form-control' name='email' value='<?= $email ?>'>
+            <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Password</label>
         <div class="col-sm-6">
-            <input type="password" class='form-control' name='password' placeholder='Password'>
+            <input id="password" type="password" class='form-control' name='password' placeholder='Password'>
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Confirm Password</label>
         <div class="col-sm-6">
-            <input type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
+            <input id="confirmPassword" type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
         <div class="col-sm-6">
-            <input type="text" class='form-control' name='contact' value='<?= $contact ?>'>
+            <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
         </div>
     </div>
     <!-- Municipality Dropdown -->
@@ -153,8 +157,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
         </div>
         <div class="col-sm-3 d-grid">
-            <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+            <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
         </div>
     </div>
 </form>
-<?php
+
+<script>
+    function validateForm(event) {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var contactNumber = document.getElementById('contact').value;
+
+        // Initialize error messages array
+        var errors = [];
+
+        if (
+            password.length < 8 ||
+            !password.match(/[A-Z]/) ||
+            !password.match(/[a-z]/) ||
+            !password.match(/[0-9]/) ||
+            !password.match(/[\W]/)
+        ) {
+            errors.push(
+                "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character."
+            );
+        }
+
+        if (password !== confirmPassword) {
+            errors.push("Passwords do not match.");
+        }
+
+        // Check if email is in valid format
+        if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/)) {
+            errors.push("Email address is not in valid format.");
+        }
+
+        // Check if contact number is in valid format
+        if (!contactNumber.match(/^09\d{9}$/)) {
+            errors.push("Contact number must start with '09' and be 11 characters long.");
+        }
+
+        // Check if there are any errors
+        if (errors.length > 0) {
+            // Display error messages
+            var errorString = "";
+            for (var i = 0; i < errors.length; i++) {
+                errorString += errors[i] + "\n";
+            }
+            alert(errorString);
+            return false;
+        }
+        return true;
+    }
+</script>
