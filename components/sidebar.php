@@ -22,12 +22,19 @@
             <span>Dashboard</span></a>
     </li> -->
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/adminTable.php">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Admin Tables</span></a>
-    </li>
+    <?php
+    if ($user_data['positionId'] == 1) {
+    ?>
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="http://localhost/admin2gh/adminTable.php">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Admin Tables</span></a>
+        </li>
+    <?php
+    }
+    ?>
+
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
