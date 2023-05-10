@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "
             <script>
                 alert('Rabies form submitted successfully!');
-                window.location = 'http://localhost/admin2gh/patientTable.php';
+                window.location = 'http://localhost/admin2gh/patientPage-view.php?patientId=$patientId';
             </script>";
             exit;
         } else {
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class='btn btn-primary'>Submit</button>
         </div>
         <div class="col-sm-3 d-grid">
-            <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+            <a href="http://localhost/admin2gh/patientPage-view.php?patientId=<?php echo $patientId; ?>" class="btn btn-outline-primary" role="button">Cancel</a>
         </div>
     </div>
 </form>
