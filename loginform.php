@@ -6,28 +6,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (!empty($email) && !empty($password) && !is_numeric($user_id)) {
-        $query = "select * from clients where email = '$email' limit 1";
+    if (!empty($email) && !empty($password)) {
+        // Perform server-side validation
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "
+            <script>
+                alert('Invalid email format!');
+                window.location = 'http://localhost/admin2gh/loginForm.php';
+            </script>
+            ";
+            die;
+        }
+
+        // Sanitize the input to prevent SQL injection
+        $email = mysqli_real_escape_string($con, $email);
+        $password = mysqli_real_escape_string($con, $password);
+
+        // // Query the database to get the hashed password
+        // $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
+        // $result = mysqli_query($con, $query);
+
+        // if ($result && mysqli_num_rows($result) > 0
+        // ) {
+        //     $user_data = mysqli_fetch_assoc($result);
+        //     $hashed_password = $user_data['password'];
+
+        //     // Compare the hashed password with the MD5 hash of the user's input
+        //     if (md5($password) === $hashed_password) {
+        //         $_SESSION['logged_in'] = true;
+        //         $_SESSION['id'] = $user_data['id'];
+        //         if ($user_data['positionId'] == 1) {
+        //             header('location: http://localhost/admin2gh/adminTable.php');
+        //             die;
+        //         }
+        //         header('location: http://localhost/admin2gh/patientTable.php');
+        //         die;
+        //     }
+        // }
+        $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
         $result = mysqli_query($con, $query);
 
-        if ($result) {
-            if ($result && mysqli_num_rows($result) > 0) {
-                $user_data = mysqli_fetch_assoc($result);
-                if ($user_data['password'] === $password) {
-                    $_SESSION['logged_in'] = true;
-                    $_SESSION['id'] = $user_data['id'];
+        if ($result && mysqli_num_rows($result) > 0) {
+            $user_data = mysqli_fetch_assoc($result);
+            if ($user_data['password'] === $password) {
+                $_SESSION['logged_in'] = true;
+                $_SESSION['id'] = $user_data['id'];
+                if ($user_data['positionId'] == 1) {
                     header('location: http://localhost/admin2gh/adminTable.php');
                     die;
                 }
+                header('location: http://localhost/admin2gh/patientTable.php');
+                die;
             }
         }
         echo "
         <script>
-            alert('Wrong')
+            alert('Invalid Email or Password!');
+            window.location = 'http://localhost/admin2gh/loginForm.php';
         </script>
         ";
     } else {
-        echo "Enter a valid information!";
+        echo "Enter valid information!";
     }
 }
 ?>
@@ -158,8 +197,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             cursor: pointer;
         }
     </style>
-
-
 </head>
 
 <body>
@@ -167,29 +204,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form action="" method="post">
+    <form action="" method="post" onsubmit="return validateLoginForm()">
         <h3>Login Here</h3>
         <label for="username">Email</label>
         <input type="text" placeholder="Email" id="email" name="email">
-
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password" name="password">
         <button>Log In</button>
         <a href="./landingpage/landingpage.php" class="btn w-100">Cancel</a>
     </form>
 
-</body>
-<!-- <script>
-    function checkForm(password) {
-        let passwordRegEx = /^[a-z0-9]+$/i;
-        let passwordValue = password.value;
+    <script>
+        function validateLoginForm() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
 
-        if (passwordValue.match(passwordRegEx) && passwordValue.length >= 8) {
-            alert('Correct');
-        } else {
-            alert('Password too short');
+            // Check if email is empty
+            if (email.trim() === '') {
+                alert('Please enter your email.');
+                return false;
+            }
+
+            // Check if password is empty
+            if (password.trim() === '') {
+                alert('Please enter your password.');
+                return false;
+            }
+
+            // Validation passed
+            return true;
         }
-    }
-</script> -->
+    </script>
+
+</body>
 
 </html>
