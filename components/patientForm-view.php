@@ -72,12 +72,6 @@ $result = mysqli_query($con, $sql);
 $barangayDRURow = mysqli_fetch_assoc($result);
 $barangayDRU = $barangayDRURow['barangay'];
 
-$sql = "SELECT * FROM rabiesinfotbl WHERE patientId = $patientId";
-$result = mysqli_query($con, $sql);
-$rabies = mysqli_fetch_assoc($result);
-// print_r($rabies);
-
-
 ?>
 <div class="container-fluid">
     <div class="align-items-center justify-content-between mb-4">
@@ -128,10 +122,19 @@ $rabies = mysqli_fetch_assoc($result);
             <!-- Details -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-success">Details <a style="margin-left: 225px; text-decoration:none;" class="text-secondary" href="http://localhost/patientrecords/admissioncontrol/patient_edit_option/1">
-                            <i class="fa fa-edit"></i></a> </h6>
+                    <h6 class="m-0 font-weight-bold text-success">Details
+                        <!-- <a style="margin-left: 225px; text-decoration:none;" class="text-secondary" href="http://localhost/admin2gh/patientPage-viewupdate.php?patientId=<?= $patientId ?>">
+                            <i class="fa fa-edit"></i>
+                        </a> -->
+                    </h6>
                 </div>
                 <div class="card-body"> <!--Card Body begin tag  -->
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $disease ?></div>
+                    </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address</div>
@@ -208,13 +211,13 @@ $rabies = mysqli_fetch_assoc($result);
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-success">Disease Information <a style="margin-left: 450px; text-decoration:none;" class="text-secondary" href="<?php echo "{$disease}Page-update.php?patientId={$patientId}"; ?>"> <i class="fa fa-plus"></i></a></h6>
+                    <h6 class="m-0 font-weight-bold text-success"><?= $disease ?> Disease Information <a style="margin-left: 450px; text-decoration:none;" class="text-secondary" href="<?php echo "{$disease}Page-update.php?patientId={$patientId}"; ?>"> <i class="fa fa-edit"></i></a></h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="col-sm-12">
                         <?php
-                        include("{$disease}Form-view.php");
+                        include("./disease/{$disease}Form-view.php");
                         ?>
                     </div>
                 </div>
