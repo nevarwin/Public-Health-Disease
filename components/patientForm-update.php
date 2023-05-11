@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="col-md-7">
         <h2>Update Patient</h2>
 
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="return validateForm(event)">
             <div class="input-group mb-3">
                 <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
                 <span class="input-group-text">Patient Name</span>
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
                 <div class="col-sm-6">
-                    <input type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
+                    <input id="contact" type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
@@ -267,3 +267,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </div>
+
+<script>
+    function validateForm(event) {
+        var contactNumber = document.getElementById('contact').value;
+
+        // Initialize error messages array
+        var errors = [];
+
+        // Check if contact number is in valid format
+        if (!contactNumber.match(/^09\d{9}$/)) {
+            errors.push("Contact number must start with '09' and be 11 characters long.");
+        }
+
+        // Check if there are any errors
+        if (errors.length > 0) {
+            // Display error messages
+            var errorString = "";
+            for (var i = 0; i < errors.length; i++) {
+                errorString += errors[i] + "\n";
+            }
+            alert(errorString);
+            return false;
+        }
+        return true;
+    }
+</script>

@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // $link = "localhost/admin2gh/{$diseaseValue}Page-create.php";
             echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            // echo 'success';
             // header("Location: $link");
             // echo ($link);
 
@@ -120,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         ?>
 
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="return validateForm(event)">
             <div class="input-group mb-3">
                 <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
                 <span class="input-group-text">Patient Name</span>
@@ -166,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
                 <div class="col-sm-6">
-                    <input type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
+                    <input id="contact" type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
@@ -267,50 +268,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include('ageScript.php');
 ?>
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // $(document).ready(function() {
-    //     $('#dropdown').change(function() {
-    //         var selectedValue = $(this).val();
-    //         var value = "<?php echo $value; ?>"
-    //         var diseaseValue = "<?php echo $diseaseValue; ?>"
-    //         var url = diseaseValue + '-form.html';
+    function validateForm(event) {
+        var contactNumber = document.getElementById('contact').value;
 
-    //         if (selectedValue === value) {
-    //             $.ajax({
-    //                 url: url,
-    //                 dataType: 'html',
-    //                 success: function(response) {
-    //                     $('#form-extension').html(response);
-    //                 }
-    //             });
-    //         } else {
-    //             $('#form-extension').empty();
-    //         }
-    //     });
-    // });
+        // Initialize error messages array
+        var errors = [];
 
-    document.getElementById('dynamicDisease').addEventListener('change', function() {
-        var selectedValue = this.value;
-        $(document).ready(function() {
-            $('#dropdown').change(function() {
-                var selectedval = $(this).val();
-                // var value = "<?php echo $value; ?>"
-                // var diseaseValue = "<?php echo $diseaseValue; ?>"
-                var url = selectedValue + '-form.html';
+        // Check if contact number is in valid format
+        if (!contactNumber.match(/^09\d{9}$/)) {
+            errors.push("Contact number must start with '09' and be 11 characters long.");
+        }
 
-                if (selectedValue === '13') {
-                    $.ajax({
-                        url: url,
-                        dataType: 'html',
-                        success: function(response) {
-                            $('#form-extension').html(response);
-                        }
-                    });
-                } else {
-                    $('#form-extension').empty();
-                }
-            });
-        });
-    });
-</script> -->
+        // Check if there are any errors
+        if (errors.length > 0) {
+            // Display error messages
+            var errorString = "";
+            for (var i = 0; i < errors.length; i++) {
+                errorString += errors[i] + "\n";
+            }
+            alert(errorString);
+            return false;
+        }
+        return true;
+    }
+</script>
