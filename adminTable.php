@@ -1,5 +1,9 @@
 <?php
 include('./components/head.php');
+if ($user_data['positionId'] != 1) {
+    header('location: http://localhost/admin2gh/404.php');
+    die;
+}
 ?>
 
 <!DOCTYPE html>
