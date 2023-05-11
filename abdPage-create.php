@@ -25,7 +25,7 @@ include('./components/head.php');
                         <h1 class="h3 mb-0 text-gray-800">Create AMB Form</h1>
                     </div>
                     <?php
-                    include('./components/abdForm-create.php');
+                    include('./disease/abdForm-create.php');
                     ?>
                 </div>
                 <!-- /.container-fluid -->

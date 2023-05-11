@@ -26,7 +26,7 @@ include('./components/head.php');
 
                     </div>
                     <?php
-                    include('./components/abdForm-update.php');
+                    include('./disease/abdForm-update.php');
                     ?>
                 </div>
                 <!-- /.container-fluid -->

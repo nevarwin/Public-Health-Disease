@@ -23,10 +23,9 @@ include('./components/head.php');
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Create Rabies Form</h1>
-
                     </div>
                     <?php
-                    include('./components/rabiesForm-create.php');
+                    include('./disease/rabiesForm-create.php');
                     ?>
                 </div>
                 <!-- /.container-fluid -->
