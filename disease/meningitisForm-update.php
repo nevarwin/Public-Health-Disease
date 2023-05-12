@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Type of Hepatitis</label>
+        <label class="col-sm-3 form-label">Organism</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" id="organism" name="organism" value='<?php echo $organism; ?>'>
         </div>
