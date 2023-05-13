@@ -48,8 +48,12 @@ $positionValue = $positionRow['position'];
                     Profile
                 </a>
                 <a class="dropdown-item" href="http://localhost/admin2gh/adminPage-updateProfile.php?id=<?= $user_data['id']; ?>">
+                    <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Update Profile
+                </a>
+                <a class="dropdown-item" href="http://localhost/admin2gh/adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
+                    Change Password
                 </a>
                 <!-- <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
