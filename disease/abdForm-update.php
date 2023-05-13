@@ -133,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label for="outcome" class="col-sm-3 form-label">Outcome</label>
         <div class="col-sm-6">
-
             <input type="text" class="form-control" id="outcome" name="outcome" value='<?php echo $outcome; ?>'>
         </div>
     </div>
