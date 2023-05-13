@@ -10,6 +10,12 @@ if (!isset($_GET["id"])) {
     exit;
 }
 
+if ($user_data['positionId'] != 1) {
+    $link = "http://localhost/admin2gh/patientTable.php";
+} else {
+    $link = "http://localhost/admin2gh/adminTable.php";
+}
+
 $id = $_GET['id'];
 // read row 
 $sql = "SELECT clients.*, municipality.municipality, barangay.barangay
