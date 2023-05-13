@@ -48,8 +48,6 @@ $barangay = $row['barangay'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
     $contact = $_POST['contact'];
     $address = $_POST['address'];
     $municipality = $_POST['municipality'];
@@ -57,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
-        if (empty($name) or empty($email) or empty($password)  or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
+        if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
             $errorMessage = "All fields are required";
             break;
         }
@@ -67,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
         // update data into the db
-        $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email',`password` = '$password', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay' WHERE id = $id";
+        $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay' WHERE id = $id";
 
         if ($con->query($sql) === TRUE) {
             echo "Record updated successfully";
@@ -104,18 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="" class='col-sm-3 col-form-label'>Email</label>
         <div class="col-sm-6">
             <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Password</label>
-        <div class="col-sm-6">
-            <input id="password" type="password" class='form-control' name='password' placeholder='Password'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Confirm Password</label>
-        <div class="col-sm-6">
-            <input id="confirmPassword" type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
         </div>
     </div>
     <div class="row mb-3">
@@ -171,28 +157,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script>
     function validateForm(event) {
         var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
         var contactNumber = document.getElementById('contact').value;
 
         // Initialize error messages array
         var errors = [];
-
-        if (
-            password.length < 8 ||
-            !password.match(/[A-Z]/) ||
-            !password.match(/[a-z]/) ||
-            !password.match(/[0-9]/) ||
-            !password.match(/[\W]/)
-        ) {
-            errors.push(
-                "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character."
-            );
-        }
-
-        if (password !== confirmPassword) {
-            errors.push("Passwords do not match.");
-        }
 
         // Check if email is in valid format
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/)) {
