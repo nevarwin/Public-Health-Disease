@@ -49,6 +49,8 @@ include('connection.php');
                     LEFT JOIN positions ON clients.positionId = positions.positionId
                     LEFT JOIN barangay ON clients.barangay = barangay.id 
                     LEFT JOIN municipality ON clients.municipality = municipality.munId
+                    WHERE clients.positionId != 1
+                    ORDER BY clients.id DESC
                     ";
                     // LIMIT $startRecord, $recordsPerPage
                     $result = mysqli_query($con, $sql);
