@@ -214,7 +214,4 @@ $morbidityWeek = $row['morbidityWeek'];
             <p> <?php echo $dateDied; ?> </p>
         </div>
     </div>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
 </form>
