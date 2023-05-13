@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Stiff Neck</label>
+        <label class="col-sm-3 form-label">Fingers</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" id="fingers" name="fingers">
         </div>
