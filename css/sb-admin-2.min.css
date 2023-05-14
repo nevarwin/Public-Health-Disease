@@ -2237,13 +2237,13 @@ fieldset:disabled a.btn {
 }
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #5eaec7;
+  border-color: #5eaec7;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #5eaec7;
+  border-color: #5eaec7;
 }
 .btn-primary.focus,
 .btn-primary:focus {
@@ -2342,13 +2342,13 @@ fieldset:disabled a.btn {
 }
 .btn-info {
   color: #fff;
-  background-color: #36b9cc;
-  border-color: #36b9cc;
+  background-color: #9ccc65;
+  border-color: #9ccc65;
 }
 .btn-info:hover {
   color: #fff;
-  background-color: #2c9faf;
-  border-color: #2a96a5;
+  background-color: #9ccc65;
+  border-color: #9ccc65;
 }
 .btn-info.focus,
 .btn-info:focus {
@@ -2516,13 +2516,13 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(115, 116, 128, 0.5);
 }
 .btn-outline-primary {
-  color: #4e73df;
-  border-color: #4e73df;
+  color: #5eaec7;
+  border-color: #5eaec7;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #5eaec7;
+  border-color: #5eaec7;
 }
 .btn-outline-primary.focus,
 .btn-outline-primary:focus {
@@ -4444,13 +4444,13 @@ input[type="submit"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
+  color: #5eaec7;
   background-color: #fff;
   border: 1px solid #dddfeb;
 }
 .page-link:hover {
   z-index: 2;
-  color: #224abe;
+  color: #5eaec7;
   text-decoration: none;
   background-color: #eaecf4;
   border-color: #dddfeb;
@@ -4472,8 +4472,8 @@ input[type="submit"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #5eaec7;
+  border-color: #5eaec7;
 }
 .page-item.disabled .page-link {
   color: #858796;
@@ -8836,7 +8836,7 @@ button.bg-dark:hover {
   color: #fff !important;
 }
 .text-primary {
-  color: #4e73df !important;
+  color: #007f4f !important;
 }
 a.text-primary:focus,
 a.text-primary:hover {
@@ -9112,8 +9112,8 @@ a:focus {
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-color: #1b365d;
+  background-image: linear-gradient(180deg, #1b365d 10%, #5eaec7 100%);
   background-size: cover;
 }
 .bg-gradient-secondary {
@@ -9147,8 +9147,8 @@ a:focus {
   background-size: cover;
 }
 .bg-gradient-dark {
-  background-color: #5a5c69;
-  background-image: linear-gradient(180deg, #5a5c69 10%, #373840 100%);
+  background-color: #5eaec7;
+  background-image: linear-gradient(180deg, #5eaec7 10%, #1b365d 100%);
   background-size: cover;
 }
 .bg-gray-100 {
