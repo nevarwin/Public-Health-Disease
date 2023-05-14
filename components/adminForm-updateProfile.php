@@ -18,10 +18,8 @@ if ($user_data['positionId'] != 1) {
 
 $id = $_GET['id'];
 // read row 
-$sql = "SELECT clients.*, municipality.municipality, barangay.barangay
+$sql = "SELECT *
         FROM clients
-        LEFT JOIN municipality ON clients.municipality = municipality.munId
-        LEFT JOIN barangay ON clients.barangay = barangay.id
         WHERE clients.id = $id";
 
 // execute the sql query
@@ -59,11 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = "All fields are required";
             break;
         }
-        if ($password != $confirmPassword) {
-            echo "Password and Confirm Password must be the same";
-            $errorMessage = "Password and Confirm Password must be the same";
-            break;
-        }
+
         // update data into the db
         $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay' WHERE id = $id";
 
@@ -115,15 +109,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
         <div class="col-sm-6">
             <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                <option value=""> <?= $municipality ?></option>
                 <?php
                 // Connect to database and fetch municipalities
-                include('connection.php');
                 $result = mysqli_query($con, 'SELECT * FROM municipality');
-
-                // Display each municipalities in a dropdown option
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                    $munId = $row['munId'];
+                    $municipalityName = $row['municipality'];
+
+                    // Check if the current option's municipality ID matches the selected municipality ID
+                    $selected = ($munId == $municipality) ? 'selected' : '';
+
+                    echo "<option value='$munId' $selected>$municipalityName</option>";
                 }
                 ?>
             </select>
@@ -134,7 +130,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
         <div class="col-sm-6">
             <select class="form-select" id="barangay" name="barangay">
-                <option><?= $barangay ?></option>
+                <?php
+                // Fetch barangays based on the selected municipality
+                $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
+
+                // Display each barangay in a dropdown option
+                while ($barangayRow = mysqli_fetch_assoc($barangayResult)) {
+                    $barangayId = $barangayRow['id'];
+                    $barangayName = $barangayRow['barangay'];
+
+                    // Check if the current option's barangay ID matches the selected barangay ID
+                    $selected = ($barangayId == $barangay) ? 'selected' : '';
+
+                    echo "<option value='$barangayId' $selected>$barangayName</option>";
+                }
+                ?>
             </select>
         </div>
     </div>
