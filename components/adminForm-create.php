@@ -62,28 +62,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $alert;
     }
     ?>
-    <div class=" row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Position</label>
-        <div class="col-sm-6">
-            <select class="form-select" id="position" name="position">
-                <option>Select Position</option>
-                <?php
-                include('connection.php');
-                $result = mysqli_query($con, 'SELECT * FROM positions');
+    <?php
+    if ($user_data['positionId'] >= 3) {
+    ?>
+        <div class=" row mb-3">
+            <label for="" class='col-sm-3 col-form-label'>Position</label>
+            <div class="col-sm-6">
+                <select class="form-select" id="position" name="position">
+                    <option>Select Position</option>
+                    <?php
+                    include('connection.php');
+                    $result = mysqli_query($con, 'SELECT * FROM positions');
 
-                $firstIteration = true;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    if ($firstIteration) {
-                        $firstIteration = false;
-                        continue; // Skip the first iteration
+                    $firstIteration = true;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        if ($firstIteration) {
+                            $firstIteration = false;
+                            continue; // Skip the first iteration
+                        }
+                        echo '<option value="' . $row['positionId'] . '">' . $row['position'] . '</option>';
                     }
-                    echo '<option value="' . $row['positionId'] . '">' . $row['position'] . '</option>';
-                }
 
-                ?>
-            </select>
+                    ?>
+                </select>
+            </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Name</label>
         <div class="col-sm-6">
