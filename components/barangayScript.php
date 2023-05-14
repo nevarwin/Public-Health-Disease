@@ -48,7 +48,8 @@
                     barangays.forEach(function(barangay) {
                         const option = document.createElement('option');
                         option.text = barangay.barangay;
-                        option.value = barangay.muncityId;
+                        option.name = barangay.id;
+                        option.value = barangay.id;
                         barangayDRUSelect.add(option);
                     });
                 }
