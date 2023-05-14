@@ -52,9 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['id'] = $user_data['id'];
                 if ($user_data['positionId'] == 1) {
+                    echo "
+                    <script>
+                        alert('Log In Successfully!');
+                    </script>
+                    ";
                     header('location: http://localhost/admin2gh/adminTable.php');
                     die;
                 }
+                echo "
+                    <script>
+                        alert('Log In Successfully!');
+                    </script>
+                    ";
                 header('location: http://localhost/admin2gh/patientTable.php');
                 die;
             }
