@@ -12,10 +12,8 @@ if (!isset($_GET["id"])) {
 
 $id = $_GET['id'];
 // read row 
-$sql = "SELECT clients.*, municipality.municipality, barangay.barangay
+$sql = "SELECT *
         FROM clients
-        LEFT JOIN municipality ON clients.municipality = municipality.munId
-        LEFT JOIN barangay ON clients.barangay = barangay.id
         WHERE clients.id = $id";
 
 // execute the sql query
@@ -29,7 +27,7 @@ $row = mysqli_fetch_assoc($result);
 if (!$row) {
     exit;
 }
-
+$position = $row['positionId'];
 $name = $row['name'];
 $email = $row['email'];
 $contact = $row['contact_number'];
@@ -40,10 +38,9 @@ $barangay = $row['barangay'];
 
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $position = $_POST['position'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
     $contact = $_POST['contact'];
     $address = $_POST['address'];
     $municipality = $_POST['municipality'];
@@ -51,29 +48,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
-        if (empty($name) or empty($email) or empty($password)  or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
+        if (empty($name) or empty($email) or empty($position) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
             $errorMessage = "All fields are required";
             break;
         }
-        if ($password != $confirmPassword) {
-            echo "Password and Confirm Password must be the same";
-            $errorMessage = "Password and Confirm Password must be the same";
-            break;
-        }
         // update data into the db
-        $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email',`password` = '$password', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay' WHERE id = $id";
+        $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay', `positionId` = '$position' WHERE id = $id";
+
+        $result = mysqli_query($con, $sql);
 
         if ($con->query($sql) === TRUE) {
             echo "Record updated successfully";
-            $successMessage = "Client added correctly";
+            $successMessage = "Client updated correctly";
         } else {
             echo "Error updating record: ";
         }
 
         echo "
         <script> 
-        alert('Admin Successfully Updated');
-        window.location= 'http://localhost/admin2gh/adminTable.php';
+            alert('Admin Successfully Updated');
+            window.location= 'http://localhost/admin2gh/adminTable.php';
         </script>
         ";
     } while (false);
@@ -82,6 +76,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <form action="" method="post" onsubmit="return validateForm(event)">
     <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
+    <div class=" row mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Position</label>
+        <div class="col-sm-6">
+            <select class="form-select" id="position" name="position">
+                <?php
+                $result = mysqli_query($con, 'SELECT * FROM positions');
+                $firstIteration = true; // Variable to track the first iteration
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if ($firstIteration) {
+                        $firstIteration = false;
+                        continue; // Skip the first iteration
+                    }
+
+                    $positionId = $row['positionId'];
+                    $positionName = $row['position'];
+
+                    // Check if the current option's position ID matches the selected position ID
+                    $selected = ($positionId == $position) ? 'selected' : '';
+
+                    echo "<option value='$positionId' $selected>$positionName</option>";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Name</label>
         <div class="col-sm-6">
@@ -95,18 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Password</label>
-        <div class="col-sm-6">
-            <input id="password" type="password" class='form-control' name='password' placeholder='Password'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Confirm Password</label>
-        <div class="col-sm-6">
-            <input id="confirmPassword" type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
-        </div>
-    </div>
-    <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
         <div class="col-sm-6">
             <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
@@ -117,15 +125,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
         <div class="col-sm-6">
             <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                <option value=""> <?= $municipality ?></option>
                 <?php
                 // Connect to database and fetch municipalities
-                include('connection.php');
                 $result = mysqli_query($con, 'SELECT * FROM municipality');
-
-                // Display each municipalities in a dropdown option
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                    $munId = $row['munId'];
+                    $municipalityName = $row['municipality'];
+
+                    // Check if the current option's municipality ID matches the selected municipality ID
+                    $selected = ($munId == $municipality) ? 'selected' : '';
+
+                    echo "<option value='$munId' $selected>$municipalityName</option>";
                 }
                 ?>
             </select>
@@ -136,7 +146,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
         <div class="col-sm-6">
             <select class="form-select" id="barangay" name="barangay">
-                <option><?= $barangay ?></option>
+                <?php
+                // Fetch barangays based on the selected municipality
+                $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
+
+                // Display each barangay in a dropdown option
+                while ($barangayRow = mysqli_fetch_assoc($barangayResult)) {
+                    $barangayId = $barangayRow['id'];
+                    $barangayName = $barangayRow['barangay'];
+
+                    // Check if the current option's barangay ID matches the selected barangay ID
+                    $selected = ($barangayId == $barangay) ? 'selected' : '';
+
+                    echo "<option value='$barangayId' $selected>$barangayName</option>";
+                }
+                ?>
             </select>
         </div>
     </div>
