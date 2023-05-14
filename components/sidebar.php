@@ -23,7 +23,7 @@
     </li> -->
 
     <?php
-    if ($user_data['positionId'] == 1) {
+    if ($user_data['positionId'] != 3) {
     ?>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
