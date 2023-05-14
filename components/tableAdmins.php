@@ -1,6 +1,21 @@
 <?php
 include('connection.php');
+include('search.php');
+
+// Determine the total number of records and the number of records per page
+$totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM clients ")->fetch_array()[0];
+// to edit how many fields in the web
+$recordsPerPage = 5;
+
+// Determine the current page number and the starting record for the page
+if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+$startRecord = ($currentPage - 1) * $recordsPerPage;
 ?>
+
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -9,12 +24,13 @@ include('connection.php');
                 Admin's Data
             </h2>
             <a href="http://localhost/admin2gh/adminPage-create.php" class="btn btn-primary" role="button">Add new Admin</a>
+            <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search">
         </div>
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered tablesorter" id="myTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Position</th>
@@ -43,17 +59,32 @@ include('connection.php');
                 </tfoot>
                 <tbody>
                     <?php
-                    // read all the data from db table
-                    $sql = "SELECT clients.*, barangay.barangay, municipality.municipality, positions.position
-                    FROM clients
-                    LEFT JOIN positions ON clients.positionId = positions.positionId
-                    LEFT JOIN barangay ON clients.barangay = barangay.id 
-                    LEFT JOIN municipality ON clients.municipality = municipality.munId
-                    WHERE clients.positionId != 1
-                    ORDER BY clients.id DESC
-                    ";
-                    // LIMIT $startRecord, $recordsPerPage
-                    $result = mysqli_query($con, $sql);
+
+                    if ($user_data['positionId'] == 1) {
+                        // read all the data from db table
+                        $sql = "SELECT clients.*, barangay.barangay, municipality.municipality, positions.position
+                        FROM clients
+                        LEFT JOIN positions ON clients.positionId = positions.positionId
+                        LEFT JOIN barangay ON clients.barangay = barangay.id 
+                        LEFT JOIN municipality ON clients.municipality = municipality.munId
+                        WHERE clients.positionId != 1
+                        ORDER BY clients.id DESC
+                        LIMIT $startRecord, $recordsPerPage
+                        ";
+                        $result = mysqli_query($con, $sql);
+                    } else if ($user_data['positionId'] == 2) {
+                        $sql = "SELECT clients.*, barangay.barangay, municipality.municipality, positions.position
+                        FROM clients
+                        LEFT JOIN positions ON clients.positionId = positions.positionId
+                        LEFT JOIN barangay ON clients.barangay = barangay.id 
+                        LEFT JOIN municipality ON clients.municipality = municipality.munId
+                        WHERE clients.positionId >= 3
+                        ORDER BY clients.id DESC
+                        LIMIT $startRecord, $recordsPerPage
+                        ";
+                        $result = mysqli_query($con, $sql);
+                    }
+
 
                     // check if there is data in the table
                     if (mysqli_num_rows($result) > 0) {
@@ -70,7 +101,13 @@ include('connection.php');
                                 <td><?= $admins['created_at']; ?></td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/adminPage-update.php?id=<?= $admins['id']; ?>">Update</a>
-                                    <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/adminForm-remove.php?id=<?= $admins['id']; ?>">Remove</a>
+                                    <?php
+                                    if ($user_data['positionId'] == 1) {
+                                    ?>
+                                        <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/adminForm-remove.php?id=<?= $admins['id']; ?>">Remove</a>
+                                    <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                     <?php
@@ -82,5 +119,52 @@ include('connection.php');
                 </tbody>
             </table>
         </div>
+        <div class="container my-5">
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <?php
+                    // Determine the current page number and the starting record for the page
+                    if (isset($_GET['page'])) {
+                        $currentPage = $_GET['page'];
+                    } else {
+                        $currentPage = 1;
+                    }
+                    $startRecord = ($currentPage - 1) * $recordsPerPage;
+                    // Add links to navigate between the pages
+                    $totalPages = ceil($totalRecords / $recordsPerPage);
+                    if ($totalPages > 1) {
+                        if ($currentPage > 1) {
+                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage - 1) . "\">Previous</a>";
+                        }
+                        // old code with class
+                        // if ($currentPage > 1) {
+                        //     echo "<li class='page-item disabled'> <a class='page-link' aria-disabled='true' tabindex='-1' href=\"?page=" . ($currentPage - 1) . "\">Previous</a></li>";
+                        // }
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            if ($i == $currentPage) {
+                                echo "<li class='page-item active'><a class='page-link'>" . $i . "</a></li>";
+                            } else {
+                                echo "<li class='page-item'><a class='page-link' href=\"?page=" . $i . "\">" . $i . "</a></li>";
+                            }
+                        }
+                        if ($currentPage < $totalPages) {
+                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage + 1) . "\">Next</a>";
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $("#myTable").tablesorter({
+            sortList: [
+                [0, 0],
+                [1, 0]
+            ]
+        });
+    });
+</script>

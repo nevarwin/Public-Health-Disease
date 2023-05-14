@@ -1,5 +1,19 @@
 <?php
 include('connection.php');
+include('search.php');
+
+// Determine the total number of records and the number of records per page
+$totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM clients ")->fetch_array()[0];
+// to edit how many fields in the web
+$recordsPerPage = 5;
+
+// Determine the current page number and the starting record for the page
+if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+$startRecord = ($currentPage - 1) * $recordsPerPage;
 ?>
 
 <!-- DataTales Example -->
@@ -10,6 +24,7 @@ include('connection.php');
                 Patient's Data
             </h2>
             <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary" role="button">Add new Patient</a>
+            <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search">
         </div>
     </div>
     <div class="card-body">
@@ -56,6 +71,7 @@ include('connection.php');
                     LEFT JOIN diseases ON patients.disease = diseases.diseaseId
                     -- LEFT JOIN outcomes ON patients.outcome = outcomes.outcomeId
                     LEFT JOIN genders ON patients.gender = genders.genderId
+                    LIMIT $startRecord, $recordsPerPage
                     ";
                     // LIMIT $startRecord, $recordsPerPage
 
@@ -99,6 +115,42 @@ include('connection.php');
                     ?>
                 </tbody>
             </table>
+        </div>
+        <div class="container my-5">
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <?php
+                    // Determine the current page number and the starting record for the page
+                    if (isset($_GET['page'])) {
+                        $currentPage = $_GET['page'];
+                    } else {
+                        $currentPage = 1;
+                    }
+                    $startRecord = ($currentPage - 1) * $recordsPerPage;
+                    // Add links to navigate between the pages
+                    $totalPages = ceil($totalRecords / $recordsPerPage);
+                    if ($totalPages > 1) {
+                        if ($currentPage > 1) {
+                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage - 1) . "\">Previous</a>";
+                        }
+                        // old code with class
+                        // if ($currentPage > 1) {
+                        //     echo "<li class='page-item disabled'> <a class='page-link' aria-disabled='true' tabindex='-1' href=\"?page=" . ($currentPage - 1) . "\">Previous</a></li>";
+                        // }
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            if ($i == $currentPage) {
+                                echo "<li class='page-item active'><a class='page-link'>" . $i . "</a></li>";
+                            } else {
+                                echo "<li class='page-item'><a class='page-link' href=\"?page=" . $i . "\">" . $i . "</a></li>";
+                            }
+                        }
+                        if ($currentPage < $totalPages) {
+                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage + 1) . "\">Next</a>";
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
