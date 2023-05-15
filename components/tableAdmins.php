@@ -5,7 +5,7 @@ include('search.php');
 // Determine the total number of records and the number of records per page
 $totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM clients ")->fetch_array()[0];
 // to edit how many fields in the web
-$recordsPerPage = 5;
+$recordsPerPage = 1;
 
 // Determine the current page number and the starting record for the page
 if (isset($_GET['page'])) {
@@ -30,7 +30,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered tablesorter" id="myTable" width="100%" cellspacing="0">
+            <table class="table table-bordered tablesorter" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Position</th>
@@ -80,7 +80,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                         LEFT JOIN municipality ON clients.municipality = municipality.munId
                         WHERE clients.positionId >= 3
                         ORDER BY clients.id DESC
-                        LIMIT $startRecord, $recordsPerPage
+                        LIMIT $startRecord,$recordsPerPage
                         ";
                         $result = mysqli_query($con, $sql);
                     }
@@ -158,7 +158,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
     </div>
 </div>
 
-<script>
+<!-- <script>
     $(function() {
         $("#myTable").tablesorter({
             sortList: [
@@ -167,4 +167,4 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
             ]
         });
     });
-</script>
+</script> -->
