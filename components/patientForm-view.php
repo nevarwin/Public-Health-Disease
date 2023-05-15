@@ -72,6 +72,42 @@ $result = mysqli_query($con, $sql);
 $barangayDRURow = mysqli_fetch_assoc($result);
 $barangayDRU = $barangayDRURow['barangay'];
 
+// switch ($disease) {
+//     case "ABD":
+//         $disease = "Amebiasis";
+//         break;
+//     case "AEFI":
+//         $disease = "Adverse Event Following Immunization";
+//         break;
+//     case "AES":
+//         $disease = "Acute encephalitis syndrome";
+//         break;
+//     case "AFP":
+//         $disease = "Alpha-Fetoprotein";
+//         break;
+//     case "AMES":
+//         $disease = "Acute Meningitis";
+//         break;
+//     case "DIPH":
+//         $disease = "Diphtheria";
+//         break;
+//     case "NT":
+//         $disease = "Neonatal Tetanus";
+//         break;
+//     case "PERT":
+//         $disease = "Perthes Disease";
+//         break;
+//     case "NNT":
+//         $disease = "Number Needed to Treat";
+//         break;
+//     case "HFMD":
+//         $disease = "Hand, Foot, and Mouth Disease";
+//         break;
+//     default:
+//         $disease = "Unknown Disease";
+//         break;
+// }
+
 ?>
 <div class="container-fluid">
     <div class="align-items-center justify-content-between mb-4">
@@ -133,7 +169,7 @@ $barangayDRU = $barangayDRURow['barangay'];
                         <div class="row no-gutters">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
                         </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $disease ?></div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $disease  ?></div>
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
