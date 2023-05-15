@@ -80,7 +80,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                         LEFT JOIN municipality ON clients.municipality = municipality.munId
                         WHERE clients.positionId >= 3
                         ORDER BY clients.id DESC
-                        LIMIT $startRecord,$recordsPerPage
+                        LIMIT $startRecord, $recordsPerPage
                         ";
                         $result = mysqli_query($con, $sql);
                     }
