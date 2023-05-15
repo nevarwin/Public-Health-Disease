@@ -128,9 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Update Patient</h2>
 
         <form action="" method="post" onsubmit="return validateForm(event)">
+            <span class="">Patient Name</span>
             <div class="input-group mb-3">
-                <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
-                <span class="input-group-text">Patient Name</span>
+                <!-- <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'> -->
                 <input placeholder="Last Name" type="text" class='form-control' name='lName' value='<?php echo $lName; ?>'>
                 <input placeholder="First Name" type="text" class='form-control' name='fName' value='<?php echo $fName; ?>'>
                 <input placeholder="Middle Name" type="text" class='form-control' name='mName' value='<?php echo $mName; ?>'>
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <label class='col-sm-3 col-form-label' for="gender">Gender</label>
                 <div class="col-sm-6">
-                    <select name='gender'>
+                    <select class="custom-select" name='gender'>
                         <?php
                         $result = mysqli_query($con, 'SELECT * FROM genders');
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -149,11 +149,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             // Check if the current option's gender ID matches the selected gender ID
                             $selected = ($genderId == $gender) ? 'selected' : '';
-
                             echo "<option value='$genderId' $selected>$genderName</option>";
                         }
                         ?>
-
                     </select>
                 </div>
             </div>
@@ -178,10 +176,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input id="contact" type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
                 </div>
             </div>
+            <!-- Address -->
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <div class="col-sm-6">
+                    <input placeholder="Address" type="text" class='form-control' name='address' value='<?php echo $address; ?>'>
+                </div>
+            </div>
             <!-- Municipality Dropdown -->
             <div class="input-group mb-3">
-                <span class="input-group-text">Municipality</span>
-                <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
+                <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                     <?php
                     // Connect to database and fetch municipalities
                     $result = mysqli_query($con, 'SELECT * FROM municipality');
@@ -197,11 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ?>
                 </select>
                 <!-- Barangay Dropdown -->
-                <span class="input-group-text">Barangay</span>
-                <!-- <select class="form-select" id="barangay" name="barangay">
-                    <option><?php echo $barangay; ?></option>
-                </select> -->
-                <select class="form-select" id="barangay" name="barangay">
+                <select class="custom-select" id="barangay" name="barangay">
                     <?php
                     // Fetch barangays based on the selected municipality
                     $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
@@ -220,17 +220,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
 
             </div>
-            <!-- Address -->
+
+            <!-- Address of DRU -->
             <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
                 <div class="col-sm-6">
-                    <input placeholder="Address" type="text" class='form-control' name='address' value='<?php echo $address; ?>'>
+                    <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
                 </div>
             </div>
             <!-- Municipality of DRU Dropdown -->
             <div class="input-group mb-3">
-                <span class="input-group-text">Municipality of DRU</span>
-                <select class="form-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
+                <select class="custom-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
                     <!-- <option value="<?php echo $municipalityDRU; ?>"><?php echo $municipalityDRU; ?></option> -->
                     <?php
                     // Connect to database and fetch municipalities
@@ -247,8 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ?>
                 </select>
                 <!-- Barangay of DRU Dropdown -->
-                <span class="input-group-text">Barangay of DRU</span>
-                <select class="form-select" id="barangayDRU" name="barangayDRU">
+                <select class="custom-select" id="barangayDRU" name="barangayDRU">
                     <!-- <option value=""><?php echo $barangayDRU; ?></option> -->
                     <?php
                     $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
@@ -266,13 +265,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ?>
                 </select>
             </div>
-            <!-- Address of DRU -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
-                <div class="col-sm-6">
-                    <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
-                </div>
-            </div>
+
 
             <?php
             if (!empty($successMessage)) {
