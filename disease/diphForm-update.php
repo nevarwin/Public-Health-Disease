@@ -1,6 +1,6 @@
 <?php
-include('./components/alertMessage.php');
 include("./components/connection.php");
+include('./components/alertMessage.php');
 
 $user_data = check_login($con);
 
@@ -29,6 +29,7 @@ if (!$row) {
     header('location: http://localhost/admin2gh/patientTable.php');
     exit;
 }
+$dateLastDose = $row['dateLastDose'];
 $dptDoses = $row['dptDoses'];
 $caseClass = $row['caseClass'];
 $outcome = $row['outcome'];
@@ -41,10 +42,11 @@ $morbidityMonth = $row['morbidityMonth'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
+    $dateLastDose = $_POST['dateLastDose'];
     $dptDoses = $_POST['dptDoses'];
     $caseClass = $_POST['caseClass'];
     $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityWeek = $_POST['morbidityWeek'];
     $morbidityMonth = $_POST['morbidityMonth'];
@@ -62,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     SET
                     patientId = '$patientId',
                     dptDoses = '$dptDoses',
+                    dateLastDose = '$dateLastDose',
                     caseClass = '$caseClass',
                     outcome = '$outcome',
                     dateDied = '$dateDied',
@@ -123,16 +126,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
-        <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
+        <label for="" class="col-sm-3 col-form-label">Date Last Dos</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
+            <input type="date" class="form-control" name="dateLastDose" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateLastDose; ?>' />
         </div>
     </div>
     <div class="row mb-3">
-        <label for="outcome" class="col-sm-3 form-label">Outcome</label>
+        <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
         <div class="col-sm-6">
-
-            <input type="text" class="form-control" id="outcome" name="outcome" value='<?php echo $outcome; ?>'>
+            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
         </div>
     </div>
     <div class="row mb-3">
@@ -147,13 +149,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
         </div>
     </div>
-    <div class="row mb-3">
-        <label for="dateDied" class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-            <input type="datetime-local" class="form-control" id="dateDied" name="dateDied" value='<?php echo $dateDied; ?>'>
-        </div>
-    </div>
     <?php
+    include('./components/outcomeUpdate.php');
     include('./components/submitCancel.php');
     ?>
 </form>

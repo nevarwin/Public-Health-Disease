@@ -159,19 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityMonth" />
         </div>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="outcome" name="outcome">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-
-            <input type="datetime-local" class="col-sm-3 form-control" id="dateDied" name="dateDied">
-        </div>
-    </div>
+    <?php
+    include('./components/outcomeCreate.php');
+    ?>
     <div class="col-sm-3 mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

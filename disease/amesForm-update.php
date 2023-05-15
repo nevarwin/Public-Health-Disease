@@ -76,8 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
     $morbidityWeek = $_POST['morbidityWeek'];
-    $dateDied = $_POST['dateDied'];
-
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     // check if the data is empty
     do {
         if (empty($dateAdmitted)) {
@@ -156,121 +155,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Fever</label>
-        <input type="text" class="form-control" id="fever" name="fever" value='<?php echo $fever; ?>'>
-    </div>
-    <div class="mb-3">
-        <label for="" class="form-label">behaviorChng</label>
-        <input type="text" class="form-control" id="behaviorChng" name="behaviorChng" value='<?php echo $behaviorChng; ?>'>
-    </div>
+    <div class="row mb-3">
 
-    <div class="mb-3">
-        <label for="" class="col-form-label">seizure</label>
+        <label for="" class="col-sm-3 col-form-label">Fever</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="fever" name="fever" value='<?php echo $fever; ?>'>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">behaviorChng</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="behaviorChng" name="behaviorChng" value='<?php echo $behaviorChng; ?>'>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">seizure</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="seizure" value='<?php echo $seizure; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">Stiff Neck</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Stiff Neck</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="stiffneck" value='<?php echo $stiffneck; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">bulgefontanel</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">bulgefontanel</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="bulgefontanel" value='<?php echo $bulgefontanel; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">menSign</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">menSign</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="menSign" value='<?php echo $menSign; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">clinDiag</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">clinDiag</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="clinDiag" value='<?php echo $clinDiag; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">pcv10</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">pcv10</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="pcv10" value='<?php echo $pcv10; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">pcv13</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">pcv13</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="pcv13" value='<?php echo $pcv13; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">meningoVacc</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">meningoVacc</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="meningoVacc" value='<?php echo $meningoVacc; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="vacMeningDate" class="form-label">vacMeningDate</label>
-        <input type="date" class="form-control" id="vacMeningDate" name="vacMeningDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacMeningDate; ?>'>
+    <div class="row mb-3">
+        <label for="vacMeningDate" class="col-sm-3 col-form-label">vacMeningDate</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" id="vacMeningDate" name="vacMeningDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacMeningDate; ?>'>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">meningoVaccDose</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">meningoVaccDose</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="meningoVaccDose" value='<?php echo $meningoVaccDose; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">measVacc</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">measVacc</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="measVacc" value='<?php echo $measVacc; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="vacMeasDate" class="form-label">vacMeasDate</label>
-        <input type="date" class="form-control" id="vacMeasDate" name="vacMeasDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacMeasDate; ?>'>
+    <div class="row mb-3">
+        <label for="vacMeasDate" class="col-sm-3 col-form-label">vacMeasDate</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" id="vacMeasDate" name="vacMeasDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacMeasDate; ?>'>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">measVaccDose</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">measVaccDose</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="measVaccDose" value='<?php echo $measVaccDose; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">aesCaseClass</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">aesCaseClass</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="aesCaseClass" value='<?php echo $aesCaseClass; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">finalDiagnosis</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">finalDiagnosis</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="finalDiagnosis" value='<?php echo $finalDiagnosis; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">MorbidityWeek</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">morbidityMonth</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="outcome" class="form-label">Outcome</label>
-        <input type="text" class="form-control" id="outcome" name="outcome" value='<?php echo $outcome; ?>'>
-    </div>
-    <div class="mb-3">
-        <label for="dateDied" class="form-label">Date Died</label>
-        <input type="datetime-local" class="form-control" id="dateDied" name="dateDied" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateDied; ?>'>
-    </div>
+    <?php
+    include('./components/outcomeUpdate.php');
+    ?>
     <?php
     include('./components/submitCancel.php');
     ?>

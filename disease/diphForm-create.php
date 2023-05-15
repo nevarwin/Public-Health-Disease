@@ -1,6 +1,6 @@
 <?php
-include('./components/alertMessage.php');
 include("./components/connection.php");
+include('./components/alertMessage.php');
 
 $user_data = check_login($con);
 
@@ -28,11 +28,12 @@ echo $patientId;
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
+    $dateAdmitted = $_POST['dateAdmitted'];
     $dptDoses = $_POST['dptDoses'];
     $caseClass = $_POST['caseClass'];
     $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
-    $dateAdmitted = $_POST['dateAdmitted'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
+    $dateLastDose = $_POST['dateLastDose'];
     $morbidityWeek = $_POST['morbidityWeek'];
     $morbidityMonth = $_POST['morbidityMonth'];
 
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = "INSERT INTO diphinfotbl (
             patientId,
             dptDoses,
+            dateLastDose,
             caseClass,
             outcome,
             dateDied,
@@ -57,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ) VALUES (
             '$patientId',
             '$dptDoses',
+            '$dateLastDose',
             '$caseClass',
             '$outcome',
             '$dateDied',
@@ -111,19 +114,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label for="dptDoses" class="col-sm-3 form-label">Dpt Doses</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="dptDoses" name="dptDoses" required>
+            <input type="text" class="form-control" id="dptDoses" name="dptDoses">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Date Last Dose</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="dateLastDose" max="<?php echo date('Y-m-d'); ?>" />
         </div>
     </div>
     <div class="row mb-3">
         <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="outcome" class="col-sm-3 form-label">Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="outcome" name="outcome">
+            <input type="text" class="form-control" id="caseClass" name="caseClass">
         </div>
     </div>
     <div class="row mb-3">
@@ -138,13 +141,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityMonth" />
         </div>
     </div>
-    <div class="row mb-3">
-        <label for="dateDied" class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-
-            <input type="datetime-local" class="col-sm-3 form-control" id="dateDied" name="dateDied">
-        </div>
-    </div>
+    <?php
+    include('./components/outcomeCreate.php');
+    ?>
     <div class="col-sm-3 mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

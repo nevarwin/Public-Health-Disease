@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $serovar = $_POST['serovar'];
     $caseClass = $_POST['caseClass'];
     $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
     $morbidityWeek = $_POST['morbidityWeek'];
@@ -139,18 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
         </div>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="outcome" name="outcome" value='<?php echo $outcome; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-            <input type="datetime-local" class="form-control" id="dateDied" name="dateDied" value='<?php echo $dateDied; ?>'>
-        </div>
-    </div>
+    <?php
+    include('./components/outcomeUpdate.php');
+    ?>
     <?php
     include('./components/submitCancel.php');
     ?>

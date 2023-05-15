@@ -33,6 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sari = $_POST['sari'];
     $caseClass = $_POST['caseClass'];
     $outcome = $_POST['outcome'];
+    $vacName = $_POST['vacName'];
+    $vacDate1 = $_POST['vacDate1'];
+    $vacDate2 = $_POST['vacDate2'];
+    $boosterName = $_POST['boosterName'];
+    $boosterDate = $_POST['boosterDate'];
     $dateDied = $_POST['dateDied'];
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
@@ -55,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     sari,
                     caseClass,
                     outcome,
+                    vacName,
+                    vacDate1,
+                    vacDate2,
+                    boosterName,
+                    boosterDate,
                     dateDied,
                     dateAdmitted,
                     morbidityMonth,
@@ -67,6 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     '$sari',
                     '$caseClass',
                     '$outcome',
+                    '$vacName',
+                    '$vacDate1',
+                    '$vacDate2',
+                    '$boosterName',
+                    '$boosterDate',
                     '$dateDied',
                     '$dateAdmitted',
                     '$morbidityMonth',
@@ -129,6 +144,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
+        <label class="col-sm-3 form-label">Vaccine Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="vacName" name="vacName">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">1st Vaccine Date</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="vacDate1" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">2nd Vaccine Date</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="vacDate2" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 form-label">boosterName</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="boosterName" name="boosterName">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Booster Date</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="boosterDate" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+    </div>
+    <div class="row mb-3">
         <label class="col-sm-3 form-label">Sari</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" id="sari" name="sari">
@@ -152,19 +197,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityMonth">
         </div>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="outcome" name="outcome">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-
-            <input type="datetime-local" class="col-sm-3 form-control" id="dateDied" name="dateDied">
-        </div>
-    </div>
+    <?php
+    include('./components/outcomeCreate.php');
+    ?>
     <div class="col-sm-3 mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

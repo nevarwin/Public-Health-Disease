@@ -221,18 +221,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="text" class="form-control" name="morbidityMonth" />
     </div>
   </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Outcome</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="outcome" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Date Died</label>
-    <div class="col-sm-6">
-      <input type="date" class="form-control" name="dateDied" max="<?php echo date('Y-m-d'); ?>" />
-    </div>
-  </div>
+  <?php
+  include('./components/outcomeCreate.php');
+  ?>
   <div class="row mb-3">
     <div class="offset-sm-3 col-sm-3 d-grid">
       <button type="submit" class="btn btn-primary">Submit</button>

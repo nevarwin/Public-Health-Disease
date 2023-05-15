@@ -149,126 +149,131 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
     <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+        <label for="" class="col-sm-3 col-sm-3 col-form-label">Date Admitted</label>
         <div class="col-sm-6">
             <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">Fever</label>
-        <input type="text" class="form-control" id="fever" name="fever">
+    <div row class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Fever</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="fever" name="fever">
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="form-label">behaviorChng</label>
-        <input type="text" class="form-control" id="behaviorChng" name="behaviorChng">
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">behaviorChng</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="behaviorChng" name="behaviorChng">
+        </div>
     </div>
 
-    <div class="mb-3">
-        <label for="" class="col-form-label">seizure</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">seizure</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="seizure" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">Stiff Neck</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Stiff Neck</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="stiffneck" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">bulgefontanel</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">bulgefontanel</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="bulgefontanel" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">menSign</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">menSign</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="menSign" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">clinDiag</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">clinDiag</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="clinDiag" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">pcv10</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">pcv10</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="pcv10" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">pcv13</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">pcv13</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="pcv13" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">meningoVacc</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">meningoVacc</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="meningoVacc" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="vacMeningDate" class="form-label">vacMeningDate</label>
-        <input type="date" class="form-control" id="vacMeningDate" name="vacMeningDate" max="<?php echo date('Y-m-d'); ?>">
+    <div class="row mb-3">
+        <label for="vacMeningDate" class="col-sm-3 col-form-label">vacMeningDate</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" id="vacMeningDate" name="vacMeningDate" max="<?php echo date('Y-m-d'); ?>">
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">meningoVaccDose</label>
+
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">meningoVaccDose</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="meningoVaccDose" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">measVacc</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">measVacc</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="measVacc" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="vacMeasDate" class="form-label">vacMeasDate</label>
-        <input type="date" class="form-control" id="vacMeasDate" name="vacMeasDate" max="<?php echo date('Y-m-d'); ?>">
+    <div class="row mb-3">
+        <label for="vacMeasDate" class="col-sm-3 col-form-label">vacMeasDate</label>
+        <div class="col-sm-6">
+
+            <input type="date" class="form-control" id="vacMeasDate" name="vacMeasDate" max="<?php echo date('Y-m-d'); ?>">
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">measVaccDose</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">measVaccDose</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="measVaccDose" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">aesCaseClass</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">aesCaseClass</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="aesCaseClass" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">finalDiagnosis</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">finalDiagnosis</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="finalDiagnosis" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">MorbidityWeek</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityWeek" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">morbidityMonth</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityMonth" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="outcome" class="form-label">Outcome</label>
-        <input type="text" class="form-control" id="outcome" name="outcome">
-    </div>
-    <div class="mb-3">
-        <label for="dateDied" class="form-label">Date Died</label>
-        <input type="date" class="form-control" id="dateDied" name="dateDied" max="<?php echo date('Y-m-d'); ?>">
-    </div>
+    <?php
+    include('./components/outcomeCreate.php');
+    ?>
     <div class="row mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
 

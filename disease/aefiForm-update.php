@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $thrombocytopenia = $_POST['thrombocytopenia'];
     $outcome = $_POST['outcome'];
     $aliveCondition = $_POST['aliveCondition'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $otherSign = $_POST['otherSign'];
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
@@ -320,18 +320,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
         </div>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="outcome" name="outcome" value='<?php echo $outcome; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dateDied" class="col-sm-3 form-label">Date Died</label>
-        <div class="col-sm-6">
-            <input type="datetime-local" class="form-control" id="dateDied" name="dateDied" value='<?php echo $dateDied; ?>'>
-        </div>
-    </div>
+    <?php
+    include('./components/outcomeUpdate.php');
+    ?>
     <?php
     include('./components/submitCancel.php');
     ?>

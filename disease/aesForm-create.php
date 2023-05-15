@@ -117,42 +117,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="stoolCulture" class="form-label">Lab Result</label>
-        <input type="text" class="form-control" id="labResult" name="labResult" required>
+    <div class="row mb-3">
+        <label for="stoolCulture" class="col-sm-3 col-form-label">Lab Result</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="labResult" name="labResult" required>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="organism" class="form-label">Organism</label>
-        <input type="text" class="form-control" id="organism" name="organism" required>
+    <div class="row mb-3">
+        <label for="organism" class="col-sm-3 col-form-label">Organism</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="organism" name="organism" required>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="outcome" class="form-label">Outcome</label>
-        <input type="text" class="form-control" id="outcome" name="outcome">
-    </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">Case Class</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">Case Class</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="caseClass" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">MorbidityWeek</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityWeek" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="" class="col-form-label">morbidityMonth</label>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityMonth" />
         </div>
     </div>
-    <div class="mb-3">
-        <label for="dateDied" class="form-label">Date Died</label>
-        <input type="date" class="form-control" id="dateDied" name="dateDied" max="<?php echo date('Y-m-d'); ?>">
-    </div>
+    <?php
+    include('./components/outcomeCreate.php');
+    ?>
     <div class="row mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
-
     </div>
 </form>
