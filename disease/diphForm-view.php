@@ -30,6 +30,7 @@ if (!$row) {
     exit;
 }
 $dptDoses = $row['dptDoses'];
+$dateLastDose = $row['dateLastDose'];
 $caseClass = $row['caseClass'];
 $outcome = $row['outcome'];
 $dateDied = $row['dateDied'];
@@ -58,16 +59,15 @@ $morbidityMonth = $row['morbidityMonth'];
         </div>
     </div>
     <div class="row mb-3">
-        <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
+        <label for="" class="col-sm-3 form-label">Date Last Dose</label>
         <div class="col-sm-6">
-            <p> <?php echo $caseClass; ?> </p>
+            <p> <?php echo $dateLastDose; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="outcome" class="col-sm-3 form-label">Outcome</label>
+        <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
         <div class="col-sm-6">
-
-            <p> <?php echo $outcome; ?> </p>
+            <p> <?php echo $caseClass; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
@@ -80,6 +80,12 @@ $morbidityMonth = $row['morbidityMonth'];
         <label for="" class="col-sm-3 form-label">MorbidityWeek</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?> </p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="outcome" class="col-sm-3 form-label">Outcome</label>
+        <div class="col-sm-6">
+            <p> <?php echo $outcome; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
