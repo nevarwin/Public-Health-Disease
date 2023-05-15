@@ -3,9 +3,9 @@ include('connection.php');
 include('search.php');
 
 // Determine the total number of records and the number of records per page
-$totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM clients ")->fetch_array()[0];
+$totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM patients ")->fetch_array()[0];
 // to edit how many fields in the web
-$recordsPerPage = 5;
+$recordsPerPage = 10;
 
 // Determine the current page number and the starting record for the page
 if (isset($_GET['page'])) {
@@ -115,6 +115,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                     ?>
                 </tbody>
             </table>
+
         </div>
         <div class="container my-5">
             <div class="d-flex justify-content-center">
@@ -152,5 +153,6 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                 </ul>
             </div>
         </div>
+
     </div>
 </div>
