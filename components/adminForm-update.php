@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class=" row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Position</label>
         <div class="col-sm-6">
-            <select class="form-select" id="position" name="position">
+            <select class="custom-select" id="position" name="position">
                 <?php
                 $result = mysqli_query($con, 'SELECT * FROM positions');
                 $firstIteration = true; // Variable to track the first iteration
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
         <div class="col-sm-6">
-            <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
+            <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                 <?php
                 // Connect to database and fetch municipalities
                 $result = mysqli_query($con, 'SELECT * FROM municipality');
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
         <div class="col-sm-6">
-            <select class="form-select" id="barangay" name="barangay">
+            <select class="custom-select" id="barangay" name="barangay">
                 <?php
                 // Fetch barangays based on the selected municipality
                 $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
