@@ -64,12 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
     <?php
-    if ($user_data['positionId'] >= 3) {
+    if ($user_data['positionId'] < 2) {
     ?>
         <div class=" row mb-3">
             <label for="" class='col-sm-3 col-form-label'>Position</label>
             <div class="col-sm-6">
-                <select class="form-select" id="position" name="position">
+                <select class="custom-select" id="position" name="position">
                     <option>Select Position</option>
                     <?php
                     include('connection.php');
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
         <div class="col-sm-6">
-            <select class="form-select" id="municipality" onchange="updateBarangays()" name="municipality">
+            <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                 <option>Select municipality</option>
                 <?php
                 // Connect to database and fetch municipalities
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mb-3">
         <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
         <div class="col-sm-6">
-            <select class="form-select" id="barangay" name="barangay">
+            <select class="custom-select" id="barangay" name="barangay">
                 <option>Select Barangay</option>
             </select>
         </div>
