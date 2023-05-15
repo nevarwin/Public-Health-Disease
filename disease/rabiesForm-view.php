@@ -44,6 +44,8 @@ $category = $row['category'];
 $biteSite = $row['biteSite'];
 $dateBitten = $row['dateBitten'];
 $typeOfAnimal = $row['typeOfAnimal'];
+$labDiagnosis = $row['labDiagnosis'];
+$labResult = $row['labResult'];
 $animalStatus = $row['animalStatus'];
 $dateVaccStarted = $row['dateVaccStarted'];
 $animalVacc = $row['animalVacc'];
@@ -54,6 +56,7 @@ $caseClass = $row['caseClass'];
 $dateDied = $row['dateDied'];
 $dateAdmitted = $row['dateAdmitted'];
 $morbidityMonth = $row['morbidityMonth'];
+$outcome = $row['outcome'];
 $morbidityWeek = $row['morbidityWeek'];
 ?>
 
@@ -91,6 +94,18 @@ $morbidityWeek = $row['morbidityWeek'];
     <label for="" class='col-sm form-label'>Type Of Animal</label>
     <div class="col-sm-6">
         <p><?php echo $typeOfAnimal; ?></p>
+    </div>
+</div>
+<div class="row mb-2">
+    <label for="" class='col-sm form-label'>Lab Diagnosis</label>
+    <div class="col-sm-6">
+        <p><?php echo $labDiagnosis; ?></p>
+    </div>
+</div>
+<div class="row mb-2">
+    <label for="" class='col-sm form-label'>Lab Result</label>
+    <div class="col-sm-6">
+        <p><?php echo $labResult; ?></p>
     </div>
 </div>
 <div class="row mb-2">
@@ -145,6 +160,12 @@ $morbidityWeek = $row['morbidityWeek'];
     <label for="" class='col-sm form-label'>Morbidity Week</label>
     <div class="col-sm-6">
         <p><?php echo $morbidityWeek; ?></p>
+    </div>
+</div>
+<div class="row mb-2">
+    <label for="" class='col-sm form-label'>Outcome</label>
+    <div class="col-sm-6">
+        <p><?php echo $outcome; ?></p>
     </div>
 </div>
 <div class="row mb-2">

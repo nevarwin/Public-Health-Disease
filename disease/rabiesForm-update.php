@@ -42,6 +42,8 @@ $category = $row['category'];
 $biteSite = $row['biteSite'];
 $dateBitten = $row['dateBitten'];
 $typeOfAnimal = $row['typeOfAnimal'];
+$labDiagnosis = $row['labDiagnosis'];
+$labResult = $row['labResult'];
 $animalStatus = $row['animalStatus'];
 $dateVaccStarted = $row['dateVaccStarted'];
 $animalVacc = $row['animalVacc'];
@@ -52,6 +54,7 @@ $caseClass = $row['caseClass'];
 $dateDied = $row['dateDied'];
 $dateAdmitted = $row['dateAdmitted'];
 $morbidityMonth = $row['morbidityMonth'];
+$outcome = $row['outcome'];
 $morbidityWeek = $row['morbidityWeek'];
 
 // check if the form is submitted using the post method
@@ -62,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $biteSite = $_POST['biteSite'];
     $dateBitten = $_POST['dateBitten'];
     $typeOfAnimal = $_POST['typeOfAnimal'];
+    $labDiagnosis = $_POST['labDiagnosis'];
+    $labResult = $_POST['labResult'];
     $animalStatus = $_POST['animalStatus'];
     $dateVaccStarted = $_POST['dateVaccStarted'];
     $animalVacc = $_POST['animalVacc'];
@@ -72,12 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateDied = $_POST['dateDied'];
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
+    $outcome = $_POST['outcome'];
     $morbidityWeek = $_POST['morbidityWeek'];
 
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted) or empty($typeOfExposure) or empty($category) or empty($biteSite) or empty($dateBitten) or empty($typeOfAnimal) or empty($animalStatus) or empty($dateVaccStarted) or empty($animalVacc) or empty($woundCleaned) or empty($rabiesVaccine) or empty($animalOutcome) or empty($caseClass)) {
+        if (empty($dateAdmitted)) {
             $errorMessage = "All fields are required!";
             echo "<script>alert('All fields are required!');</script>";
             break;
@@ -89,6 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             biteSite = '$biteSite',
             dateBitten = '$dateBitten',
             typeOfAnimal = '$typeOfAnimal',
+            labDiagnosis = '$labDiagnosis',
+            labResult = '$labResult',
             animalStatus = '$animalStatus',
             dateVaccStarted = '$dateVaccStarted',
             animalVacc = '$animalVacc',
@@ -100,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             dateAdmitted = '$dateAdmitted',
             morbidityMonth = '$morbidityMonth',
             morbidityWeek = '$morbidityWeek'
+            outcome = '$outcome'
         WHERE patientId = $patientId";
 
 
@@ -160,6 +169,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="row mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Lab Diagnosis</label>
+        <div class="col-sm-6">
+            <input type="text" class='form-control' name='labDiagnosis' value='<?php echo $labDiagnosis; ?>'>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Lab Result</label>
+        <div class="col-sm-6">
+            <input type="text" class='form-control' name='labResult' value='<?php echo $labResult; ?>'>
+        </div>
+    </div>
+    <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Animal Status</label>
         <div class="col-sm-6">
             <input type="text" class='form-control' name='animalStatus' value='<?php echo $animalStatus; ?>'>
@@ -211,6 +232,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-3 col-form-label">outcome</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="outcome" value='<?php echo $outcome; ?>' />
         </div>
     </div>
     <div class="row mb-3">
