@@ -6,7 +6,9 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bootstrap 5 Responsive Landing Page Design</title>
+  <title>Public Health Disease Geomapping</title>
+  <!-- <link rel="shortcut icon" href="https://img.icons8.com/office/16/null/longitude.png" type="image/x-icon"> -->
+  <link rel="shortcut icon" href="../assets/img/caviteLogo.png" type="image/png">
 
   <!-- All CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -18,34 +20,6 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" style='color:white' ; href="#"><span class="text-success">Public</span>Health</a>
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-      <!-- <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> -->
-      <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li> -->
-      <!-- <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#project">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../loginform.php">Login</a>
-          </li> -->
-      <!-- </ul> -->
-      <!-- </div> -->
     </div>
   </nav>
 
