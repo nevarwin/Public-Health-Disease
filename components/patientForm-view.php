@@ -58,7 +58,10 @@ $municipalityDRU = $row['munCityOfDRU'];
 $barangayDRU = $row['brgyOfDRU'];
 $disease = $row['disease'];
 $contact = $row['contact'];
-$address = $row['address'];
+$street = $row['street'];
+$unitCode = $row['unitCode'];
+$subd = $row['subd'];
+$postalCode = $row['postalCode'];
 $addressDRU = $row['addressOfDRU'];
 $creationDate = $row['creationDate'];
 
@@ -72,41 +75,73 @@ $result = mysqli_query($con, $sql);
 $barangayDRURow = mysqli_fetch_assoc($result);
 $barangayDRU = $barangayDRURow['barangay'];
 
-// switch ($disease) {
-//     case "ABD":
-//         $disease = "Amebiasis";
-//         break;
-//     case "AEFI":
-//         $disease = "Adverse Event Following Immunization";
-//         break;
-//     case "AES":
-//         $disease = "Acute encephalitis syndrome";
-//         break;
-//     case "AFP":
-//         $disease = "Alpha-Fetoprotein";
-//         break;
-//     case "AMES":
-//         $disease = "Acute Meningitis";
-//         break;
-//     case "DIPH":
-//         $disease = "Diphtheria";
-//         break;
-//     case "NT":
-//         $disease = "Neonatal Tetanus";
-//         break;
-//     case "PERT":
-//         $disease = "Perthes Disease";
-//         break;
-//     case "NNT":
-//         $disease = "Number Needed to Treat";
-//         break;
-//     case "HFMD":
-//         $disease = "Hand, Foot, and Mouth Disease";
-//         break;
-//     default:
-//         $disease = "Unknown Disease";
-//         break;
-// }
+$fullName = "";
+
+switch ($disease) {
+    case "ABD":
+        $fullName = "Amebiasis";
+        break;
+    case "AEFI":
+        $fullName = "Adverse Event Following Immunization";
+        break;
+    case "AES":
+        $fullName = "Acute encephalitis syndrome";
+        break;
+    case "AFP":
+        $fullName = "Alpha-Fetoprotein";
+        break;
+    case "AMES":
+        $fullName = "Acute Meningitis";
+        break;
+    case "DIPH":
+        $fullName = "Diphtheria";
+        break;
+    case "NT":
+        $fullName = "Neonatal Tetanus";
+        break;
+    case "PERT":
+        $fullName = "Perthes Disease";
+        break;
+    case "NNT":
+        $fullName = "Number Needed to Treat";
+        break;
+    case "HFMD":
+        $fullName = "Hand, Foot, and Mouth Disease";
+        break;
+    case "Influenza":
+        $fullName = "Influenza";
+        break;
+    case "Dengue":
+        $fullName = "Dengue";
+        break;
+    case "Rabies":
+        $fullName = "Rabies";
+        break;
+    case "Cholera":
+        $fullName = "Cholera";
+        break;
+    case "Hepatitis":
+        $fullName = "Hepatitis";
+        break;
+    case "Meningitis":
+        $fullName = "Meningitis";
+        break;
+    case "Meningo":
+        $fullName = "Meningo";
+        break;
+    case "Typhoid":
+        $fullName = "Typhoid";
+        break;
+    case "Leptospirosis":
+        $fullName = "Leptospirosis";
+        break;
+    default:
+        $fullName = "Unknown";
+        break;
+}
+
+
+
 
 ?>
 <div class="container-fluid">
@@ -169,19 +204,13 @@ $barangayDRU = $barangayDRURow['barangay'];
                         <div class="row no-gutters">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
                         </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $disease  ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $address ?></div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $fullName  ?></div>
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>
                         </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?></div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?> years old</div>
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
@@ -191,15 +220,39 @@ $barangayDRU = $barangayDRURow['barangay'];
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Building Number</div>
                         </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $unitCode ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Subdivision/Village</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $subd ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Street</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $street ?></div>
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay</div>
                         </div>
                         <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangay ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
+                    </div>
+                    <div style="margin-bottom:17px;">
+                        <div class="row no-gutters">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Postal Code</div>
+                        </div>
+                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $postalCode ?></div>
                     </div>
                     <div style="margin-bottom:17px;">
                         <div class="row no-gutters">
