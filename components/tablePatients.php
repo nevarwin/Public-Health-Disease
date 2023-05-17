@@ -45,7 +45,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tfoot>
+                <!-- <tfoot>
                     <tr>
                         <th>Patient Id</th>
                         <th>First Name</th>
@@ -59,7 +59,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                         <th>Year</th>
                         <th>Action</th>
                     </tr>
-                </tfoot>
+                </tfoot> -->
                 <tbody>
                     <?php
                     include("connection.php");
@@ -73,7 +73,6 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                     LEFT JOIN genders ON patients.gender = genders.genderId
                     LIMIT $startRecord, $recordsPerPage
                     ";
-                    // LIMIT $startRecord, $recordsPerPage
 
                     $result = mysqli_query($con, $sql);
 
@@ -94,14 +93,14 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                                 <td><?= $patients['barangay'] ?></td>
                                 <td><?= $patients['municipality'] ?></td>
                                 <td><?= $year ?></td>
-                                <td>
-                                    <a class="btn btn-info btn-sm" href="http://localhost/admin2gh/patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
-                                    <a class="btn btn-primary btn-sm" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
+                                <td class="text-center">
+                                    <a class="btn btn-info btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
+                                    <a class="btn btn-primary btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Edit</a>
 
                                     <?php
                                     if ($user_data['positionId'] == 1 or $user_data['positionId'] == 2) {
                                     ?>
-                                        <a class="btn btn-danger btn-sm" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
+                                        <a class="btn btn-danger btn-sm btn-block my-1" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
                                     <?php
                                     }
                                     ?>
