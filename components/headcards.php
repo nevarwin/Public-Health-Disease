@@ -37,32 +37,18 @@
         </div>
     </div>
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                            </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+    // Replace with your database connection code
+    include('./components/connection.php');
+
+    // Fetch the most common disease out of 20 diseases
+    $query = "SELECT COUNT(*) AS count, disease FROM patients GROUP BY disease ORDER BY count DESC LIMIT 1";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    $mostCommonDiseaseCount = $row['count'];
+    $mostCommonDisease = $row['disease'];
+    ?>
 
     <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
@@ -71,8 +57,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            Most Common Disease</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $mostCommonDisease; ?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -81,6 +67,53 @@
             </div>
         </div>
     </div>
+
+    <?php
+    // Replace with your database connection code
+    include('./components/connection.php');
+
+    // Define the list of diseases
+    $diseases = array(
+        'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
+        'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
+        'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
+    );
+
+    // Fetch the top 4 diseases from the list
+    $query = "SELECT COUNT(p.id) AS count, d.disease
+          FROM patients p
+          INNER JOIN diseases d ON p.disease = d.diseaseId
+          WHERE d.disease IN ('" . implode("','", $diseases) . "')
+          GROUP BY p.disease
+          ORDER BY count DESC
+          LIMIT 4";
+    $result = mysqli_query($con, $query);
+
+    // Display the top 4 diseases
+    while ($row = mysqli_fetch_assoc($result)) {
+        $disease = $row['disease'];
+        $count = $row['count'];
+    ?>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $disease ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    }
+    ?>
 </div>
 
 <!-- Content Row -->
