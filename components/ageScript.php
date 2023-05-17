@@ -3,6 +3,35 @@
         var dob = document.getElementById("dob").value;
         var today = new Date();
         var birthDate = new Date(dob);
+        var age = calculateAge(birthDate, today);
+
+        console.log("Age:", age);
+
+        // Get the value of the input element
+        var input = event.target;
+        var inputValue = input.value;
+
+        // Assign the value to the JavaScript variable
+        var myVariable = inputValue;
+
+        // Update the disabled input field with the new value
+        document.getElementById("age").value = age;
+    };
+
+    function calculateAge(birthDate, today) {
+        var ageInMilliseconds = today - birthDate;
+        var millisecondsPerYear = 1000 * 60 * 60 * 24 * 365.25; // Accounting for leap years
+        var age = Math.floor(ageInMilliseconds / millisecondsPerYear);
+
+        return age + " years old";
+    }
+</script>
+
+<!-- <script>
+    window.updateVariable = function(event) {
+        var dob = document.getElementById("dob").value;
+        var today = new Date();
+        var birthDate = new Date(dob);
         var age;
 
         // Calculate the difference in years, months, and days
@@ -89,4 +118,4 @@
         // Update the disabled input field with the new value
         document.getElementById("age").value = age;
     };
-</script>
+</script> -->
