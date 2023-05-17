@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $thrombocytopenia = $_POST['thrombocytopenia'];
     $outcome = $_POST['outcome'];
     $aliveCondition = $_POST['aliveCondition'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $otherSign = $_POST['otherSign'];
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];

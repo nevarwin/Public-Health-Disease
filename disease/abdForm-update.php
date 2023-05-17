@@ -37,7 +37,7 @@ if (!$row) {
 $stoolCulture = $row['stoolCulture'];
 $organism = $row['organism'];
 $outcome = $row['outcome'];
-$dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
+$dateDied = $row['dateDied'];
 $dateAdmitted = $row['dateAdmitted'];
 $morbidityWeek = $row['morbidityWeek'];
 $morbidityMonth = $row['morbidityMonth'];
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stoolCulture = $_POST['stoolCulture'];
     $organism = $_POST['organism'];
     $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityWeek = $_POST['morbidityWeek'];
     $morbidityMonth = $_POST['morbidityMonth'];

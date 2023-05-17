@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hxDisorder = $_POST['hxDisorder'];
     $otherCases = $_POST['otherCases'];
     $firststoolSpec = $_POST['firststoolSpec'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $outcome = $_POST['outcome'];
     $dstool1Taken = $_POST['dstool1Taken'];
     $dstool2Taken = $_POST['dstool2Taken'];

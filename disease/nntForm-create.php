@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tetanusAntitoxin = $_POST['tetanusAntitoxin'];
     $skinLesion = $_POST['skinLesion'];
     $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
     $morbidityWeek = $_POST['morbidityWeek'];

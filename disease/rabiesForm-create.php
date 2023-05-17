@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $morbidityWeek = $_POST['morbidityWeek'];
   $morbidityMonth = $_POST['morbidityMonth'];
   $outcome = $_POST['outcome'];
-  $dateDied = $_POST['dateDied'];
+  $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
 
 
   // check if the data is empty
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $successMessage = "Rabies info successfully added!";
       echo "<script>
       alert('Rabies form submitted successfully!');
-      window.location = 'http://localhost/admin2gh/patientTable.php';
+      //window.location = 'http://localhost/admin2gh/patientTable.php';
       </script>";
       exit;
     } else {

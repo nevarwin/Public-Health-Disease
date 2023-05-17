@@ -104,13 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             rabiesVaccine = '$rabiesVaccine',
             animalOutcome = '$animalOutcome',
             caseClass = '$caseClass',
-            dateDied = '$dateDied',
             dateAdmitted = '$dateAdmitted',
             morbidityMonth = '$morbidityMonth',
-            morbidityWeek = '$morbidityWeek'
-            outcome = '$outcome'
+            morbidityWeek = '$morbidityWeek',
+            outcome = '$outcome',
+            dateDied = '$dateDied'
         WHERE patientId = $patientId";
-
 
         $result = mysqli_query($con, $query);
 
@@ -123,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </script>";
             exit;
         } else {
+            echo 'error';
             $errorMessage = "Error submitting form!";
             echo "<script>alert('Error submitting form! " . mysqli_error($con) . "');</script>";
         }
