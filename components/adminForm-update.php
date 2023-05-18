@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
-        if (empty($name) or empty($email) or empty($position) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
+
+        if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
             $errorMessage = "All fields are required";
             break;
         }
@@ -76,32 +77,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <form action="" method="post" onsubmit="return validateForm(event)">
     <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
-    <div class=" row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Position</label>
-        <div class="col-sm-6">
-            <select class="custom-select" id="position" name="position">
-                <?php
-                $result = mysqli_query($con, 'SELECT * FROM positions');
-                $firstIteration = true; // Variable to track the first iteration
+    <?php
+    if ($user_data['positionId'] < 2) {
+    ?>
+        <div class=" row mb-3">
+            <label for="" class='col-sm-3 col-form-label'>Position</label>
+            <div class="col-sm-6">
+                <select class="custom-select" id="position" name="position">
+                    <?php
+                    $result = mysqli_query($con, 'SELECT * FROM positions');
+                    $firstIteration = true; // Variable to track the first iteration
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    if ($firstIteration) {
-                        $firstIteration = false;
-                        continue; // Skip the first iteration
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        if ($firstIteration) {
+                            $firstIteration = false;
+                            continue; // Skip the first iteration
+                        }
+
+                        $positionId = $row['positionId'];
+                        $positionName = $row['position'];
+
+                        // Check if the current option's position ID matches the selected position ID
+                        $selected = ($positionId == $position) ? 'selected' : '';
+
+                        echo "<option value='$positionId' $selected>$positionName</option>";
                     }
-
-                    $positionId = $row['positionId'];
-                    $positionName = $row['position'];
-
-                    // Check if the current option's position ID matches the selected position ID
-                    $selected = ($positionId == $position) ? 'selected' : '';
-
-                    echo "<option value='$positionId' $selected>$positionName</option>";
-                }
-                ?>
-            </select>
+                    ?>
+                </select>
+            </div>
         </div>
-    </div>
+    <?php
+    } else {
+        echo '<input type="hidden" name="position" value="3">';
+    }
+    ?>
     <div class="row mb-3">
         <label for="" class='col-sm-3 col-form-label'>Name</label>
         <div class="col-sm-6">

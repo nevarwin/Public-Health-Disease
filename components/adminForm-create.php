@@ -89,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     <?php
+    } else {
+        echo '<input type="hidden" name="position" value="3">';
     }
     ?>
     <div class="row mb-3">
