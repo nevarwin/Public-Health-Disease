@@ -74,36 +74,6 @@
   </button>
   </div>
 
-  <!-- about section starts -->
-  <section id="about" class="about section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-12 col-12">
-          <div class="about-img">
-            <img src="img/phabout.jpg" alt="" class="img-fluid" />
-          </div>
-        </div>
-        <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-          <div class="about-text">
-            <h2>
-              We Provide the Best Quality <br />
-              Services Ever
-            </h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam,
-              labore reiciendis. Assumenda eos quod animi! Soluta nesciunt
-              inventore dolores excepturi provident, culpa beatae tempora,
-              explicabo corporis quibusdam corrupti. Autem, quaerat. Assumenda
-              quo aliquam vel, nostrum explicabo ipsum dolor, ipsa perferendis
-              porro doloribus obcaecati placeat natus iste odio est non earum?
-            </p>
-            <a href="#" class="btn btn-warning">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- about section Ends -->
   <!-- services section Starts -->
   <section class="services section-padding" id="services">
     <div class="container">
@@ -209,7 +179,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-3">
           <div class="card text-center">
             <div class="card-body">
@@ -265,75 +235,48 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card text-center">
-            <div class="card-body">
-              <img src="img/team-4.jpg" alt="" class="img-fluid rounded-circle" />
-              <h3 class="card-title py-2">Jack Wilson</h3>
-              <p class="card-text">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Sequi ipsam nostrum illo tempora esse quibusdam.
-              </p>
-              <p class="socials">
-                <i class="bi bi-twitter text-dark mx-1"></i>
-                <i class="bi bi-facebook text-dark mx-1"></i>
-                <i class="bi bi-linkedin text-dark mx-1"></i>
-                <i class="bi bi-instagram text-dark mx-1"></i>
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
-  <!-- team ends -->
-  <!-- Contact starts -->
-  <section id="contact" class="contact section-padding">
-    <div class="container mt-5 mb-5">
+  <!-- about section starts -->
+  <section id="about" class="about section-padding">
+    <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="section-header text-center pb-5">
-            <h2>Contact Us</h2>
+            <h2>About Us</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-12 col-12">
+          <div class="about-img">
+            <img src="img/phabout.jpg" alt="" class="img-fluid" />
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+          <div class="about-text">
+            <h2>
+              We Provide the Best Quality <br />
+              Services Ever
+            </h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur <br />adipisicing elit.
-              Non, quo.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam,
+              labore reiciendis. Assumenda eos quod animi! Soluta nesciunt
+              inventore dolores excepturi provident, culpa beatae tempora,
+              explicabo corporis quibusdam corrupti. Autem, quaerat. Assumenda
+              quo aliquam vel, nostrum explicabo ipsum dolor, ipsa perferendis
+              porro doloribus obcaecati placeat natus iste odio est non earum?
             </p>
           </div>
         </div>
       </div>
-      <div class="row m-0">
-        <div class="col-md-12 p-0 pt-4 pb-4">
-          <form action="#" class="bg-light p-4 m-auto">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="mb-3">
-                  <input class="form-control" placeholder="Full Name" required="" type="text" />
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="mb-3">
-                  <input class="form-control" placeholder="Email" required="" type="email" />
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="mb-3">
-                  <textarea class="form-control" placeholder="Message" required="" rows="3"></textarea>
-                </div>
-              </div>
-              <button class="btn btn-warning btn-lg btn-block mt-3" type="button">
-                Send Now
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
   </section>
-  <!-- contact ends -->
-  <!-- footer starts -->
+  <!-- about section Ends --> <!-- footer starts -->
   <footer class="bg-dark p-2 text-center">
     <div class="container">
-      <p class="text-white">All Right Reserved By @website Name</p>
+      <p class="text-white">All Right Reserved By @Cavite Public Health Disease Geomapping</p>
     </div>
   </footer>
   <!-- footer ends -->
