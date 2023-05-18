@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
-        <h2>Add New Patient</h2>
+        <h2>Update Patient Information</h2>
 
         <?php
         if (!empty($errorMessage)) {
@@ -264,11 +264,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </select>
                     </div>
                 </div>
-
                 <br>
                 <div id="form-extension"></div>
                 <br>
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-md-3 mx-auto">
                         <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
                     </div>

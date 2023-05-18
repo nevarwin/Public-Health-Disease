@@ -84,29 +84,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-<form action="" method="post" onsubmit="return validateForm(event)">
-    <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Password</label>
-        <div class="col-sm-6">
-            <input id="password" type="password" class='form-control' name='password' placeholder='Password'>
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2>Change Password</h2>
+        <form action="" method="post" onsubmit="return validateForm(event)">
+            <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Password</label>
+                <div class="col-sm-6">
+                    <input id="password" type="password" class='form-control' name='password' placeholder='Password'>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Confirm Password</label>
+                <div class="col-sm-6">
+                    <input id="confirmPassword" type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class='btn btn-primary'>Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Confirm Password</label>
-        <div class="col-sm-6">
-            <input id="confirmPassword" type="password" class='form-control' name='confirmPassword' placeholder='Confirm Password'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class='btn btn-primary'>Submit</button>
-        </div>
-        <div class="col-sm-3 d-grid">
-            <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
-        </div>
-    </div>
-</form>
+</div>
 
 <script>
     function validateForm(event) {

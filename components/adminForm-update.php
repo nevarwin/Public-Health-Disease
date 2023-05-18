@@ -75,126 +75,131 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-<form action="" method="post" onsubmit="return validateForm(event)">
-    <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
-    <?php
-    if ($user_data['positionId'] < 2) {
-    ?>
-        <div class=" row mb-3">
-            <label for="" class='col-sm-3 col-form-label'>Position</label>
-            <div class="col-sm-6">
-                <select class="custom-select" id="position" name="position">
-                    <?php
-                    $result = mysqli_query($con, 'SELECT * FROM positions');
-                    $firstIteration = true; // Variable to track the first iteration
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2>Update Admin Information</h2>
+        <form action="" method="post" onsubmit="return validateForm(event)">
+            <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
+            <?php
+            if ($user_data['positionId'] < 2) {
+            ?>
+                <div class=" row mb-3">
+                    <label for="" class='col-sm-3 col-form-label'>Position</label>
+                    <div class="col-sm-6">
+                        <select class="custom-select" id="position" name="position">
+                            <?php
+                            $result = mysqli_query($con, 'SELECT * FROM positions');
+                            $firstIteration = true; // Variable to track the first iteration
 
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        if ($firstIteration) {
-                            $firstIteration = false;
-                            continue; // Skip the first iteration
-                        }
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                if ($firstIteration) {
+                                    $firstIteration = false;
+                                    continue; // Skip the first iteration
+                                }
 
-                        $positionId = $row['positionId'];
-                        $positionName = $row['position'];
+                                $positionId = $row['positionId'];
+                                $positionName = $row['position'];
 
-                        // Check if the current option's position ID matches the selected position ID
-                        $selected = ($positionId == $position) ? 'selected' : '';
+                                // Check if the current option's position ID matches the selected position ID
+                                $selected = ($positionId == $position) ? 'selected' : '';
 
-                        echo "<option value='$positionId' $selected>$positionName</option>";
-                    }
-                    ?>
-                </select>
+                                echo "<option value='$positionId' $selected>$positionName</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            <?php
+            } else {
+                echo '<input type="hidden" name="position" value="3">';
+            }
+            ?>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='name' value='<?= $name ?>'>
+                </div>
             </div>
-        </div>
-    <?php
-    } else {
-        echo '<input type="hidden" name="position" value="3">';
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Name</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='name' value='<?= $name ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Email</label>
-        <div class="col-sm-6">
-            <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
-        <div class="col-sm-6">
-            <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
-        </div>
-    </div>
-    <!-- Municipality Dropdown -->
-    <div class="row mb-3">
-        <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
-        <div class="col-sm-6">
-            <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Email</label>
+                <div class="col-sm-6">
+                    <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
+                <div class="col-sm-6">
+                    <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
+                </div>
+            </div>
+            <!-- Municipality Dropdown -->
+            <div class="row mb-3">
+                <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
+                <div class="col-sm-6">
+                    <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+                        <?php
+                        // Connect to database and fetch municipalities
+                        $result = mysqli_query($con, 'SELECT * FROM municipality');
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $munId = $row['munId'];
+                            $municipalityName = $row['municipality'];
+
+                            // Check if the current option's municipality ID matches the selected municipality ID
+                            $selected = ($munId == $municipality) ? 'selected' : '';
+
+                            echo "<option value='$munId' $selected>$municipalityName</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <!-- Barangay Dropdown -->
+            <div class="row mb-3">
+                <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
+                <div class="col-sm-6">
+                    <select class="custom-select" id="barangay" name="barangay">
+                        <?php
+                        // Fetch barangays based on the selected municipality
+                        $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
+
+                        // Display each barangay in a dropdown option
+                        while ($barangayRow = mysqli_fetch_assoc($barangayResult)) {
+                            $barangayId = $barangayRow['id'];
+                            $barangayName = $barangayRow['barangay'];
+
+                            // Check if the current option's barangay ID matches the selected barangay ID
+                            $selected = ($barangayId == $barangay) ? 'selected' : '';
+
+                            echo "<option value='$barangayId' $selected>$barangayName</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
+                </div>
                 <?php
-                // Connect to database and fetch municipalities
-                $result = mysqli_query($con, 'SELECT * FROM municipality');
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $munId = $row['munId'];
-                    $municipalityName = $row['municipality'];
-
-                    // Check if the current option's municipality ID matches the selected municipality ID
-                    $selected = ($munId == $municipality) ? 'selected' : '';
-
-                    echo "<option value='$munId' $selected>$municipalityName</option>";
+                if ($user_data['positionId'] != 1) {
+                    $link = "http://localhost/admin2gh/patientTable.php";
+                } else {
+                    $link = "http://localhost/admin2gh/adminTable.php";
                 }
                 ?>
-            </select>
-        </div>
+                <div class="col-sm-3 d-grid">
+                    <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <!-- Barangay Dropdown -->
-    <div class="row mb-3">
-        <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
-        <div class="col-sm-6">
-            <select class="custom-select" id="barangay" name="barangay">
-                <?php
-                // Fetch barangays based on the selected municipality
-                $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
-
-                // Display each barangay in a dropdown option
-                while ($barangayRow = mysqli_fetch_assoc($barangayResult)) {
-                    $barangayId = $barangayRow['id'];
-                    $barangayName = $barangayRow['barangay'];
-
-                    // Check if the current option's barangay ID matches the selected barangay ID
-                    $selected = ($barangayId == $barangay) ? 'selected' : '';
-
-                    echo "<option value='$barangayId' $selected>$barangayName</option>";
-                }
-                ?>
-            </select>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Address</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
-        </div>
-        <?php
-        if ($user_data['positionId'] != 1) {
-            $link = "http://localhost/admin2gh/patientTable.php";
-        } else {
-            $link = "http://localhost/admin2gh/adminTable.php";
-        }
-        ?>
-        <div class="col-sm-3 d-grid">
-            <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
-        </div>
-    </div>
-</form>
+</div>
 
 <script>
     function validateForm(event) {

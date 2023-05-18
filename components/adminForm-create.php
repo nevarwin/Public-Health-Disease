@@ -56,110 +56,114 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2>Create New Admin</h2>
+        <?php
+        if (!empty($alert)) {
+            echo $alert;
+        }
+        ?>
+        <form class="" method="post" onsubmit="return validateForm(event)">
+            <?php
+            if ($user_data['positionId'] < 2) {
+            ?>
+                <div class=" row mb-3">
+                    <label for="" class='col-sm-3 col-form-label'>Position</label>
+                    <div class="col-sm-6">
+                        <select class="custom-select" id="position" name="position">
+                            <option>Select Position</option>
+                            <?php
+                            include('connection.php');
+                            $result = mysqli_query($con, 'SELECT * FROM positions');
 
-<form action="" method="post" onsubmit="return validateForm(event)">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <?php
-    if ($user_data['positionId'] < 2) {
-    ?>
-        <div class=" row mb-3">
-            <label for="" class='col-sm-3 col-form-label'>Position</label>
-            <div class="col-sm-6">
-                <select class="custom-select" id="position" name="position">
-                    <option>Select Position</option>
-                    <?php
-                    include('connection.php');
-                    $result = mysqli_query($con, 'SELECT * FROM positions');
+                            $firstIteration = true;
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                if ($firstIteration) {
+                                    $firstIteration = false;
+                                    continue; // Skip the first iteration
+                                }
+                                echo '<option value="' . $row['positionId'] . '">' . $row['position'] . '</option>';
+                            }
 
-                    $firstIteration = true;
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        if ($firstIteration) {
-                            $firstIteration = false;
-                            continue; // Skip the first iteration
-                        }
-                        echo '<option value="' . $row['positionId'] . '">' . $row['position'] . '</option>';
-                    }
-
-                    ?>
-                </select>
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            <?php
+            } else {
+                echo '<input type="hidden" name="position" value="3">';
+            }
+            ?>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='name'>
+                </div>
             </div>
-        </div>
-    <?php
-    } else {
-        echo '<input type="hidden" name="position" value="3">';
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Name</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='name'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Email</label>
-        <div class="col-sm-6">
-            <input autocomplete=false type="email" class='form-control' name='email' id='email'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Password</label>
-        <div class="col-sm-6">
-            <input autocomplete=false type="password" class='form-control' name='password' id='password'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='contact' id="contact">
-        </div>
-    </div>
-    <!-- Municipality Dropdown -->
-    <div class="row mb-3">
-        <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
-        <div class="col-sm-6">
-            <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                <option>Select municipality</option>
-                <?php
-                // Connect to database and fetch municipalities
-                include('connection.php');
-                $result = mysqli_query($con, 'SELECT * FROM municipality');
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Email</label>
+                <div class="col-sm-6">
+                    <input autocomplete=false type="email" class='form-control' name='email' id='email'>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Password</label>
+                <div class="col-sm-6">
+                    <input autocomplete=false type="password" class='form-control' name='password' id='password'>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='contact' id="contact">
+                </div>
+            </div>
+            <!-- Municipality Dropdown -->
+            <div class="row mb-3">
+                <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
+                <div class="col-sm-6">
+                    <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+                        <option>Select municipality</option>
+                        <?php
+                        // Connect to database and fetch municipalities
+                        include('connection.php');
+                        $result = mysqli_query($con, 'SELECT * FROM municipality');
 
-                // Display each municipalities in a dropdown option
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
+                        // Display each municipalities in a dropdown option
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <!-- Barangay Dropdown -->
+            <div class="row mb-3">
+                <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
+                <div class="col-sm-6">
+                    <select class="custom-select" id="barangay" name="barangay">
+                        <option>Select Barangay</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='address'>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class='btn btn-primary' name="createAdmin">Submit</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <!-- Barangay Dropdown -->
-    <div class="row mb-3">
-        <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
-        <div class="col-sm-6">
-            <select class="custom-select" id="barangay" name="barangay">
-                <option>Select Barangay</option>
-            </select>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Address</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='address'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class='btn btn-primary' name="createAdmin">Submit</button>
-        </div>
-        <div class="col-sm-3 d-grid">
-            <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
-        </div>
-    </div>
-</form>
+</div>
 
 <script>
     function validateForm(event) {
