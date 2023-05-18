@@ -108,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-<!-- Name Form Group -->
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
         <h2>Add New Patient</h2>
@@ -123,83 +122,114 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
 
         <form action="" method="post" onsubmit="return validateForm(event)">
-            <span class="">Patient Name</span>
-            <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
-            <div class="input-group mb-3">
-                <div class="col">
-                    <input placeholder="Last Name" type="text" class="form-control" name="lName" value="<?php echo $fName; ?>">
-                </div>
-                <div class="col">
-                    <input placeholder="First Name" type="text" class="form-control" name="fName" value="<?php echo $lName; ?>">
-                </div>
-                <div class="col">
-                    <input placeholder="Middle Name" type="text" class="form-control" name="mName" value="<?php echo $mName; ?>">
-                </div>
-            </div>
-
-
-            <!-- Gender Dropdown -->
-            <div class="row mb-3">
-                <label class='col-sm-3 col-form-label' for="gender">Gender</label>
-                <div class="col-sm-6">
-                    <select class="custom-select" id="gender" name="gender">
-                        <?php
-                        // Connect to database and fetch municipalities
-                        include("connection.php");
-                        $result = mysqli_query($con, 'SELECT * FROM genders');
-
-                        // Display each municipalities in a dropdown option
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option value="' . $row['genderId'] . '">' . $row['gender'] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <!-- DOB -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Birthday</label>
-                <div class="col-sm-6">
-                    <input type="date" class='form-control' name='dob' id="dob" onchange="updateVariable(event)" max="<?php echo date('Y-m-d'); ?>">
-                </div>
-            </div>
-            <!-- Age minus the DOB -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Age</label>
-                <div class="col-sm-6">
-                    <input type="text" class='form-control' id="age" name='age' readonly="">
-                </div>
-            </div>
-            <!-- Contact Number -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
-                <div class="col-sm-6">
-                    <input placeholder="Contact Number" id="contact" type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
-                </div>
-            </div>
-            <span class="">Patient's Complete Address</span>
-            <div class="input-group">
-                <div class="col">
-                    <input placeholder="Building Number" type="text" class='form-control' name='unitCode'>
-                </div>
-                <div class="col">
-                    <input placeholder="Subd/Village" type="text" class='form-control' name='subd'>
-                </div>
-                <div class="col">
-                    <input placeholder="Street" type="text" class='form-control' name='street'>
-                </div>
-                <div class="col">
-                    <input placeholder="Postal Code" type="text" class='form-control' name='postalCode'>
-                </div>
-                <div class="input-group my-3">
+            <div class="col px-2">
+                <input type="hidden" class='form-control' name='patientId' value='<?php echo $patientId; ?>'>
+                <span class="">Patient Name</span>
+                <div class="input-group mb-3">
                     <div class="col">
+                        <input placeholder="Last Name" type="text" class="form-control" name="lName" value="<?php echo $fName; ?>">
+                    </div>
+                    <div class="col">
+                        <input placeholder="First Name" type="text" class="form-control" name="fName" value="<?php echo $lName; ?>">
+                    </div>
+                    <div class="col">
+                        <input placeholder="Middle Name" type="text" class="form-control" name="mName" value="<?php echo $mName; ?>">
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-12">
+                        <div class="input-group mb-3">
+                            <!-- Gender -->
+                            <div class="col">
+                                <label class='col-form-label' for="gender">Gender</label>
+                                <select class="custom-select" id="gender" name="gender">
+                                    <?php
+                                    // Connect to database and fetch genders
+                                    include("connection.php");
+                                    $result = mysqli_query($con, 'SELECT * FROM genders');
 
-                        <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                            <option value="">Select municipality</option>
+                                    // Display each gender in a dropdown option
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<option value="' . $row['genderId'] . '">' . $row['gender'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- DOB -->
+                            <div class="col">
+                                <label for="" class="col-form-label">Birthday</label>
+                                <input type="date" class="form-control" name="dob" id="dob" onchange="updateVariable(event)" max="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                            <!-- Age -->
+                            <div class="col">
+                                <label for="" class="col-form-label">Age</label>
+                                <input type="text" class="form-control" id="age" name="age" readonly>
+                            </div>
+                            <!-- Contact Number -->
+                            <div class="col">
+                                <label for="" class='col-form-label'>Contact Number</label>
+                                <input placeholder="Contact Number" id="contact" type="text" class='form-control' name='contact' value='<?php echo $contact; ?>'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="">Patient's Complete Address</span>
+                <div class="input-group">
+                    <div class="col">
+                        <input placeholder="Building Number" type="text" class='form-control' name='unitCode'>
+                    </div>
+                    <div class="col">
+                        <input placeholder="Subd/Village" type="text" class='form-control' name='subd'>
+                    </div>
+                    <div class="col">
+                        <input placeholder="Street" type="text" class='form-control' name='street'>
+                    </div>
+                    <div class="col">
+                        <input placeholder="Postal Code" type="text" class='form-control' name='postalCode'>
+                    </div>
+                    <div class="input-group my-3">
+                        <div class="col">
+
+                            <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+                                <option value="">Select municipality</option>
+                                <?php
+                                // Connect to database and fetch municipalities
+                                include("connection.php");
+                                $result = mysqli_query($con, 'SELECT * FROM municipality');
+                                // Display each municipalities in a dropdown option
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="barangay" name="barangay">
+                                <option>Select Barangay</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Address of DRU -->
+                <div class="row mb-3">
+                    <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
+                    <div class="col-sm-6">
+                        <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
+                    </div>
+                </div>
+                <!-- Municipality of DRU Dropdown -->
+                <div class="input-group mb-3">
+                    <div class="col">
+                        <select class="custom-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
+                            <option value="">Select municipality of DRU</option>
                             <?php
                             // Connect to database and fetch municipalities
                             include("connection.php");
                             $result = mysqli_query($con, 'SELECT * FROM municipality');
+
                             // Display each municipalities in a dropdown option
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
@@ -208,75 +238,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </select>
                     </div>
                     <div class="col">
-                        <select class="custom-select" id="barangay" name="barangay">
-                            <option>Select Barangay</option>
+                        <select class="custom-select" id="barangayDRU" name="barangayDRU">
+                            <option>Select Barangay of DRU</option>
                         </select>
                     </div>
                 </div>
-            </div>
 
+                <!-- Disease Dropdown -->
+                <div class="row mb-3">
+                    <label class='col-sm-3 col-form-label' for="disease">Disease</label>
+                    <div class="col-sm-6">
+                        <select class="custom-select" id="dynamicDisease" name="disease">
+                            <option value="">Select Disease</option>
+                            <?php
+                            // Connect to database and fetch disease
+                            include("connection.php");
+                            $result = mysqli_query($con, 'SELECT * FROM diseases');
 
-            <!-- Address of DRU -->
-            <div class="row mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
-                <div class="col-sm-6">
-                    <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
+                            // Display each disease in a dropdown option
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . $row['diseaseId'] . '">' . $row['disease'] . '</option>';
+                            }
+
+                            ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <!-- Municipality of DRU Dropdown -->
-            <div class="input-group mb-3">
-                <div class="col">
-                    <select class="custom-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
-                        <option value="">Select municipality of DRU</option>
-                        <?php
-                        // Connect to database and fetch municipalities
-                        include("connection.php");
-                        $result = mysqli_query($con, 'SELECT * FROM municipality');
 
-                        // Display each municipalities in a dropdown option
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="custom-select" id="barangayDRU" name="barangayDRU">
-                        <option>Select Barangay of DRU</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Disease Dropdown -->
-            <div class="row mb-3">
-                <label class='col-sm-3 col-form-label' for="disease">Disease</label>
-                <div class="col-sm-6">
-                    <select class="custom-select" id="dynamicDisease" name="disease">
-                        <option value="">Select Disease</option>
-                        <?php
-                        // Connect to database and fetch disease
-                        include("connection.php");
-                        $result = mysqli_query($con, 'SELECT * FROM diseases');
-
-                        // Display each disease in a dropdown option
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option value="' . $row['diseaseId'] . '">' . $row['disease'] . '</option>';
-                        }
-
-                        ?>
-                    </select>
-                </div>
-            </div>
-
-            <br>
-            <div id="form-extension"></div>
-            <br>
-            <div class="row mb-3">
-                <div class="col-md-3 mx-auto">
-                    <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
-                </div>
-                <div class="col-md-3 mx-auto">
-                    <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                <br>
+                <div id="form-extension"></div>
+                <br>
+                <div class="row mb-3">
+                    <div class="col-md-3 mx-auto">
+                        <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
+                    </div>
+                    <div class="col-md-3 mx-auto">
+                        <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                    </div>
                 </div>
             </div>
         </form>
