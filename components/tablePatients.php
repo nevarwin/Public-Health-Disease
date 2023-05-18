@@ -22,8 +22,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
         <div class="row">
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search">
-            <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary mlroant
-            -auto" role="button">Add new Patient</a>
+            <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary ml-auto" role="button">Add new patient</a>
         </div>
     </div>
     <div class="card-body">
