@@ -20,11 +20,10 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="row">
-            <h2 class="m-0 font-weight-bold text-primary">
-                Patient's Data
-            </h2>
-            <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary" role="button">Add new Patient</a>
+            <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search">
+            <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary mlroant
+            -auto" role="button">Add new Patient</a>
         </div>
     </div>
     <div class="card-body">
