@@ -10,6 +10,9 @@
   <!-- <link rel="shortcut icon" href="https://img.icons8.com/office/16/null/longitude.png" type="image/x-icon"> -->
   <link rel="shortcut icon" href="../assets/img/caviteLogo.png" type="image/png">
 
+  <!-- chart.js cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- All CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
@@ -19,7 +22,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" style='color:white' ; href="#"><span class="text-success">Public</span>Health</a>
+      <a class="navbar-brand" style='color:white' ; href="#"><span class="text-success">Public </span>Health <span class="text-warning">Disease </span>Geomapping</a>
     </div>
   </nav>
 
@@ -29,49 +32,46 @@
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner">
+    <<div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/phhome1.jpg" class="d-block w-100" alt="..." />
+        <img src="img/phhome1.jpg" class="d-block w-100" alt="Public Health Disease Geomapping" />
         <div class="carousel-caption">
-          <h5>Be updated</h5>
+          <h5>Stay Informed</h5>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-            nulla, tempore. Deserunt excepturi quas vero.
+            Get the latest updates on disease geomapping and its impact on communities.
           </p>
           <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="img/phhome2.jpg" class="d-block w-100" alt="..." />
+        <img src="img/phhome2.jpg" class="d-block w-100" alt="Public Health Disease Geomapping" />
         <div class="carousel-caption">
-          <h5>Always Dedicated</h5>
+          <h5>Dedicated to Public Health</h5>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-            nulla, tempore. Deserunt excepturi quas vero.
+            Discover our commitment to ensuring public health through effective disease geomapping initiatives.
           </p>
           <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="img/phhome3.jpg" class="d-block w-100" alt="..." />
+        <img src="img/phhome3.jpg" class="d-block w-100" alt="Public Health Disease Geomapping" />
         <div class="carousel-caption">
-          <h5>For Community</h5>
+          <h5>Empowering Communities</h5>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-            nulla, tempore. Deserunt excepturi quas vero.
+            Explore how disease geomapping empowers communities in preventing and addressing public health challenges.
           </p>
           <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
   </div>
 
   <!-- about section starts -->
@@ -118,43 +118,38 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-white text-center bg-dark pb-2">
+      <!-- Bar Chart -->
+      <div class="row my-4">
+        <div class="col-md-8">
+          <div class="card shadow">
             <div class="card-body">
-              <i class="bi bi-laptop"></i>
-              <h3 class="card-title">Best Quality</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">Read More</button>
+              <canvas id="myChart"></canvas>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-white text-center bg-dark pb-2">
+        <div class="col-md-4">
+          <div class="card">
             <div class="card-body">
-              <i class="bi bi-journal"></i>
-              <h3 class="card-title">Sustainability</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">Read More</button>
+              <h5 class="card-title">Lorem Ipsum</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-white text-center bg-dark pb-2">
+      </div>
+      <!-- Pie Chart -->
+      <div class="row my-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Lorem Ipsum</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card shadow">
             <div class="card-body">
-              <i class="bi bi-intersect"></i>
-              <h3 class="card-title">Integrity</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">Read More</button>
+              <canvas id="pieChart"></canvas>
             </div>
           </div>
         </div>
@@ -177,53 +172,26 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-light text-center bg-white pb-2">
-            <div class="card-body text-dark">
-              <div class="img-area mb-4">
-                <img src="img/project-1.jpg" class="img-fluid" alt="" />
-              </div>
-              <h3 class="card-title">Building Make</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">Learn More</button>
+      <div class="row my-4">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body col-md-8">
+              <?php
+              include('../components/googlemap.php');
+              ?>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-light text-center bg-white pb-2">
-            <div class="card-body text-dark">
-              <div class="img-area mb-4">
-                <img src="img/project-2.jpg" class="img-fluid" alt="" />
-              </div>
-              <h3 class="card-title">Building Make</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">learn More</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-12 col-lg-4">
-          <div class="card text-light text-center bg-white pb-2">
-            <div class="card-body text-dark">
-              <div class="img-area mb-4">
-                <img src="img/project-3.jpg" class="img-fluid" alt="" />
-              </div>
-              <h3 class="card-title">Building Make</h3>
-              <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci eligendi modi temporibus alias iste. Accusantium?
-              </p>
-              <button class="btn bg-warning text-dark">Learn More</button>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Lorem Ipsum</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
   <!-- project ends -->
@@ -371,6 +339,9 @@
   <!-- footer ends -->
 
   <!-- All Js -->
+  <?php
+  include('js/chart.php')
+  ?>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>
