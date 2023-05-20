@@ -23,56 +23,74 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = mysqli_real_escape_string($con, $password);
 
         // // Query the database to get the hashed password
+        $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
+        $result = mysqli_query($con, $query);
+
+        if (
+            $result && mysqli_num_rows($result) > 0
+        ) {
+            $user_data = mysqli_fetch_assoc($result);
+            $hashed_password = $user_data['password'];
+
+            // Hash the user's input password using MD5
+            $input_password_md5 = md5($password);
+
+            // Compare the hashed password with the MD5 hash of the user's input
+            if ($hashed_password === $input_password_md5) {
+                // Passwords match
+                $_SESSION['logged_in'] = true;
+                $_SESSION['id'] = $user_data['id'];
+
+                if ($user_data['positionId'] == 1) {
+                    header('location: http://localhost/admin2gh/adminTable.php');
+                    echo "<script>alert('Log In Successfully!');</script>";
+                    die;
+                } else {
+                    header('location: http://localhost/admin2gh/patientTable.php');
+                    echo "<script>alert('Log In Successfully!');</script>";
+                    die;
+                }
+            } else {
+                // Incorrect password
+                echo "<script>alert('Incorrect password. Please try again.');</script>";
+                echo "<script>window.location.href = 'http://localhost/login.php';</script>";
+            }
+        } else {
+            // User not found
+            echo "<script>alert('User not found. Please try again.');</script>";
+            echo "<script>window.location.href = 'http://localhost/login.php';</script>";
+        }
+
         // $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
         // $result = mysqli_query($con, $query);
 
-        // if ($result && mysqli_num_rows($result) > 0
-        // ) {
+        // if ($result && mysqli_num_rows($result) > 0) {
         //     $user_data = mysqli_fetch_assoc($result);
-        //     $hashed_password = $user_data['password'];
-
-        //     // Compare the hashed password with the MD5 hash of the user's input
-        //     if (md5($password) === $hashed_password) {
+        //     if ($user_data['password'] === $password) {
         //         $_SESSION['logged_in'] = true;
         //         $_SESSION['id'] = $user_data['id'];
         //         if ($user_data['positionId'] == 1) {
+        //             echo "
+        //             <script>
+        //                 alert('Log In Successfully!');
+        //             </script>
+        //             ";
         //             header('location: http://localhost/admin2gh/adminTable.php');
         //             die;
         //         }
+        //         echo "
+        //             <script>
+        //                 alert('Log In Successfully!');
+        //             </script>
+        //             ";
         //         header('location: http://localhost/admin2gh/patientTable.php');
         //         die;
         //     }
         // }
-        $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
-        $result = mysqli_query($con, $query);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $user_data = mysqli_fetch_assoc($result);
-            if ($user_data['password'] === $password) {
-                $_SESSION['logged_in'] = true;
-                $_SESSION['id'] = $user_data['id'];
-                if ($user_data['positionId'] == 1) {
-                    echo "
-                    <script>
-                        alert('Log In Successfully!');
-                    </script>
-                    ";
-                    header('location: http://localhost/admin2gh/adminTable.php');
-                    die;
-                }
-                echo "
-                    <script>
-                        alert('Log In Successfully!');
-                    </script>
-                    ";
-                header('location: http://localhost/admin2gh/patientTable.php');
-                die;
-            }
-        }
         echo "
         <script>
             alert('Invalid Email or Password!');
-            window.location = 'http://localhost/admin2gh/loginForm.php';
+            //window.location = 'http://localhost/admin2gh/loginForm.php';
         </script>
         ";
     } else {
@@ -126,14 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: linear-gradient(#00ff87,
                     #60efff);
             left: -80px;
-            top: -80px;
+            top: -90px;
         }
 
         .shape:last-child {
             background: linear-gradient(to right,
                     #0061ff,
                     #60efff);
-            right: -30px;
+            right: -60px;
             bottom: -80px;
         }
 

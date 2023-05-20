@@ -58,8 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = "Password and Confirm Password must be the same";
             break;
         }
-        // update data into the db
-        $sql = "UPDATE `clients` SET `password` = '$password' WHERE id = $id";
+
+        // Add MD5 encryption to the password
+        $hashedPassword = md5($password);
+
+        // Update data in the database
+        $sql = "UPDATE `clients` SET `password` = '$hashedPassword' WHERE id = $id";
 
         if ($con->query($sql) === TRUE) {
             echo "Password updated successfully";

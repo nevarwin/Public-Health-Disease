@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
         $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
-        $password = mysqli_real_escape_string($con, $_POST['password']);
-        // $password = mysqli_real_escape_string($con, md5($_POST['password']));
+        // $password = mysqli_real_escape_string($con, $_POST['password']);
+        $password = mysqli_real_escape_string($con, md5($_POST['password']));
         $contact = mysqli_real_escape_string($con, $_POST['contact']);
         $address = mysqli_real_escape_string($con, $_POST['address']);
 
