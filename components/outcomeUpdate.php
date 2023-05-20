@@ -1,5 +1,5 @@
-<div class="row mb-3">
-    <label for="outcome" class="col-sm-3 form-label">Outcome</label>
+<div class="row justify-content-center mb-3">
+    <label for="outcome" class="col-sm-3 col-form-label">Outcome</label>
     <div class="col-sm-6">
         <select class="custom-select" id="outcome" name="outcome" onchange="toggleDateDied()">
             <?php
@@ -12,8 +12,8 @@
         </select>
     </div>
 </div>
-<div class="row mb-3">
-    <label for="dateDied" class="col-sm-3 form-label">Date Died</label>
+<div class="row justify-content-center mb-3">
+    <label for="dateDied" class="col-sm-3 col-form-label">Date Died</label>
     <div class="col-sm-6">
         <input type="datetime-local" class="form-control" id="dateDied" name="dateDied" value="<?php echo $dateDied; ?>" <?php echo ($outcome === 'alive') ? 'disabled' : ''; ?>>
     </div>
