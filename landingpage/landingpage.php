@@ -40,7 +40,7 @@
           <p>
             Get the latest updates on disease geomapping and its impact on communities.
           </p>
-          <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+          <p><a href="#about" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -50,7 +50,7 @@
           <p>
             Discover our commitment to ensuring public health through effective disease geomapping initiatives.
           </p>
-          <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+          <p><a href="" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -73,6 +73,36 @@
     <span class="visually-hidden">Next</span>
   </button>
   </div>
+  <!-- about section starts -->
+  <section id="about" class="about section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-header text-center pb-5">
+            <h2>What is Geomapping?</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="about-img">
+            <img src="img/geomapping.svg" alt="" class="img-fluid" />
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12 ps-lg-5 mt-md-5">
+          <div class="about-text">
+            <p>
+              Geomapping is a powerful tool that can be used to track and control diseases. By overlaying data on a map, public health officials can identify areas where diseases are most prevalent and take steps to prevent the spread of disease.
+              <br>
+              <br>
+              For example, geomapping can be used to track the spread of influenza. This information can be used to warn residents about areas where the virus is present and to take steps to prevent the spread of the virus.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- about section Ends -->
 
   <!-- services section Starts -->
   <section class="services section-padding" id="services">
@@ -80,11 +110,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="section-header text-center pb-5">
-            <h2>Our Services</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur <br />adipisicing elit.
-              Non, quo.
-            </p>
+            <h2>Data Visualizations</h2>
           </div>
         </div>
       </div>
@@ -98,10 +124,10 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Lorem Ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
+          <div class="">
+            <div class="card-body text-center">
+              <h5 class="card-title">Bar Graph</h5>
+              <p class="card-text">The number of disease cases reported each year is depicted in a bar graph. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
             </div>
           </div>
         </div>
@@ -109,10 +135,10 @@
       <!-- Pie Chart -->
       <div class="row my-4">
         <div class="col-md-6">
-          <div class="card">
+          <div class="">
             <div class="card-body text-center">
-              <h5 class="card-title">Lorem Ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
+              <h5 class="card-title">Pie Chart</h5>
+              <p class="card-text">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
             </div>
           </div>
         </div>
@@ -134,18 +160,14 @@
       <div class="row">
         <div class="col-md-12">
           <div class="section-header text-center pb-5">
-            <h2>Our Projects</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur <br />adipisicing elit.
-              Non, quo.
-            </p>
+            <h2>Heatmap</h2>
           </div>
         </div>
       </div>
       <div class="row my-4">
         <div class="col-md-8">
-          <div class="card">
-            <div class="card-body col-md-8">
+          <div class="">
+            <div class="">
               <?php
               include('../components/googlemap.php');
               ?>
@@ -155,8 +177,8 @@
         <div class="col-md-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Lorem Ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem ligula, gravida vitae sodales ut, gravida in quam.</p>
+              <h5 class="card-title">Cavite Health Disease Heatmap</h5>
+              <p class="card-text">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
             </div>
           </div>
         </div>
@@ -249,34 +271,26 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-12 col-12">
+        <div class="col-lg-6 col-md-12 col-12">
           <div class="about-img">
             <img src="img/phabout.jpg" alt="" class="img-fluid" />
           </div>
         </div>
-        <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+        <div class="col-lg-6 col-md-12 col-12 ps-lg-5 mt-md-5">
           <div class="about-text">
-            <h2>
-              We Provide the Best Quality <br />
-              Services Ever
-            </h2>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam,
-              labore reiciendis. Assumenda eos quod animi! Soluta nesciunt
-              inventore dolores excepturi provident, culpa beatae tempora,
-              explicabo corporis quibusdam corrupti. Autem, quaerat. Assumenda
-              quo aliquam vel, nostrum explicabo ipsum dolor, ipsa perferendis
-              porro doloribus obcaecati placeat natus iste odio est non earum?
+              Our Public Health Disease Geomapping website is a detailed online resource made to offer engaging and educational representations of disease data on maps of Cavite. For information on the geographic distribution of diseases and their effects on various locations, public health authorities, researchers, and the general public can all benefit from visiting our website.
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- about section Ends --> <!-- footer starts -->
+  <!-- about section Ends -->
+  <!-- footer starts -->
   <footer class="bg-dark p-2 text-center">
     <div class="container">
-      <p class="text-white">All Right Reserved By @Cavite Public Health Disease Geomapping</p>
+      <p class="text-white">Copyright © Public Health Disease Geo mapping 2023</p>
     </div>
   </footer>
   <!-- footer ends -->
