@@ -130,114 +130,118 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form action="" method="POST">
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Rabies Disease Form</h2>
+        <form action="" method="POST">
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Type Of Exposure</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='typeOfExposure' value='<?php echo $typeOfExposure; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Category</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='category' value='<?php echo $category; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Bite Site</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='biteSite' value='<?php echo $biteSite; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Date Bitten</label>
+                <div class="col-sm-6">
+                    <input type="date" class='form-control' name='dateBitten' value='<?php echo $dateBitten; ?>' max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Type Of Animal</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='typeOfAnimal' value='<?php echo $typeOfAnimal; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Lab Diagnosis</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='labDiagnosis' value='<?php echo $labDiagnosis; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Lab Result</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='labResult' value='<?php echo $labResult; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Animal Status</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='animalStatus' value='<?php echo $animalStatus; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Date Vacc Started</label>
+                <div class="col-sm-6">
+                    <input type="date" class='form-control' name='dateVaccStarted' value='<?php echo $dateVaccStarted; ?>' max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Animal Vaccination</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='animalVacc' value='<?php echo $animalVacc; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Wound Cleaned</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='woundCleaned' value='<?php echo $woundCleaned; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Rabies Vaccine</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='rabiesVaccine' value='<?php echo $rabiesVaccine; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Animal Outcome</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='animalOutcome' value='<?php echo $animalOutcome; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Case Class</label>
+                <div class="col-sm-6">
+                    <input type="text" class='form-control' name='caseClass' value='<?php echo $caseClass; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            ?>
+            <?php
+            include('./components/submitCancel.php');
+            ?>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Type Of Exposure</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='typeOfExposure' value='<?php echo $typeOfExposure; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Category</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='category' value='<?php echo $category; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Bite Site</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='biteSite' value='<?php echo $biteSite; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Date Bitten</label>
-        <div class="col-sm-6">
-            <input type="date" class='form-control' name='dateBitten' value='<?php echo $dateBitten; ?>' max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Type Of Animal</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='typeOfAnimal' value='<?php echo $typeOfAnimal; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Lab Diagnosis</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='labDiagnosis' value='<?php echo $labDiagnosis; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Lab Result</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='labResult' value='<?php echo $labResult; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Animal Status</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='animalStatus' value='<?php echo $animalStatus; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Date Vacc Started</label>
-        <div class="col-sm-6">
-            <input type="date" class='form-control' name='dateVaccStarted' value='<?php echo $dateVaccStarted; ?>' max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Animal Vaccination</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='animalVacc' value='<?php echo $animalVacc; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Wound Cleaned</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='woundCleaned' value='<?php echo $woundCleaned; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Rabies Vaccine</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='rabiesVaccine' value='<?php echo $rabiesVaccine; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Animal Outcome</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='animalOutcome' value='<?php echo $animalOutcome; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class='col-sm-3 col-form-label'>Case Class</label>
-        <div class="col-sm-6">
-            <input type="text" class='form-control' name='caseClass' value='<?php echo $caseClass; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    ?>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
-</form>
+</div>

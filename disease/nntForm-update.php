@@ -107,78 +107,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Update Number Needed to Treat Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Recent Acute Wound</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="recentAcuteWound" name="recentAcuteWound" value='<?php echo $recentAcuteWound; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">woundSite</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="woundSite" name="woundSite" value='<?php echo $woundSite; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">woundType</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="woundType" name="woundType" value='<?php echo $woundType; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherWound</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherWound" name="otherWound" value='<?php echo $otherWound; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Tetanus Toxoid</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="tetanusToxoid" name="tetanusToxoid" value='<?php echo $tetanusToxoid; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Tetanus Antitoxin</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="tetanusAntitoxin" name="tetanusAntitoxin" value='<?php echo $tetanusAntitoxin; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Skin Lesion</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="skinLesion" name="skinLesion" value='<?php echo $skinLesion; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    ?>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
-</form>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Recent Acute Wound</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="recentAcuteWound" name="recentAcuteWound" value='<?php echo $recentAcuteWound; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">woundSite</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="woundSite" name="woundSite" value='<?php echo $woundSite; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Wound Type</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="woundType" name="woundType" value='<?php echo $woundType; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Other Wound</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="otherWound" name="otherWound" value='<?php echo $otherWound; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Tetanus Toxoid</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="tetanusToxoid" name="tetanusToxoid" value='<?php echo $tetanusToxoid; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Tetanus Antitoxin</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="tetanusAntitoxin" name="tetanusAntitoxin" value='<?php echo $tetanusAntitoxin; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Skin Lesion</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="skinLesion" name="skinLesion" value='<?php echo $skinLesion; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            ?>
+            <?php
+            include('./components/submitCancel.php');
+            ?>
+        </form>

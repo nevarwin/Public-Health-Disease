@@ -1,6 +1,8 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdown.php");
+
 
 $user_data = check_login($con);
 
@@ -195,240 +197,170 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3"> Alpha-Fetoprotein Disease Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('fever');
+            echo generateDropdown('rarm');
+            echo generateDropdown('cough');
+            echo generateDropdown('paralysisatBirth');
+            echo generateDropdown('diarrheaVomiting');
+            echo generateDropdown('musclePain');
+            echo generateDropdown('mening');
+            echo generateDropdown('brthMusc');
+            echo generateDropdown('neckMusc');
+            echo generateDropdown('paradev');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">paradir</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('facialMusc');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">rasens</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rasens" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">lasens</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lasens" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">rlsens</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlsens" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">llsens</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llsens" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">raref</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="raref" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">laref</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="laref" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">rlref</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlref" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">llref</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llref" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">ramotor</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="ramotor" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">lamotor</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lamotor" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">rlmotor</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlmotor" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">llmotor</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llmotor" />
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('hxDisorder');
+            echo generateDropdown('otherCases');
+            echo generateDropdown('firststoolSpec');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="dstool1Taken" class="col-sm-3 col-form-label">dstool1Taken</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="date" class="form-control" id="dstool1Taken" name="dstool1Taken" max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="dstool1Sent" class="col-sm-3 col-form-label">dstool1Sent</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="date" class="form-control" id="dstool1Sent" name="dstool1Sent" max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="dstool2Taken" class="col-sm-3 col-form-label">dstool2Taken</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="date" class="form-control" id="dstool2Taken" name="dstool2Taken" max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="dstool2Sent" class="col-sm-3 col-form-label">dstool2Sent</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="date" class="form-control" id="dstool2Sent" name="dstool2Sent" max="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">stool1Result</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" name="stool1Result" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">stool2Result</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" name="stool2Result" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityWeek" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityMonth" />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeCreate.php');
+            ?>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Fever</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="fever" name="fever">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Rarm</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rarm" name="rarm">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Cough</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="cough" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Paralysis at Birth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="paralysisatBirth" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Diarrhea Vomiting</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="diarrheaVomiting" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Muscle Pain</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="musclePain" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">mening</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="mening" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">brthMusc</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="brthMusc" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">neckMusc</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="neckMusc" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">paradev</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="paradev" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">paradir</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="paradir" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">facialMusc</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="facialMusc" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">rasens</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="rasens" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">lasens</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="lasens" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">rlsens</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="rlsens" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">llsens</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="llsens" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">raref</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="raref" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">laref</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="laref" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">rlref</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="rlref" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">llref</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="llref" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">ramotor</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="ramotor" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">lamotor</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="lamotor" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">rlmotor</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="rlmotor" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">llmotor</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="llmotor" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">hxDisorder</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="hxDisorder" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">otherCases</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="otherCases" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">firststoolSpec</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="firststoolSpec" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dstool1Taken" class="col-sm-3 col-form-label">dstool1Taken</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" id="dstool1Taken" name="dstool1Taken" max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dstool1Sent" class="col-sm-3 col-form-label">dstool1Sent</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" id="dstool1Sent" name="dstool1Sent" max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dstool2Taken" class="col-sm-3 col-form-label">dstool2Taken</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" id="dstool2Taken" name="dstool2Taken" max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dstool2Sent" class="col-sm-3 col-form-label">dstool2Sent</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" id="dstool2Sent" name="dstool2Sent" max="<?php echo date('Y-m-d'); ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">firststoolSpec</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="firststoolSpec" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">stool1Result</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="stool1Result" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">stool2Result</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="stool2Result" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeCreate.php');
-    ?>
-    <div class="row mb-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+</div>

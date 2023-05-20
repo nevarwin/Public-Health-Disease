@@ -1,6 +1,7 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdownUpdate.php");
 
 $user_data = check_login($con);
 
@@ -204,269 +205,98 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dayswithSymp</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dayswithSymp" name="dayswithSymp" value='<?php echo $dayswithSymp; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">fever</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="fever" name="fever" value='<?php echo $fever; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">arthritis</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="arthritis" name="arthritis" value='<?php echo $arthritis; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">hands</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="hands" name="hands" value='<?php echo $hands; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">feet</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="feet" name="feet" value='<?php echo $feet; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">ankles</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="ankles" name="ankles" value='<?php echo $ankles; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherSite</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSite" name="otherSite" value='<?php echo $otherSite; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">arthralgia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="arthralgia" name="arthralgia" value='<?php echo $arthralgia; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">periEdema</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="periEdema" name="periEdema" value='<?php echo $periEdema; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">skinMani</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="skinMani" name="skinMani" value='<?php echo $skinMani; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">skinDesc</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="skinDesc" name="skinDesc" value='<?php echo $skinDesc; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">myalgia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="myalgia" name="myalgia" value='<?php echo $myalgia; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">backPain</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="backPain" name="backPain" value='<?php echo $backPain; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">headache</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="headache" name="headache" value='<?php echo $headache; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">nausea</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="nausea" name="nausea" value='<?php echo $nausea; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">mucosBleed</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="mucosBleed" name="mucosBleed" value='<?php echo $mucosBleed; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Vomiting</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="vomiting" name="vomiting" value='<?php echo $vomiting; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">asthenia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="asthenia" name="asthenia" value='<?php echo $asthenia; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">meningoEncep</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="meningoEncep" name="meningoEncep" value='<?php echo $meningoEncep; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherSymptom</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSymptom" name="otherSymptom" value='<?php echo $otherSymptom; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">clinDx</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="clinDx" name="clinDx" value='<?php echo $clinDx; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dCollected</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dCollected" name="dCollected" value='<?php echo $dCollected; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dspecSent</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dspecSent" name="dspecSent" value='<?php echo $dspecSent; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">serIgm</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="serIgm" name="serIgm" value='<?php echo $serIgm; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">serIgG</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="serIgG" name="serIgG" value='<?php echo $serIgG; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">igm_Res</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="igm_Res" name="igm_Res" value='<?php echo $igm_Res; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">digMres</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="digMres" name="digMres" value='<?php echo $digMres; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">serIgG</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="serIgG" name="serIgG" value='<?php echo $serIgG; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">igG_Res</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="igG_Res" name="igG_Res" value='<?php echo $igG_Res; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dIgGRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dIgGRes" name="dIgGRes" value='<?php echo $dIgGRes; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">rt_PCR</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rt_PCR" name="rt_PCR" value='<?php echo $rt_PCR; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">rt_PCRRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rt_PCRRes" name="rt_PCRRes" value='<?php echo $rt_PCRRes; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">drtPCRRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="drtPCRRes" name="drtPCRRes" value='<?php echo $drtPCRRes; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">virIso</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="virIso" name="virIso" value='<?php echo $virIso; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">virIsoRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="virIsoRes" name="virIsoRes" value='<?php echo $virIsoRes; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">travHist</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="travHist" name="travHist" value='<?php echo $travHist; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">placeOfTravel</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="placeOfTravel" name="placeOfTravel" value='<?php echo $placeOfTravel; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dVirIsoRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dVirIsoRes" name="dVirIsoRes" value='<?php echo $dVirIsoRes; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">caseClass</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>'>
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    ?>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
-</form>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Update Chikungunya Virus Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">dayswithSymp</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="dayswithSymp" name="dayswithSymp" value='<?php echo $dayswithSymp; ?>'>
+                </div>
+            </div>
+            <?php
+            echo generateDropdownUpdate('fever', $fever);
+            echo generateDropdownUpdate('arthritis', $arthritis);
+            echo generateDropdownUpdate('hands', $hands);
+            echo generateDropdownUpdate('feet', $feet);
+            echo generateDropdownUpdate('ankles', $ankles);
+            echo generateDropdownUpdate('otherSite', $otherSite);
+            echo generateDropdownUpdate('arthralgia', $arthralgia);
+            echo generateDropdownUpdate('periEdema', $periEdema);
+            echo generateDropdownUpdate('skinMani', $skinMani);
+            echo generateDropdownUpdate('skinDesc', $skinDesc);
+            echo generateDropdownUpdate('myalgia', $myalgia);
+            echo generateDropdownUpdate('backPain', $backPain);
+            echo generateDropdownUpdate('headache', $headache);
+            echo generateDropdownUpdate('nausea', $nausea);
+            echo generateDropdownUpdate('mucosBleed', $mucosBleed);
+            echo generateDropdownUpdate('vomiting', $vomiting);
+            echo generateDropdownUpdate('asthenia', $asthenia);
+            echo generateDropdownUpdate('meningoEncep', $meningoEncep);
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">otherSymptom</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="otherSymptom" name="otherSymptom" value='<?php echo $otherSymptom; ?>'>
+                </div>
+            </div>
+            <?php
+            echo generateDropdownUpdate('dCollected', $dCollected);
+            echo generateDropdownUpdate('dspecSent', $dspecSent);
+            echo generateDropdownUpdate('serIgm', $serIgm);
+            echo generateDropdownUpdate('igm_Res', $igm_Res);
+            echo generateDropdownUpdate('digMres', $digMres);
+            echo generateDropdownUpdate('serIgG', $serIgG);
+            echo generateDropdownUpdate('igG_Res', $igG_Res);
+            echo generateDropdownUpdate('dIgGRes', $dIgGRes);
+            echo generateDropdownUpdate('rt_PCR', $rt_PCR);
+            echo generateDropdownUpdate('rt_PCRRes', $rt_PCRRes);
+            echo generateDropdownUpdate('drtPCRRes', $drtPCRRes);
+            echo generateDropdownUpdate('virIso', $virIso);
+            echo generateDropdownUpdate('virIsoRes', $virIsoRes);
+            echo generateDropdownUpdate('travHist', $travHist);
+            echo generateDropdownUpdate('dVirIsoRes', $dVirIsoRes);
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Place Of Travel</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="placeOfTravel" name="placeOfTravel" value='<?php echo $placeOfTravel; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Case Class</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>'>
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            ?>
+            <?php
+            include('./components/submitCancel.php');
+            ?>
+        </form>

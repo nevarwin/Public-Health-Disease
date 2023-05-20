@@ -1,6 +1,8 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdown.php");
+
 
 $user_data = check_login($con);
 
@@ -198,263 +200,103 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Chikungunya Virus Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">dayswithSymp</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="dayswithSymp" name="dayswithSymp">
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('fever');
+            echo generateDropdown('arthritis');
+            echo generateDropdown('hands');
+            echo generateDropdown('feet');
+            echo generateDropdown('ankles');
+            echo generateDropdown('otherSite');
+            echo generateDropdown('arthralgia');
+            echo generateDropdown('periEdema');
+            echo generateDropdown('skinMani');
+            echo generateDropdown('skinDesc');
+            echo generateDropdown('myalgia');
+            echo generateDropdown('backPain');
+            echo generateDropdown('headache');
+            echo generateDropdown('nausea');
+            echo generateDropdown('mucosBleed');
+            echo generateDropdown('vomiting');
+            echo generateDropdown('asthenia');
+            echo generateDropdown('meningoEncep');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">otherSymptom</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="otherSymptom" name="otherSymptom">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">clinDx</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="clinDx" name="clinDx">
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('dCollected');
+            echo generateDropdown('dspecSent');
+            echo generateDropdown('serIgm');
+            echo generateDropdown('igm_Res');
+            echo generateDropdown('digMres');
+            echo generateDropdown('serIgG');
+            echo generateDropdown('igG_Res');
+            echo generateDropdown('dIgGRes');
+            echo generateDropdown('rt_PCR');
+            echo generateDropdown('rt_PCRRes');
+            echo generateDropdown('drtPCRRes');
+            echo generateDropdown('virIso');
+            echo generateDropdown('virIsoRes');
+            echo generateDropdown('travHist');
+            echo generateDropdown('dVirIsoRes');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">placeOfTravel</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="placeOfTravel" name="placeOfTravel">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">caseClass</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="caseClass" name="caseClass">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek">
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeCreate.php');
+            ?>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dayswithSymp</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dayswithSymp" name="dayswithSymp">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">fever</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="fever" name="fever">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">arthritis</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="arthritis" name="arthritis">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">hands</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="hands" name="hands">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">feet</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="feet" name="feet">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">ankles</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="ankles" name="ankles">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherSite</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSite" name="otherSite">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">arthralgia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="arthralgia" name="arthralgia">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">periEdema</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="periEdema" name="periEdema">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">skinMani</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="skinMani" name="skinMani">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">skinDesc</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="skinDesc" name="skinDesc">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">myalgia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="myalgia" name="myalgia">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">backPain</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="backPain" name="backPain">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">headache</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="headache" name="headache">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">nausea</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="nausea" name="nausea">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">mucosBleed</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="mucosBleed" name="mucosBleed">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Vomiting</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="vomiting" name="vomiting">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">asthenia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="asthenia" name="asthenia">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">meningoEncep</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="meningoEncep" name="meningoEncep">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherSymptom</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSymptom" name="otherSymptom">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">clinDx</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="clinDx" name="clinDx">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dCollected</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dCollected" name="dCollected">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dspecSent</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dspecSent" name="dspecSent">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">serIgm</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="serIgm" name="serIgm">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">serIgG</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="serIgG" name="serIgG">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">igm_Res</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="igm_Res" name="igm_Res">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">digMres</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="digMres" name="digMres">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">igG_Res</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="igG_Res" name="igG_Res">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dIgGRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dIgGRes" name="dIgGRes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">rt_PCR</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rt_PCR" name="rt_PCR">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">rt_PCRRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rt_PCRRes" name="rt_PCRRes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">drtPCRRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="drtPCRRes" name="drtPCRRes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">virIso</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="virIso" name="virIso">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">virIsoRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="virIsoRes" name="virIsoRes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">travHist</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="travHist" name="travHist">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">placeOfTravel</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="placeOfTravel" name="placeOfTravel">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dVirIsoRes</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dVirIsoRes" name="dVirIsoRes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">caseClass</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek">
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeCreate.php');
-    ?>
-    <div class="col-sm-3 mb-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+</div>

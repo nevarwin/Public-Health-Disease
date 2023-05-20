@@ -101,54 +101,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Update Perthes Disease Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
 
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
-        </div>
-    </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
+                </div>
+            </div>
 
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Dpt Dose</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dptDose" name="dptDose" value='<?php echo $dptDose; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date of Last Dose</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" id="datelastDose" name="datelastDose" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $datelastDose; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Case Classification</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    ?>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
-</form>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Dpt Dose</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="dptDose" name="dptDose" value='<?php echo $dptDose; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Date of Last Dose</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" id="datelastDose" name="datelastDose" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $datelastDose; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Case Classification</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">morbidityMonth</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">MorbidityWeek</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            ?>
+            <?php
+            include('./components/submitCancel.php');
+            ?>
+        </form>

@@ -1,6 +1,7 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdown.php");
 
 $user_data = check_login($con);
 
@@ -128,119 +129,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Measles Disease Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
+                </div>
+            </div>
+            <?php
+            echo generateDropdown('measVacc');
+            echo generateDropdown('vitaminA');
+            echo generateDropdown('cough');
+            echo generateDropdown('koplikSpot');
+            echo generateDropdown('runnyNose');
+            echo generateDropdown('redEyes');
+            echo generateDropdown('arthritisArthralgia');
+            echo generateDropdown('swolympNod');
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Last Vaccine</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="date" class="form-control" name="lastVac" max="<?php echo date('Y-m-d'); ?>" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Other Symptoms</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="otherSymptoms" name="otherSymptoms">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Complications</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="complications" name="complications">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Other Case</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="otherCase" name="otherCase">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Final Class</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Discarded" type="text" class="form-control" id="finalClass" name="finalClass">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Infection Source</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Endemic" type="text" class="form-control" id="infectionSource" name="infectionSource">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityWeek">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityMonth">
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeCreate.php');
+            ?>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Measles Vaccine</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="measVacc" name="measVacc">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">vitaminA</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="vitaminA" name="vitaminA">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Cough</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="cough" name="cough">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">koplikSpot</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="koplikSpot" name="koplikSpot">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Last Vaccine</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="lastVac" max="<?php echo date('Y-m-d'); ?>" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Runny Nose</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="runnyNose" name="runnyNose">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Red Eye</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="redEyes" name="redEyes">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">arthritisArthralgia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="arthritisArthralgia" name="arthritisArthralgia">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">swolympNod</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="swolympNod" name="swolympNod">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Other Symptoms</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSymptoms" name="otherSymptoms">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">complications</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="complications" name="complications">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherCase</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherCase" name="otherCase">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">finalClass</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="finalClass" name="finalClass">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">infectionSource</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="infectionSource" name="infectionSource">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth">
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeCreate.php');
-    ?>
-    <div class="col-sm-3 mb-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+</div>

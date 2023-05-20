@@ -1,6 +1,8 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdownUpdate.php");
+
 
 $user_data = check_login($con);
 
@@ -145,156 +147,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Update Meningo Disease Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Fever</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="fever" name="fever" value='<?php echo $fever; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">seizure</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="seizure" name="seizure" value='<?php echo $seizure; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">malaise</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="malaise" name="malaise" value='<?php echo $malaise; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">headache</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="headache" name="headache" value='<?php echo $headache; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Stiff Neck</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="stiffNeck" name="stiffNeck" value='<?php echo $stiffNeck; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Cough</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="cough" name="cough" value='<?php echo $cough; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">rash</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="rash" name="rash" value='<?php echo $rash; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">vomiting</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="vomiting" name="vomiting" value='<?php echo $vomiting; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">soreThroat</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="soreThroat" name="soreThroat" value='<?php echo $soreThroat; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">petechia</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="petechia" name="petechia" value='<?php echo $petechia; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">sensoriumCh</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="sensoriumCh" name="sensoriumCh" value='<?php echo $sensoriumCh; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">runnyNose</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="runnyNose" name="runnyNose" value='<?php echo $runnyNose; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">purpura</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="purpura" name="purpura" value='<?php echo $purpura; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">drowsiness</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="drowsiness" name="drowsiness" value='<?php echo $drowsiness; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">dyspnea</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="dyspnea" name="dyspnea" value='<?php echo $dyspnea; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Other Symptoms</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="otherSS" name="otherSS" value='<?php echo $otherSS; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">clinicalPres</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="clinicalPres" name="clinicalPres" value='<?php echo $clinicalPres; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">caseClass</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">antibiotics</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="antibiotics" name="antibiotics" value='<?php echo $antibiotics; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">bloodSpecimen</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="bloodSpecimen" name="bloodSpecimen" value='<?php echo $bloodSpecimen; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    ?>
-    <?php
-    include('./components/submitCancel.php');
-    ?>
-</form>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
+                </div>
+            </div>
+            <?php
+            echo generateDropdownUpdate('fever', $fever);
+            echo generateDropdownUpdate('seizure', $seizure);
+            echo generateDropdownUpdate('malaise', $malaise);
+            echo generateDropdownUpdate('headache', $headache);
+            echo generateDropdownUpdate('stiffNeck', $stiffNeck);
+            echo generateDropdownUpdate('cough', $cough);
+            echo generateDropdownUpdate('rash', $rash);
+            echo generateDropdownUpdate('vomiting', $vomiting);
+            echo generateDropdownUpdate('soreThroat', $soreThroat);
+            echo generateDropdownUpdate('petechia', $petechia);
+            echo generateDropdownUpdate('sensoriumCh', $sensoriumCh);
+            echo generateDropdownUpdate('runnyNose', $runnyNose);
+            echo generateDropdownUpdate('purpura', $purpura);
+            echo generateDropdownUpdate('drowsiness', $drowsiness);
+            echo generateDropdownUpdate('dyspnea', $dyspnea);
+            echo generateDropdownUpdate('bloodSpecimen', $bloodSpecimen);
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Other Symptoms</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="otherSS" name="otherSS" value='<?php echo $otherSS; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">clinicalPres</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="clinicalPres" name="clinicalPres" value='<?php echo $clinicalPres; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">caseClass</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">antibiotics</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="antibiotics" name="antibiotics" value='<?php echo $antibiotics; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            ?>
+            <?php
+            include('./components/submitCancel.php');
+            ?>
+        </form>

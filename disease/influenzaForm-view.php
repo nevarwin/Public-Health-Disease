@@ -32,6 +32,7 @@ if (!$row) {
 $labResult = $row['labResult'];
 $organism = $row['organism'];
 $vacName = $row['vacName'];
+$vaccinated = $row['vaccinated'];
 $vacDate1 = $row['vacDate1'];
 $vacDate2 = $row['vacDate2'];
 $boosterName = $row['boosterName'];
@@ -72,37 +73,43 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">vacName</label>
+        <label class="col-sm-3 form-label">Vaccinated</label>
+        <div class="col-sm-6">
+            <p> <?php echo $vaccinated; ?> </p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 form-label">Vaccine Name</label>
         <div class="col-sm-6">
             <p> <?php echo $vacName; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">vacDate1</label>
+        <label class="col-sm-3 form-label">Vaccination Date 1</label>
         <div class="col-sm-6">
             <p> <?php echo $vacDate1; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">vacDate2</label>
+        <label class="col-sm-3 form-label">Vaccination Date 2</label>
         <div class="col-sm-6">
             <p> <?php echo $vacDate2; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">boosterName</label>
+        <label class="col-sm-3 form-label">Booster Name</label>
         <div class="col-sm-6">
             <p> <?php echo $boosterName; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">boosterDate</label>
+        <label class="col-sm-3 form-label">Booster Date</label>
         <div class="col-sm-6">
             <p> <?php echo $boosterDate; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">sari</label>
+        <label class="col-sm-3 form-label">Sari</label>
         <div class="col-sm-6">
             <p> <?php echo $sari; ?> </p>
         </div>
@@ -114,13 +121,13 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
+        <label class="col-sm-3 form-label">Morbidity Month</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityMonth; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
+        <label class="col-sm-3 form-label">Morbidit yWeek</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?></p>
         </div>

@@ -21,21 +21,19 @@ include('./components/head.php');
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Create Rabies Form</h1>
-                    </div>
-                    <?php
-                    include('./disease/rabiesForm-create.php');
-                    ?>
                 </div>
-                <!-- /.container-fluid -->
+                <?php
+                include('./disease/rabiesForm-create.php');
+                ?>
             </div>
-            <!-- End of Main Content -->
-            <?php
-            include('./components/footer.php');
-            ?>
+            <!-- /.container-fluid -->
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+        <?php
+        include('./components/footer.php');
+        ?>
+    </div>
+    <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
 

@@ -119,38 +119,38 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">complications</label>
+        <label class="col-sm-3 form-label">Complications</label>
         <div class="col-sm-6">
             <p> <?php echo $complications; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherCase</label>
+        <label class="col-sm-3 form-label">Other Case</label>
         <div class="col-sm-6">
             <p> <?php echo $otherCase; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">finalClass</label>
+        <label class="col-sm-3 form-label">Final Class</label>
         <div class="col-sm-6">
             <p> <?php echo $finalClass; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">infectionSource</label>
+        <label class="col-sm-3 form-label">Infection Source</label>
         <div class="col-sm-6">
             <p> <?php echo $infectionSource; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6p">
+        <label class="col-sm-3 form-label">Morbidity Month</label>
+        <div class="col-sm-6">
             <p><?php echo $morbidityMonth; ?> </p>
         </div>
     </div>
     <div class=" row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6p>">
+        <label class="col-sm-3 form-label">Morbidity Week</label>
+        <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?> </p>
         </div>
     </div>

@@ -117,116 +117,115 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form action="" method="POST">
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-    <div class="col-sm-6">
-      <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
-    </div>
+<div class="row d-flex justify-content-center">
+  <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <h2 class="row justify-content-center mb-3">Rabies Disease Form</h2>
+    <form action="" method="POST">
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. 1" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Type Of Exposure</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Bite" type="text" class="form-control" name="typeOfExposure" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Category</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Category 3" type="text" class="form-control" name="category" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Bite Site</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Hand" type="text" class="form-control" name="biteSite" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Date Bitten</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. 1" type="date" class="form-control" name="dateBitten" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Type Of Animal</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Dog" type="text" class="form-control" name="typeOfAnimal" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Lab Diagnosis</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. No" type="text" class='form-control' name='labDiagnosis'>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class='col-sm-3 col-form-label'>Lab Result</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. N/A" type="text" class='form-control' name='labResult'>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Animal Status</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Domestic" type="text" class="form-control" name="animalStatus" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Date Vacc Started</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. 1" type="date" class="form-control" name="dateVaccStarted" max="<?php echo date('Y-m-d'); ?>" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Animal Vaccination</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Vaccinated" type="text" class="form-control" name="animalVacc" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Wound Cleaned</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Yes" type="text" class="form-control" name="woundCleaned" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Rabies Vaccine</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Yes" type="text" class="form-control" name="rabiesVaccine" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Animal Outcome</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Alive" type="text" class="form-control" name="animalOutcome" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Case Class</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. Suspected" type="text" class="form-control" name="caseClass" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. 1" type="text" class="form-control" name="morbidityWeek" />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
+        <div class="col-sm-6">
+          <input placeholder="ex. 1" type="text" class="form-control" name="morbidityMonth" />
+        </div>
+      </div>
+      <?php
+      include('./components/outcomeCreate.php');
+      ?>
+    </form>
   </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Type Of Exposure</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="typeOfExposure" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Category</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="category" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Bite Site</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="biteSite" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Date Bitten</label>
-    <div class="col-sm-6">
-      <input type="date" class="form-control" name="dateBitten" max="<?php echo date('Y-m-d'); ?>" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Type Of Animal</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="typeOfAnimal" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class='col-sm-3 col-form-label'>Lab Diagnosis</label>
-    <div class="col-sm-6">
-      <input type="text" class='form-control' name='labDiagnosis'>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class='col-sm-3 col-form-label'>Lab Result</label>
-    <div class="col-sm-6">
-      <input type="text" class='form-control' name='labResult'>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Animal Status</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="animalStatus" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Date Vacc Started</label>
-    <div class="col-sm-6">
-      <input type="date" class="form-control" name="dateVaccStarted" max="<?php echo date('Y-m-d'); ?>" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Animal Vaccination</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="animalVacc" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Wound Cleaned</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="woundCleaned" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Rabies Vaccine</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="rabiesVaccine" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Animal Outcome</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="animalOutcome" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">Case Class</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="caseClass" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="morbidityWeek" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" name="morbidityMonth" />
-    </div>
-  </div>
-  <?php
-  include('./components/outcomeCreate.php');
-  ?>
-  <div class="row mb-3">
-    <div class="offset-sm-3 col-sm-3 d-grid">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
-</form>
+</div>

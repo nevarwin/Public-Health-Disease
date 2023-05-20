@@ -34,6 +34,7 @@ $organism = $row['organism'];
 $sari = $row['sari'];
 $caseClass = $row['caseClass'];
 $outcome = $row['outcome'];
+$vaccinated = $row['vaccinated'];
 $vacName = $row['vacName'];
 $vacDate1 = $row['vacDate1'];
 $vacDate2 = $row['vacDate2'];
@@ -53,11 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sari = $_POST['sari'];
     $caseClass = $_POST['caseClass'];
     $outcome = $_POST['outcome'];
-    $vacName = $_POST['vacName'];
-    $vacDate1 = $_POST['vacDate1'];
-    $vacDate2 = $_POST['vacDate2'];
-    $boosterName = $_POST['boosterName'];
-    $boosterDate = $_POST['boosterDate'];
+    $vaccinated = $_POST['vaccinated'];
+    $vacName = ($_POST['vaccinated'] === 'yes') ? $_POST['vacName'] : 'N/A';
+    $vacDate1 = ($_POST['vaccinated'] === 'yes') ? $_POST['vacDate1'] : '';
+    $vacDate2 = ($_POST['vaccinated'] === 'yes') ? $_POST['vacDate2'] : '';
+    $boosterName = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterName'] : 'N/A';
+    $boosterDate = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterDate'] : '';
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
@@ -79,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     caseClass = '$caseClass',
                     outcome = '$outcome',
                     vacName = '$vacName',
+                    vaccinated = '$vaccinated',
                     vacDate1 = '$vacDate1',
                     vacDate2 = '$vacDate2',
                     boosterName = '$boosterName',
@@ -114,88 +117,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Update Influenza Virus Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Lab Result</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="labResult" name="labResult" value='<?php echo $labResult; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Booster Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="organism" name="organism" value='<?php echo $organism; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Vaccinated?</label>
+                <div class="col-sm-6">
+                    <select class="custom-select" id="vaccinated" name="vaccinated">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+            <div id="vaccinationInputs" style="display: none;">
+                <div class="row justify-content-center mb-3">
+                    <label class="col-sm-3 col-form-label">Vaccine Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="vacName" name="vacName" value='<?php echo $vacName; ?>'>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <label for="" class="col-sm-3 col-form-label">1st Vaccine Date</label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" name="vacDate1" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacDate1; ?>' />
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <label for="" class="col-sm-3 col-form-label">2nd Vaccine Date</label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" name="vacDate2" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacDate2; ?>' />
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <label class="col-sm-3 col-form-label">Booster Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="boosterName" name="boosterName" value='<?php echo $boosterName; ?>'>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <label for="" class="col-sm-3 col-form-label">Booster Date</label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" name="boosterDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $boosterDate; ?>' />
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Sari</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="sari" name="sari" value='<?php echo $sari; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Case Classification</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeUpdate.php');
+            include('./components/submitCancel.php');
+            ?>
+        </form>
+    </div>
+</div>
+<script>
+    // Get the vaccination dropdown element
+    var vaccinatedDropdown = document.getElementById('vaccinated');
+    // Get the vaccination inputs container
+    var vaccinationInputs = document.getElementById('vaccinationInputs');
+
+    // Function to toggle the visibility of the vaccination inputs
+    function toggleVaccinationInputs() {
+        if (vaccinatedDropdown.value === 'yes') {
+            vaccinationInputs.style.display = 'block';
+        } else {
+            vaccinationInputs.style.display = 'none';
+        }
     }
-    ?>
 
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Lab Result</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="labResult" name="labResult" value='<?php echo $labResult; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">boosterName</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="organism" name="organism" value='<?php echo $organism; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Vaccine Name</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="vacName" name="vacName" value='<?php echo $vacName; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">1st Vaccine Date</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="vacDate1" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacDate1; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">2nd Vaccine Date</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="vacDate2" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $vacDate2; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Booster Name</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="boosterName" name="boosterName" value='<?php echo $boosterName; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Booster Date</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="boosterDate" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $boosterDate; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Sari</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="sari" name="sari" value='<?php echo $sari; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Case Classification</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeUpdate.php');
-    include('./components/submitCancel.php');
-    ?>
-</form>
+    // Add event listener to the dropdown to toggle inputs on change
+    vaccinatedDropdown.addEventListener('change', toggleVaccinationInputs);
+
+    // Initial check on page load
+    toggleVaccinationInputs();
+</script>

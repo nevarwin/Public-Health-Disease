@@ -1,6 +1,8 @@
 <?php
 include('./components/alertMessage.php');
 include("./components/connection.php");
+include("./components/dropdown.php");
+
 
 $user_data = check_login($con);
 
@@ -104,65 +106,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
-        <div class="col-sm-6">
-            <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
-        </div>
+<div class="row d-flex justify-content-center">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+        <h2 class="row justify-content-center mb-3">Dengue Disease Form</h2>
+        <form method="POST">
+            <?php
+            if (!empty($alert)) {
+                echo $alert;
+            }
+            ?>
+            <div class="row justify-content-center mb-3">
+                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Type</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. DF" type="text" class="form-control" id="type" name="type" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Lab Test</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Negative" type="text" class="form-control" id="labTest" name="labTest" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Lab Result</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Negative" type="text" class="form-control" id="labRes" name="labRes" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Clinical Class</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. No warning" type="text" class="form-control" id="clinClass" name="clinClass" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Case Class</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. Suspected" type="text" class="form-control" id="caseClass" name="caseClass" required>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Morbidity Week</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityWeek" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 form-label">Morbidity Month</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. 1" type="text" class="form-control" name="morbidityMonth" />
+                </div>
+            </div>
+            <?php
+            include('./components/outcomeCreate.php');
+            ?>
+        </form>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Type</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="type" name="type" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Lab Test</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="labTest" name="labTest" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Lab Result</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="labRes" name="labRes" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Clinical Class</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="clinClass" name="clinClass" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">Case Class</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" id="caseClass" name="caseClass" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityWeek" />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="morbidityMonth" />
-        </div>
-    </div>
-    <?php
-    include('./components/outcomeCreate.php');
-    ?>
-    <div class="col-sm-3 mb-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+</div>
