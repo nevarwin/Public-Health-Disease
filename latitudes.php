@@ -1,3 +1,22 @@
+<?php
+// Replace with your database connection code
+include('./components/connection.php');
+
+// Fetch all rows from the "patients" table
+$query = "SELECT patients.*, barangay.barangay, municipality.municipality, diseases.disease 
+          FROM patients
+          LEFT JOIN barangay ON patients.barangay = barangay.id
+          LEFT JOIN municipality ON patients.municipality = municipality.munId
+          LEFT JOIN diseases ON patients.disease = diseases.diseaseId";
+$result = mysqli_query($con, $query);
+
+// Fetch the data and convert it to JSON
+$data = [];
+while ($row = mysqli_fetch_assoc($result)) {
+  $data[] = $row;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -5,16 +24,23 @@
   <title>Geocoding Example</title>
   <style>
     #map {
-      height: 400px;
+      height: 90vh;
       width: 100%;
     }
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=places&callback=loadGoogleMapsAPI" async defer></script>
+</head>
+
+<body>
+  <div id="map"></div>
+
   <script>
     let map;
     let markers = [];
+    let heatmapData = [];
 
-    function initializeGeocoding(address, name) {
+    // Markers
+    function initializeGeocoding(address, name, disease) {
       return new Promise((resolve, reject) => {
         // Create a Geocoder instance
         const geocoder = new google.maps.Geocoder();
@@ -28,6 +54,12 @@
             const location = results[0].geometry.location;
             const latitude = location.lat();
             const longitude = location.lng();
+
+            // Print latitude and longitude
+            console.log(`Name: ${name}`);
+            console.log(`Disease: ${disease}`);
+            console.log(`Latitude: ${latitude}`);
+            console.log(`Longitude: ${longitude}`);
 
             // Create a LatLng object
             const latLng = new google.maps.LatLng(latitude, longitude);
@@ -59,34 +91,26 @@
         zoom: 8
       });
 
-      <?php
-      // Replace with your database connection code
-      include('./components/connection.php');
+      // Process the fetched data
+      const data = <?php echo json_encode($data); ?>;
+      const latitudes = [];
 
-      // Fetch all rows from the "patients" table
-      $query = "SELECT patients.*, barangay.barangay, municipality.municipality 
-                FROM patients
-                LEFT JOIN barangay ON patients.barangay = barangay.id
-                LEFT JOIN municipality ON patients.municipality = municipality.munId";
-      $result = mysqli_query($con, $query);
+      data.forEach(row => {
+        const address = row.barangay + ', ' + row.municipality + ', ' + row.postalCode + 'Cavite';
+        const name = row.firstName;
+        const disease = row.disease;
+        initializeGeocoding(address, name, disease).then(() => {
+          console.log('Geocoding successful');
+        });
 
-      // Iterate over each row
-      while ($row = mysqli_fetch_assoc($result)) {
-        // Build the address string for each row
-        $address = $row['barangay'] . ', ' . $row['municipality'] . ', ' . $row['address'] . 'Cavite';
-        $name = $row['name'];
-        initializeGeocoding($address, $name)
-          . then(function () {
-            console . log('Geocoding successful');
-          });
-      }
-      ?>
+        // Add latitude to the latitudes array
+        latitudes.push(row.latitude);
+      });
+
+      // Log the latitudes array
+      console.log('Latitudes:', latitudes);
     }
   </script>
-</head>
-
-<body>
-  <div id="map"></div>
 </body>
 
 </html>
