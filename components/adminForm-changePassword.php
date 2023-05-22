@@ -1,9 +1,9 @@
 <?php
 include('connection.php');
 include('barangayScript.php');
+include('alertMessage.php');
 
 // $user_data = check_login($con);
-
 // Get admin by id
 if (!isset($_GET["id"])) {
     header('location: /phpsandbox/publichealthd/admin.php');
@@ -41,7 +41,7 @@ $address = $row['address'];
 $municipality = $row['municipality'];
 $barangay = $row['barangay'];
 
-
+$oldHashedPassword = md5($row['password']);
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
@@ -51,25 +51,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     do {
         if (empty($password)) {
             $errorMessage = "All fields are required";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
         if ($password != $confirmPassword) {
-            echo "Password and Confirm Password must be the same";
             $errorMessage = "Password and Confirm Password must be the same";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
 
         // Add MD5 encryption to the password
         $hashedPassword = md5($password);
 
+        if ($hashedPassword == $user_data['password']) {
+            $errorMessage = "New password must be different from the previous password";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
         // Update data in the database
         $sql = "UPDATE `clients` SET `password` = '$hashedPassword' WHERE id = $id";
 
         if ($con->query($sql) === TRUE) {
-            echo "Password updated successfully";
             $successMessage = "Password updated successfully";
+            $type = 'success';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $successMessage);
         } else {
-            echo "Error updating password: ";
+            $errorMessage = "Error updating password";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
         }
 
         if ($user_data['positionId'] != 1) {
@@ -79,16 +96,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         echo "
-        <script> 
-            alert('Admin Successfully Updated');
-            window.location= '$link';
-        </script>
-        ";
+    <script> 
+        alert('Admin Successfully Updated');
+        window.location= '$link';
+    </script>
+    ";
     } while (false);
 }
 
 ?>
 <div class="row d-flex justify-content-center">
+    <?php
+    if (!empty($errorMessage)) {
+        echo $alert;
+    }
+    if (!empty($successMessage)) {
+        echo $alert;
+    }
+    ?>
     <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
         <h2>Change Password</h2>
         <form action="" method="post" onsubmit="return validateForm(event)">
