@@ -188,16 +188,12 @@
   </section>
   <!-- project ends -->
   <!-- team starts -->
-  <section class="team section-padding" id="team">
+  <!-- <section class="team section-padding" id="team">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="section-header text-center pb-5">
             <h2>Our Team</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur <br />adipisicing elit.
-              Non, quo.
-            </p>
           </div>
         </div>
       </div>
@@ -213,10 +209,7 @@
               </p>
 
               <p class="socials">
-                <i class="bi bi-twitter text-dark mx-1"></i>
                 <i class="bi bi-facebook text-dark mx-1"></i>
-                <i class="bi bi-linkedin text-dark mx-1"></i>
-                <i class="bi bi-instagram text-dark mx-1"></i>
               </p>
             </div>
           </div>
@@ -231,10 +224,7 @@
                 Sequi ipsam nostrum illo tempora esse quibusdam.
               </p>
               <p class="socials">
-                <i class="bi bi-twitter text-dark mx-1"></i>
                 <i class="bi bi-facebook text-dark mx-1"></i>
-                <i class="bi bi-linkedin text-dark mx-1"></i>
-                <i class="bi bi-instagram text-dark mx-1"></i>
               </p>
             </div>
           </div>
@@ -249,17 +239,14 @@
                 Sequi ipsam nostrum illo tempora esse quibusdam.
               </p>
               <p class="socials">
-                <i class="bi bi-twitter text-dark mx-1"></i>
                 <i class="bi bi-facebook text-dark mx-1"></i>
-                <i class="bi bi-linkedin text-dark mx-1"></i>
-                <i class="bi bi-instagram text-dark mx-1"></i>
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- about section starts -->
   <section id="about" class="about section-padding">
     <div class="container">
