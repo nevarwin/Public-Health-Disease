@@ -291,7 +291,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select class="custom-select" id="barangayDRU" name="barangayDRU">
                             <!-- <option value=""><?php echo $barangayDRU; ?></option> -->
                             <?php
-                            $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipality'");
+                            $barangayResult = mysqli_query($con, "SELECT * FROM barangay WHERE muncityId = '$municipalityDRU'");
 
                             // Display each barangay in a dropdown option
                             while ($barangayRow = mysqli_fetch_assoc($barangayResult)) {
