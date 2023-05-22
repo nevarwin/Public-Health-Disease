@@ -86,29 +86,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
-        <h2>Update Profile</h2>
+        <h2 class="row justify-content-center mb-3">Update Profile</h2>
         <form action="" method="post" onsubmit="return validateForm(event)">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Name</label>
                 <div class="col-sm-6">
                     <input type="text" class='form-control' name='name' value='<?= $name ?>'>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Email</label>
                 <div class="col-sm-6">
                     <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
                 <div class="col-sm-6">
                     <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <!-- Barangay Dropdown -->
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="barangay" name="barangay">
@@ -151,13 +151,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Address</label>
                 <div class="col-sm-6">
                     <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
                 </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="offset-sm-3 col-sm-3 d-grid">
                     <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
                 </div>
