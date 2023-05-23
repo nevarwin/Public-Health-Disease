@@ -37,46 +37,41 @@ while ($row = mysqli_fetch_assoc($result)) {
   <script>
     let map;
     let markers = [];
-    let heatmapData = [];
+    let successfulGeocoding = 0;
+    let unsuccessfulGeocoding = 0;
 
-    // Markers
     function initializeGeocoding(address, name, disease) {
       return new Promise((resolve, reject) => {
-        // Create a Geocoder instance
         const geocoder = new google.maps.Geocoder();
 
-        // Geocode the address
         geocoder.geocode({
           address: address
         }, (results, status) => {
           if (status === "OK") {
-            // Get the latitude and longitude
             const location = results[0].geometry.location;
             const latitude = location.lat();
             const longitude = location.lng();
 
-            // Print latitude and longitude
-            console.log(`Name: ${name}`);
-            console.log(`Disease: ${disease}`);
-            console.log(`Latitude: ${latitude}`);
-            console.log(`Longitude: ${longitude}`);
+            // console.log(`Name: ${name}`);
+            // console.log(`Disease: ${disease}`);
+            // console.log(`Latitude: ${latitude}`);
+            // console.log(`Longitude: ${longitude}`);
 
-            // Create a LatLng object
             const latLng = new google.maps.LatLng(latitude, longitude);
 
-            // Create a marker and set its position
             const marker = new google.maps.Marker({
               position: latLng,
               map: map,
               title: name
             });
 
-            // Add the marker to the markers array
             markers.push(marker);
-
+            successfulGeocoding++;
             resolve();
           } else {
-            reject(status);
+            console.error(`Geocoding failed for address: ${address}. Status: ${status}`);
+            unsuccessfulGeocoding++;
+            resolve();
           }
         });
       });
@@ -88,27 +83,24 @@ while ($row = mysqli_fetch_assoc($result)) {
           lat: 14.2180912010889,
           lng: 120.86307689036485
         },
-        zoom: 8
+        zoom: 10
       });
 
-      // Process the fetched data
       const data = <?php echo json_encode($data); ?>;
-      const latitudes = [];
 
       data.forEach(row => {
-        const address = row.barangay + ', ' + row.municipality + ', ' + row.postalCode + 'Cavite';
-        const name = row.firstName;
+        const address = row.barangay + ', ' + row.municipality + ', ' + row.postalCode + ' Cavite';
+        console.log(row.patientId);
+        console.log(address);
+        const name = row.patientId;
         const disease = row.disease;
+
         initializeGeocoding(address, name, disease).then(() => {
-          console.log('Geocoding successful');
+          console.log('Geocoding complete');
+          console.log(`Successful geocoding: ${successfulGeocoding}`);
+          console.log(`Unsuccessful geocoding: ${unsuccessfulGeocoding}`);
         });
-
-        // Add latitude to the latitudes array
-        latitudes.push(row.latitude);
       });
-
-      // Log the latitudes array
-      console.log('Latitudes:', latitudes);
     }
   </script>
 </body>
