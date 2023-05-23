@@ -8,8 +8,11 @@ if (isset($_GET['patientId'])) {
         // die equivalent to exit
         die("Connection failed: " . mysqli_connect_error());
     }
-
-    $sql = "SELECT * FROM patients WHERE patientId = $patientId";
+    // getting the patientId 
+    $sql = "SELECT * 
+            FROM patients 
+            WHERE patientId = $patientId
+            ";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
     $fieldValue = $row['patientId'];
@@ -18,6 +21,7 @@ if (isset($_GET['patientId'])) {
     $query = "INSERT INTO deleted_fields (patientId) VALUES ('$fieldValue')";
     mysqli_query($con, $query);
 
+    // Deleting the value from the table
     $sql = "DELETE FROM patients WHERE patientId = $patientId";
     $result = mysqli_query($con, $sql);
 
