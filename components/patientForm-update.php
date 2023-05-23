@@ -90,26 +90,104 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $strongContent = 'Holy guacamole!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
+        } else {
+            $sql = "UPDATE patients 
+                        SET `firstName`='$fName', 
+                        `lastName`='$lName', 
+                        `middleName`='$mName', 
+                        `munCityOfDRU`='$municipalityDRU', 
+                        `brgyOfDRU`='$barangayDRU', 
+                        `addressOfDRU`='$addressDRU', 
+                        `gender`='$gender', 
+                        `dob`='$dob', 
+                        `age`='$age',
+                        `municipality`='$municipality', 
+                        `barangay`='$barangay', 
+                        `street`='$street',
+                        `unitCode`='$unitCode',
+                        `postalCode`='$postalCode',
+                        `subd`='$subd',
+                        `contact`='$contact'
+                        WHERE patientId=$patientId";
         }
+
+        if ($con->query($sql) === TRUE) {
+            // $insert_id = mysqli_insert_id($con);
+
+            // Fetch the necessary values from another table using the last inserted ID
+            $addressQuery = "SELECT patients.*, barangay.barangay, municipality.municipality
+                        FROM patients 
+                        LEFT JOIN barangay ON patients.barangay = barangay.id
+                        LEFT JOIN municipality ON patients.municipality = municipality.munId
+                        WHERE patientId = $patientId
+                        ";
+            $addressResult = $con->query($addressQuery);
+            $row = mysqli_fetch_assoc($addressResult);
+
+            $barangayValue = $row['barangay'];
+            $municipalityValue = $row['municipality'];
+
+            // Create the full address
+            $address = $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode;
+            echo $address;
+
+            // Format the address for URL encoding
+            $formattedAddress = urlencode($address);
+
+            // Create the geocoding API URL
+            $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E";
+
+            // Send a GET request to the geocoding API
+            $geocodingResponse = file_get_contents($geocodingUrl);
+
+            // Check if the geocoding request was successful
+            if ($geocodingResponse !== false) {
+                // Decode the JSON response
+                $geocodingData = json_decode($geocodingResponse, true);
+
+                // Check if the geocoding was successful
+                if ($geocodingData['status'] === 'OK') {
+                    // Get the latitude and longitude
+                    $latitude = $geocodingData['results'][0]['geometry']['location']['lat'];
+                    $longitude = $geocodingData['results'][0]['geometry']['location']['lng'];
+
+                    // Update the patients table with latitude and longitude
+                    $updateSql = "UPDATE patients SET latitude = '$latitude', longitude = '$longitude' WHERE patientId = $patientId";
+
+                    if ($con->query($updateSql) === TRUE) {
+                        echo "Address saved successfully";
+                    } else {
+                        echo "Error updating address: " . $con->error;
+                    }
+                } else {
+                    echo "Geocoding failed: " . $geocodingData['status'];
+                }
+            } else {
+                echo "Failed to fetch geocoding data";
+            }
+        } else {
+            echo "Error saving address: " . $con->error;
+        }
+
         // added new data into the db
-        $sql = "UPDATE patients 
-            SET `firstName`='$fName', 
-            `lastName`='$lName', 
-            `middleName`='$mName', 
-            `munCityOfDRU`='$municipalityDRU', 
-            `brgyOfDRU`='$barangayDRU', 
-            `addressOfDRU`='$addressDRU', 
-            `gender`='$gender', 
-            `dob`='$dob', 
-            `age`='$age',
-            `municipality`='$municipality', 
-            `barangay`='$barangay', 
-            `street`='$street',
-            `unitCode`='$unitCode',
-            `postalCode`='$postalCode',
-            `subd`='$subd',
-            `contact`='$contact' 
-        WHERE patientId=$patientId";
+        // $sql = "UPDATE patients 
+        //     SET `firstName`='$fName', 
+        //     `lastName`='$lName', 
+        //     `middleName`='$mName', 
+        //     `munCityOfDRU`='$municipalityDRU', 
+        //     `brgyOfDRU`='$barangayDRU', 
+        //     `addressOfDRU`='$addressDRU', 
+        //     `gender`='$gender', 
+        //     `dob`='$dob', 
+        //     `age`='$age',
+        //     `municipality`='$municipality', 
+        //     `barangay`='$barangay', 
+        //     `street`='$street',
+        //     `unitCode`='$unitCode',
+        //     `postalCode`='$postalCode',
+        //     `subd`='$subd',
+        //     `contact`='$contact' 
+        // WHERE patientId=$patientId";
 
         $result = mysqli_query($con, $sql);
 
@@ -129,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script> 
         alert('Patient Successfully Updated');
-        window.location= 'http://localhost/admin2gh/patientTable.php';
+        //window.location= 'http://localhost/admin2gh/patientTable.php';
         </script>
         ";
         exit;
@@ -172,13 +250,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label class='col-form-label' for="gender">Gender</label>
                                 <select class="custom-select" id="gender" name="gender">
                                     <?php
-                                    // Connect to database and fetch genders
+                                    // Connect to the database and fetch genders
                                     include("connection.php");
                                     $result = mysqli_query($con, 'SELECT * FROM genders');
-
                                     // Display each gender in a dropdown option
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' . $row['genderId'] . '">' . $row['gender'] . '</option>';
+                                        $genderId = $row['genderId'];
+                                        $genderName = $row['gender'];
+                                        // Check if the current option's municipality ID matches the selected municipality ID
+                                        $selected = ($genderId == $gender) ? 'selected' : '';
+                                        echo "<option value='$genderId' $selected>$genderName</option>";
                                     }
                                     ?>
                                 </select>
@@ -214,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input placeholder="Street" type="text" class='form-control' name='street' value='<?php echo $street; ?>'>
                     </div>
                     <div class="col">
-                        <input placeholder="Postal Code" type="text" class='form-control' name='postalCode' value='<?php echo $postalCode; ?>'>
+                        <input id="postalCode" readonly placeholder="Postal Code" type="text" class='form-control' name='postalCode' value='<?php echo $postalCode; ?>'>
                     </div>
                 </div>
                 <!-- Municipality Dropdown -->

@@ -26,35 +26,147 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $age = $_POST['age'];
+    $unitCode = $_POST['unitCode'];
+    $subd = $_POST['subd'];
+    $street = $_POST['street'];
     $municipality = $_POST['municipality'];
     $barangay = $_POST['barangay'];
+    $postalCode = $_POST['postalCode'];
     $municipalityDRU = $_POST['municipalityDRU'];
     $barangayDRU = $_POST['barangayDRU'];
     $disease = $_POST['disease'];
     $contact = $_POST['contact'];
-    $street = $_POST['street'];
-    $unitCode = $_POST['unitCode'];
-    $subd = $_POST['subd'];
-    $postalCode = $_POST['postalCode'];
     $addressDRU = $_POST['addressDRU'];
     $currentDate = date("Y-m-d H:i:s");
 
     // check if the data is empty
     do {
-        if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
+        // if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
+        //     $errorMessage = "All fields are required";
+        //     $type = 'warning';
+        //     $strongContent = 'Holy guacamole!';
+        //     $alert = generateAlert($type, $strongContent, $errorMessage);
+        //     break;
+        // }
+        // // added new data into the db
+        // $sql = "INSERT INTO patients
+        // (`creationDate`, `firstName`, `lastName`, `middleName`, `munCityOfDRU`, `addressOfDRU`,`gender`, `dob`, `age`, `municipality`, `barangay`, `street`,`unitCode`,`postalCode`,`subd`, `disease`,`brgyOfDRU`, `contact`) 
+        // VALUES 
+        // ('$currentDate', '$fName', '$lName', '$mName' , '$municipalityDRU', '$addressDRU','$gender', '$dob', '$age', '$municipality', '$barangay', '$street','$unitCode','$postalCode','$subd', '$disease', '$barangayDRU', '$contact')";
+        // $result = mysqli_query($con, $sql);
+        // $insert_id = mysqli_insert_id($con);
+
+        if (empty($fName) || empty($lName) || empty($municipality) || empty($barangay) || empty($municipalityDRU) || empty($barangayDRU) || empty($disease) || empty($contact) || empty($gender)) {
             $errorMessage = "All fields are required";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
-            break;
+            // Handle the error or display the alert message
+        } else {
+            // Store the values in the patients table
+            $sql = "INSERT INTO patients
+                    (
+                        `creationDate`, 
+                        `firstName`, 
+                        `lastName`, 
+                        `middleName`, 
+                        `munCityOfDRU`, 
+                        `addressOfDRU`,
+                        `gender`, 
+                        `dob`, 
+                        `age`, 
+                        `municipality`, 
+                        `barangay`, 
+                        `street`,
+                        `unitCode`,
+                        `postalCode`,
+                        `subd`, 
+                        `disease`,
+                        `brgyOfDRU`, 
+                        `contact`
+                    ) 
+                    VALUES 
+                    (
+                        '$currentDate', 
+                        '$fName', 
+                        '$lName', 
+                        '$mName', 
+                        '$municipalityDRU', 
+                        '$addressDRU',
+                        '$gender', 
+                        '$dob', 
+                        '$age', 
+                        '$municipality', 
+                        '$barangay', 
+                        '$street',
+                        '$unitCode',
+                        '$postalCode',
+                        '$subd', 
+                        '$disease', 
+                        '$barangayDRU', 
+                        '$contact'
+                    )";
+
+
+            if ($con->query($sql) === TRUE) {
+                $insert_id = mysqli_insert_id($con);
+
+                // Fetch the necessary values from another table using the last inserted ID
+                $addressQuery = "SELECT patients.*, barangay.barangay, municipality.municipality
+                        FROM patients 
+                        LEFT JOIN barangay ON patients.barangay = barangay.id
+                        LEFT JOIN municipality ON patients.municipality = municipality.munId
+                        WHERE patientId = $insert_id
+                        ";
+                $addressResult = $con->query($addressQuery);
+                $row = mysqli_fetch_assoc($addressResult);
+
+                $barangayValue = $row['barangay'];
+                $municipalityValue = $row['municipality'];
+
+                // Create the full address
+                $address = $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode;
+                echo $address;
+
+                // Format the address for URL encoding
+                $formattedAddress = urlencode($address);
+
+                // Create the geocoding API URL
+                $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E";
+
+                // Send a GET request to the geocoding API
+                $geocodingResponse = file_get_contents($geocodingUrl);
+
+                // Check if the geocoding request was successful
+                if ($geocodingResponse !== false) {
+                    // Decode the JSON response
+                    $geocodingData = json_decode($geocodingResponse, true);
+
+                    // Check if the geocoding was successful
+                    if ($geocodingData['status'] === 'OK') {
+                        // Get the latitude and longitude
+                        $latitude = $geocodingData['results'][0]['geometry']['location']['lat'];
+                        $longitude = $geocodingData['results'][0]['geometry']['location']['lng'];
+
+                        // Update the patients table with latitude and longitude
+                        $updateSql = "UPDATE patients SET latitude = '$latitude', longitude = '$longitude' WHERE patientId = $insert_id";
+
+                        if ($con->query($updateSql) === TRUE) {
+                            echo "Address saved successfully";
+                        } else {
+                            echo "Error updating address: " . $con->error;
+                        }
+                    } else {
+                        echo "Geocoding failed: " . $geocodingData['status'];
+                    }
+                } else {
+                    echo "Failed to fetch geocoding data";
+                }
+            } else {
+                echo "Error saving address: " . $con->error;
+            }
         }
-        // added new data into the db
-        $sql = "INSERT INTO patients
-        (`creationDate`, `firstName`, `lastName`, `middleName`, `munCityOfDRU`, `addressOfDRU`,`gender`, `dob`, `age`, `municipality`, `barangay`, `street`,`unitCode`,`postalCode`,`subd`, `disease`,`brgyOfDRU`, `contact`) 
-        VALUES 
-        ('$currentDate', '$fName', '$lName', '$mName' , '$municipalityDRU', '$addressDRU','$gender', '$dob', '$age', '$municipality', '$barangay', '$street','$unitCode','$postalCode','$subd', '$disease', '$barangayDRU', '$contact')";
-        $result = mysqli_query($con, $sql);
-        $insert_id = mysqli_insert_id($con);
+
 
         if (!$result) {
             $errorMessage = mysqli_error($con);
@@ -72,15 +184,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $value = $row['diseaseId'];
         $diseaseValue = strtolower($row['disease']);
 
-        $query = "SELECT patientId FROM patients";
-        $patientIdResult = mysqli_query($con, $query);
-        $patientValue = mysqli_fetch_assoc($patientIdResult);
-        $patientId = $patientValue['patientId'];
-
         if (strcmp($diseaseName, $value) == 0) {
 
             // $link = "localhost/admin2gh/{$diseaseValue}Page-create.php";
-            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            //echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
             // echo 'success';
             // header("Location: $link");
             // echo ($link);
@@ -110,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
-        <h2>Update Patient Information</h2>
+        <h2>Create New Patient Information</h2>
 
         <?php
         if (!empty($errorMessage)) {
@@ -186,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input placeholder="Street" type="text" class='form-control' name='street'>
                     </div>
                     <div class="col">
-                        <input placeholder="Postal Code" type="text" class='form-control' name='postalCode'>
+                        <input id="postalCode" placeholder="Postal Code" type="text" class='form-control' name='postalCode' readonly>
                     </div>
                     <div class="input-group my-3">
                         <div class="col">
