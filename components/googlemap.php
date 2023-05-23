@@ -1,10 +1,63 @@
-<!--Google map-->
-<!-- <div id="map-container-google-3" class="z-depth-1-full map-container-3 position-fixed w-100">
-    <iframe src="https://maps.google.com/maps?q=manila&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen title="googlemap"></iframe>
-</div> -->
+<?php
+// Replace with your database connection code
+include('./components/connection.php');
 
-<div class="container-fluid">
-    <div class="embed-responsive embed-responsive-16by9 h-100">
-        <iframe class="embed-responsive-item" src="https://maps.google.com/maps?q=manila&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen title="googlemap"></iframe>
-    </div>
-</div>
+// Fetch latitude and longitude from the "patients" table
+$query = "SELECT latitude, longitude FROM patients";
+$result = mysqli_query($con, $query);
+
+// Fetch the data and convert it to JSON
+$data = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = [
+        'lat' => floatval($row['latitude']),
+        'lng' => floatval($row['longitude'])
+    ];
+}
+
+// var_dump($data);
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Heatmap Example</title>
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+        let map;
+        let heatmap;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 14.278023306102497,
+                    lng: 120.88505851514495
+                },
+                zoom: 11
+            });
+
+            const data = <?php echo json_encode($data); ?>;
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: data.map(item => new google.maps.LatLng(item.lat, item.lng)),
+                map: map
+            });
+        }
+
+        initMap();
+    </script>
+</body>
+
+</html>
