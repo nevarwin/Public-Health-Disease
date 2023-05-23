@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Incorrect password
                 echo "<script>alert('Incorrect password. Please try again.');</script>";
-                echo "<script>window.location.href = 'http://localhost/login.php';</script>";
+                echo "<script>window.location.href = 'http://localhost/admin2gh/loginForm.php';</script>";
             }
         } else {
             // User not found
