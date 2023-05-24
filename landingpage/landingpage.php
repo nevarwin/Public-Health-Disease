@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--divinectorweb.com-->
 
 <head>
   <meta charset="UTF-8" />
@@ -169,7 +168,7 @@
           <div class="">
             <div class="">
               <?php
-              include('../components/googlemap.php');
+              include('../heatmap.php');
               ?>
             </div>
           </div>
