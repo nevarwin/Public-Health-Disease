@@ -1,32 +1,43 @@
 <script>
   const ctx = document.getElementById("myChart").getContext('2d');
+  let delayed;
 
-  new Chart(ctx, {
-    legend: 'Hellow',
-    type: "bar",
-    data: {
-      labels: ["2018", "2019", "2020", "2021", "2022"],
-      datasets: [{
-        label: "Number of Influenza Cases",
-        data: [2358, 3877, 2850, 3504, 5885],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)'
-        ],
-        borderColor: [
-          'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)'
-        ],
-        borderWidth: 1,
-      }, ],
-    },
+  const data = {
+    labels: ["2018", "2019", "2020", "2021", "2022"],
+    datasets: [{
+      fill: true,
+      label: "Number of Influenza Cases",
+      data: [2358, 3877, 2850, 3504, 5885],
+      borderWidth: 1,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)'
+      ],
+    }, ],
+  };
+
+  const config = {
+    type: "line",
+    data: data,
     options: {
+      responsive: true,
+      animation: {
+        onComplete: () => {
+          delayed = true;
+        },
+        delay: (context) => {
+          let delay = 0;
+          if (context.type === 'data' && context.mode === 'default' && !delayed) {
+            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+          }
+          return delay;
+        },
+      },
+      radius: 5,
+      hitRadius: 20,
+      hoverRadius: 12,
       plugins: {
         title: {
           display: true,
@@ -36,19 +47,10 @@
           }
         }
       },
-      animation: {
-        duration: 2000, // Animation duration in milliseconds
-        easing: 'easeInOutQuart' // Easing function for animation
-      },
-      legend: {
-        display: true,
-        position: 'left',
-        align: 'start'
-      },
-      responsive: true,
-
     },
-  });
+  };
+
+  const myChart = new Chart(ctx, config);
 
   const pieChart = document.getElementById("pieChart");
 
@@ -86,8 +88,16 @@
         }
       },
       animation: {
-        duration: 2000, // Animation duration in milliseconds
-        easing: 'easeInOutQuart' // Easing function for animation
+        onComplete: () => {
+          delayed = true;
+        },
+        delay: (context) => {
+          let delay = 0;
+          if (context.type === 'data' && context.mode === 'default' && !delayed) {
+            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+          }
+          return delay;
+        },
       },
       responsive: true,
     },
