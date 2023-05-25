@@ -1,31 +1,54 @@
-<!-- Area Chart -->
-<div class="col-xl-8 col-lg-7">
-    <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Yearly Disease Cases</h6>
-            <!-- <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div> -->
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-            <div class="chart-area">
-                <canvas id="myAreaChart"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    const ctx = document.getElementById("myChart").getContext('2d');
+    let delayed;
 
-<?php
-include('script.php');
-?>
+    const data = {
+        labels: ["2018", "2019", "2020", "2021", "2022"],
+        datasets: [{
+            fill: true,
+            label: "Number of Influenza Cases",
+            data: [2358, 3877, 2850, 3504, 5885],
+            borderWidth: 1,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)'
+            ],
+        }, ],
+    };
+
+    const config = {
+        type: "line",
+        data: data,
+        options: {
+            responsive: true,
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+            },
+            radius: 5,
+            hitRadius: 20,
+            hoverRadius: 12,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Influenza Cases in past 5 years',
+                    font: {
+                        size: 18
+                    }
+                }
+            },
+        },
+    };
+
+    const myChart = new Chart(ctx, config);
+</script>
