@@ -125,8 +125,8 @@
         <div class="col-md-4">
           <div class="">
             <div class="card-body text-center">
-              <h5 class="card-title">Bar Graph</h5>
-              <p class="card-text">The number of disease cases reported each year is depicted in a bar graph. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
+              <h5 class="card-title">Line Chart</h5>
+              <p class="card-text">The number of disease cases reported each year is depicted in a line chart. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
             </div>
           </div>
         </div>
@@ -167,9 +167,8 @@
         <div class="col-md-8">
           <div class="">
             <div class="">
-              <?php
-              include('../heatmap.php');
-              ?>
+              <!-- <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" /> -->
+              <?php include('../landingpage/landingHeatmap.php'); ?>
             </div>
           </div>
         </div>
@@ -286,9 +285,6 @@
   include('js/chart.php')
   ?>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
 </body>
 
 </html>
-
-<!--for getting the form download the code from download button-->
