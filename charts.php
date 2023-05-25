@@ -45,18 +45,31 @@ include('./components/head.php');
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
-                        <?php
-                        include('./components/linechart.php');
-                        include('./components/piechart.php');
-
-                        ?>
+                        <div class="col-md-6">
+                            <div class="card shadow">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Yearly Disease Cases</h6>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <?php
-                    ?>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -75,5 +88,7 @@ include('./components/head.php');
     </a>
     <?php
     include('./components/logoutmodal.php');
-    include('./components/script.php');
+    // include('./components/script.php');
+    include('./components/linechart.php');
+    include('./components/piechart.php');
     ?>
