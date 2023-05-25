@@ -1,5 +1,4 @@
 <?php
-// Replace with your database connection code
 include('./components/connection.php');
 
 // Fetch latitude and longitude from the "patients" table
