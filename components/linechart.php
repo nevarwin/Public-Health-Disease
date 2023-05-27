@@ -1,13 +1,145 @@
+<div class="card shadow">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Line Chart</h6>
+    </div>
+    <div class="card-body">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+<div class="row">
+    <form>
+        <div class="btn-group col-xl-12 col-lg-5 my-2">
+            <div class="dropdown mx-2">
+                <select class="custom-select" name="disease">
+                    <?php
+                    $diseases = [
+                        1 => 'ABD',
+                        2 => 'AEFI',
+                        3 => 'AES',
+                        4 => 'AFP',
+                        5 => 'AMES',
+                        6 => 'ChikV',
+                        7 => 'DIPH',
+                        8 => 'HFMD',
+                        9 => 'NNT',
+                        10 => 'NT',
+                        11 => 'PERT',
+                        12 => 'Influenza',
+                        13 => 'Dengue',
+                        14 => 'Rabies',
+                        15 => 'Cholera',
+                        16 => 'Hepatitis',
+                        17 => 'Measles',
+                        18 => 'Meningitis',
+                        19 => 'Meningo',
+                        20 => 'Typhoid',
+                        21 => 'Leptospirosis',
+                    ];
+                    $selectedDisease = $_GET['disease'] ?? '';
+
+                    foreach ($diseases as $key => $value) {
+                        $selected = ($key == $selectedDisease) ? 'selected' : '';
+                        echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="submit" class='btn btn-primary'>Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<?php
+// Replace with your database connection code
+include('connection.php');
+
+$patientCount = 0;
+$jsonData = 0;
+
+if (isset($_GET['disease'])) {
+    $selectedDisease = $_GET['disease'];
+    echo "Selected Disease: $selectedDisease<br>";
+
+    $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
+            FROM patients 
+            WHERE disease = $selectedDisease 
+            GROUP BY YEAR(creationDate)";
+
+    $countResult = mysqli_query($con, $countQuery);
+
+    $data = array();
+    while ($row = $countResult->fetch_assoc()) {
+        $year = $row['creationYear'];
+        $count = $row['patientCount'];
+        $data[$year] = $count;
+    }
+
+    // Echo the counts per year
+    // foreach ($data as $year => $count) {
+    //     echo "Year: $year, Count: $count<br>";
+    // }
+
+    // Encode the PHP array as JSON
+    $jsonData = json_encode($data);
+
+    // Echo the JSON data inside a JavaScript block
+    echo '<script>var selectedDisease = ' . $selectedDisease . ';</script>';
+    echo '<script>var jsonData = ' . $jsonData . ';</script>';
+}
+?>
+
 <script>
+    var diseases = {
+        1: 'Amebiasis',
+        2: 'Adverse Event Following Immunization',
+        3: 'Acute encephalitis syndrome',
+        4: 'Alpha-Fetoprotein',
+        5: 'Acute Meningitis',
+        6: 'Chikungunya Virus',
+        7: 'Diphtheria',
+        8: 'Hand, Foot, and Mouth Disease',
+        9: 'Number Needed to Treat',
+        10: 'Neonatal Tetanus',
+        11: 'Perthes Disease',
+        12: 'Influenza',
+        13: 'Dengue',
+        14: 'Rabies',
+        15: 'Cholera',
+        16: 'Hepatitis',
+        17: 'Measles',
+        18: 'Meningitis',
+        19: 'Meningo',
+        20: 'Typhoid',
+        21: 'Leptospirosis'
+    };
+
+    console.log(jsonData);
+    let diseaseName = diseases[selectedDisease];
+
+    var years = [];
+    var counts = [];
+
+    for (var year in jsonData) {
+        if (jsonData.hasOwnProperty(year)) {
+            var count = parseInt(jsonData[year]);
+            console.log("Year: " + year + ", Count: " + count);
+            years.push(year);
+            counts.push(count);
+        }
+    }
+    console.log(typeof counts);
+    console.log(years);
+
     const ctx = document.getElementById("myChart").getContext('2d');
     let delayed;
 
     const data = {
-        labels: ["2018", "2019", "2020", "2021", "2022"],
+        labels: years,
         datasets: [{
             fill: true,
-            label: "Number of Influenza Cases",
-            data: [2358, 3877, 2850, 3504, 5885],
+            label: `Number of ${diseaseName} Cases`,
+            data: counts,
             borderWidth: 1,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)'
@@ -41,7 +173,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Influenza Cases in past 5 years',
+                    text: `${diseaseName} Cases Per Year`,
                     font: {
                         size: 18
                     }
