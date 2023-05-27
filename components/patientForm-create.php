@@ -56,11 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $result = mysqli_query($con, $sql);
         // $insert_id = mysqli_insert_id($con);
 
-        if (empty($fName) || empty($lName) || empty($municipality) || empty($barangay) || empty($municipalityDRU) || empty($barangayDRU) || empty($disease) || empty($contact) || empty($gender)) {
+        if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
             $errorMessage = "All fields are required";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
             // Handle the error or display the alert message
         } else {
             // Store the values in the patients table
