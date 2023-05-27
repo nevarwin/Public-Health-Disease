@@ -16,6 +16,21 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .gradient-bar {
+      height: 20px;
+      background: linear-gradient(to right, red, yellow, green);
+    }
+
+    .label {
+      display: inline-block;
+      width: 50px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -126,7 +141,7 @@
           <div class="">
             <div class="card-body text-center">
               <h5 class="card-title">Line Chart</h5>
-              <p class="card-text">The number of disease cases reported each year is depicted in a line chart. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
+              <p class="card-text" style="text-align: justify;">The number of disease cases reported each year is depicted in a line chart. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
             </div>
           </div>
         </div>
@@ -137,7 +152,7 @@
           <div class="">
             <div class="card-body text-center">
               <h5 class="card-title">Pie Chart</h5>
-              <p class="card-text">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
+              <p class="card-text" style="text-align: justify;">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
             </div>
           </div>
         </div>
@@ -154,7 +169,7 @@
   <!-- services section Ends -->
 
   <!-- project strats -->
-  <section id="project" class="project section-padding">
+  <section id="project" class="project section-padding" style="background-color: rgba(94, 174, 199, 0.8);">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -165,22 +180,31 @@
       </div>
       <div class="row my-4">
         <div class="col-md-8">
-          <div class="">
-            <div class="">
-              <!-- <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" /> -->
-              <?php include('../landingpage/landingHeatmap.php'); ?>
+          <div class="row">
+            <div class="col-12">
+              <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" />
+            </div>
+          </div>
+          <div class="row mt-3 justify-content-center">
+            <div class="col-4 text-center">
+              <div class="gradient-bar"></div>
+              <span class="label label-high">High</span>
+              <span class="label label-medium">Medium</span>
+              <span class="label label-low">Low</span>
             </div>
           </div>
         </div>
+
         <div class="col-md-4">
-          <div class="card">
+          <div class="">
             <div class="card-body">
               <h5 class="card-title">Cavite Health Disease Heatmap</h5>
-              <p class="card-text">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
+              <p class="card-text" style="text-align: justify;">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
             </div>
           </div>
         </div>
       </div>
+
 
     </div>
   </section>
