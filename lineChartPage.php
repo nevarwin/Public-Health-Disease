@@ -21,24 +21,9 @@ include('./components/head.php');
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- <div class="dropdown mx-2">
-            <select class="custom-select" name="year">
-                <?php
-                foreach ($year as $key => $value) {
-                    $selected = ($key == $year) ? 'selected' : '';
-                    echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
-                }
-                ?>
-                </select>
-            </div> -->
-                        <div class="col-md-6">
+                        <div class="col-sm-6 col-md-8 col-lg-12 py2">
                             <?php
                             include('./components/linechart.php')
-                            ?>
-                        </div>
-                        <div class="col-md-4">
-                            <?php
-                            include('./components/piechart.php')
                             ?>
                         </div>
                     </div>
@@ -60,3 +45,29 @@ include('./components/head.php');
         <?php
         include('./components/logoutmodal.php');
         ?>
+
+        <!-- <script>
+            // Get references to the form elements
+            var form1 = document.getElementById('form1');
+            var form2 = document.getElementById('form2');
+
+            // Attach event listener for Form 1 submission
+            form1.addEventListener('submit', function(event) {
+                // event.preventDefault(); // Prevent form submission from reloading the page
+
+                // Handle Form 1 submission logic
+                // ...
+
+                // Optionally, you can reset the form after submission
+            });
+
+            // Attach event listener for Form 2 submission
+            form2.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission from reloading the page
+
+                // Handle Form 2 submission logic
+                // ...
+
+                // Optionally, you can reset the form after submission
+            });
+        </script> -->
