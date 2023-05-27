@@ -1,16 +1,8 @@
-<div class="card shadow">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Line Chart</h6>
-    </div>
-    <div class="card-body">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
 <div class="row">
-    <form>
-        <div class="btn-group col-xl-12 col-lg-5 my-2">
+    <form id="form1">
+        <div class="btn-group col-md-12 col-lg-12 my-2">
             <div class="dropdown mx-2">
-                <select class="custom-select" name="disease">
+                <select id='selectDisease' class="custom-select" name="disease">
                     <?php
                     $diseases = [
                         1 => 'ABD',
@@ -48,6 +40,14 @@
         </div>
     </form>
 </div>
+<div class="card shadow">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Line Chart</h6>
+    </div>
+    <div class="card-body">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
 
 
 <?php
@@ -59,7 +59,7 @@ $jsonData = 0;
 
 if (isset($_GET['disease'])) {
     $selectedDisease = $_GET['disease'];
-    echo "Selected Disease: $selectedDisease<br>";
+    // echo "Selected Disease: $selectedDisease<br>";
 
     $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
             FROM patients 
@@ -114,8 +114,7 @@ if (isset($_GET['disease'])) {
         21: 'Leptospirosis'
     };
 
-    console.log(jsonData);
-    let diseaseName = diseases[selectedDisease];
+    let diseaseName = diseases[selectedDisease] === '' ? 'Disease' : diseases[selectedDisease];
 
     var years = [];
     var counts = [];
@@ -135,11 +134,11 @@ if (isset($_GET['disease'])) {
     let delayed;
 
     const data = {
-        labels: years,
+        labels: years === '' ? ["2018", "2019", "2020", "2021", "2022"] : years,
         datasets: [{
             fill: true,
             label: `Number of ${diseaseName} Cases`,
-            data: counts,
+            data: counts === '' ? [2358, 3877, 2850, 3504, 5885] : counts,
             borderWidth: 1,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)'
