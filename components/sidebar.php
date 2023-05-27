@@ -42,9 +42,14 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/charts.php">
+        <a class="nav-link" href="http://localhost/admin2gh/lineChartPage.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Line Chart</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="http://localhost/admin2gh/pieChartPage.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Pie Chart</span></a>
     </li>
 
     <!-- Nav Item - Charts -->
