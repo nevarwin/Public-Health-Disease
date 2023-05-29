@@ -77,7 +77,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     lat: 14.278023306102497,
                     lng: 120.88505851514495
                 },
-                zoom: 11
+                zoom: 11,
+                mapTypeId: "satellite",
             });
 
             const data = <?php echo json_encode($data); ?>;
