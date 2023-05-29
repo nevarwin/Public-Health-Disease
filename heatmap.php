@@ -12,9 +12,12 @@ while ($row = mysqli_fetch_assoc($result)) {
         'lat' => floatval($row['latitude']),
         'lng' => floatval($row['longitude'])
     ];
-}
+} // Convert the data to JSON format
+$dataJson = json_encode($data);
 
-var_dump($data);
+// Output the result to the console
+echo "<script>console.log(" . $dataJson . ");</script>";
+
 ?>
 
 <!DOCTYPE html>
