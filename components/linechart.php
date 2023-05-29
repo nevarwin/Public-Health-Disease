@@ -46,6 +46,7 @@
     </div>
     <div class="card-body">
         <canvas id="myChart"></canvas>
+        <button id="downloadButton">Download Chart</button>
     </div>
 </div>
 
@@ -114,11 +115,24 @@ if (isset($_GET['disease'])) {
         21: 'Leptospirosis'
     };
 
-    let diseaseName = diseases[selectedDisease] === '' ? 'Disease' : diseases[selectedDisease];
+    var diseaseName;
+    var selectedDisease;
+    if (selectedDisease === undefined || selectedDisease === null || selectedDisease === '' ||
+        selectedDisease === 0) {
+        diseaseName = 'Sample Disease';
+    } else {
+        diseaseName = diseases[selectedDisease];
+    }
 
     var years = [];
     var counts = [];
+    var jsonData;
 
+    if (jsonData === undefined || jsonData === null || jsonData === '') {
+        years = 0;
+        counts = 0;
+        diseaseName = 'Sample Disease';
+    }
     for (var year in jsonData) {
         if (jsonData.hasOwnProperty(year)) {
             var count = parseInt(jsonData[year]);
@@ -134,11 +148,11 @@ if (isset($_GET['disease'])) {
     let delayed;
 
     const data = {
-        labels: years === '' ? ["2018", "2019", "2020", "2021", "2022"] : years,
+        labels: years === 0 ? ["2018", "2019", "2020", "2021", "2022"] : years,
         datasets: [{
             fill: true,
             label: `Number of ${diseaseName} Cases`,
-            data: counts === '' ? [2358, 3877, 2850, 3504, 5885] : counts,
+            data: counts === 0 ? [2358, 3877, 2850, 3504, 5885] : counts,
             borderWidth: 1,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)'
@@ -182,4 +196,13 @@ if (isset($_GET['disease'])) {
     };
 
     const myChart = new Chart(ctx, config);
+
+    const downloadButton = document.getElementById("downloadButton");
+    downloadButton.addEventListener("click", () => {
+        const imageUrl = myChart.toBase64Image();
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = `${diseaseName} LineChart.png`;
+        link.click();
+    });
 </script>

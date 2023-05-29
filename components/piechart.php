@@ -65,7 +65,7 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
 
 <div class="row">
     <form id="form2">
-        <div class="btn-group col-xl-12 col-lg-5 my-2">
+        <div class="btn-group col-xl-12 col-lg-12 col-sm-12 my-2">
             <div class="dropdown mx-2">
                 <select class="custom-select" name="pieDisease">
                     <?php
@@ -118,10 +118,30 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
     </div>
     <div class="card-body">
         <canvas id="pieChart"></canvas>
+        <button id="downloadButton">Download Chart</button>
     </div>
 </div>
 
 <script>
+    var pieJsonData;
+
+    if (pieJsonData === undefined || pieJsonData === null || pieJsonData === '') {
+        cases = 0;
+        municipalities = [];
+        pieSelectedYear = 'Sample Year';
+    }
+
+    var diseaseName;
+    var selectedDisease;
+    if (selectedDisease === undefined || selectedDisease === null || selectedDisease === '' ||
+        selectedDisease === 0) {
+        diseaseName = 'Sample Disease';
+    } else {
+        diseaseName = diseases[selectedDisease];
+    }
+
+    var sampleMun = ["Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas", "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias", "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez", "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay City", "Tanza", "Ternate", "Trece Martires City"];
+
     var diseases = {
         1: 'Amebiasis',
         2: 'Adverse Event Following Immunization',
@@ -172,18 +192,20 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
         23: "Trece Martires City",
     };
 
-    console.log(pieJsonData);
-    console.log(pieSelectedDisease);
-    console.log(pieSelectedYear);
-    console.log(municipalities);
-    console.log(cases);
-    let diseaseName = diseases[pieSelectedDisease];
+    // console.log(pieJsonData);
+    // console.log(pieSelectedDisease);
+    // console.log(pieSelectedYear);
+    // console.log(municipalities);
+    // console.log(cases);
+    // let diseaseName = diseases[pieSelectedDisease];
 
     // this translates the municipalities from sql to the corresponding number
     // in the municipality associated array
     var translatedMunicipality = municipalities.map(function(number) {
         return municipality[number];
     });
+
+    console.log(translatedMunicipality);
 
 
     const pie = document.getElementById("pieChart");
@@ -200,11 +222,11 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
     }
 
     const pieData = {
-        labels: translatedMunicipality,
+        labels: translatedMunicipality.length === 0 ? ["Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas", "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias", "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez", "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay City", "Tanza", "Ternate", "Trece Martires City"] : translatedMunicipality,
         // label: `Number of ${diseaseName} Cases`,
         datasets: [{
             label: "Cases",
-            data: cases,
+            data: cases === 0 ? [66, 50, 1362, 33, 9, 133, 16, 109, 207, 2809, 6, 108, 2, 72, 81, 14, 10, 17, 190, 301, 59, 215, 16] : cases,
             backgroundColor: colors,
             borderColor: colors,
             borderWidth: 1,
@@ -245,4 +267,12 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
 
 
     const pieChart = new Chart(pie, pieConfig);
+    const downloadButton = document.getElementById("downloadButton");
+    downloadButton.addEventListener("click", () => {
+        const imageUrl = pieChart.toBase64Image();
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = `${diseaseName} PieChart.png`;
+        link.click();
+    });
 </script>
