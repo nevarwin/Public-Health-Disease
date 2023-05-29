@@ -117,10 +117,12 @@
     </div>
   </section>
   <!-- about section Ends -->
-
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#9CCC65" fill-opacity="0.5" d="M0,160L36.9,160L73.8,160L110.8,32L147.7,288L184.6,224L221.5,160L258.5,224L295.4,256L332.3,192L369.2,288L406.2,192L443.1,256L480,288L516.9,128L553.8,160L590.8,288L627.7,128L664.6,224L701.5,160L738.5,128L775.4,224L812.3,128L849.2,32L886.2,32L923.1,288L960,224L996.9,32L1033.8,96L1070.8,64L1107.7,192L1144.6,320L1181.5,256L1218.5,192L1255.4,192L1292.3,224L1329.2,160L1366.2,224L1403.1,256L1440,192L1440,320L1403.1,320L1366.2,320L1329.2,320L1292.3,320L1255.4,320L1218.5,320L1181.5,320L1144.6,320L1107.7,320L1070.8,320L1033.8,320L996.9,320L960,320L923.1,320L886.2,320L849.2,320L812.3,320L775.4,320L738.5,320L701.5,320L664.6,320L627.7,320L590.8,320L553.8,320L516.9,320L480,320L443.1,320L406.2,320L369.2,320L332.3,320L295.4,320L258.5,320L221.5,320L184.6,320L147.7,320L110.8,320L73.8,320L36.9,320L0,320Z"></path>
+  </svg>
   <!-- services section Starts -->
-  <section class="services section-padding" id="services">
-    <div class="container">
+  <section class="services section-padding" id="services" style="background-color: rgba(156,204,101,0.5);">
+    <div class=" container">
       <div class="row">
         <div class="col-md-12">
           <div class="section-header text-center pb-5">
@@ -167,9 +169,8 @@
     </div>
   </section>
   <!-- services section Ends -->
-
   <!-- project strats -->
-  <section id="project" class="project section-padding" style="background-color: rgba(94, 174, 199, 0.8);">
+  <section id="project" class="project section-padding" style="background-color: rgba(156,204,101,0.5);">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -178,36 +179,39 @@
           </div>
         </div>
       </div>
-      <div class="row my-4">
-        <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-8 col-lg-12">
           <div class="row">
-            <div class="col-12">
-              <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" />
-            </div>
-          </div>
-          <div class="row mt-3 justify-content-center">
-            <div class="col-4 text-center">
-              <div class="gradient-bar"></div>
-              <span class="label label-high">High</span>
-              <span class="label label-medium">Medium</span>
-              <span class="label label-low">Low</span>
-            </div>
-          </div>
-        </div>
+            <div class="col-8">
+              <!-- <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" /> -->
 
-        <div class="col-md-4">
-          <div class="">
-            <div class="card-body">
-              <h5 class="card-title">Cavite Health Disease Heatmap</h5>
-              <p class="card-text" style="text-align: justify;">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
+              <iframe src="../heatmap.php" width="800" height="500" title="heatmap"></iframe>
+              <div class="row mt-3 justify-content-center">
+                <div class="col-4 text-center">
+                  <span class=""><strong>Intensity Level</strong></span>
+                  <div class="gradient-bar"></div>
+                  <span class="label label-high">High</span>
+                  <span class="label label-medium">Medium</span>
+                  <span class="label label-low">Low</span>
+                </div>
+              </div>
             </div>
-          </div>
+            <div class="col-4">
+              <div class="card-body">
+                <h5 class="card-title">Cavite Health Disease Heatmap</h5>
+                <p class="card-text" style="text-align: justify;">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
+              </div>
+            </div>
+          </div <div class="col-md-4">
         </div>
       </div>
 
 
     </div>
   </section>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#9CCC65" fill-opacity="0.5" d="M0,256L14.1,250.7C28.2,245,56,235,85,192C112.9,149,141,75,169,80C197.6,85,226,171,254,202.7C282.4,235,311,213,339,176C367.1,139,395,85,424,53.3C451.8,21,480,11,508,42.7C536.5,75,565,149,593,170.7C621.2,192,649,160,678,165.3C705.9,171,734,213,762,240C790.6,267,819,277,847,256C875.3,235,904,181,932,160C960,139,988,149,1016,144C1044.7,139,1073,117,1101,101.3C1129.4,85,1158,75,1186,85.3C1214.1,96,1242,128,1271,170.7C1298.8,213,1327,267,1355,277.3C1383.5,288,1412,256,1426,240L1440,224L1440,0L1425.9,0C1411.8,0,1384,0,1355,0C1327.1,0,1299,0,1271,0C1242.4,0,1214,0,1186,0C1157.6,0,1129,0,1101,0C1072.9,0,1045,0,1016,0C988.2,0,960,0,932,0C903.5,0,875,0,847,0C818.8,0,791,0,762,0C734.1,0,706,0,678,0C649.4,0,621,0,593,0C564.7,0,536,0,508,0C480,0,452,0,424,0C395.3,0,367,0,339,0C310.6,0,282,0,254,0C225.9,0,198,0,169,0C141.2,0,113,0,85,0C56.5,0,28,0,14,0L0,0Z"></path>
+  </svg>
   <!-- project ends -->
   <!-- team starts -->
   <!-- <section class="team section-padding" id="team">
@@ -299,7 +303,7 @@
   <!-- footer starts -->
   <footer class="bg-dark p-2 text-center">
     <div class="container">
-      <p class="text-white">Copyright © Public Health Disease Geo mapping 2023</p>
+      <p class="text-white">Copyright © Public Health Disease Geo Mapping 2023</p>
     </div>
   </footer>
   <!-- footer ends -->
