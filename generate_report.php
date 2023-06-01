@@ -1,6 +1,4 @@
 <?php
-// the header and  value is longer than the a4 error
-
 // Include the TCPDF library
 require_once('tcpdf/tcpdf.php');
 
@@ -8,11 +6,11 @@ require_once('tcpdf/tcpdf.php');
 include('./components/connection.php');
 
 // Fetch the data from the patients table
-$sql = "SELECT `patientId`, `firstName`, `lastName`, `gender`, `disease`, `dob`, `age`, `barangay`, `municipality`, `creationDate` FROM patients";
+$sql = "SELECT `patientId`, `firstName`, `lastName`, `gender`, `disease`, `dob`, `age`, `barangay`, `municipality`, YEAR(`creationDate`) AS `year` FROM patients";
 $result = mysqli_query($con, $sql);
 
 // Create a new PDF instance
-$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
+$pdf = new TCPDF('L', 'mm', 'A4', true, 'UTF-8'); // Set page orientation to landscape
 
 // Set document information
 $pdf->SetCreator(PDF_CREATOR);
