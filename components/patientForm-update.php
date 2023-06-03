@@ -404,11 +404,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ";
                 }
                 ?>
-                <div class="row mb-3">
-                    <div class="offset-sm-3 col-sm-3 d-grid">
+                <div class="d-flex justify-content-around">
+                    <div class="col text-center">
                         <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
                     </div>
-                    <div class="col-sm-3 d-grid">
+                    <div class="col text-center">
                         <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
                     </div>
                 </div>

@@ -107,7 +107,7 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
                     <?php echo $options; ?>
                 </select>
             </div>
-            <button type="submit" class='btn btn-primary'>Submit</button>
+            <button type="submit" class='btn btn-primary mx-2'>Submit</button>
         </div>
     </form>
 </div>
