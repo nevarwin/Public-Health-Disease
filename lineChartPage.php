@@ -20,7 +20,7 @@ include('./components/head.php');
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-sm-6 col-md-8 col-lg-12 py2">
                             <?php
                             include('./components/linechart.php')
