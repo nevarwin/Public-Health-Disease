@@ -76,23 +76,23 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
     ?>
     <div class="row d-flex align-contents-center my-2">
-        <label for="disease">Select Disease:</label>
         <div class="col">
+            <label for="disease">Select Disease:</label>
             <select name="disease" id="disease" class="custom-select">
                 <option value="">All</option>
                 <?php
                 $pieDropdown = [
-                    1 => 'ABD',
-                    2 => 'AEFI',
-                    3 => 'AES',
-                    4 => 'AFP',
-                    5 => 'AMES',
+                    1 => 'Amebiasis',
+                    2 => 'Adverse Event Following Immunization',
+                    3 => 'Acute encephalitis syndrome',
+                    4 => 'Alpha-Fetoprotein',
+                    5 => 'Acute Meningitis',
                     6 => 'ChikV',
-                    7 => 'DIPH',
-                    8 => 'HFMD',
-                    9 => 'NNT',
-                    10 => 'NT',
-                    11 => 'PERT',
+                    7 => 'Diphtheria',
+                    8 => 'Hand, Foot, and Mouth Disease',
+                    9 => 'Number Needed to Treat',
+                    10 => 'Neonatal Tetanus',
+                    11 => 'Perthes Disease',
                     12 => 'Influenza',
                     13 => 'Dengue',
                     14 => 'Rabies',
@@ -110,8 +110,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <?php endforeach; ?>
             </select>
         </div>
-        <label for="year">Select Year:</label>
         <div class="col">
+            <label for="year">Select Year:</label>
             <select name="year" id="year" class="custom-select">
                 <option value="">All</option>
                 <?php foreach ($years as $year) : ?>
