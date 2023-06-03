@@ -1,7 +1,8 @@
 <div class="row">
-    <form id="form1">
-        <div class="btn-group col-md-12 col-lg-12 my-2">
-            <div class="dropdown mx-2">
+    <form id="form1" class="col-12 p-0">
+        <div class="row col-xl-12 col-lg-12 col-sm-12">
+            <div class="dropdown col">
+                <label for="disease">Select Disease:</label>
                 <select id='selectDisease' class="custom-select" name="disease">
                     <?php
                     $diseases = [
@@ -36,7 +37,11 @@
                     ?>
                 </select>
             </div>
-            <button type="submit" class='btn btn-primary'>Submit</button>
+            <div class="col">
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
         </div>
     </form>
 </div>
