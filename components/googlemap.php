@@ -1,10 +1,49 @@
 <?php
 // Replace with your database connection code
 include('connection.php');
+include('alertMessage.php');
+
+
+// Get the list of unique diseases from the "patients" table
+$diseaseQuery = "SELECT DISTINCT disease FROM patients ";
+$diseaseResult = mysqli_query($con, $diseaseQuery);
+$diseases = [];
+while ($diseaseRow = mysqli_fetch_assoc($diseaseResult)) {
+    $diseases[] = $diseaseRow['disease'];
+}
+
+// Get the list of unique years from the "patients" table
+$yearQuery = "SELECT DISTINCT YEAR(creationDate) AS year 
+            FROM patients ORDER BY year ASC";
+$yearResult = mysqli_query($con, $yearQuery);
+$years = [];
+while ($yearRow = mysqli_fetch_assoc($yearResult)) {
+    $years[] = $yearRow['year'];
+}
 
 // Fetch latitude and longitude from the "patients" table
+$selectedDisease = $_GET['disease'] ?? '';
+$selectedYear = $_GET['year'] ?? '';
+
 $query = "SELECT latitude, longitude FROM patients";
+
+if (!empty($selectedDisease)) {
+    // echo "Disease Only";
+    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$selectedDisease'";
+}
+
+if (!empty($selectedDisease) && !empty($selectedYear)) {
+    // echo "This is triggered";
+    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$selectedDisease' AND YEAR(creationDate) = $selectedYear";
+}
+
 $result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) == 0) {
+    $message = "No records found!";
+    $type = 'warning';
+    $strongContent = 'Holy guacamole!';
+    $alert = generateAlert($type, $strongContent, $message);
+}
 
 // Fetch the data and convert it to JSON
 $data = [];
@@ -15,14 +54,12 @@ while ($row = mysqli_fetch_assoc($result)) {
     ];
 }
 
-// var_dump($data);
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Heatmap Example</title>
     <style>
         #map {
             height: 100%;
@@ -30,41 +67,60 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=visualization&v=weekly" defer></script> -->
-    <!-- <script>
-        (g => {
-            var h, a, k, p = "The Google Maps JavaScript API",
-                c = "google",
-                l = "importLibrary",
-                q = "__ib__",
-                m = document,
-                b = window;
-            b = b[c] || (b[c] = {});
-            var d = b.maps || (b.maps = {}),
-                r = new Set,
-                e = new URLSearchParams,
-                u = () => h || (h = new Promise(async (f, n) => {
-                    await (a = m.createElement("script"));
-                    e.set("libraries", [...r] + "");
-                    for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
-                    e.set("callback", c + ".maps." + q);
-                    a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
-                    d[q] = f;
-                    a.onerror = () => h = n(Error(p + " could not load."));
-                    a.nonce = m.querySelector("script[nonce]")?.nonce || "";
-                    m.head.append(a)
-                }));
-            d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
-        })({
-            key: "AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E",
-            v: "weekly",
-            // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-            // Add other bootstrap parameters as needed, using camel case.
-        });
-    </script> -->
 </head>
 
 <body>
+    <?php
+    if (!empty($alert)) {
+        echo $alert;
+    }
+    ?>
+    <div class="row d-flex align-contents-center my-2">
+        <label for="disease">Select Disease:</label>
+        <div class="col">
+            <select name="disease" id="disease" class="custom-select">
+                <option value="">All</option>
+                <?php
+                $pieDropdown = [
+                    1 => 'ABD',
+                    2 => 'AEFI',
+                    3 => 'AES',
+                    4 => 'AFP',
+                    5 => 'AMES',
+                    6 => 'ChikV',
+                    7 => 'DIPH',
+                    8 => 'HFMD',
+                    9 => 'NNT',
+                    10 => 'NT',
+                    11 => 'PERT',
+                    12 => 'Influenza',
+                    13 => 'Dengue',
+                    14 => 'Rabies',
+                    15 => 'Cholera',
+                    16 => 'Hepatitis',
+                    17 => 'Measles',
+                    18 => 'Meningitis',
+                    19 => 'Meningo',
+                    20 => 'Typhoid',
+                    21 => 'Leptospirosis',
+                ];
+                ?>
+                <?php foreach ($pieDropdown as $key => $disease) : ?>
+                    <option value="<?php echo $key; ?>" <?php echo $key == $selectedDisease ? 'selected' : ''; ?>><?php echo $disease; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <label for="year">Select Year:</label>
+        <div class="col">
+            <select name="year" id="year" class="custom-select">
+                <option value="">All</option>
+                <?php foreach ($years as $year) : ?>
+                    <option value="<?php echo $year; ?>" <?php echo $year == $selectedYear ? 'selected' : ''; ?>><?php echo $year; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
     <div id="map"></div>
 
     <script>
@@ -87,6 +143,21 @@ while ($row = mysqli_fetch_assoc($result)) {
                 data: data.map(item => new google.maps.LatLng(item.lat, item.lng)),
                 map: map
             });
+        }
+
+        // Handle changes in the dropdown menus
+        const diseaseSelect = document.getElementById('disease');
+        const yearSelect = document.getElementById('year');
+
+        diseaseSelect.addEventListener('change', updateHeatmap);
+        yearSelect.addEventListener('change', updateHeatmap);
+
+        function updateHeatmap() {
+            const selectedDisease = diseaseSelect.value;
+            const selectedYear = yearSelect.value;
+
+            // Redirect to the same page with updated query parameters
+            window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
         }
 
         initMap();
