@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($con->query($updateSql) === TRUE) {
                             echo "Address saved successfully";
                         } else {
-                            echo "Error updating address: " . $con->error;
+                            echo "Error updating address: " .  mysqli_error($con);
                         }
                     } else {
                         echo "Geocoding failed: " . $geocodingData['status'];
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "Failed to fetch geocoding data";
                 }
             } else {
-                echo "Error saving address: " . $con->error;
+                echo "Error saving address: " .  mysqli_error($con);
             }
         }
 
@@ -185,10 +185,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $value = $row['diseaseId'];
         $diseaseValue = strtolower($row['disease']);
 
+        $addDiseaseSql = "INSERT INTO " . $diseaseValue . "infotbl (patientId) VALUES ($insert_id)";
+        $addDiseaseResult = mysqli_query($con, $addDiseaseSql);
+        if (!$addDiseaseResult) {
+            echo "Error: " . mysqli_error($con);
+        }
+
         if (strcmp($diseaseName, $value) == 0) {
 
             // $link = "localhost/admin2gh/{$diseaseValue}Page-create.php";
-            //echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
             // echo 'success';
             // header("Location: $link");
             // echo ($link);
@@ -372,14 +378,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </select>
                     </div>
                 </div>
-                <br>
-                <div id="form-extension"></div>
-                <br>
-                <div class="row">
-                    <div class="col-md-3 mx-auto">
+                <div class="d-flex justify-content-around">
+                    <div class="text-center">
                         <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
                     </div>
-                    <div class="col-md-3 mx-auto">
+                    <div class="text-center">
                         <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
                     </div>
                 </div>
