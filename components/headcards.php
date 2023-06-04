@@ -1,73 +1,5 @@
 <!-- Content Row -->
 <div class="row">
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php
-    // Replace with your database connection code
-    include('./components/connection.php');
-
-    // Fetch the most common disease out of 20 diseases
-    $query = "SELECT COUNT(*) AS count, disease FROM patients GROUP BY disease ORDER BY count DESC LIMIT 1";
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-
-    $mostCommonDiseaseCount = $row['count'];
-    $mostCommonDisease = $row['disease'];
-    ?>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Most Common Disease</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $mostCommonDisease; ?></div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <?php
     // Replace with your database connection code
     include('./components/connection.php');
@@ -79,14 +11,16 @@
         'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
     );
 
-    // Fetch the top 4 diseases from the list
-    $query = "SELECT COUNT(p.id) AS count, d.disease
-          FROM patients p
-          INNER JOIN diseases d ON p.disease = d.diseaseId
-          WHERE d.disease IN ('" . implode("','", $diseases) . "')
-          GROUP BY p.disease
-          ORDER BY count DESC
-          LIMIT 4";
+    $currentYear = date('Y');
+
+    $query = "SELECT COUNT(p.patientId) AS count, d.disease
+            FROM patients p
+            INNER JOIN diseases d ON p.disease = d.diseaseId
+            WHERE YEAR(p.creationDate) = '$currentYear'
+                AND d.disease IN ('" . implode("','", $diseases) . "')
+            GROUP BY p.disease, d.disease
+            ORDER BY count DESC
+            LIMIT 4";
     $result = mysqli_query($con, $query);
 
     // Display the top 4 diseases
@@ -117,3 +51,68 @@
 </div>
 
 <!-- Content Row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Newly Added Patients</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Disease</th>
+                                <th>Municipality</th>
+                                <th>Barangay</th>
+                                <th>Creation Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Replace with your database connection code
+                            include('./components/connection.php');
+
+                            // Fetch the newly added patients from the patients table
+                            $query = "SELECT p.*, d.disease, b.barangay, m.municipality
+                                    FROM patients p
+                                    INNER JOIN diseases d ON p.disease = d.diseaseId
+                                    INNER JOIN barangay b ON p.barangay = b.id
+                                    INNER JOIN municipality m ON p.municipality = m.munId
+                                    WHERE YEAR(p.creationDate) = '$currentYear'
+                                    ORDER BY p.creationDate DESC
+                                    LIMIT 10";
+                            $result = mysqli_query($con, $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $patientId = $row['patientId'];
+                                    $name = $row['firstName'];
+                                    $disease = $row['disease'];
+                                    $municipality = $row['municipality'];
+                                    $barangay = $row['barangay'];
+                                    $creationDate = $row['creationDate'];
+                            ?>
+                                    <tr>
+                                        <td><?php echo $patientId; ?></td>
+                                        <td><?php echo $name; ?></td>
+                                        <td><?php echo $disease; ?></td>
+                                        <td><?php echo $municipality; ?></td>
+                                        <td><?php echo $barangay; ?></td>
+                                        <td><?php echo $creationDate; ?></td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='4' class='text-center'>No newly added patients found</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
