@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Public Health Disease Geomapping</title>
-  <!-- <link rel="shortcut icon" href="https://img.icons8.com/office/16/null/longitude.png" type="image/x-icon"> -->
   <link rel="shortcut icon" href="../assets/img/caviteLogo.png" type="image/png">
 
   <!-- chart.js cdn -->
@@ -129,7 +128,7 @@
             <div class="section-header text-center pb-5">
               <h2>Data Visualizations</h2>
               <?php
-              include('js/landingPageChart.php')
+              include('js/landingDropdown.php')
               ?>
             </div>
           </div>
@@ -143,7 +142,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-xl-4">
             <div class="">
               <div class="card-body text-center">
                 <h5 class="card-title">Line Chart</h5>
@@ -154,12 +153,10 @@
         </div>
         <!-- Pie Chart -->
         <div class="row my-4">
-          <div class="col-md-6">
-            <div class="">
-              <div class="card-body text-center">
-                <h5 class="card-title">Pie Chart</h5>
-                <p class="card-text" style="text-align: justify;">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
-              </div>
+          <div class="col-md-6 col-xl-6">
+            <div class="card-body text-center">
+              <h5 class="card-title">Pie Chart</h5>
+              <p class="card-text" style="text-align: justify;">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
             </div>
           </div>
           <div class="col-md-6">
@@ -190,14 +187,17 @@
           <div class="row">
             <div class="col" style="height: 600px;">
               <!-- <img src="img/heatmapss.png" alt="heatmap" class="img-fluid" /> -->
-              <iframe src="../heatmap.php" width="100%" height="100%" title="heatmap"></iframe>
+              <!-- <iframe src="./landingPageHeatmap.php" width="100%" height="100%" title="heatmap"></iframe> -->
+              <?php include('landingPageHeatmap.php') ?>
               <div class="row mt-3 justify-content-center">
                 <div class="col-4 text-center">
                   <span class=""><strong>Intensity Level</strong></span>
                   <div class="gradient-bar"></div>
-                  <span class="label label-high">High</span>
-                  <span class="label label-medium">Medium</span>
-                  <span class="label label-low">Low</span>
+                  <div class="d-flex justify-content-between">
+                    <span class="label label-high">High</span>
+                    <span class="label label-medium">Medium</span>
+                    <span class="label label-low">Low</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -207,7 +207,7 @@
                 <p class="card-text" style="text-align: justify;">A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
               </div>
             </div>
-          </div <div class="col-md-4">
+          </div>
         </div>
       </div>
     </div>
