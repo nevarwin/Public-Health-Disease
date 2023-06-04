@@ -315,18 +315,3 @@ const config = {
 };
 
 const myChart = new Chart(ctx, config);
-
-// Handle changes in the dropdown menus
-const diseaseSelect = document.getElementById("pieDisease");
-const yearSelect = document.getElementById("pieYear");
-
-diseaseSelect.addEventListener("change", updateHeatmap);
-yearSelect.addEventListener("change", updateHeatmap);
-
-function updateHeatmap() {
-  const selectedDisease = diseaseSelect.value;
-  const selectedYear = yearSelect.value;
-
-  // Redirect to the same page with updated query parameters
-  window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
-}
