@@ -21,10 +21,7 @@ include('./components/head.php');
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <?php
-                    include('./components/pageheading.php');
                     include('./components/headcards.php');
-                    include('./components/piechart.php');
-
                     ?>
                 </div>
                 <!-- /.container-fluid -->
