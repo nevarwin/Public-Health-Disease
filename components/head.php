@@ -15,7 +15,7 @@ $user_data = check_login($con);
 
     <title>Public Health Disease Geo Mapping</title>
 
-    <link rel="shortcut icon" href="https://img.icons8.com/office/16/null/longitude.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/caviteLogo.png" type="image/png">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
