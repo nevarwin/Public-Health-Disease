@@ -110,7 +110,7 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
             </div>
             <div class="col">
                 <div class="row justify-content-end">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Check</button>
                 </div>
             </div>
         </div>
