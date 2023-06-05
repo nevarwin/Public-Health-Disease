@@ -7,25 +7,22 @@ function generateDropdownUpdate($fieldName, $selectedValue = '') {
         'Other'
     ];
 
-    $dropdown = <<<HTML
+    $dropdown = '
     <div class="row justify-content-center mb-3">
-        <label class="col-sm-3 col-form-label">$fieldName</label>
+        <label class="col-sm-5 col-form-label">' . $fieldName . '</label>
         <div class="col-sm-6">
-            <select class="custom-select" name="$fieldName">
-HTML;
+            <select class="custom-select" name="' . $fieldName . '">';
 
     foreach ($options as $option) {
         $selected = ($option === $selectedValue) ? 'selected' : '';
-        $dropdown .= <<<HTML
-            <option value="$option" $selected>$option</option>
-HTML;
+        $dropdown .= '
+            <option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
     }
 
-    $dropdown .= <<<HTML
+    $dropdown .= '
         </select>
     </div>
-</div>
-HTML;
+</div>';
 
     return $dropdown;
 }
