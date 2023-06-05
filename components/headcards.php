@@ -1,5 +1,5 @@
 <!-- Content Row -->
-<div class="row">
+<div class="row gap-0">
     <?php
     // Replace with your database connection code
     include('./components/connection.php');
@@ -16,8 +16,8 @@
         $count = $row['count'];
     ?>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+            <div class="card border-left-primary shadow h-100">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -50,8 +50,8 @@
                 $count = $row['count'];
             ?>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+        <div class="col-xl-3 col-lg-3 col-md-12">
+            <div class="card border-left-primary shadow h-100">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -99,8 +99,8 @@
         $count = $row['count'];
     ?>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
+        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+            <div class="card border-left-warning shadow h-100">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -108,45 +108,45 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-disease fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     <?php
     }
     ?>
 </div>
 
-<!-- Content Row -->
-<div class="row">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Newly Added Patients</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Patient ID</th>
-                                <th>Name</th>
-                                <th>Disease</th>
-                                <th>Municipality</th>
-                                <th>Barangay</th>
-                                <th>Creation Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Replace with your database connection code
-                            include('./components/connection.php');
+<!-- Patient Table Recently Added -->
+<div class="container-fluid my-2">
+    <div class="row flex-wrap">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Newly Added Patients</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Name</th>
+                                    <th>Disease</th>
+                                    <th>Municipality</th>
+                                    <th>Barangay</th>
+                                    <th>Creation Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Replace with your database connection code
+                                include('./components/connection.php');
 
-                            // Fetch the newly added patients from the patients table
-                            $query = "SELECT p.*, d.disease, b.barangay, m.municipality
+                                // Fetch the newly added patients from the patients table
+                                $query = "SELECT p.*, d.disease, b.barangay, m.municipality
                                     FROM patients p
                                     INNER JOIN diseases d ON p.disease = d.diseaseId
                                     INNER JOIN barangay b ON p.barangay = b.id
@@ -154,33 +154,34 @@
                                     WHERE YEAR(p.creationDate) = '$currentYear'
                                     ORDER BY p.creationDate DESC
                                     LIMIT 10";
-                            $result = mysqli_query($con, $query);
+                                $result = mysqli_query($con, $query);
 
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $patientId = $row['patientId'];
-                                    $name = $row['firstName'];
-                                    $disease = $row['disease'];
-                                    $municipality = $row['municipality'];
-                                    $barangay = $row['barangay'];
-                                    $creationDate = $row['creationDate'];
-                            ?>
-                                    <tr>
-                                        <td><?php echo $patientId; ?></td>
-                                        <td><?php echo $name; ?></td>
-                                        <td><?php echo $disease; ?></td>
-                                        <td><?php echo $municipality; ?></td>
-                                        <td><?php echo $barangay; ?></td>
-                                        <td><?php echo $creationDate; ?></td>
-                                    </tr>
-                            <?php
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $patientId = $row['patientId'];
+                                        $name = $row['firstName'];
+                                        $disease = $row['disease'];
+                                        $municipality = $row['municipality'];
+                                        $barangay = $row['barangay'];
+                                        $creationDate = $row['creationDate'];
+                                ?>
+                                        <tr>
+                                            <td><?php echo $patientId; ?></td>
+                                            <td><?php echo $name; ?></td>
+                                            <td><?php echo $disease; ?></td>
+                                            <td><?php echo $municipality; ?></td>
+                                            <td><?php echo $barangay; ?></td>
+                                            <td><?php echo $creationDate; ?></td>
+                                        </tr>
+                                <?php
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='4' class='text-center'>No newly added patients found</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='4' class='text-center'>No newly added patients found</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
