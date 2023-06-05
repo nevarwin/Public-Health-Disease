@@ -192,20 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (strcmp($diseaseName, $value) == 0) {
-
-            // $link = "localhost/admin2gh/{$diseaseValue}Page-create.php";
             echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
-            // echo 'success';
-            // header("Location: $link");
-            // echo ($link);
-
-
-            // // check if certain disease form is present *not working
-            // if (file_exists($link)) {
-            //     echo ('Link Exist!');
-            // } else {
-            //     echo ('Link does not exist!');
-            // }
         } else {
             // Handle error
             $errorMessage = "Link does not exists!";
