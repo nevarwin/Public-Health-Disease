@@ -41,15 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['id'] = $user_data['id'];
 
-                if ($user_data['positionId'] == 1) {
-                    header('location: http://localhost/admin2gh/adminTable.php');
-                    echo "<script>alert('Log In Successfully!');</script>";
-                    die;
-                } else {
-                    header('location: http://localhost/admin2gh/patientTable.php');
-                    echo "<script>alert('Log In Successfully!');</script>";
-                    die;
-                }
+                // if ($user_data['positionId'] == 1) {
+                //     header('location: http://localhost/admin2gh/adminTable.php');
+                //     echo "<script>alert('Log In Successfully!');</script>";
+                //     die;
+                // } else {
+                //     header('location: http://localhost/admin2gh/patientTable.php');
+                //     echo "<script>alert('Log In Successfully!');</script>";
+                //     die;
+                // }
+                header('location: http://localhost/admin2gh/homepage.php');
+                echo "<script>alert('Log In Successfully!');</script>";
+                die;
             } else {
                 // Incorrect password
                 echo "<script>alert('Incorrect password. Please try again.');</script>";
