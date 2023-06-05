@@ -21,7 +21,7 @@ if (!isset($_GET["patientId"])) {
 
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM amebiasisinfotbl WHERE patientId = $patientId";
+$sql = "SELECT * FROM abdinfotbl WHERE patientId = $patientId";
 // execute the sql query
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);

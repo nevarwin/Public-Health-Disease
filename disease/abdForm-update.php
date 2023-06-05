@@ -23,7 +23,7 @@ if (!isset($_GET["patientId"])) {
 }
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM amebiasisinfotbl WHERE patientId = $patientId";
+$sql = "SELECT * FROM abdinfotbl WHERE patientId = $patientId";
 // execute the sql query
 $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // Proceed with form submission
         // Insert the data into the amebiasisinfotbl table
-        $query = "UPDATE amebiasisinfotbl SET 
+        $query = "UPDATE abdinfotbl SET 
             stoolCulture = '$stoolCulture',
             organism = '$organism',
             outcome = '$outcome',

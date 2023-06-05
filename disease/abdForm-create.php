@@ -49,26 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // Proceed with form submission
         // Insert the data into the amebiasisinfotbl table
-        $query = "INSERT INTO amebiasisinfotbl (
-            patientId, 
-            stoolCulture, 
-            organism, 
-            outcome, 
-            dateDied, 
-            dateAdmitted, 
-            morbidityMonth, 
-            morbidityWeek
-        ) 
-        VALUES (
-            '$patientId', 
-            '$stoolCulture', 
-            '$organism', 
-            '$outcome', 
-            '$dateDied', 
-            '$dateAdmitted', 
-            '$morbidityMonth', 
-            '$morbidityWeek'
-        )";
+        $query = "UPDATE abdinfotbl SET 
+            stoolCulture = '$stoolCulture',
+            organism = '$organism',
+            outcome = '$outcome',
+            dateDied = '$dateDied',
+            dateAdmitted = '$dateAdmitted',
+            morbidityMonth = '$morbidityMonth',
+            morbidityWeek = '$morbidityWeek'
+        WHERE patientId = '$patientId'";
 
         $result = mysqli_query($con, $query);
 
