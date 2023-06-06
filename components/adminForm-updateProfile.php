@@ -1,8 +1,11 @@
 <?php
 include('connection.php');
-include('barangayScript.php');
+include('alertMessage.php');
+include('adminBarangayScript.php');
 
-// $user_data = check_login($con);
+$message = '';
+$type = '';
+$strongContent = '';
 
 // Get admin by id
 if (!isset($_GET["id"])) {
@@ -44,28 +47,39 @@ $barangay = $row['barangay'];
 
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $contact = $_POST['contact'];
-    $address = $_POST['address'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $contact = mysqli_real_escape_string($con, $_POST['contact']);
+    $address = mysqli_real_escape_string($con, $_POST['address']);
+    $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
+    $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
 
     // check if the data is empty
     do {
         if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
-            $errorMessage = "All fields are required";
+            $message = "All fields are required";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
             break;
         }
 
         // update data into the db
         $sql = "UPDATE `clients` SET `name` = '$name', `email` = '$email', `contact_number` = '$contact', `address` = '$address', `municipality` = '$municipality', `barangay` = '$barangay' WHERE id = $id";
 
-        if ($con->query($sql) === TRUE) {
-            echo "Record updated successfully";
-            $successMessage = "Client added correctly";
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            $message = "Profile Successfully Update";
+            $type = 'success';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
         } else {
-            echo "Error updating record: ";
+            $message = "Invalid query: " . $result;
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
+            break;
         }
 
         if ($user_data['positionId'] != 1) {
@@ -85,8 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Profile</h2>
+        <?php
+        if (!empty($alert)) {
+            echo $alert;
+        }
+        ?>
         <form action="" method="post" onsubmit="return validateForm(event)">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
             <div class="row justify-content-center mb-3">

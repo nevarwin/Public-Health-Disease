@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 include('alertMessage.php');
-include('barangayScript.php');
+include('adminBarangayScript.php');
 
 $message = '';
 $type = '';
@@ -19,12 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $contact = mysqli_real_escape_string($con, $_POST['contact']);
         $address = mysqli_real_escape_string($con, $_POST['address']);
 
-        if (empty($position) or empty($name) or empty($email) or empty($password) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
+        if ($position == "Select Position" or empty($name) or empty($email) or empty($password) or empty($contact) or empty($address) or $municipality  == "Select Municipality" or $barangay == "Select Barangay") {
             $message = "All fields are required";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
             break;
         }
 
@@ -33,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_query($con, $sql);
 
         if ($result) {
-            // $_SESSION['message'] = "Admin Successfully Created";
             $message = "Admin Successfully Created";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
@@ -85,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
                                 echo '<option value="' . $row['positionId'] . '">' . $row['position'] . '</option>';
                             }
-
                             ?>
                         </select>
                     </div>
@@ -124,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
-                        <option>Select municipality</option>
+                        <option>Select Municipality</option>
                         <?php
                         // Connect to database and fetch municipalities
                         include('connection.php');
@@ -153,18 +150,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class='form-control' name='address'>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class='btn btn-primary' name="createAdmin">Submit</button>
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
-                </div>
+            <div class="row justify-content-around">
+                <button type="submit" class='btn btn-primary' name="createAdmin">Submit</button>
+                <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
             </div>
         </form>
     </div>
 </div>
-
 <script>
     function validateForm(event) {
 
