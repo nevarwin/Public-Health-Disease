@@ -65,22 +65,32 @@ $addressDRU = $row['addressOfDRU'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get the data from the Form
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-    $mName = $_POST['mName'];
-    $gender = $_POST['gender'];
-    $dob = $_POST['dob'];
-    $age = $_POST['age'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
-    $municipalityDRU = $_POST['municipalityDRU'];
-    $barangayDRU = $_POST['barangayDRU'];
-    $contact = $_POST['contact'];
-    $street = $_POST['street'];
-    $unitCode = $_POST['unitCode'];
-    $subd = $_POST['subd'];
-    $postalCode = $_POST['postalCode'];
-    $addressDRU = $_POST['addressDRU'];
+    $fName = mysqli_real_escape_string($con, $_POST['fName']);
+    $lName = mysqli_real_escape_string(
+        $con,
+        $_POST['lName']
+    );
+    $mName = mysqli_real_escape_string(
+        $con,
+        $_POST['mName']
+    );
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $dob = mysqli_real_escape_string($con, $_POST['dob']);
+    $age = mysqli_real_escape_string($con, $_POST['age']);
+    $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
+    $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
+    $municipalityDRU = mysqli_real_escape_string($con, $_POST['municipalityDRU']);
+    $barangayDRU = mysqli_real_escape_string($con, $_POST['barangayDRU']);
+    $contact = mysqli_real_escape_string($con, $_POST['contact']);
+    $street = mysqli_real_escape_string($con, $_POST['street']);
+    $unitCode = mysqli_real_escape_string($con, $_POST['unitCode']);
+    $subd = mysqli_real_escape_string(
+        $con,
+        $_POST['subd']
+    );
+    $postalCode = mysqli_real_escape_string($con, $_POST['postalCode']);
+    $addressDRU = mysqli_real_escape_string($con, $_POST['addressDRU']);
+
 
     // check if the data is empty
     do {
@@ -110,18 +120,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         `contact`='$contact'
                         WHERE patientId=$patientId";
         }
-
         if ($con->query($sql) === TRUE) {
-            // $insert_id = mysqli_insert_id($con);
-
             // Fetch the necessary values from another table using the last inserted ID
             $addressQuery = "SELECT patients.*, barangay.barangay, municipality.municipality
-                        FROM patients 
-                        LEFT JOIN barangay ON patients.barangay = barangay.id
-                        LEFT JOIN municipality ON patients.municipality = municipality.munId
-                        WHERE patientId = $patientId
-                        ";
-            $addressResult = $con->query($addressQuery);
+                FROM patients 
+                LEFT JOIN barangay ON patients.barangay = barangay.id
+                LEFT JOIN municipality ON patients.municipality = municipality.munId
+                WHERE patientId = $patientId
+                ";
+            $addressResult = mysqli_query($con, $addressQuery);
             $row = mysqli_fetch_assoc($addressResult);
 
             $barangayValue = $row['barangay'];
@@ -129,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Create the full address
             $address = $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode;
-            echo $address;
 
             // Format the address for URL encoding
             $formattedAddress = urlencode($address);
@@ -157,37 +163,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if ($con->query($updateSql) === TRUE) {
                         echo "Address saved successfully";
                     } else {
-                        echo "Error updating address: " . $con->error;
+                        $errorMessage = "Error updating address: " . mysqli_error($con);
+                        $type = 'warning';
+                        $strongContent = 'Holy guacamole!';
+                        $alert = generateAlert($type, $strongContent, $errorMessage);
                     }
                 } else {
-                    echo "Geocoding failed: " . $geocodingData['status'];
+                    $errorMessage = "Geocoding failed: " . $geocodingData['status'];
+                    $type = 'warning';
+                    $strongContent = 'Holy guacamole!';
+                    $alert = generateAlert($type, $strongContent, $errorMessage);
                 }
             } else {
-                echo "Failed to fetch geocoding data";
+                $errorMessage = "Failed to fetch geocoding data";
+                $type = 'warning';
+                $strongContent = 'Holy guacamole!';
+                $alert = generateAlert($type, $strongContent, $errorMessage);
             }
         } else {
-            echo "Error saving address: " . $con->error;
+            $errorMessage = "Error saving address: " . mysqli_error($con);
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
         }
-
-        // added new data into the db
-        // $sql = "UPDATE patients 
-        //     SET `firstName`='$fName', 
-        //     `lastName`='$lName', 
-        //     `middleName`='$mName', 
-        //     `munCityOfDRU`='$municipalityDRU', 
-        //     `brgyOfDRU`='$barangayDRU', 
-        //     `addressOfDRU`='$addressDRU', 
-        //     `gender`='$gender', 
-        //     `dob`='$dob', 
-        //     `age`='$age',
-        //     `municipality`='$municipality', 
-        //     `barangay`='$barangay', 
-        //     `street`='$street',
-        //     `unitCode`='$unitCode',
-        //     `postalCode`='$postalCode',
-        //     `subd`='$subd',
-        //     `contact`='$contact' 
-        // WHERE patientId=$patientId";
 
         $result = mysqli_query($con, $sql);
 
@@ -206,8 +204,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo "
         <script> 
-        alert('Patient Successfully Updated');
-        //window.location= 'http://localhost/admin2gh/patientTable.php';
+            alert('Patient Successfully Updated');
+            window.location= 'http://localhost/admin2gh/patientTable.php';
         </script>
         ";
         exit;
