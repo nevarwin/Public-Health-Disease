@@ -69,6 +69,7 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                     LEFT JOIN diseases ON patients.disease = diseases.diseaseId
                     -- LEFT JOIN outcomes ON patients.outcome = outcomes.outcomeId
                     LEFT JOIN genders ON patients.gender = genders.genderId
+                    ORDER BY patientId DESC
                     LIMIT $startRecord, $recordsPerPage
                     ";
 
