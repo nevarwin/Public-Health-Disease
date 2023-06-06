@@ -1,8 +1,11 @@
 <?php
 include('connection.php');
-include('barangayScript.php');
+include('alertMessage.php');
+include('adminBarangayScript.php');
 
-// $user_data = check_login($con);
+$message = '';
+$type = '';
+$strongContent = '';
 
 // Get admin by id
 if (!isset($_GET["id"])) {
@@ -39,18 +42,21 @@ $barangay = $row['barangay'];
 // POST Method: Update the data of the client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $position = $_POST['position'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $contact = $_POST['contact'];
-    $address = $_POST['address'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $contact = mysqli_real_escape_string($con, $_POST['contact']);
+    $address = mysqli_real_escape_string($con, $_POST['address']);
+    $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
+    $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
 
     // check if the data is empty
     do {
 
         if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
-            $errorMessage = "All fields are required";
+            $message = "All fields are required";
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
             break;
         }
         // update data into the db
@@ -58,11 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $result = mysqli_query($con, $sql);
 
-        if ($con->query($sql) === TRUE) {
-            echo "Record updated successfully";
-            $successMessage = "Client updated correctly";
+        if ($result) {
+            $message = "Profile Successfully Update";
+            $type = 'success';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
         } else {
-            echo "Error updating record: ";
+            $message = "Invalid query: " . $result;
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $message);
+            break;
         }
 
         echo "
@@ -78,6 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Admin Information</h2>
+        <?php
+        if (!empty($alert)) {
+            echo $alert;
+        }
+        ?>
         <form action="" method="post" onsubmit="return validateForm(event)">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
             <?php
@@ -182,10 +199,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
-                </div>
+            <div class="row justify-content-around">
+                <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
                 <?php
                 if ($user_data['positionId'] != 1) {
                     $link = "http://localhost/admin2gh/patientTable.php";
@@ -193,9 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $link = "http://localhost/admin2gh/adminTable.php";
                 }
                 ?>
-                <div class="col-sm-3 d-grid">
-                    <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
-                </div>
+                <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
             </div>
         </form>
     </div>
@@ -204,28 +217,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script>
     function validateForm(event) {
         var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
         var contactNumber = document.getElementById('contact').value;
 
         // Initialize error messages array
         var errors = [];
-
-        if (
-            password.length < 8 ||
-            !password.match(/[A-Z]/) ||
-            !password.match(/[a-z]/) ||
-            !password.match(/[0-9]/) ||
-            !password.match(/[\W]/)
-        ) {
-            errors.push(
-                "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character."
-            );
-        }
-
-        if (password !== confirmPassword) {
-            errors.push("Passwords do not match.");
-        }
 
         // Check if email is in valid format
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/)) {
