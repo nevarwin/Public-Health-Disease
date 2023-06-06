@@ -78,49 +78,49 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $dayswithSymp = $_POST['dayswithSymp'];
-    $fever = $_POST['fever'];
-    $arthritis = $_POST['arthritis'];
-    $hands = $_POST['hands'];
-    $feet = $_POST['feet'];
-    $ankles = $_POST['ankles'];
-    $otherSite = $_POST['otherSite'];
-    $arthralgia = $_POST['arthralgia'];
-    $periEdema = $_POST['periEdema'];
-    $skinMani = $_POST['skinMani'];
-    $skinDesc = $_POST['skinDesc'];
-    $myalgia = $_POST['myalgia'];
-    $backPain = $_POST['backPain'];
-    $headache = $_POST['headache'];
-    $nausea = $_POST['nausea'];
-    $mucosBleed = $_POST['mucosBleed'];
-    $vomiting = $_POST['vomiting'];
-    $asthenia = $_POST['asthenia'];
-    $meningoEncep = $_POST['meningoEncep'];
-    $otherSymptom = $_POST['otherSymptom'];
-    $clinDx = $_POST['clinDx'];
-    $dCollected = $_POST['dCollected'];
-    $dspecSent = $_POST['dspecSent'];
-    $serIgm = $_POST['serIgm'];
-    $igm_Res = $_POST['igm_Res'];
-    $digMres = $_POST['digMres'];
-    $serIgG = $_POST['serIgG'];
-    $igG_Res = $_POST['igG_Res'];
-    $dIgGRes = $_POST['dIgGRes'];
-    $rt_PCR = $_POST['rt_PCR'];
-    $rt_PCRRes = $_POST['rt_PCRRes'];
-    $drtPCRRes = $_POST['drtPCRRes'];
-    $virIso = $_POST['virIso'];
-    $virIsoRes = $_POST['virIsoRes'];
-    $travHist = $_POST['travHist'];
-    $placeOfTravel = $_POST['placeOfTravel'];
-    $dVirIsoRes = $_POST['dVirIsoRes'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $dayswithSymp = mysqli_real_escape_string($con, $_POST['dayswithSymp']);
+    $fever = mysqli_real_escape_string($con, $_POST['fever']);
+    $arthritis = mysqli_real_escape_string($con, $_POST['arthritis']);
+    $hands = mysqli_real_escape_string($con, $_POST['hands']);
+    $feet = mysqli_real_escape_string($con, $_POST['feet']);
+    $ankles = mysqli_real_escape_string($con, $_POST['ankles']);
+    $otherSite = mysqli_real_escape_string($con, $_POST['otherSite']);
+    $arthralgia = mysqli_real_escape_string($con, $_POST['arthralgia']);
+    $periEdema = mysqli_real_escape_string($con, $_POST['periEdema']);
+    $skinMani = mysqli_real_escape_string($con, $_POST['skinMani']);
+    $skinDesc = mysqli_real_escape_string($con, $_POST['skinDesc']);
+    $myalgia = mysqli_real_escape_string($con, $_POST['myalgia']);
+    $backPain = mysqli_real_escape_string($con, $_POST['backPain']);
+    $headache = mysqli_real_escape_string($con, $_POST['headache']);
+    $nausea = mysqli_real_escape_string($con, $_POST['nausea']);
+    $mucosBleed = mysqli_real_escape_string($con, $_POST['mucosBleed']);
+    $vomiting = mysqli_real_escape_string($con, $_POST['vomiting']);
+    $asthenia = mysqli_real_escape_string($con, $_POST['asthenia']);
+    $meningoEncep = mysqli_real_escape_string($con, $_POST['meningoEncep']);
+    $otherSymptom = mysqli_real_escape_string($con, $_POST['otherSymptom']);
+    $clinDx = mysqli_real_escape_string($con, $_POST['clinDx']);
+    $dCollected = mysqli_real_escape_string($con, $_POST['dCollected']);
+    $dspecSent = mysqli_real_escape_string($con, $_POST['dspecSent']);
+    $serIgm = mysqli_real_escape_string($con, $_POST['serIgm']);
+    $igm_Res = mysqli_real_escape_string($con, $_POST['igm_Res']);
+    $digMres = mysqli_real_escape_string($con, $_POST['digMres']);
+    $serIgG = mysqli_real_escape_string($con, $_POST['serIgG']);
+    $igG_Res = mysqli_real_escape_string($con, $_POST['igG_Res']);
+    $dIgGRes = mysqli_real_escape_string($con, $_POST['dIgGRes']);
+    $rt_PCR = mysqli_real_escape_string($con, $_POST['rt_PCR']);
+    $rt_PCRRes = mysqli_real_escape_string($con, $_POST['rt_PCRRes']);
+    $drtPCRRes = mysqli_real_escape_string($con, $_POST['drtPCRRes']);
+    $virIso = mysqli_real_escape_string($con, $_POST['virIso']);
+    $virIsoRes = mysqli_real_escape_string($con, $_POST['virIsoRes']);
+    $travHist = mysqli_real_escape_string($con, $_POST['travHist']);
+    $placeOfTravel = mysqli_real_escape_string($con, $_POST['placeOfTravel']);
+    $dVirIsoRes = mysqli_real_escape_string($con, $_POST['dVirIsoRes']);
+    $caseClass = mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
 
     // check if the data is empty
     do {
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Chikungunya Virus Form</h2>
         <form method="POST">
             <?php
@@ -226,49 +226,141 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" id="dayswithSymp" name="dayswithSymp" value='<?php echo $dayswithSymp; ?>'>
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('fever', $fever);
-            echo generateDropdownUpdate('arthritis', $arthritis);
-            echo generateDropdownUpdate('hands', $hands);
-            echo generateDropdownUpdate('feet', $feet);
-            echo generateDropdownUpdate('ankles', $ankles);
-            echo generateDropdownUpdate('otherSite', $otherSite);
-            echo generateDropdownUpdate('arthralgia', $arthralgia);
-            echo generateDropdownUpdate('periEdema', $periEdema);
-            echo generateDropdownUpdate('skinMani', $skinMani);
-            echo generateDropdownUpdate('skinDesc', $skinDesc);
-            echo generateDropdownUpdate('myalgia', $myalgia);
-            echo generateDropdownUpdate('backPain', $backPain);
-            echo generateDropdownUpdate('headache', $headache);
-            echo generateDropdownUpdate('nausea', $nausea);
-            echo generateDropdownUpdate('mucosBleed', $mucosBleed);
-            echo generateDropdownUpdate('vomiting', $vomiting);
-            echo generateDropdownUpdate('asthenia', $asthenia);
-            echo generateDropdownUpdate('meningoEncep', $meningoEncep);
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('fever', $fever); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('arthritis', $arthritis); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('hands', $hands); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('feet', $feet); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('ankles', $ankles); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('otherSite', $otherSite); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('arthralgia', $arthralgia); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('periEdema', $periEdema); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('skinMani', $skinMani); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('skinDesc', $skinDesc); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('myalgia', $myalgia); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('backPain', $backPain); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('headache', $headache); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('nausea', $nausea); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('mucosBleed', $mucosBleed); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('vomiting', $vomiting); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('asthenia', $asthenia); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('meningoEncep', $meningoEncep); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">otherSymptom</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="otherSymptom" name="otherSymptom" value='<?php echo $otherSymptom; ?>'>
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('dCollected', $dCollected);
-            echo generateDropdownUpdate('dspecSent', $dspecSent);
-            echo generateDropdownUpdate('serIgm', $serIgm);
-            echo generateDropdownUpdate('igm_Res', $igm_Res);
-            echo generateDropdownUpdate('digMres', $digMres);
-            echo generateDropdownUpdate('serIgG', $serIgG);
-            echo generateDropdownUpdate('igG_Res', $igG_Res);
-            echo generateDropdownUpdate('dIgGRes', $dIgGRes);
-            echo generateDropdownUpdate('rt_PCR', $rt_PCR);
-            echo generateDropdownUpdate('rt_PCRRes', $rt_PCRRes);
-            echo generateDropdownUpdate('drtPCRRes', $drtPCRRes);
-            echo generateDropdownUpdate('virIso', $virIso);
-            echo generateDropdownUpdate('virIsoRes', $virIsoRes);
-            echo generateDropdownUpdate('travHist', $travHist);
-            echo generateDropdownUpdate('dVirIsoRes', $dVirIsoRes);
-            ?>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">clinDx</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="clinDx" name="clinDx" value='<?php echo $clinDx; ?>'>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('dCollected', $dCollected); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('dspecSent', $dspecSent); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('serIgm', $serIgm); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('igm_Res', $igm_Res); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('digMres', $digMres); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('serIgG', $serIgG); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('igG_Res', $igG_Res); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('dIgGRes', $dIgGRes); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('rt_PCR', $rt_PCR); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('rt_PCRRes', $rt_PCRRes); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('drtPCRRes', $drtPCRRes); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('virIso', $virIso); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('virIsoRes', $virIsoRes); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('travHist', $travHist); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('dVirIsoRes', $dVirIsoRes); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Place Of Travel</label>
                 <div class="col-sm-6">

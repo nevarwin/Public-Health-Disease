@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-10" style="padding: 30px">
         <h2 class="row justify-content-center mb-3"> Alpha-Fetoprotein Disease Form</h2>
         <form method="POST">
             <?php
@@ -213,150 +213,186 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('fever', $fever);
-            echo generateDropdownUpdate('rarm', $rarm);
-            echo generateDropdownUpdate('cough', $cough);
-            echo generateDropdownUpdate('paralysisatBirth', $paralysisatBirth);
-            echo generateDropdownUpdate('diarrheaVomiting', $diarrheaVomiting);
-            echo generateDropdownUpdate('musclePain', $musclePain);
-            echo generateDropdownUpdate('mening', $mening);
-            echo generateDropdownUpdate('brthMusc', $brthMusc);
-            echo generateDropdownUpdate('neckMusc', $neckMusc);
-            echo generateDropdownUpdate('paradev', $paradev);
-            ?>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">paradir</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="paradir" value='<?php echo $paradir; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('fever', $fever); ?>
                 </div>
-            </div>
-            <?php
-            echo generateDropdownUpdate('facialMusc', $facialMusc);
-            ?>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">rasens</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="rasens" value='<?php echo $rasens; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('rarm', $rarm); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('cough', $cough); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">lasens</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="lasens" value='<?php echo $lasens; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Paralysis at Birth', $paralysisatBirth); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Diarrhea Vomiting', $diarrheaVomiting); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Muscle Pain', $musclePain); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">rlsens</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="rlsens" value='<?php echo $rlsens; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('mening', $mening); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('brthMusc', $brthMusc); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('neckMusc', $neckMusc); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">llsens</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="llsens" value='<?php echo $llsens; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('hxDisorder', $hxDisorder); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Other Cases', $otherCases); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('First Stool Spec', $firststoolSpec); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">raref</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="raref" value='<?php echo $raref; ?>' />
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Paradev', $paradev); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Facial Musc', $facialMusc); ?>
+                </div>
+                <div class="col-lg-3">
+                    <div class="row justify-content-center mb-3">
+                        <label for="" class="col-sm-5 col-form-label">paradir</label>
+                        <div class="col-sm-6">
+                            <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">laref</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="laref" value='<?php echo $laref; ?>' />
+            <div class="row row-cols-4 justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">rasens</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rasens" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">rlref</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="rlref" value='<?php echo $rlref; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">lasens</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lasens" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">llref</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="llref" value='<?php echo $llref; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">rlsens</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlsens" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">ramotor</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="ramotor" value='<?php echo $ramotor; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">llsens</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llsens" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">lamotor</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="lamotor" value='<?php echo $lamotor; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">raref</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="raref" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">rlmotor</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="rlmotor" value='<?php echo $rlmotor; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">laref</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="laref" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">llmotor</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="llmotor" value='<?php echo $llmotor; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">rlref</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlref" />
+                    </div>
                 </div>
-            </div>
-            <?php
-            echo generateDropdownUpdate('hxDisorder', $hxDisorder);
-            echo generateDropdownUpdate('otherCases', $otherCases);
-            echo generateDropdownUpdate('firststoolSpec', $firststoolSpec);
-            ?>
-            <div class="row justify-content-center mb-3">
-                <label for="dstool1Taken" class="col-sm-3 col-form-label">dstool1Taken</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dstool1Taken" name="dstool1Taken" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dstool1Taken; ?>'>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">llref</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llref" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="dstool1Sent" class="col-sm-3 col-form-label">dstool1Sent</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dstool1Sent" name="dstool1Sent" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dstool1Taken; ?>'>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">ramotor</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="ramotor" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="dstool2Taken" class="col-sm-3 col-form-label">dstool2Taken</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dstool2Taken" name="dstool2Taken" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dstool2Taken; ?>'>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">lamotor</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lamotor" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="dstool2Sent" class="col-sm-3 col-form-label">dstool2Sent</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" id="dstool2Sent" name="dstool2Sent" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dstool2Sent; ?>'>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">rlmotor</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlmotor" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">stool1Result</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="stool1Result" value='<?php echo $stool1Result; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">llmotor</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llmotor" />
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">stool2Result</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="stool2Result" value='<?php echo $stool2Result; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="dstool1Taken" class="col-form-label">D Stool 1 Taken</label>
+                        <input type="date" class="form-control" id="dstool1Taken" name="dstool1Taken" max="<?php echo date('Y-m-d'); ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="dstool1Sent" class="col-form-label">D Stool 1 Sent</label>
+                        <input type="date" class="form-control" id="dstool1Sent" name="dstool1Sent" max="<?php echo date('Y-m-d'); ?>">
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="dstool2Taken" class="col-form-label">D Stool 2 Taken</label>
+                        <input type="date" class="form-control" id="dstool2Taken" name="dstool2Taken" max="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="dstool2Sent" class="col-form-label">D Stool 2 Sent</label>
+                        <input type="date" class="form-control" id="dstool2Sent" name="dstool2Sent" max="<?php echo date('Y-m-d'); ?>">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">Stool 1 Result</label>
+                        <input placeholder="ex. Negative" type="text" class="form-control" name="stool1Result" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">Stool 2 Result</label>
+                        <input placeholder="ex. Negative" type="text" class="form-control" name="stool2Result" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">Morbidity Week</label>
+                        <input placeholder="ex. 1" type="text" class="form-control" name="morbidityWeek" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">Morbidity Month</label>
+                        <input placeholder="ex. 1" type="text" class="form-control" name="morbidityMonth" />
+                    </div>
                 </div>
             </div>
             <?php

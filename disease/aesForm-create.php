@@ -26,53 +26,33 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $labResult = $_POST['labResult'];
-    $organism = $_POST['organism'];
-    $outcome = $_POST['outcome'];
+    $labResult = $_POST['labResult'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+    $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $outcome = mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $caseClass = mysqli_real_escape_string($con, $_POST['caseClass']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $caseClass = $_POST['caseClass'];
-
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted) or empty($labResult) or empty($organism)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the aesinfotbl table
-        $query = "INSERT INTO aesinfotbl (
-            patientId, 
-            labResult, 
-            organism, 
-            outcome, 
-            dateDied, 
-            dateAdmitted, 
-            morbidityMonth, 
-            morbidityWeek,
-            caseClass
-        ) 
-        VALUES (
-            '$patientId', 
-            '$labResult', 
-            '$organism', 
-            '$outcome', 
-            '$dateDied', 
-            '$dateAdmitted', 
-            '$morbidityMonth', 
-            '$morbidityWeek',
-            '$caseClass'
-        )";
+        $query = "UPDATE aesinfotbl SET 
+            labResult = '$labResult',
+            organism = '$organism',
+            outcome = '$outcome',
+            dateDied = '$dateDied',
+            dateAdmitted = '$dateAdmitted',
+            morbidityMonth = '$morbidityMonth',
+            morbidityWeek = '$morbidityWeek',
+            caseClass = '$caseClass'
+        WHERE patientId = '$patientId'";
 
         $result = mysqli_query($con, $query);
 
@@ -80,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "AES info successfully added!";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "<script>
                 alert('AES form submitted successfully!');
@@ -92,8 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!" . mysqli_error($con);
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>
@@ -122,13 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label for="stoolCulture" class="col-sm-3 col-form-label">Lab Result</label>
                 <div class="col-sm-6">
-                    <input placeholder='ex. Negative' type="text" class="form-control" id="labResult" name="labResult" required>
+                    <input placeholder='ex. Negative' type="text" class="form-control" id="labResult" name="labResult">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="organism" class="col-sm-3 col-form-label">Organism</label>
                 <div class="col-sm-6">
-                    <input placeholder='ex. N/A' type="text" class="form-control" id="organism" name="organism" required>
+                    <input placeholder='ex. N/A' type="text" class="form-control" id="organism" name="organism">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
@@ -138,13 +116,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" name="morbidityWeek" />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" name="morbidityMonth" />
                 </div>
@@ -153,3 +131,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include('./components/outcomeCreate.php');
             ?>
         </form>
+    </div>
+</div>

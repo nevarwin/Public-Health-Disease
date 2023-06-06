@@ -46,22 +46,16 @@ $morbidityMonth = $row['morbidityMonth'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $stoolCulture = $_POST['stoolCulture'];
-    $organism = $_POST['organism'];
-    $outcome = $_POST['outcome'];
+    $stoolCulture = $_POST['stoolCulture'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stoolCulture']);
+    $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $outcome = mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted) or empty($stoolCulture) or empty($organism)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the amebiasisinfotbl table
         $query = "UPDATE abdinfotbl SET 
             stoolCulture = '$stoolCulture',
@@ -72,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             morbidityMonth = '$morbidityMonth',
             morbidityWeek = '$morbidityWeek'
         WHERE patientId = '$patientId'";
-
 
         $result = mysqli_query($con, $query);
 
@@ -92,8 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>
@@ -123,13 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label for="stoolCulture" class="col-sm-3 form-label">Stool Culture</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="stoolCulture" name="stoolCulture" required value='<?php echo $stoolCulture; ?>'>
+                    <input type="text" class="form-control" id="stoolCulture" name="stoolCulture" value='<?php echo $stoolCulture; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="organism" class="col-sm-3 form-label">Organism</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="organism" name="organism" required value='<?php echo $organism; ?>'>
+                    <input type="text" class="form-control" id="organism" name="organism" value='<?php echo $organism; ?>'>
                 </div>
             </div>
 
@@ -152,3 +144,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include('./components/submitCancel.php');
             ?>
         </form>
+    </div>
+</div>

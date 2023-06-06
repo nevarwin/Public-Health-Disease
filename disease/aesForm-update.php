@@ -58,12 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted) or empty($labResult) or empty($organism)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the amebiasisinfotbl table
         $query = "UPDATE aesinfotbl SET 
             labResult = '$labResult',

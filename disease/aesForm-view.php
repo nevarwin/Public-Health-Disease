@@ -43,43 +43,49 @@ $caseClass = $row['caseClass'];
 ?>
 
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Date Admitted</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Date Admitted</label>
     <div class="col-sm-6">
         <p><?php echo $dateAdmitted; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Lab Result</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Case Class</label>
+    <div class="col-sm-6">
+        <p><?php echo $caseClass; ?></p>
+    </div>
+</div>
+<div class="row mb-2">
+    <label for="" class='col-sm form-label font-weight-bold'>Lab Result</label>
     <div class="col-sm-6">
         <p><?php echo $labResult; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Organism</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Organism</label>
     <div class="col-sm-6">
         <p><?php echo $organism; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Outcome</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Outcome</label>
     <div class="col-sm-6">
         <p><?php echo $outcome; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Morbidity Month</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Morbidity Month</label>
     <div class="col-sm-6">
         <p><?php echo $morbidityMonth; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Morbidity Week</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Morbidity Week</label>
     <div class="col-sm-6">
         <p><?php echo $morbidityWeek; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label'>Date Died</label>
+    <label for="" class='col-sm form-label font-weight-bold'>Date Died</label>
     <div class="col-sm-6">
         <p><?php echo $dateDied; ?></p>
     </div>

@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Adverse Event Following Immunization Form</h2>
         <form method="POST">
             <?php
@@ -174,29 +174,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">case</label>
+                <label class="col-sm-3 col-form-label">Case</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="case" name="case" value='<?php echo $case; ?>'>
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('anaphylactoid', $anaphylactoid);
-            echo generateDropdownUpdate('anaphylaxis', $anaphylaxis);
-            echo generateDropdownUpdate('brachialneuritis', $brachialneuritis);
-            echo generateDropdownUpdate('dissbcginfect', $dissbcginfect);
-            echo generateDropdownUpdate('hhe', $hhe);
-            echo generateDropdownUpdate('encephalopathy', $encephalopathy);
-            echo generateDropdownUpdate('injectsiteAbcess', $injectsiteAbcess);
-            echo generateDropdownUpdate('intussusception', $intussusception);
-            echo generateDropdownUpdate('lymphadenitis', $lymphadenitis);
-            echo generateDropdownUpdate('osteitis', $osteitis);
-            echo generateDropdownUpdate('persistent', $persistent);
-            echo generateDropdownUpdate('seizures', $seizures);
-            echo generateDropdownUpdate('sepsis', $sepsis);
-            echo generateDropdownUpdate('thrombocytopenia', $thrombocytopenia);
-            ?>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">aliveCondition</label>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Anaphylactoid', $anaphylactoid); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Anaphylaxis', $anaphylaxis); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Brachialneuritis', $brachialneuritis); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Dissbcginfect', $dissbcginfect); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Hhe', $hhe); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Encephalopathy', $encephalopathy); ?>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('InjectsiteAbcess', $injectsiteAbcess); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Intussusception', $intussusception); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Lymphadenitis', $lymphadenitis); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Osteitis', $osteitis); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Persistent', $persistent); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Seizures', $seizures); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Sepsis', $sepsis); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('Thrombocytopenia', $thrombocytopenia); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Alive Condition</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="aliveCondition" name="aliveCondition" value='<?php echo $aliveCondition; ?>'>
                 </div>
@@ -208,49 +246,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">suspectedVacc</label>
+                <label class="col-sm-3 col-form-label">Suspected Vaccine</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="suspectedVacc" name="suspectedVacc" value='<?php echo $suspectedVacc; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dateVaccination</label>
+                <label class="col-sm-3 col-form-label">Date Vaccination</label>
                 <div class="col-sm-6">
                     <input type="datetime-local" class="form-control" id="dateVaccination" name="dateVaccination" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateVaccination; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dose</label>
+                <label class="col-sm-3 col-form-label">Dose</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="dose" name="dose" value='<?php echo $dose; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">siteInjection</label>
+                <label class="col-sm-3 col-form-label">Site Injection</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="siteInjection" name="siteInjection" value='<?php echo $siteInjection; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">manufacturer</label>
+                <label class="col-sm-3 col-form-label">Manufacturer</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="manufacturer" name="manufacturer" value='<?php echo $manufacturer; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dateExpire</label>
+                <label class="col-sm-3 col-form-label">Date Expire</label>
                 <div class="col-sm-6">
                     <input type="datetime-local" class="form-control" id="dateExpire" name="dateExpire" value='<?php echo $dateExpire; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

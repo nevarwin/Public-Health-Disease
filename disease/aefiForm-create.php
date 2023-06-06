@@ -17,20 +17,25 @@ $strongContent = '';
 if (!isset($_GET["patientId"])) {
     echo "User ID is not set.";
     // header('location: http://localhost/admin2gh/patientTable.php');
-    // exit;
+    exit;
 }
 $patientId = $_GET['patientId'];
 
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $case = $_POST['case'];
+    $case = $_POST['case'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['case']);
+    $siteInjection = $_POST['siteInjection'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['siteInjection']);
+    $manufacturer = $_POST['manufacturer'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['manufacturer']);
+    $suspectedVacc = $_POST['suspectedVacc'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['suspectedVacc']);
+    $aliveCondition = $_POST['aliveCondition'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['aliveCondition']);
+    $otherSign = $_POST['otherSign'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSign']);
+
     $anaphylactoid = $_POST['anaphylactoid'];
     $anaphylaxis = $_POST['anaphylaxis'];
     $brachialneuritis = $_POST['brachialneuritis'];
@@ -46,92 +51,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sepsis = $_POST['sepsis'];
     $thrombocytopenia = $_POST['thrombocytopenia'];
     $outcome = $_POST['outcome'];
-    $aliveCondition = $_POST['aliveCondition'];
-    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $otherSign = $_POST['otherSign'];
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
     $morbidityWeek = $_POST['morbidityWeek'];
-    $suspectedVacc = $_POST['suspectedVacc'];
     $dateVaccination = $_POST['dateVaccination'];
     $dose = $_POST['dose'];
-    $siteInjection = $_POST['siteInjection'];
-    $manufacturer = $_POST['manufacturer'];
     $dateExpire = $_POST['dateExpire'];
+    $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the aefiinfotbl table
-        $query = "INSERT INTO aefiinfotbl (
-                patientId,
-                `case`,
-                anaphylactoid,
-                anaphylaxis,
-                brachialneuritis,
-                dissbcginfect,
-                encephalopathy,
-                hhe,
-                injectsiteAbcess,
-                intussusception,
-                lymphadenitis,
-                osteitis,
-                persistent,
-                seizures,
-                sepsis,
-                thrombocytopenia,
-                outcome,
-                aliveCondition,
-                dateDied,
-                otherSign,
-                dateAdmitted,
-                morbidityMonth,
-                morbidityWeek,
-                suspectedVacc,
-                dateVaccination,
-                dose,
-                siteInjection,
-                manufacturer,
-                dateExpire
-            )
-            VALUES (
-                '$patientId',
-                '$case',
-                '$anaphylactoid',
-                '$anaphylaxis',
-                '$brachialneuritis',
-                '$dissbcginfect',
-                '$encephalopathy',
-                '$hhe',
-                '$injectsiteAbcess',
-                '$intussusception',
-                '$lymphadenitis',
-                '$osteitis',
-                '$persistent',
-                '$seizures',
-                '$sepsis',
-                '$thrombocytopenia',
-                '$outcome',
-                '$aliveCondition',
-                '$dateDied',
-                '$otherSign',
-                '$dateAdmitted',
-                '$morbidityMonth',
-                '$morbidityWeek',
-                '$suspectedVacc',
-                '$dateVaccination',
-                '$dose',
-                '$siteInjection',
-                '$manufacturer',
-                '$dateExpire'
-            );";
-
-
+        $query = "UPDATE aefiinfotbl SET
+                `case` = '$case',
+                anaphylactoid = '$anaphylactoid',
+                anaphylaxis = '$anaphylaxis',
+                brachialneuritis = '$brachialneuritis',
+                dissbcginfect = '$dissbcginfect',
+                encephalopathy = '$encephalopathy',
+                hhe = '$hhe',
+                injectsiteAbcess = '$injectsiteAbcess',
+                intussusception = '$intussusception',
+                lymphadenitis = '$lymphadenitis',
+                osteitis = '$osteitis',
+                persistent = '$persistent',
+                sepsis = '$sepsis',
+                thrombocytopenia = '$thrombocytopenia',
+                outcome = '$outcome',
+                seizures = '$seizures',
+                aliveCondition = '$aliveCondition',
+                dateDied = '$dateDied',
+                otherSign = '$otherSign',
+                dateAdmitted = '$dateAdmitted',
+                morbidityMonth = '$morbidityMonth',
+                morbidityWeek = '$morbidityWeek',
+                suspectedVacc = '$suspectedVacc',
+                dateVaccination = '$dateVaccination',
+                dose = '$dose',
+                siteInjection = '$siteInjection',
+                manufacturer = '$manufacturer',
+                dateExpire = '$dateExpire'
+                WHERE patientId = '$patientId';";
 
         $result = mysqli_query($con, $query);
 
@@ -157,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Adverse Event Following Immunization Form</h2>
         <form method="POST">
             <?php
@@ -174,69 +134,106 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Case</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="case" name="case">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="case" name="case">
                 </div>
             </div>
-            <?php
-            echo generateDropdown('anaphylactoid');
-            echo generateDropdown('anaphylaxis');
-            echo generateDropdown('brachialneuritis');
-            echo generateDropdown('dissbcginfect');
-            echo generateDropdown('hhe');
-            echo generateDropdown('encephalopathy');
-            echo generateDropdown('injectsiteAbcess');
-            echo generateDropdown('intussusception');
-            echo generateDropdown('lymphadenitis');
-            echo generateDropdown('osteitis');
-            echo generateDropdown('persistent');
-            echo generateDropdown('seizures');
-            echo generateDropdown('sepsis');
-            echo generateDropdown('thrombocytopenia');
-            ?>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('anaphylactoid'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('anaphylaxis'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('brachialneuritis'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('dissbcginfect'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('hhe'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('encephalopathy'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('injectsiteAbcess'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('intussusception'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('lymphadenitis'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('osteitis'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('persistent'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('seizures'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('sepsis'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('thrombocytopenia'); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Alive Condition</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="aliveCondition" name="aliveCondition">
+                    <input placeholder="ex. Recovering" type="text" class="form-control" id="aliveCondition" name="aliveCondition">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Other Sign</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="otherSign" name="otherSign">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="otherSign" name="otherSign">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">suspectedVacc</label>
+                <label class="col-sm-3 col-form-label">Suspected Vaccine</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="suspectedVacc" name="suspectedVacc">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="suspectedVacc" name="suspectedVacc">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dateVaccination</label>
+                <label class="col-sm-3 col-form-label">Date Vaccination</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. 1" type="datetime-local" class="form-control" id="dateVaccination" name="dateVaccination" max="<?php echo date('Y-m-d'); ?>">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dose</label>
+                <label class="col-sm-3 col-form-label">Dose</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. 1" type="text" class="form-control" id="dose" name="dose">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">siteInjection</label>
+                <label class="col-sm-3 col-form-label">Site Injection</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="siteInjection" name="siteInjection">
+                    <input placeholder="ex. Arm" type="text" class="form-control" id="siteInjection" name="siteInjection">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">manufacturer</label>
+                <label class="col-sm-3 col-form-label">Manufacturer</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="manufacturer" name="manufacturer">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="manufacturer" name="manufacturer">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dateExpire</label>
+                <label class="col-sm-3 col-form-label">Date Expire</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. 1" type="datetime-local" class="form-control" id="dateExpire" name="dateExpire">
                 </div>

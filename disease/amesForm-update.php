@@ -56,27 +56,27 @@ $dateDied = $row['dateDied'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $fever = $_POST['fever'];
-    $behaviorChng = $_POST['behaviorChng'];
-    $seizure = $_POST['seizure'];
-    $stiffneck = $_POST['stiffneck'];
-    $bulgefontanel = $_POST['bulgefontanel'];
-    $menSign = $_POST['menSign'];
-    $clinDiag = $_POST['clinDiag'];
-    $pcv10 = $_POST['pcv10'];
-    $pcv13 = $_POST['pcv13'];
-    $meningoVacc = $_POST['meningoVacc'];
-    $vacMeningDate = $_POST['vacMeningDate'];
-    $meningoVaccDose = $_POST['meningoVaccDose'];
-    $measVacc = $_POST['measVacc'];
-    $vacMeasDate = $_POST['vacMeasDate'];
-    $measVaccDose = $_POST['measVaccDose'];
-    $aesCaseClass = $_POST['aesCaseClass'];
-    $finalDiagnosis = $_POST['finalDiagnosis'];
-    $outcome = $_POST['outcome'];
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
+    $fever = mysqli_real_escape_string($con, $_POST['fever']);
+    $behaviorChng = mysqli_real_escape_string($con, $_POST['behaviorChng']);
+    $seizure = mysqli_real_escape_string($con, $_POST['seizure']);
+    $stiffneck = mysqli_real_escape_string($con, $_POST['stiffneck']);
+    $bulgefontanel = mysqli_real_escape_string($con, $_POST['bulgefontanel']);
+    $menSign = mysqli_real_escape_string($con, $_POST['menSign']);
+    $pcv10 = mysqli_real_escape_string($con, $_POST['pcv10']);
+    $pcv13 = mysqli_real_escape_string($con, $_POST['pcv13']);
+    $meningoVacc = mysqli_real_escape_string($con, $_POST['meningoVacc']);
+    $vacMeningDate = mysqli_real_escape_string($con, $_POST['vacMeningDate']);
+    $clinDiag = mysqli_real_escape_string($con, $_POST['clinDiag']);
+    $meningoVaccDose = mysqli_real_escape_string($con, $_POST['meningoVaccDose']);
+    $measVacc = mysqli_real_escape_string($con, $_POST['measVacc']);
+    $vacMeasDate = mysqli_real_escape_string($con, $_POST['vacMeasDate']);
+    $measVaccDose = mysqli_real_escape_string($con, $_POST['measVaccDose']);
+    $aesCaseClass = mysqli_real_escape_string($con, $_POST['aesCaseClass']);
+    $finalDiagnosis = mysqli_real_escape_string($con, $_POST['finalDiagnosis']);
+    $outcome = mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     // check if the data is empty
     do {
@@ -112,15 +112,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 dateDied = '$dateDied'
             WHERE patientId = '$patientId';";
 
-
         $result = mysqli_query($con, $query);
 
         if ($result) {
             $message = "AMES info successfully added!";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "<script>
                 alert('AMES form submitted successfully!');
@@ -131,8 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!" . mysqli_error($con);
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>
@@ -159,17 +156,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('fever', $fever);
-            echo generateDropdownUpdate('behaviorChng', $behaviorChng);
-            echo generateDropdownUpdate('seizure', $seizure);
-            echo generateDropdownUpdate('stiffneck', $stiffneck);
-            echo generateDropdownUpdate('bulgefontanel', $bulgefontanel);
-            echo generateDropdownUpdate('menSign', $menSign);
-            echo generateDropdownUpdate('pcv10', $pcv10);
-            echo generateDropdownUpdate('pcv13', $pcv13);
-            echo generateDropdownUpdate('meningoVacc', $meningoVacc);
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('fever', $fever); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('behaviorChng', $behaviorChng); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('seizure', $seizure); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('stiffneck', $stiffneck); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('bulgefontanel', $bulgefontanel); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('menSign', $menSign); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('pcv10', $pcv10); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('pcv13', $pcv13); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('meningoVacc', $meningoVacc); ?>
+                </div>
+            </div>
             <div class="row justify-content-center mb-3">
                 <label for="" class="col-sm-3 col-form-label">clinDiag</label>
                 <div class="col-sm-6">
