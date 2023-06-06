@@ -95,25 +95,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class='form-control' name='name'>
+                    <input placeholder="Name" type="text" class='form-control' name='name'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Email</label>
                 <div class="col-sm-6">
-                    <input autocomplete=false type="email" class='form-control' name='email' id='email'>
+                    <input placeholder="Email" autocomplete=false type="email" class='form-control' name='email' id='email'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Password</label>
                 <div class="col-sm-6">
-                    <input autocomplete=false type="password" class='form-control' name='password' id='password'>
+                    <input placeholder="Password" autocomplete=false type="password" class='form-control' name='password' id='password'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
                 <div class="col-sm-6">
-                    <input type="text" class='form-control' name='contact' id="contact">
+                    <input placeholder="Contact Number" type="text" class='form-control' name='contact' id="contact">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <div class="col-sm-6">
+                    <input placeholder="Address" type="text" class='form-control' name='address'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
@@ -142,12 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <select class="custom-select" id="barangay" name="barangay">
                         <option>Select Barangay</option>
                     </select>
-                </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address</label>
-                <div class="col-sm-6">
-                    <input type="text" class='form-control' name='address'>
                 </div>
             </div>
             <div class="row justify-content-around">
