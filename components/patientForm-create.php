@@ -121,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Create the full address
                 $address = $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode;
-                echo $address;
 
                 // Format the address for URL encoding
                 $formattedAddress = urlencode($address);
@@ -149,16 +148,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($con->query($updateSql) === TRUE) {
                             echo "Address saved successfully";
                         } else {
-                            echo "Error updating address: " .  mysqli_error($con);
+                            $errorMessage = "Error updating address: " .  mysqli_error($con);
+                            $type = 'warning';
+                            $strongContent = 'Holy guacamole!';
+                            $alert = generateAlert($type, $strongContent, $errorMessage);
                         }
                     } else {
-                        echo "Geocoding failed: " . $geocodingData['status'];
+                        $errorMessage = "Geocoding failed: " . $geocodingData['status'];
+                        $type = 'warning';
+                        $strongContent = 'Holy guacamole!';
+                        $alert = generateAlert($type, $strongContent, $errorMessage);
                     }
                 } else {
-                    echo "Failed to fetch geocoding data";
+                    $errorMessage = "Failed to fetch geocoding data";
+                    $type = 'warning';
+                    $strongContent = 'Holy guacamole!';
+                    $alert = generateAlert($type, $strongContent, $errorMessage);
                 }
             } else {
-                echo "Error saving address: " .  mysqli_error($con);
+                $errorMessage = "Error saving address: " .  mysqli_error($con);
+                $type = 'warning';
+                $strongContent = 'Holy guacamole!';
+                $alert = generateAlert($type, $strongContent, $errorMessage);
             }
         }
 
