@@ -20,42 +20,36 @@ $alert = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get the data from the Form
     $patientId = $_POST['patientId'];
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-    $mName = $_POST['mName'];
-    $gender = $_POST['gender'];
-    $dob = $_POST['dob'];
-    $age = $_POST['age'];
-    $unitCode = $_POST['unitCode'];
-    $subd = $_POST['subd'];
-    $street = $_POST['street'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
-    $postalCode = $_POST['postalCode'];
-    $municipalityDRU = $_POST['municipalityDRU'];
-    $barangayDRU = $_POST['barangayDRU'];
-    $disease = $_POST['disease'];
-    $contact = $_POST['contact'];
-    $addressDRU = $_POST['addressDRU'];
+    $fName = mysqli_real_escape_string($con, $_POST['fName']);
+    $lName = mysqli_real_escape_string(
+        $con,
+        $_POST['lName']
+    );
+    $mName = mysqli_real_escape_string(
+        $con,
+        $_POST['mName']
+    );
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $dob = mysqli_real_escape_string($con, $_POST['dob']);
+    $age = mysqli_real_escape_string($con, $_POST['age']);
+    $unitCode = mysqli_real_escape_string($con, $_POST['unitCode']);
+    $subd = mysqli_real_escape_string(
+        $con,
+        $_POST['subd']
+    );
+    $street = mysqli_real_escape_string($con, $_POST['street']);
+    $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
+    $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
+    $postalCode = mysqli_real_escape_string($con, $_POST['postalCode']);
+    $municipalityDRU = mysqli_real_escape_string($con, $_POST['municipalityDRU']);
+    $barangayDRU = mysqli_real_escape_string($con, $_POST['barangayDRU']);
+    $disease = mysqli_real_escape_string($con, $_POST['disease']);
+    $contact = mysqli_real_escape_string($con, $_POST['contact']);
+    $addressDRU = mysqli_real_escape_string($con, $_POST['addressDRU']);
     $currentDate = date("Y-m-d H:i:s");
 
     // check if the data is empty
     do {
-        // if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
-        //     $errorMessage = "All fields are required";
-        //     $type = 'warning';
-        //     $strongContent = 'Holy guacamole!';
-        //     $alert = generateAlert($type, $strongContent, $errorMessage);
-        //     break;
-        // }
-        // // added new data into the db
-        // $sql = "INSERT INTO patients
-        // (`creationDate`, `firstName`, `lastName`, `middleName`, `munCityOfDRU`, `addressOfDRU`,`gender`, `dob`, `age`, `municipality`, `barangay`, `street`,`unitCode`,`postalCode`,`subd`, `disease`,`brgyOfDRU`, `contact`) 
-        // VALUES 
-        // ('$currentDate', '$fName', '$lName', '$mName' , '$municipalityDRU', '$addressDRU','$gender', '$dob', '$age', '$municipality', '$barangay', '$street','$unitCode','$postalCode','$subd', '$disease', '$barangayDRU', '$contact')";
-        // $result = mysqli_query($con, $sql);
-        // $insert_id = mysqli_insert_id($con);
-
         if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
             $errorMessage = "All fields are required";
             $type = 'warning';
@@ -168,7 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
-
         if (!$result) {
             $errorMessage = mysqli_error($con);
             $type = 'warning';
@@ -188,11 +181,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $addDiseaseSql = "INSERT INTO " . $diseaseValue . "infotbl (patientId) VALUES ($insert_id)";
         $addDiseaseResult = mysqli_query($con, $addDiseaseSql);
         if (!$addDiseaseResult) {
-            echo "Error: " . mysqli_error($con);
+            $errorMessage = "Error: " . mysqli_error($con);
+            $type = 'warning';
+            $strongContent = 'Holy guacamole!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
         }
 
         if (strcmp($diseaseName, $value) == 0) {
-            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            echo "
+                <script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';
+            </script>";
         } else {
             // Handle error
             $errorMessage = "Link does not exists!";
@@ -211,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-8 col-sm-6" style="padding: 30px">
-        <h2>Create New Patient Information</h2>
+        <h2>New Patient Information</h2>
 
         <?php
         if (!empty($errorMessage)) {
@@ -315,40 +313,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                 <!-- Address of DRU -->
-                <div class="row mb-3">
-                    <label for="" class='col-sm-3 col-form-label'>Address of DRU</label>
-                    <div class="col-sm-6">
-                        <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
-                    </div>
-                </div>
-                <!-- Municipality of DRU Dropdown -->
-                <div class="input-group mb-3">
-                    <div class="col">
-                        <select class="custom-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
-                            <option value="">Select municipality of DRU</option>
-                            <?php
-                            // Connect to database and fetch municipalities
-                            include("connection.php");
-                            $result = mysqli_query($con, 'SELECT * FROM municipality');
+                <span>Address of DRU</span>
+                <div class="row justify-content-start mb-3">
+                    <!-- Municipality of DRU Dropdown -->
+                    <div class="input-group">
+                        <div class="col">
+                            <input placeholder="Address of DRU" type="text" class='form-control' name='addressDRU' value='<?php echo $addressDRU; ?>'>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="municipalityDRU" onchange="updateBarangaysDRU()" name="municipalityDRU">
+                                <option value="">Select municipality of DRU</option>
+                                <?php
+                                // Connect to database and fetch municipalities
+                                include("connection.php");
+                                $result = mysqli_query($con, 'SELECT * FROM municipality');
 
-                            // Display each municipalities in a dropdown option
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select class="custom-select" id="barangayDRU" name="barangayDRU">
-                            <option>Select Barangay of DRU</option>
-                        </select>
+                                // Display each municipalities in a dropdown option
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="barangayDRU" name="barangayDRU">
+                                <option>Select Barangay of DRU</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Disease Dropdown -->
-                <div class="row mb-3">
-                    <label class='col-sm-3 col-form-label' for="disease">Disease</label>
-                    <div class="col-sm-6">
+                <span>Disease</span>
+                <div class="row justify-content-start mb-3">
+                    <div class="col-sm-12">
                         <select class="custom-select" id="dynamicDisease" name="disease">
                             <option value="">Select Disease</option>
                             <?php
