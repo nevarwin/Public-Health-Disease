@@ -9,8 +9,8 @@ function generateDropdown($name) {
 
     return '
         <div class="row justify-content-center mb-3">
-            <label class="col-sm-5 col-form-label">' . ucwords($name) . '</label>
-            <div class="col-sm-6">
+            <label class="col-sm-6 col-form-label">' . ucwords($name) . '</label>
+            <div class="col-sm-4">
                 <select class="custom-select" name="' . $name . '">
                     ' . implode('', array_map(function ($value, $label) {
         return '<option value="' . $value . '">' . $label . '</option>';
