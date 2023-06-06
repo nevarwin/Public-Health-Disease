@@ -176,13 +176,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
-                </div>
+            <div class="row justify-content-around">
+                <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
+                <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
+
             </div>
         </form>
     </div>
