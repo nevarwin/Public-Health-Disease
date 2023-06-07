@@ -21,17 +21,17 @@ include('./components/head.php');
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
+                    <?php
+                    include('./disease/rabiesForm-create.php');
+                    ?>
                 </div>
-                <?php
-                include('./disease/rabiesForm-create.php');
-                ?>
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+            <?php
+            include('./components/footer.php');
+            ?>
         </div>
-        <!-- End of Main Content -->
-        <?php
-        include('./components/footer.php');
-        ?>
     </div>
     <!-- End of Content Wrapper -->
     </div>
