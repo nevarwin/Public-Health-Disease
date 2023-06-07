@@ -1,5 +1,5 @@
 <?php
-function generateDropdownUpdate($fieldName, $selectedValue = '') {
+function generateDropdownUpdate($fieldName, $selectedValue) {
     $options = [
         'No',
         'Yes',
