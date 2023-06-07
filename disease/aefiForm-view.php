@@ -224,7 +224,8 @@ $dateExpire = $row['dateExpire'];
     <div class="row mb-3">
         <label for="" class="col-sm-3 form-label font-weight-bold">Outcome</label>
         <div class="col-sm-6">
-            <p> <?php echo $outcome; ?> </p>
+            <p> <?php echo ucfirst($outcome); ?>
+            </p>
         </div>
     </div>
     <div class="row mb-3">

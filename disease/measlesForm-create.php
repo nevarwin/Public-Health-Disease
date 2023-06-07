@@ -23,88 +23,55 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $measVacc = $_POST['measVacc'];
-    $vitaminA = $_POST['vitaminA'];
-    $cough = $_POST['cough'];
-    $koplikSpot = $_POST['koplikSpot'];
-    $lastVac = $_POST['lastVac'];
-    $runnyNose = $_POST['runnyNose'];
-    $redEyes = $_POST['redEyes'];
-    $arthritisArthralgia = $_POST['arthritisArthralgia'];
-    $swolympNod = $_POST['swolympNod'];
-    $otherSymptoms = $_POST['otherSymptoms'];
-    $complications = $_POST['complications'];
-    $otherCase = $_POST['otherCase'];
-    $finalClass = $_POST['finalClass'];
-    $infectionSource = $_POST['infectionSource'];
-    $outcome = $_POST['outcome'];
+    $measVacc = $_POST['measVacc'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['measVacc']);
+    $vitaminA = $_POST['vitaminA'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['vitaminA']);
+    $cough = $_POST['cough'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['cough']);
+    $koplikSpot = $_POST['koplikSpot'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['koplikSpot']);
+    $lastVac = $_POST['lastVac'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['lastVac']);
+    $runnyNose = $_POST['runnyNose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['runnyNose']);
+    $redEyes = $_POST['redEyes'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['redEyes']);
+    $arthritisArthralgia = $_POST['arthritisArthralgia'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['arthritisArthralgia']);
+    $swolympNod = $_POST['swolympNod'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['swolympNod']);
+    $otherSymptoms = $_POST['otherSymptoms'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSymptoms']);
+    $complications = $_POST['complications'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['complications']);
+    $otherCase = $_POST['otherCase'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherCase']);
+    $finalClass = $_POST['finalClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalClass']);
+    $infectionSource = $_POST['infectionSource'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['infectionSource']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the measlesinfotbl table
-        $query = "INSERT INTO measlesinfotbl (
-                patientId,
-                measVacc,
-                vitaminA,
-                cough,
-                koplikSpot,
-                lastVac,
-                runnyNose,
-                redEyes,
-                arthritisArthralgia,
-                swolympNod,
-                otherSymptoms,
-                complications,
-                otherCase,
-                finalClass,
-                infectionSource,
-                outcome,
-                dateDied,
-                dateAdmitted,
-                morbidityMonth,
-                morbidityWeek
-            )
-            VALUES (
-                '$patientId',
-                '$measVacc',
-                '$vitaminA',
-                '$cough',
-                '$koplikSpot',
-                '$lastVac',
-                '$runnyNose',
-                '$redEyes',
-                '$arthritisArthralgia',
-                '$swolympNod',
-                '$otherSymptoms',
-                '$complications',
-                '$otherCase',
-                '$finalClass',
-                '$infectionSource',
-                '$outcome',
-                '$dateDied',
-                '$dateAdmitted',
-                '$morbidityMonth',
-                '$morbidityWeek'
-            );";
-
-
-
+        $query = "UPDATE measlesinfotbl SET
+                measVacc = '$measVacc',
+                vitaminA = '$vitaminA',
+                cough = '$cough',
+                koplikSpot = '$koplikSpot',
+                lastVac = '$lastVac',
+                runnyNose = '$runnyNose',
+                redEyes = '$redEyes',
+                arthritisArthralgia = '$arthritisArthralgia',
+                swolympNod = '$swolympNod',
+                otherSymptoms = '$otherSymptoms',
+                complications = '$complications',
+                otherCase = '$otherCase',
+                finalClass = '$finalClass',
+                infectionSource = '$infectionSource',
+                outcome = '$outcome',
+                dateDied = '$dateDied',
+                dateAdmitted = '$dateAdmitted',
+                morbidityMonth = '$morbidityMonth',
+                morbidityWeek = '$morbidityWeek'
+                WHERE patientId = '$patientId';";
 
         $result = mysqli_query($con, $query);
 
@@ -144,16 +111,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. 1" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
-            <?php
-            echo generateDropdown('measVacc');
-            echo generateDropdown('vitaminA');
-            echo generateDropdown('cough');
-            echo generateDropdown('koplikSpot');
-            echo generateDropdown('runnyNose');
-            echo generateDropdown('redEyes');
-            echo generateDropdown('arthritisArthralgia');
-            echo generateDropdown('swolympNod');
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('measVacc'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('vitaminA'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('cough'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('koplikSpot'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('runnyNose'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('redEyes'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('arthritisArthralgia'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('swolympNod'); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label for="" class="col-sm-3 col-form-label">Last Vaccine</label>
                 <div class="col-sm-6">

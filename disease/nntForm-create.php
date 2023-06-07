@@ -22,67 +22,42 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $recentAcuteWound = $_POST['recentAcuteWound'];
-    $woundSite = $_POST['woundSite'];
-    $woundType = $_POST['woundType'];
-    $otherWound = $_POST['otherWound'];
-    $tetanusToxoid = $_POST['tetanusToxoid'];
-    $tetanusAntitoxin = $_POST['tetanusAntitoxin'];
-    $skinLesion = $_POST['skinLesion'];
-    $outcome = $_POST['outcome'];
+    $recentAcuteWound = $_POST['recentAcuteWound'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['recentAcuteWound']);
+    $woundSite = $_POST['woundSite'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['woundSite']);
+    $woundType = $_POST['woundType'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['woundType']);
+    $otherWound = $_POST['otherWound'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherWound']);
+    $tetanusToxoid = $_POST['tetanusToxoid'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['tetanusToxoid']);
+    $tetanusAntitoxin = $_POST['tetanusAntitoxin'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['tetanusAntitoxin']);
+    $skinLesion = $_POST['skinLesion'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['skinLesion']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
 
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the nntinfotbl table
-        $query = "INSERT INTO nntinfotbl (
-                patientId,
-                recentAcuteWound,
-                woundSite,
-                woundType,
-                otherWound,
-                tetanusToxoid,
-                tetanusAntitoxin,
-                skinLesion,
-                outcome,
-                dateDied,
-                dateAdmitted,
-                morbidityMonth,
-                morbidityWeek
-            )
-            VALUES (
-                '$patientId',
-                '$recentAcuteWound',
-                '$woundSite',
-                '$woundType',
-                '$otherWound',
-                '$tetanusToxoid',
-                '$tetanusAntitoxin',
-                '$skinLesion',
-                '$outcome',
-                '$dateDied',
-                '$dateAdmitted',
-                '$morbidityMonth',
-                '$morbidityWeek'
-            );";
-
-
+        $query = "UPDATE nntinfotbl SET
+                recentAcuteWound = '$recentAcuteWound',
+                woundSite = '$woundSite',
+                woundType = '$woundType',
+                otherWound = '$otherWound',
+                tetanusToxoid = '$tetanusToxoid',
+                tetanusAntitoxin = '$tetanusAntitoxin',
+                skinLesion = '$skinLesion',
+                outcome = '$outcome',
+                dateDied = '$dateDied',
+                dateAdmitted = '$dateAdmitted',
+                morbidityMonth = '$morbidityMonth',
+                morbidityWeek = '$morbidityWeek'
+                WHERE patientId = '$patientId';";
 
         $result = mysqli_query($con, $query);
 
@@ -125,49 +100,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Lab Result</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="labResult" name="labResult">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="labResult" name="labResult">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Recent Acute Wound</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="recentAcuteWound" name="recentAcuteWound">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="recentAcuteWound" name="recentAcuteWound">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Wound Site</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="woundSite" name="woundSite">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="woundSite" name="woundSite">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Wound Type</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="woundType" name="woundType">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="woundType" name="woundType">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Other Wound</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="otherWound" name="otherWound">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="otherWound" name="otherWound">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Tetanus Toxoid</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="tetanusToxoid" name="tetanusToxoid">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="tetanusToxoid" name="tetanusToxoid">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Tetanus Antitoxin</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="tetanusAntitoxin" name="tetanusAntitoxin">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="tetanusAntitoxin" name="tetanusAntitoxin">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Skin Lesion</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. 1" type="text" class="form-control" id="skinLesion" name="skinLesion">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="skinLesion" name="skinLesion">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">

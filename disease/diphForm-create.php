@@ -22,52 +22,37 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $dptDoses = $_POST['dptDoses'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $dptDoses = $_POST['dptDoses'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dptDoses']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateLastDose = $_POST['dateLastDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateLastDose']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateLastDose = $_POST['dateLastDose'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the diphinfotbl table
-        $query = "INSERT INTO diphinfotbl (
-            patientId,
-            dptDoses,
-            dateLastDose,
-            caseClass,
-            outcome,
-            dateDied,
-            dateAdmitted,
-            morbidityMonth,
-            morbidityWeek
-            ) VALUES (
-            '$patientId',
-            '$dptDoses',
-            '$dateLastDose',
-            '$caseClass',
-            '$outcome',
-            '$dateDied',
-            '$dateAdmitted',
-            '$morbidityMonth',
-            '$morbidityWeek'
-            );
-            ";
+        $query = "UPDATE diphinfotbl
+                    SET
+                    patientId = '$patientId',
+                    dptDoses = '$dptDoses',
+                    dateLastDose = '$dateLastDose',
+                    caseClass = '$caseClass',
+                    outcome = '$outcome',
+                    dateDied = '$dateDied',
+                    dateAdmitted = '$dateAdmitted',
+                    morbidityMonth = '$morbidityMonth',
+                    morbidityWeek = '$morbidityWeek'
+                    WHERE
+                    patientId = '$patientId';
+                    ";
 
         $result = mysqli_query($con, $query);
 
@@ -108,37 +93,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">Date Admitted</label>
+                <label class="col-sm-3 col-form-label">Date Admitted</label>
                 <div class="col-sm-6">
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="dptDoses" class="col-sm-3 form-label">Dpt Doses</label>
+                <label class="col-sm-3 col-form-label">Dpt Doses</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" id="dptDoses" name="dptDoses">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">Date Last Dose</label>
+                <label class="col-sm-3 col-form-label">Date Last Dose</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="date" class="form-control" name="dateLastDose" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
+                <label class="col-sm-3 col-form-label">Case Classification</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. Suspected' type="text" class="form-control" id="caseClass" name="caseClass">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 form-label">Morbidity Week</label>
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" name="morbidityWeek" />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 form-label">Morbidity Month</label>
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" name="morbidityMonth" />
                 </div>

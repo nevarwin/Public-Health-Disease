@@ -21,7 +21,7 @@ if (!isset($_GET["patientId"])) {
 }
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM neonatalinfotbl WHERE patientId = $patientId";
+$sql = "SELECT * FROM ntinfotbl WHERE patientId = $patientId";
 // execute the sql query
 $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
@@ -51,32 +51,26 @@ $morbidityMonth = $row['morbidityMonth'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $mother = $_POST['mother'];
-    $first2Days = $_POST['first2Days'];
-    $after2Days = $_POST['after2Days'];
-    $finalDx = $_POST['finalDx'];
-    $trismus = $_POST['trismus'];
-    $clenFis = $_POST['clenFis'];
-    $opistho = $_POST['opistho'];
-    $stumpInf = $_POST['stumpInf'];
-    $cordCut = $_POST['cordCut'];
-    $finalClass = $_POST['finalClass'];
-    $outcome = $_POST['outcome'];
+    $mother = $_POST['mother'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['mother']);
+    $first2Days = $_POST['first2Days'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['first2Days']);
+    $after2Days = $_POST['after2Days'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['after2Days']);
+    $finalDx = $_POST['finalDx'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalDx']);
+    $trismus = $_POST['trismus'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['trismus']);
+    $clenFis = $_POST['clenFis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['clenFis']);
+    $opistho = $_POST['opistho'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['opistho']);
+    $stumpInf = $_POST['stumpInf'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stumpInf']);
+    $cordCut = $_POST['cordCut'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['cordCut']);
+    $finalClass = $_POST['finalClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the diphinfotbl table
-        $query = "UPDATE neonatalinfotbl SET
+        $query = "UPDATE ntinfotbl SET
             mother = '$mother',
             first2Days = '$first2Days',
             after2Days = '$after2Days',
@@ -93,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             morbidityMonth = '$morbidityMonth',
             morbidityWeek = '$morbidityWeek'
             WHERE patientId = $patientId;
-";
+            ";
 
 
 
@@ -128,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Neonatal Tetanus Form</h2>
         <form method="POST">
             <?php
@@ -149,16 +143,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" id="mother" name="mother" value='<?php echo $mother; ?>'>
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('first2Days', $first2Days);
-            echo generateDropdownUpdate('after2Days', $after2Days);
-            echo generateDropdownUpdate('first2Days', $first2Days);
-            echo generateDropdownUpdate('trismus', $trismus);
-            echo generateDropdownUpdate('clenFis', $clenFis);
-            echo generateDropdownUpdate('opistho', $opistho);
-            echo generateDropdownUpdate('stumpInf', $stumpInf);
-            echo generateDropdownUpdate('cordCut', $cordCut);
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('first2Days', $first2Days); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('after2Days', $after2Days); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('first2Days', $first2Days); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('trismus', $trismus); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('clenFis', $clenFis); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('opistho', $opistho); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('stumpInf', $stumpInf); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('cordCut', $cordCut); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Final Dx</label>
                 <div class="col-sm-6">
@@ -172,13 +187,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">morbidityMonth</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">MorbidityWeek</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

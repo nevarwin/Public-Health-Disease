@@ -22,54 +22,34 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $dptDose = $_POST['dptDose'];
-    $datelastDose = $_POST['datelastDose'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $dptDose = $_POST['dptDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dptDose']);
+    $datelastDose = $_POST['datelastDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['datelastDose']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the perthesinfotbl table
-        $query = "INSERT INTO perthesinfotbl (
-                    patientId,
-                    dptDose,
-                    datelastDose,
-                    caseClass,
-                    outcome,
-                    dateDied,
-                    dateAdmitted,
-                    morbidityMonth,
-                    morbidityWeek
-                )
-                VALUES (
-                    '$patientId',
-                    '$dptDose',
-                    '$datelastDose',
-                    '$caseClass',
-                    '$outcome',
-                    '$dateDied',
-                    '$dateAdmitted',
-                    '$morbidityMonth',
-                    '$morbidityWeek'
-                )";
-
+        $query = "UPDATE pertinfotbl
+                SET
+                    dptDose = '$dptDose',
+                    datelastDose = '$datelastDose',
+                    caseClass = '$caseClass',
+                    outcome = '$outcome',
+                    dateDied = '$dateDied',
+                    dateAdmitted = '$dateAdmitted',
+                    morbidityMonth = '$morbidityMonth',
+                    morbidityWeek = '$morbidityWeek'
+                WHERE patientId = '$patientId'";
 
         $result = mysqli_query($con, $query);
 
@@ -88,8 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>

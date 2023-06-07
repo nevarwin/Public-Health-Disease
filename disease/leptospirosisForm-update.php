@@ -42,22 +42,16 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $labResult = $_POST['labResult'];
-    $serovar = $_POST['serovar'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $labResult = empty($_POST['labResult']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+    $serovar = empty($_POST['serovar']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['serovar']);
+    $caseClass = empty($_POST['caseClass']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = empty($_POST['outcome']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = empty($_POST['dateAdmitted']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = empty($_POST['morbidityMonth']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = empty($_POST['morbidityWeek']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the leptospirosisinfotbl table
         $query = "UPDATE leptospirosisinfotbl
                 SET
@@ -130,13 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">morbidityMonth</label>
+                <label class="col-sm-3 form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">MorbidityWeek</label>
+                <label class="col-sm-3 form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

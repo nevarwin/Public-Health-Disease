@@ -19,7 +19,7 @@ if (!isset($_GET["patientId"])) {
 }
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM perthesinfotbl WHERE patientId = $patientId";
+$sql = "SELECT * FROM pertinfotbl WHERE patientId = $patientId";
 // execute the sql query
 $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
@@ -42,24 +42,19 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $dptDose = $_POST['dptDose'];
-    $datelastDose = $_POST['datelastDose'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $dptDose = $_POST['dptDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dptDose']);
+    $datelastDose = $_POST['datelastDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['datelastDose']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
+
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the perthesinfotbl table
-        $query = "UPDATE perthesinfotbl
+        $query = "UPDATE pertinfotbl
                 SET
                     dptDose = '$dptDose',
                     datelastDose = '$datelastDose',
@@ -78,8 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Perthes Disease info successfully updated!";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "<script>
                 alert('Perthes Disease info successfully updated!');
@@ -137,13 +131,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">morbidityMonth</label>
+                <label class="col-sm-3 form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">MorbidityWeek</label>
+                <label class="col-sm-3 form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

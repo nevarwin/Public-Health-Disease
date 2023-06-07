@@ -69,7 +69,8 @@ $caseClass = $row['caseClass'];
 <div class="row mb-2">
     <label for="" class='col-sm form-label font-weight-bold'>Outcome</label>
     <div class="col-sm-6">
-        <p><?php echo $outcome; ?></p>
+        <p><?php echo ucfirst($outcome); ?>
+        </p>
     </div>
 </div>
 <div class="row mb-2">

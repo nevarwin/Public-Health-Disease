@@ -22,74 +22,48 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $labResult = $_POST['labResult'];
-    $organism = $_POST['organism'];
-    $sari = $_POST['sari'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $labResult = $_POST['labResult'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+    $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $sari = $_POST['sari'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['sari']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $vaccinated = $_POST['vaccinated'];
+    $dateAdmitted = $_POST['dateAdmitted'];
     $vacName = ($_POST['vaccinated'] === 'yes') ? $_POST['vacName'] : 'N/A';
     $vacDate1 = ($_POST['vaccinated'] === 'yes') ? $_POST['vacDate1'] : '';
     $vacDate2 = ($_POST['vaccinated'] === 'yes') ? $_POST['vacDate2'] : '';
     $boosterName = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterName'] : 'N/A';
     $boosterDate = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterDate'] : '';
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the influenzainfotbl table
-        $query = "INSERT INTO influenzainfotbl (
-                    patientId,
-                    labResult,
-                    organism,
-                    sari,
-                    caseClass,
-                    outcome,
-                    vacName,
-                    vaccinated,
-                    vacDate1,
-                    vacDate2,
-                    boosterName,
-                    boosterDate,
-                    dateDied,
-                    dateAdmitted,
-                    morbidityMonth,
-                    morbidityWeek
-                )
-                VALUES (
-                    '$patientId',
-                    '$labResult',
-                    '$organism',
-                    '$sari',
-                    '$caseClass',
-                    '$outcome',
-                    '$vacName',
-                    '$vaccinated',
-                    '$vacDate1',
-                    '$vacDate2',
-                    '$boosterName',
-                    '$boosterDate',
-                    '$dateDied',
-                    '$dateAdmitted',
-                    '$morbidityMonth',
-                    '$morbidityWeek'
-                )";
+        $query = "UPDATE influenzainfotbl
+                SET
+                    labResult = '$labResult',
+                    organism = '$organism',
+                    sari = '$sari',
+                    caseClass = '$caseClass',
+                    outcome = '$outcome',
+                    vacName = '$vacName',
+                    vaccinated = '$vaccinated',
+                    vacDate1 = '$vacDate1',
+                    vacDate2 = '$vacDate2',
+                    boosterName = '$boosterName',
+                    boosterDate = '$boosterDate',
+                    dateDied = '$dateDied',
+                    dateAdmitted = '$dateAdmitted',
+                    morbidityMonth = '$morbidityMonth',
+                    morbidityWeek = '$morbidityWeek'
+                WHERE patientId = '$patientId'";
 
 
         $result = mysqli_query($con, $query);
@@ -161,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row justify-content-center mb-3">
                     <label class="col-sm-3 col-form-label">Vaccine Name</label>
                     <div class="col-sm-6">
-                        <input placeholder='ex. Pfizer' type="text" class="form-control" id="vacName" name="vacName">
+                        <input placeholder='ex. Pfizer' type="text" class="form-control" id="vacName" name="vacName" <?= $vaccinated == 'yes' ? 'required' : '' ?>>
                     </div>
                 </div>
                 <div class="row justify-content-center mb-3">
@@ -179,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row justify-content-center mb-3">
                     <label class="col-sm-3 col-form-label">Booster Name</label>
                     <div class="col-sm-6">
-                        <input placeholder='ex. Pfizer' type="text" class="form-control" id="boosterName" name="boosterName">
+                        <input placeholder='ex. Pfizer' type="text" class="form-control" id="boosterName" name="boosterName" <?= $vaccinated == 'yes' ? 'required' : '' ?>>
                     </div>
                 </div>
                 <div class="row justify-content-center mb-3">
@@ -202,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">MorbidityWeek</label>
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input placeholder='ex. 1' type="text" class="form-control" name="morbidityWeek">
                 </div>

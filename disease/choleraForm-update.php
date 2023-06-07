@@ -42,23 +42,18 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $stoolCulture = $_POST['stoolCulture'];
-    $organism = $_POST['organism'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
-    $dateDied = $_POST['dateDied'];
+    $stoolCulture = $_POST['stoolCulture'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stoolCulture']);
+    $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the diphinfotbl table
         $query = "UPDATE cholerainfotbl
                 SET
@@ -72,16 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     morbidityWeek = '$morbidityWeek'
                 WHERE patientId = '$patientId'";
 
-
-
         $result = mysqli_query($con, $query);
 
         if ($result) {
             $message = "Dengue info successfully updated!";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "<script>
                 alert('Dengue info successfully updated!');
@@ -92,8 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>
@@ -139,13 +130,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">morbidityMonth</label>
+                <label class="col-sm-3 form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 form-label">MorbidityWeek</label>
+                <label class="col-sm-3 form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

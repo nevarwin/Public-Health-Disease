@@ -19,7 +19,7 @@ if (!isset($_GET["patientId"])) {
 }
 $patientId = $_GET['patientId'];
 // read row 
-$sql = "SELECT * FROM neonatalinfotbl WHERE patientId = $patientId";
+$sql = "SELECT * FROM ntinfotbl WHERE patientId = $patientId";
 // execute the sql query
 $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
@@ -55,91 +55,91 @@ $morbidityMonth = $row['morbidityMonth'];
     ?>
 
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
+        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
         <div class="col-sm-6">
             <p> <?php echo $dateAdmitted; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Mother's Name</label>
+        <label class="col-sm-3 form-label font-weight-bold">Mother's Name</label>
         <div class="col-sm-6">
-            <p> <?php echo $mother; ?> </p>
+            <p> <?php echo ucfirst($mother); ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">first2Days</label>
+        <label class="col-sm-3 form-label font-weight-bold">First 2Days</label>
         <div class="col-sm-6">
             <p> <?php echo $first2Days; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">after2Days</label>
+        <label class="col-sm-3 form-label font-weight-bold">After 2Days</label>
         <div class="col-sm-6">
             <p> <?php echo $after2Days; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">finalDx</label>
+        <label class="col-sm-3 form-label font-weight-bold">FinalDx</label>
         <div class="col-sm-6">
             <p> <?php echo $finalDx; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">trismus</label>
+        <label class="col-sm-3 form-label font-weight-bold">Trismus</label>
         <div class="col-sm-6">
             <p> <?php echo $trismus; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">clenFis</label>
+        <label class="col-sm-3 form-label font-weight-bold">ClenFis</label>
         <div class="col-sm-6">
             <p> <?php echo $clenFis; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">opistho</label>
+        <label class="col-sm-3 form-label font-weight-bold">Opistho</label>
         <div class="col-sm-6">
             <p> <?php echo $opistho; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">stumpInf</label>
+        <label class="col-sm-3 form-label font-weight-bold">Stump Information</label>
         <div class="col-sm-6">
             <p> <?php echo $stumpInf; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Cord Cut</label>
+        <label class="col-sm-3 form-label font-weight-bold">Cord Cut</label>
         <div class="col-sm-6">
             <p> <?php echo $cordCut; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Final Classification</label>
+        <label class="col-sm-3 form-label font-weight-bold">Final Classification</label>
         <div class="col-sm-6">
             <p> <?php echo $finalClass; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="outcome" class="col-sm-3 form-label">Outcome</label>
+        <label for="outcome" class="col-sm-3 form-label font-weight-bold">Outcome</label>
         <div class="col-sm-6">
-            <p> <?php echo $outcome; ?> </p>
+            <p> <?php echo ucfirst($outcome); ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">morbidityMonth</label>
+        <label for="" class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityMonth; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">MorbidityWeek</label>
+        <label for="" class="col-sm-3 form-label font-weight-bold">Morbidity Week</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label for="dateDied" class="col-sm-3 form-label">Date Died</label>
+        <label for="dateDied" class="col-sm-3 form-label font-weight-bold">Date Died</label>
         <div class="col-sm-6">
             <p> <?php echo $dateDied; ?> </p>
         </div>

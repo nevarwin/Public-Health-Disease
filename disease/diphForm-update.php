@@ -42,23 +42,17 @@ $morbidityMonth = $row['morbidityMonth'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $dateLastDose = $_POST['dateLastDose'];
-    $dptDoses = $_POST['dptDoses'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $dptDoses = $_POST['dptDoses'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dptDoses']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateLastDose = $_POST['dateLastDose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateLastDose']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the diphinfotbl table
         $query = "UPDATE diphinfotbl
                     SET
@@ -122,31 +116,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="dptDoses" class="col-sm-3 form-label">Dpt Doses</label>
+                <label for="dptDoses" class="col-sm-3 col-form-label">Dpt Doses</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="dptDoses" name="dptDoses" value='<?php echo $dptDoses; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 col-form-label">Date Last Dos</label>
+                <label for="" class="col-sm-3 col-form-label">Date Last Dose</label>
                 <div class="col-sm-6">
                     <input type="date" class="form-control" name="dateLastDose" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateLastDose; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="caseClass" class="col-sm-3 form-label">Case Classification</label>
+                <label for="caseClass" class="col-sm-3 col-form-label">Case Classification</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 form-label">morbidityMonth</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class="col-sm-3 form-label">MorbidityWeek</label>
+                <label for="" class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>

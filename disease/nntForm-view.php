@@ -51,73 +51,67 @@ $morbidityWeek = $row['morbidityWeek'];
     ?>
 
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
+        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
         <div class="col-sm-6">
             <p> <?php echo $dateAdmitted; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Lab Result</label>
+        <label class="col-sm-3 form-label font-weight-bold">Recent Acute Wound</label>
         <div class="col-sm-6">
             <p> <?php echo $recentAcuteWound; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">woundSite</label>
+        <label class="col-sm-3 form-label font-weight-bold">Wound Site</label>
         <div class="col-sm-6">
             <p> <?php echo $woundSite; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Wound Type</label>
+        <label class="col-sm-3 form-label font-weight-bold">Wound Type</label>
         <div class="col-sm-6">
             <p> <?php echo $woundType; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">otherWound</label>
+        <label class="col-sm-3 form-label font-weight-bold">Other Wound</label>
         <div class="col-sm-6">
             <p> <?php echo $otherWound; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">tetanusAntitoxin</label>
+        <label class="col-sm-3 form-label font-weight-bold">Tetanus Antitoxin</label>
         <div class="col-sm-6">
             <p> <?php echo $tetanusAntitoxin; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">tetanusAntitoxin</label>
-        <div class="col-sm-6">
-            <p> <?php echo $tetanusAntitoxin; ?> </p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label">skinLesion</label>
+        <label class="col-sm-3 form-label font-weight-bold">Skin Lesion</label>
         <div class="col-sm-6">
             <p> <?php echo $skinLesion; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
+        <label class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityMonth; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
+        <label class="col-sm-3 form-label font-weight-bold">MorbidityWeek</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
+        <label class="col-sm-3 form-label font-weight-bold">Outcome</label>
         <div class="col-sm-6">
-            <p> <?php echo $outcome; ?></p>
+            <p> <?php echo ucfirst($outcome); ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date Died</label>
+        <label class="col-sm-3 form-label font-weight-bold">Date Died</label>
         <div class="col-sm-6">
             <p> <?php echo $dateDied; ?> </p>
         </div>

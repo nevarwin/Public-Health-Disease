@@ -24,58 +24,38 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $type = $_POST['type'];
-    $labTest = $_POST['labTest'];
-    $labRes = $_POST['labRes'];
-    $clinClass = $_POST['clinClass'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $type = $_POST['type'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['type']);
+    $labTest = $_POST['labTest'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labTest']);
+    $labRes = $_POST['labRes'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labRes']);
+    $clinClass = $_POST['clinClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['clinClass']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the Dengueinfotbl table
-        $query = "INSERT INTO dengueinfotbl (
-                    patientId,
-                    type,
-                    labTest,
-                    labRes,
-                    clinClass,
-                    caseClass,
-                    outcome,
-                    dateDied,
-                    dateAdmitted,
-                    morbidityMonth,
-                    morbidityWeek
-                )
-                VALUES (
-                    '$patientId',
-                    '$type',
-                    '$labTest',
-                    '$labRes',
-                    '$clinClass',
-                    '$caseClass',
-                    '$outcome',
-                    '$dateDied',
-                    '$dateAdmitted',
-                    '$morbidityMonth',
-                    '$morbidityWeek'
-                );";
+        $query = "UPDATE dengueinfotbl SET
+                    type = '$type',
+                    labTest = '$labTest',
+                    labRes = '$labRes',
+                    clinClass = '$clinClass',
+                    caseClass = '$caseClass',
+                    outcome = '$outcome',
+                    dateDied = '$dateDied',
+                    dateAdmitted = '$dateAdmitted',
+                    morbidityMonth = '$morbidityMonth',
+                    morbidityWeek = '$morbidityWeek'
+                WHERE patientId = $patientId;";
 
         $result = mysqli_query($con, $query);
 
@@ -94,8 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Error submitting form!";
             $type = 'warning';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "
             <script>
@@ -124,31 +103,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 form-label">Type</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. DF" type="text" class="form-control" id="type" name="type" required>
+                    <input placeholder="ex. DF" type="text" class="form-control" id="type" name="type">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 form-label">Lab Test</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. Negative" type="text" class="form-control" id="labTest" name="labTest" required>
+                    <input placeholder="ex. Negative" type="text" class="form-control" id="labTest" name="labTest">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 form-label">Lab Result</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. Negative" type="text" class="form-control" id="labRes" name="labRes" required>
+                    <input placeholder="ex. Negative" type="text" class="form-control" id="labRes" name="labRes">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 form-label">Clinical Class</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. No warning" type="text" class="form-control" id="clinClass" name="clinClass" required>
+                    <input placeholder="ex. No warning" type="text" class="form-control" id="clinClass" name="clinClass">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 form-label">Case Class</label>
                 <div class="col-sm-6">
-                    <input placeholder="ex. Suspected" type="text" class="form-control" id="caseClass" name="caseClass" required>
+                    <input placeholder="ex. Suspected" type="text" class="form-control" id="caseClass" name="caseClass">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">

@@ -49,11 +49,13 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $labResult = $_POST['labResult'];
-    $organism = $_POST['organism'];
-    $sari = $_POST['sari'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
+    $labResult = $_POST['labResult'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+    $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $sari = $_POST['sari'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['sari']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $vaccinated = $_POST['vaccinated'];
     $vacName = ($_POST['vaccinated'] === 'yes') ? $_POST['vacName'] : 'N/A';
     $vacDate1 = ($_POST['vaccinated'] === 'yes') ? $_POST['vacDate1'] : '';
@@ -61,17 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $boosterName = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterName'] : 'N/A';
     $boosterDate = ($_POST['vaccinated'] === 'yes') ? $_POST['boosterDate'] : '';
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the influenzainfotbl table
         $query = "UPDATE influenzainfotbl
                 SET
@@ -149,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="col-sm-3 col-form-label">Vaccinated?</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="vaccinated" name="vaccinated">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
+                        <option value="yes" <?php echo ($vaccinated == 'yes') ? 'selected' : ''; ?>>Yes</option>
+                        <option value="no" <?php echo ($vaccinated == 'no') ? 'selected' : ''; ?>>No</option>
                     </select>
                 </div>
             </div>
@@ -158,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row justify-content-center mb-3">
                     <label class="col-sm-3 col-form-label">Vaccine Name</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="vacName" name="vacName" value='<?php echo $vacName; ?>'>
+                        <input type="text" class="form-control" id="vacName" name="vacName" value='<?php echo $vacName; ?>' <?= $vaccinated == 'yes' ? 'required' : '' ?>>
                     </div>
                 </div>
                 <div class="row justify-content-center mb-3">
@@ -176,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row justify-content-center mb-3">
                     <label class="col-sm-3 col-form-label">Booster Name</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="boosterName" name="boosterName" value='<?php echo $boosterName; ?>'>
+                        <input type="text" class="form-control" id="boosterName" name="boosterName" value='<?php echo $boosterName; ?>' <?= $vaccinated == 'yes' ? 'required' : '' ?>>
                     </div>
                 </div>
                 <div class="row justify-content-center mb-3">

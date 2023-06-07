@@ -61,39 +61,33 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $fever = $_POST['fever'];
-    $seizure = $_POST['seizure'];
-    $malaise = $_POST['malaise'];
-    $headache = $_POST['headache'];
-    $stiffNeck = $_POST['stiffNeck'];
-    $cough = $_POST['cough'];
-    $rash = $_POST['rash'];
-    $vomiting = $_POST['vomiting'];
-    $soreThroat = $_POST['soreThroat'];
-    $petechia = $_POST['petechia'];
-    $sensoriumCh = $_POST['sensoriumCh'];
-    $runnyNose = $_POST['runnyNose'];
-    $purpura = $_POST['purpura'];
-    $drowsiness = $_POST['drowsiness'];
-    $dyspnea = $_POST['dyspnea'];
-    $otherSS = $_POST['otherSS'];
-    $clinicalPres = $_POST['clinicalPres'];
-    $caseClass = $_POST['caseClass'];
-    $antibiotics = $_POST['antibiotics'];
-    $bloodSpecimen = $_POST['bloodSpecimen'];
-    $outcome = $_POST['outcome'];
+    $fever = $_POST['fever'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['fever']);
+    $seizure = $_POST['seizure'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['seizure']);
+    $malaise = $_POST['malaise'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['malaise']);
+    $headache = $_POST['headache'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['headache']);
+    $stiffNeck = $_POST['stiffNeck'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stiffNeck']);
+    $cough = $_POST['cough'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['cough']);
+    $rash = $_POST['rash'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rash']);
+    $vomiting = $_POST['vomiting'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['vomiting']);
+    $soreThroat = $_POST['soreThroat'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['soreThroat']);
+    $petechia = $_POST['petechia'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['petechia']);
+    $sensoriumCh = $_POST['sensoriumCh'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['sensoriumCh']);
+    $runnyNose = $_POST['runnyNose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['runnyNose']);
+    $purpura = $_POST['purpura'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['purpura']);
+    $drowsiness = $_POST['drowsiness'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['drowsiness']);
+    $dyspnea = $_POST['dyspnea'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dyspnea']);
+    $otherSS = $_POST['otherSS'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSS']);
+    $clinicalPres = $_POST['clinicalPres'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['clinicalPres']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $antibiotics = $_POST['antibiotics'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['antibiotics']);
+    $bloodSpecimen = $_POST['bloodSpecimen'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['bloodSpecimen']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the leptospirosisinfotbl table
         $query = "UPDATE meningoinfotbl SET
                 fever = '$fever',
@@ -148,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Meningo Disease Form</h2>
         <form method="POST">
             <?php
@@ -163,24 +157,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('fever', $fever);
-            echo generateDropdownUpdate('seizure', $seizure);
-            echo generateDropdownUpdate('malaise', $malaise);
-            echo generateDropdownUpdate('headache', $headache);
-            echo generateDropdownUpdate('stiffNeck', $stiffNeck);
-            echo generateDropdownUpdate('cough', $cough);
-            echo generateDropdownUpdate('rash', $rash);
-            echo generateDropdownUpdate('vomiting', $vomiting);
-            echo generateDropdownUpdate('soreThroat', $soreThroat);
-            echo generateDropdownUpdate('petechia', $petechia);
-            echo generateDropdownUpdate('sensoriumCh', $sensoriumCh);
-            echo generateDropdownUpdate('runnyNose', $runnyNose);
-            echo generateDropdownUpdate('purpura', $purpura);
-            echo generateDropdownUpdate('drowsiness', $drowsiness);
-            echo generateDropdownUpdate('dyspnea', $dyspnea);
-            echo generateDropdownUpdate('bloodSpecimen', $bloodSpecimen);
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('fever', $fever); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('seizure', $seizure); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('malaise', $malaise); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('headache', $headache); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('stiffNeck', $stiffNeck); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('cough', $cough); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('rash', $rash); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('vomiting', $vomiting); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('soreThroat', $soreThroat); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('petechia', $petechia); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('sensoriumCh', $sensoriumCh); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('runnyNose', $runnyNose); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('purpura', $purpura); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('drowsiness', $drowsiness); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('dyspnea', $dyspnea); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('bloodSpecimen', $bloodSpecimen); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Other Symptoms</label>
                 <div class="col-sm-6">
@@ -188,19 +225,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">clinicalPres</label>
+                <label class="col-sm-3 col-form-label">Clinical Pres</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="clinicalPres" name="clinicalPres" value='<?php echo $clinicalPres; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">caseClass</label>
+                <label class="col-sm-3 col-form-label">Case Class</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="caseClass" name="caseClass" value='<?php echo $caseClass; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">antibiotics</label>
+                <label class="col-sm-3 col-form-label">Antibiotics</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="antibiotics" name="antibiotics" value='<?php echo $antibiotics; ?>'>
                 </div>

@@ -24,116 +24,76 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $fever = $_POST['fever'];
-    $rashChar = $_POST['rashChar'];
-    $rashSores = $_POST['rashSores'];
-    $palms = $_POST['palms'];
-    $fingers = $_POST['fingers'];
-    $footSoles = $_POST['footSoles'];
-    $buttocks = $_POST['buttocks'];
-    $mouthUlcers = $_POST['mouthUlcers'];
-    $pain = $_POST['pain'];
-    $anorexia = $_POST['anorexia'];
-    $bm = $_POST['bm'];
-    $soreThroat = $_POST['soreThroat'];
-    $nausVom = $_POST['nausVom'];
-    $diffBreath = $_POST['diffBreath'];
-    $paralysis = $_POST['paralysis'];
-    $meningLes = $_POST['meningLes'];
-    $otherSymptoms = $_POST['otherSymptoms'];
-    $anyComp = $_POST['anyComp'];
-    $complicated = $_POST['complicated'];
-    $otherCase = $_POST['otherCase'];
-    $travel = $_POST['travel'];
-    $probExposure = $_POST['probExposure'];
-    $caseClass = $_POST['caseClass'];
-    $outcome = $_POST['outcome'];
-    $wfDiag = $_POST['wfDiag'];
+    $fever = $_POST['fever'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['fever']);
+    $rashChar = $_POST['rashChar'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rashChar']);
+    $rashSores = $_POST['rashSores'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rashSores']);
+    $palms = $_POST['palms'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['palms']);
+    $fingers = $_POST['fingers'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['fingers']);
+    $footSoles = $_POST['footSoles'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['footSoles']);
+    $buttocks = $_POST['buttocks'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['buttocks']);
+    $mouthUlcers = $_POST['mouthUlcers'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['mouthUlcers']);
+    $pain = $_POST['pain'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['pain']);
+    $anorexia = $_POST['anorexia'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['anorexia']);
+    $bm = $_POST['bm'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['bm']);
+    $soreThroat = $_POST['soreThroat'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['soreThroat']);
+    $nausVom = $_POST['nausVom'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['nausVom']);
+    $diffBreath = $_POST['diffBreath'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['diffBreath']);
+    $paralysis = $_POST['paralysis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['paralysis']);
+    $meningLes = $_POST['meningLes'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['meningLes']);
+    $otherSymptoms = $_POST['otherSymptoms'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSymptoms']);
+    $anyComp = $_POST['anyComp'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['anyComp']);
+    $complicated = $_POST['complicated'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['complicated']);
+    $otherCase = $_POST['otherCase'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherCase']);
+    $travel = $_POST['travel'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['travel']);
+    $probExposure = $_POST['probExposure'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['probExposure']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $wfDiag = $_POST['wfDiag'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['wfDiag']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the Hand, Foot and Mouth Diseaseinfotbl table
-        $query = "INSERT INTO hfmdinfotbl (
-                patientId,
-                fever,
-                rashChar,
-                rashSores,
-                palms,
-                fingers,
-                footSoles,
-                buttocks,
-                mouthUlcers,
-                pain,
-                anorexia,
-                bm,
-                soreThroat,
-                nausVom,
-                diffBreath,
-                paralysis,
-                meningLes,
-                otherSymptoms,
-                anyComp,
-                complicated,
-                otherCase,
-                travel,
-                probExposure,
-                caseClass,
-                outcome,
-                wfDiag,
-                dateDied,
-                dateAdmitted,
-                morbidityMonth,
-                morbidityWeek
-            )
-            VALUES (
-                '$patientId',
-                '$fever',
-                '$rashChar',
-                '$rashSores',
-                '$palms',
-                '$fingers',
-                '$footSoles',
-                '$buttocks',
-                '$mouthUlcers',
-                '$pain',
-                '$anorexia',
-                '$bm',
-                '$soreThroat',
-                '$nausVom',
-                '$diffBreath',
-                '$paralysis',
-                '$meningLes',
-                '$otherSymptoms',
-                '$anyComp',
-                '$complicated',
-                '$otherCase',
-                '$travel',
-                '$probExposure',
-                '$caseClass',
-                '$outcome',
-                '$wfDiag',
-                '$dateDied',
-                '$dateAdmitted',
-                '$morbidityMonth',
-                '$morbidityWeek'
-            );";
-
+        $query = "UPDATE hfmdinfotbl SET
+                fever = '$fever',
+                rashChar = '$rashChar',
+                rashSores = '$rashSores',
+                palms = '$palms',
+                fingers = '$fingers',
+                footSoles = '$footSoles',
+                buttocks = '$buttocks',
+                mouthUlcers = '$mouthUlcers',
+                pain = '$pain',
+                anorexia = '$anorexia',
+                bm = '$bm',
+                soreThroat = '$soreThroat',
+                nausVom = '$nausVom',
+                diffBreath = '$diffBreath',
+                paralysis = '$paralysis',
+                meningLes = '$meningLes',
+                otherSymptoms = '$otherSymptoms',
+                anyComp = '$anyComp',
+                complicated = '$complicated',
+                otherCase = '$otherCase',
+                caseClass = '$caseClass',
+                outcome = '$outcome',
+                travel = '$travel',
+                wfDiag = '$wfDiag',
+                dateDied = '$dateDied',
+                probExposure = '$probExposure',
+                dateAdmitted = '$dateAdmitted',
+                morbidityMonth = '$morbidityMonth',
+                morbidityWeek = '$morbidityWeek'
+                WHERE patientId = '$patientId';";
 
         $result = mysqli_query($con, $query);
 
@@ -159,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-9" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Hand, Foot and Mouth Disease Form</h2>
         <form method="POST">
             <?php
@@ -173,25 +133,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
-            <?php
-            echo generateDropdown('fever');
-            echo generateDropdown('rashChar');
-            echo generateDropdown('rashSores');
-            echo generateDropdown('palms');
-            echo generateDropdown('fingers');
-            echo generateDropdown('footSoles');
-            echo generateDropdown('buttocks');
-            echo generateDropdown('mouthUlcers');
-            echo generateDropdown('pain');
-            echo generateDropdown('anorexia');
-            echo generateDropdown('bm');
-            echo generateDropdown('soreThroat');
-            echo generateDropdown('nausVom');
-            echo generateDropdown('diffBreath');
-            echo generateDropdown('paralysis');
-            echo generateDropdown('meningLes');
-            echo generateDropdown('travel');
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('fever'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('rashChar'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('rashSores'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('palms'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('fingers'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('footSoles'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('buttocks'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('mouthUlcers'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('pain'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('anorexia'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('bm'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('soreThroat'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('nausVom'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('diffBreath'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('paralysis'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('meningLes'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('travel'); ?>
+                </div>
+            </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Other Symptoms</label>
                 <div class="col-sm-6">
@@ -205,19 +209,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">complicated</label>
+                <label class="col-sm-3 col-form-label">Complicated</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="complicated" name="complicated">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">probExposure</label>
+                <label class="col-sm-3 col-form-label">Prob Exposure</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="probExposure" name="probExposure">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">wfDiag</label>
+                <label class="col-sm-3 col-form-label">Other Case</label>
+                <div class="col-sm-6">
+                    <input placeholder="ex. N/A" type="text" class="form-control" id="otherCase" name="otherCase">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Wf Diag</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="wfDiag" name="wfDiag">
                 </div>

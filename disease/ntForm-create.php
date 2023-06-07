@@ -24,73 +24,48 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
     echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $mother = $_POST['mother'];
-    $first2Days = $_POST['first2Days'];
-    $after2Days = $_POST['after2Days'];
-    $finalDx = $_POST['finalDx'];
-    $trismus = $_POST['trismus'];
-    $clenFis = $_POST['clenFis'];
-    $opistho = $_POST['opistho'];
-    $stumpInf = $_POST['stumpInf'];
-    $cordCut = $_POST['cordCut'];
-    $finalClass = $_POST['finalClass'];
-    $outcome = $_POST['outcome'];
+    $mother = $_POST['mother'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['mother']);
+    $first2Days = $_POST['first2Days'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['first2Days']);
+    $after2Days = $_POST['after2Days'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['after2Days']);
+    $finalDx = $_POST['finalDx'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalDx']);
+    $trismus = $_POST['trismus'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['trismus']);
+    $clenFis = $_POST['clenFis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['clenFis']);
+    $opistho = $_POST['opistho'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['opistho']);
+    $stumpInf = $_POST['stumpInf'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stumpInf']);
+    $cordCut = $_POST['cordCut'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['cordCut']);
+    $finalClass = $_POST['finalClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalClass']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $morbidityMonth = $_POST['morbidityMonth'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
-        // Insert the data into the diphinfotbl table
-        $query = "INSERT INTO neonatalinfotbl (
-                    patientId,
-                    mother,
-                    first2Days,
-                    after2Days,
-                    finalDx,
-                    trismus,
-                    clenFis,
-                    opistho,
-                    stumpInf,
-                    cordCut,
-                    finalClass,
-                    outcome,
-                    dateDied,
-                    dateAdmitted,
-                    morbidityMonth,
-                    morbidityWeek
-                    )
-                    VALUES (
-                    '$patientId',
-                    '$mother',
-                    '$first2Days',
-                    '$after2Days',
-                    '$finalDx',
-                    '$trismus',
-                    '$clenFis',
-                    '$opistho',
-                    '$stumpInf',
-                    '$cordCut',
-                    '$finalClass',
-                    '$outcome',
-                    '$dateDied',
-                    '$dateAdmitted',
-                    '$morbidityMonth',
-                    '$morbidityWeek'
-        );";
+        // Insert the data into the ntinfotbl table
+        $query = "UPDATE ntinfotbl SET
+            mother = '$mother',
+            first2Days = '$first2Days',
+            after2Days = '$after2Days',
+            finalDx = '$finalDx',
+            trismus = '$trismus',
+            clenFis = '$clenFis',
+            opistho = '$opistho',
+            stumpInf = '$stumpInf',
+            cordCut = '$cordCut',
+            finalClass = '$finalClass',
+            outcome = '$outcome',
+            dateDied = '$dateDied',
+            dateAdmitted = '$dateAdmitted',
+            morbidityMonth = '$morbidityMonth',
+            morbidityWeek = '$morbidityWeek'
+            WHERE patientId = $patientId;
+            ";
 
         $result = mysqli_query($con, $query);
 
@@ -122,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Neonatal Tetanus Form</h2>
         <form method="POST">
             <?php
@@ -142,16 +117,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. Juana" type="text" class="form-control" id="mother" name="mother" required>
                 </div>
             </div>
-            <?php
-            echo generateDropdown('first2Days');
-            echo generateDropdown('after2Days');
-            echo generateDropdown('first2Days');
-            echo generateDropdown('trismus');
-            echo generateDropdown('clenFis');
-            echo generateDropdown('opistho');
-            echo generateDropdown('stumpInf');
-            echo generateDropdown('cordCut');
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('first2Days'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('after2Days'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('first2Days'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('trismus'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('clenFis'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('opistho'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdown('stumpInf'); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdown('cordCut'); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Final Dx</label>
                 <div class="col-sm-6">

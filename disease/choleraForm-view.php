@@ -48,49 +48,50 @@ $morbidityWeek = $row['morbidityWeek'];
     ?>
 
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label">Date Admitted</label>
+        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
         <div class="col-sm-6">
             <p> <?php echo $dateAdmitted; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Stool Culture</label>
+        <label class="col-sm-3 form-label font-weight-bold">Stool Culture</label>
         <div class="col-sm-6">
             <p> <?php echo $stoolCulture; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Organism</label>
+        <label class="col-sm-3 form-label font-weight-bold">Organism</label>
         <div class="col-sm-6">
             <p> <?php echo $organism; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Case Classification</label>
+        <label class="col-sm-3 form-label font-weight-bold">Case Classification</label>
         <div class="col-sm-6">
             <p> <?php echo $caseClass; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">morbidityMonth</label>
+        <label class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityMonth; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">MorbidityWeek</label>
+        <label class="col-sm-3 form-label font-weight-bold">MorbidityWeek</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Outcome</label>
+        <label class="col-sm-3 form-label font-weight-bold">Outcome</label>
         <div class="col-sm-6">
-            <p> <?php echo $outcome; ?></p>
+            <p> <?php echo ucfirst($outcome); ?>
+            </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label">Date Died</label>
+        <label class="col-sm-3 form-label font-weight-bold">Date Died</label>
         <div class="col-sm-6">
             <p> <?php echo $dateDied; ?> </p>
         </div>

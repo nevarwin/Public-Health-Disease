@@ -20,83 +20,55 @@ $patientId = $_GET['patientId'];
 if (empty($patientId)) {
   echo 'patiend Id emtpy';
 }
-echo $patientId;
 
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $typeOfExposure = $_POST['typeOfExposure'];
-  $category = $_POST['category'];
-  $biteSite = $_POST['biteSite'];
-  $dateBitten = $_POST['dateBitten'];
-  $typeOfAnimal = $_POST['typeOfAnimal'];
-  $labDiagnosis = $_POST['labDiagnosis'];
-  $labResult = $_POST['labResult'];
-  $animalStatus = $_POST['animalStatus'];
-  $dateVaccStarted = $_POST['dateVaccStarted'];
-  $animalVacc = $_POST['animalVacc'];
-  $woundCleaned = $_POST['woundCleaned'];
-  $rabiesVaccine = $_POST['rabiesVaccine'];
-  $animalOutcome = $_POST['animalOutcome'];
-  $caseClass = $_POST['caseClass'];
-  $dateAdmitted = $_POST['dateAdmitted'];
-  $morbidityWeek = $_POST['morbidityWeek'];
-  $morbidityMonth = $_POST['morbidityMonth'];
-  $outcome = $_POST['outcome'];
+  $typeOfExposure = $_POST['typeOfExposure'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['typeOfExposure']);
+  $category = $_POST['category'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['category']);
+  $biteSite = $_POST['biteSite'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['biteSite']);
+  $dateBitten = $_POST['dateBitten'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateBitten']);
+  $typeOfAnimal = $_POST['typeOfAnimal'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['typeOfAnimal']);
+  $labDiagnosis = $_POST['labDiagnosis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labDiagnosis']);
+  $labResult = $_POST['labResult'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+  $animalStatus = $_POST['animalStatus'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['animalStatus']);
+  $dateVaccStarted = $_POST['dateVaccStarted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateVaccStarted']);
+  $animalVacc = $_POST['animalVacc'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['animalVacc']);
+  $woundCleaned = $_POST['woundCleaned'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['woundCleaned']);
+  $rabiesVaccine = $_POST['rabiesVaccine'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rabiesVaccine']);
+  $animalOutcome = $_POST['animalOutcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['animalOutcome']);
+  $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
+  $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+  $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+  $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+  $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
   $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
 
 
   // check if the data is empty
   do {
-    if (empty($dateAdmitted)) {
-      $errorMessage = "All fields are required!";
-      echo "<script>alert('All fields are required!');</script>";
-      break;
-    }
     // Proceed with form submission
-    $query = "INSERT INTO rabiesinfotbl (
-    `patientId`, 
-    `typeOfExposure`, 
-    `category`, 
-    `biteSite`, 
-    `dateBitten`, 
-    `typeOfAnimal`, 
-    `labDiagnosis`, 
-    `labResult`, 
-    `animalStatus`, 
-    `dateVaccStarted`, 
-    `animalVacc`, 
-    `woundCleaned`, 
-    `rabiesVaccine`, 
-    `animalOutcome`, 
-    `caseClass`,
-    `dateAdmitted`,
-    `morbidityWeek`,
-    `morbidityMonth`,
-    `outcome`,
-    `dateDied`
-) VALUES (
-    '$patientId', 
-    '$typeOfExposure', 
-    '$category', 
-    '$biteSite', 
-    '$dateBitten', 
-    '$typeOfAnimal',
-    '$labDiagnosis',
-    '$labResult',
-    '$animalStatus', 
-    '$dateVaccStarted', 
-    '$animalVacc', 
-    '$woundCleaned', 
-    '$rabiesVaccine', 
-    '$animalOutcome', 
-    '$caseClass',
-    '$dateAdmitted',
-    '$morbidityWeek',
-    '$morbidityMonth',
-    '$outcome',
-    '$dateDied'
-)";
+    $query = "UPDATE rabiesinfotbl SET
+            typeOfExposure = '$typeOfExposure',
+            category = '$category',
+            biteSite = '$biteSite',
+            dateBitten = '$dateBitten',
+            typeOfAnimal = '$typeOfAnimal',
+            labDiagnosis = '$labDiagnosis',
+            labResult = '$labResult',
+            animalStatus = '$animalStatus',
+            dateVaccStarted = '$dateVaccStarted',
+            animalVacc = '$animalVacc',
+            woundCleaned = '$woundCleaned',
+            rabiesVaccine = '$rabiesVaccine',
+            animalOutcome = '$animalOutcome',
+            caseClass = '$caseClass',
+            dateAdmitted = '$dateAdmitted',
+            morbidityMonth = '$morbidityMonth',
+            morbidityWeek = '$morbidityWeek',
+            outcome = '$outcome',
+            dateDied = '$dateDied'
+        WHERE patientId = $patientId";
 
 
 
@@ -106,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $successMessage = "Rabies info successfully added!";
       echo "<script>
       alert('Rabies form submitted successfully!');
-      //window.location = 'http://localhost/admin2gh/patientTable.php';
+      window.location = 'http://localhost/admin2gh/patientTable.php';
       </script>";
       exit;
     } else {

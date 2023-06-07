@@ -46,26 +46,20 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $recentAcuteWound = $_POST['recentAcuteWound'];
-    $woundSite = $_POST['woundSite'];
-    $woundType = $_POST['woundType'];
-    $otherWound = $_POST['otherWound'];
-    $tetanusToxoid = $_POST['tetanusToxoid'];
-    $tetanusAntitoxin = $_POST['tetanusAntitoxin'];
-    $skinLesion = $_POST['skinLesion'];
-    $outcome = $_POST['outcome'];
+    $recentAcuteWound = $_POST['recentAcuteWound'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['recentAcuteWound']);
+    $woundSite = $_POST['woundSite'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['woundSite']);
+    $woundType = $_POST['woundType'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['woundType']);
+    $otherWound = $_POST['otherWound'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherWound']);
+    $tetanusToxoid = $_POST['tetanusToxoid'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['tetanusToxoid']);
+    $tetanusAntitoxin = $_POST['tetanusAntitoxin'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['tetanusAntitoxin']);
+    $skinLesion = $_POST['skinLesion'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['skinLesion']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the nntinfotbl table
         $query = "UPDATE nntinfotbl SET
                 recentAcuteWound = '$recentAcuteWound',
@@ -130,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">woundSite</label>
+                <label class="col-sm-3 col-form-label">Wound Site</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="woundSite" name="woundSite" value='<?php echo $woundSite; ?>'>
                 </div>

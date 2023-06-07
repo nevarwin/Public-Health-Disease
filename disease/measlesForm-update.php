@@ -55,33 +55,27 @@ $morbidityWeek = $row['morbidityWeek'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $measVacc = $_POST['measVacc'];
-    $vitaminA = $_POST['vitaminA'];
-    $cough = $_POST['cough'];
-    $koplikSpot = $_POST['koplikSpot'];
-    $lastVac = $_POST['lastVac'];
-    $runnyNose = $_POST['runnyNose'];
-    $redEyes = $_POST['redEyes'];
-    $arthritisArthralgia = $_POST['arthritisArthralgia'];
-    $swolympNod = $_POST['swolympNod'];
-    $otherSymptoms = $_POST['otherSymptoms'];
-    $complications = $_POST['complications'];
-    $otherCase = $_POST['otherCase'];
-    $finalClass = $_POST['finalClass'];
-    $infectionSource = $_POST['infectionSource'];
-    $outcome = $_POST['outcome'];
+    $measVacc = $_POST['measVacc'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['measVacc']);
+    $vitaminA = $_POST['vitaminA'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['vitaminA']);
+    $cough = $_POST['cough'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['cough']);
+    $koplikSpot = $_POST['koplikSpot'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['koplikSpot']);
+    $lastVac = $_POST['lastVac'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['lastVac']);
+    $runnyNose = $_POST['runnyNose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['runnyNose']);
+    $redEyes = $_POST['redEyes'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['redEyes']);
+    $arthritisArthralgia = $_POST['arthritisArthralgia'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['arthritisArthralgia']);
+    $swolympNod = $_POST['swolympNod'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['swolympNod']);
+    $otherSymptoms = $_POST['otherSymptoms'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSymptoms']);
+    $complications = $_POST['complications'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['complications']);
+    $otherCase = $_POST['otherCase'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherCase']);
+    $finalClass = $_POST['finalClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['finalClass']);
+    $infectionSource = $_POST['infectionSource'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['infectionSource']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the leptospirosisinfotbl table
         $query = "UPDATE measlesinfotbl SET
                 measVacc = '$measVacc',
@@ -146,16 +140,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <?php
-            echo generateDropdownUpdate('measVacc', $measVacc);
-            echo generateDropdownUpdate('vitaminA', $vitaminA);
-            echo generateDropdownUpdate('cough', $cough);
-            echo generateDropdownUpdate('koplikSpot', $koplikSpot);
-            echo generateDropdownUpdate('runnyNose', $runnyNose);
-            echo generateDropdownUpdate('redEyes', $redEyes);
-            echo generateDropdownUpdate('arthritisArthralgia', $arthritisArthralgia);
-            echo generateDropdownUpdate('swolympNod', $swolympNod);
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('measVacc', $measVacc); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('vitaminA', $vitaminA); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('cough', $cough); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('koplikSpot', $koplikSpot); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('runnyNose', $runnyNose); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('redEyes', $redEyes); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php echo generateDropdownUpdate('arthritisArthralgia', $arthritisArthralgia); ?>
+                </div>
+                <div class="col">
+                    <?php echo generateDropdownUpdate('swolympNod', $swolympNod); ?>
+                </div>
+            </div>
+
             <div class="row justify-content-center mb-3">
                 <label for="" class="col-sm-3 col-form-label">Last Vaccine</label>
                 <div class="col-sm-6">
@@ -163,43 +178,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">otherSymptoms</label>
+                <label class="col-sm-3 col-form-label">Other Symptoms</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="otherSymptoms" name="otherSymptoms" value='<?php echo $otherSymptoms; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">complications</label>
+                <label class="col-sm-3 col-form-label">Complications</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="complications" name="complications" value='<?php echo $complications; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">otherCase</label>
+                <label class="col-sm-3 col-form-label">Other Case</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="otherCase" name="otherCase" value='<?php echo $otherCase; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">finalClass</label>
+                <label class="col-sm-3 col-form-label">Final Class</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="finalClass" name="finalClass" value='<?php echo $finalClass; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">infectionSource</label>
+                <label class="col-sm-3 col-form-label">Infection Source</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="infectionSource" name="infectionSource" value='<?php echo $infectionSource; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">morbidityMonth</label>
+                <label class="col-sm-3 col-form-label">Morbidity Month</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityMonth" value='<?php echo $morbidityMonth; ?>' />
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">MorbidityWeek</label>
+                <label class="col-sm-3 col-form-label">Morbidity Week</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="morbidityWeek" value='<?php echo $morbidityWeek; ?>' />
                 </div>
