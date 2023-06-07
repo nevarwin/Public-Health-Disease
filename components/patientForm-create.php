@@ -363,7 +363,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <?php
                             // Connect to database and fetch disease
                             include("connection.php");
-                            $result = mysqli_query($con, 'SELECT * FROM diseases');
+                            $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
 
                             // Display each disease in a dropdown option
                             while ($row = mysqli_fetch_assoc($result)) {
