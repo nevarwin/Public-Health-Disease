@@ -156,7 +156,7 @@
           <div class="col-md-6 col-xl-6">
             <div class="card-body text-center">
               <h5 class="card-title">Pie Chart</h5>
-              <p class="card-text" style="text-align: justify;">The distribution of disease cases each year is shown in the pie chart. The size of each slice on the graph represents the percentage of disease cases that were reported in year 2022, and each slice represents a different municipality. The graph gives a clear picture of how the disease burden each municipality.</p>
+              <p class="card-text" style="text-align: justify;">The pie chart is a graphical tool that shows the proportion of disease cases in various municipalities. The chart is divided into segments, each corresponding to a different municipality. The larger the segment, the more disease cases there are in that municipality. The pie chart helps to compare the disease situation across different regions and identify the areas with the highest or lowest disease prevalence.</p>
             </div>
           </div>
           <div class="col-md-6">
