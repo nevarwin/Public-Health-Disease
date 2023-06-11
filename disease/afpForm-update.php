@@ -88,20 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $brthMusc = $_POST['brthMusc'];
     $neckMusc = $_POST['neckMusc'];
     $paradev = $_POST['paradev'];
-    $paradir = $_POST['paradir'];
     $facialMusc = $_POST['facialMusc'];
-    $rasens = $_POST['rasens'];
-    $lasens = $_POST['lasens'];
-    $rlsens = $_POST['rlsens'];
-    $llsens = $_POST['llsens'];
-    $raref = $_POST['raref'];
-    $laref = $_POST['laref'];
-    $rlref = $_POST['rlref'];
-    $llref = $_POST['llref'];
-    $ramotor = $_POST['ramotor'];
-    $lamotor = $_POST['lamotor'];
-    $rlmotor = $_POST['rlmotor'];
-    $llmotor = $_POST['llmotor'];
+    $rasens = $_POST['rasens'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rasens']);
+    $lasens = $_POST['lasens'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['lasens']);
+    $rlsens = $_POST['rlsens'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rlsens']);
+    $llsens = $_POST['llsens'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['llsens']);
+    $raref = $_POST['raref'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['raref']);
+    $laref = $_POST['laref'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['laref']);
+    $rlref = $_POST['rlref'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rlref']);
+    $llref = $_POST['llref'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['llref']);
+    $ramotor = $_POST['ramotor'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['ramotor']);
+    $lamotor = $_POST['lamotor'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['lamotor']);
+    $rlmotor = $_POST['rlmotor'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['rlmotor']);
+    $llmotor = $_POST['llmotor'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['llmotor']);
     $hxDisorder = $_POST['hxDisorder'];
     $otherCases = $_POST['otherCases'];
     $firststoolSpec = $_POST['firststoolSpec'];
@@ -111,20 +110,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dstool2Taken = $_POST['dstool2Taken'];
     $dstool1Sent = $_POST['dstool1Sent'];
     $dstool2Sent = $_POST['dstool2Sent'];
-    $stool1Result = $_POST['stool1Result'];
-    $stool2Result = $_POST['stool2Result'];
+    $stool1Result = $_POST['stool1Result'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stool1Result']);
+    $stool2Result = $_POST['stool2Result'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stool2Result']);
+    $paradir = $_POST['paradir'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['paradir']);
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityMonth = $_POST['morbidityMonth'];
     $morbidityWeek = $_POST['morbidityWeek'];
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
-        // Proceed with form submission
         // Insert the data into the amebiasisinfotbl table
         $query = "UPDATE afpinfotbl SET
                 fever = '$fever',
@@ -226,13 +220,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Paralysis at Birth', $paralysisatBirth); ?>
+                    <?php echo generateDropdownUpdate('paralysisatBirth', $paralysisatBirth); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Diarrhea Vomiting', $diarrheaVomiting); ?>
+                    <?php echo generateDropdownUpdate('diarrheaVomiting', $diarrheaVomiting); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Muscle Pain', $musclePain); ?>
+                    <?php echo generateDropdownUpdate('musclePain', $musclePain); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
@@ -251,18 +245,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('hxDisorder', $hxDisorder); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Other Cases', $otherCases); ?>
+                    <?php echo generateDropdownUpdate('otherCases', $otherCases); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('First Stool Spec', $firststoolSpec); ?>
+                    <?php echo generateDropdownUpdate('firststoolSpec', $firststoolSpec); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Paradev', $paradev); ?>
+                    <?php echo generateDropdownUpdate('paradev', $paradev); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Facial Musc', $facialMusc); ?>
+                    <?php echo generateDropdownUpdate('facialMusc', $facialMusc); ?>
                 </div>
                 <div class="col-lg-3">
                     <div class="row justify-content-center mb-3">

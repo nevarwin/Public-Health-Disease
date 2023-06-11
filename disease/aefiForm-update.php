@@ -62,34 +62,34 @@ $dateExpire = $row['dateExpire'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $case = $_POST['case'];
-    $anaphylactoid = $_POST['anaphylactoid'];
-    $anaphylaxis = $_POST['anaphylaxis'];
-    $brachialneuritis = $_POST['brachialneuritis'];
-    $dissbcginfect = $_POST['dissbcginfect'];
-    $encephalopathy = $_POST['encephalopathy'];
-    $hhe = $_POST['hhe'];
-    $injectsiteAbcess = $_POST['injectsiteAbcess'];
-    $intussusception = $_POST['intussusception'];
-    $lymphadenitis = $_POST['lymphadenitis'];
-    $osteitis = $_POST['osteitis'];
-    $persistent = $_POST['persistent'];
-    $seizures = $_POST['seizures'];
-    $sepsis = $_POST['sepsis'];
-    $thrombocytopenia = $_POST['thrombocytopenia'];
-    $outcome = $_POST['outcome'];
-    $aliveCondition = $_POST['aliveCondition'];
+    $case = $_POST['case'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['case']);
+    $siteInjection = $_POST['siteInjection'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['siteInjection']);
+    $manufacturer = $_POST['manufacturer'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['manufacturer']);
+    $suspectedVacc = $_POST['suspectedVacc'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['suspectedVacc']);
+    $aliveCondition = $_POST['aliveCondition'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['aliveCondition']);
+    $otherSign = $_POST['otherSign'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['otherSign']);
+    $anaphylactoid = $_POST['anaphylactoid'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['anaphylactoid']);
+    $anaphylaxis = $_POST['anaphylaxis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['anaphylaxis']);
+    $brachialneuritis = $_POST['brachialneuritis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['brachialneuritis']);
+    $dissbcginfect = $_POST['dissbcginfect'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dissbcginfect']);
+    $encephalopathy = $_POST['encephalopathy'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['encephalopathy']);
+    $hhe = $_POST['hhe'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['hhe']);
+    $injectsiteAbcess = $_POST['injectsiteAbcess'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['injectsiteAbcess']);
+    $intussusception = $_POST['intussusception'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['intussusception']);
+    $lymphadenitis = $_POST['lymphadenitis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['lymphadenitis']);
+    $osteitis = $_POST['osteitis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['osteitis']);
+    $persistent = $_POST['persistent'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['persistent']);
+    $seizures = $_POST['seizures'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['seizures']);
+    $sepsis = $_POST['sepsis'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['sepsis']);
+    $thrombocytopenia = $_POST['thrombocytopenia'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['thrombocytopenia']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $dateVaccination = $_POST['dateVaccination'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateVaccination']);
+    $dose = $_POST['dose'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dose']);
+    $dateExpire = $_POST['dateExpire'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateExpire']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
-    $otherSign = $_POST['otherSign'];
-    $dateAdmitted = $_POST['dateAdmitted'];
-    $morbidityMonth = $_POST['morbidityMonth'];
-    $morbidityWeek = $_POST['morbidityWeek'];
-    $suspectedVacc = $_POST['suspectedVacc'];
-    $dateVaccination = $_POST['dateVaccination'];
-    $dose = $_POST['dose'];
-    $siteInjection = $_POST['siteInjection'];
-    $manufacturer = $_POST['manufacturer'];
-    $dateExpire = $_POST['dateExpire'];
 
     // check if the data is empty
     do {
@@ -136,8 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Adverse Event Following Immunization info successfully updated!";
             $type = 'success';
             $strongContent = 'Holy guacamole!';
-            $alert
-                = generateAlert($type, $strongContent, $message);
+            $alert = generateAlert($type, $strongContent, $message);
 
             echo "<script>
                 alert('Adverse Event Following Immunization info successfully updated!');
@@ -181,56 +180,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Anaphylactoid', $anaphylactoid); ?>
+                    <?php echo generateDropdownUpdate('anaphylactoid', $anaphylactoid); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Anaphylaxis', $anaphylaxis); ?>
+                    <?php echo generateDropdownUpdate('anaphylaxis', $anaphylaxis); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Brachialneuritis', $brachialneuritis); ?>
+                    <?php echo generateDropdownUpdate('brachialneuritis', $brachialneuritis); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
 
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Dissbcginfect', $dissbcginfect); ?>
+                    <?php echo generateDropdownUpdate('dissbcginfect', $dissbcginfect); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Hhe', $hhe); ?>
+                    <?php echo generateDropdownUpdate('hhe', $hhe); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Encephalopathy', $encephalopathy); ?>
+                    <?php echo generateDropdownUpdate('encephalopathy', $encephalopathy); ?>
                 </div>
             </div>
 
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('InjectsiteAbcess', $injectsiteAbcess); ?>
+                    <?php echo generateDropdownUpdate('injectsiteAbcess', $injectsiteAbcess); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Intussusception', $intussusception); ?>
+                    <?php echo generateDropdownUpdate('intussusception', $intussusception); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Lymphadenitis', $lymphadenitis); ?>
-                </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Osteitis', $osteitis); ?>
-                </div>
-                <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Persistent', $persistent); ?>
-                </div>
-                <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Seizures', $seizures); ?>
+                    <?php echo generateDropdownUpdate('lymphadenitis', $lymphadenitis); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Sepsis', $sepsis); ?>
+                    <?php echo generateDropdownUpdate('osteitis', $osteitis); ?>
                 </div>
                 <div class="col-lg-3">
-                    <?php echo generateDropdownUpdate('Thrombocytopenia', $thrombocytopenia); ?>
+                    <?php echo generateDropdownUpdate('persistent', $persistent); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('seizures', $seizures); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('sepsis', $sepsis); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdownUpdate('thrombocytopenia', $thrombocytopenia); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">

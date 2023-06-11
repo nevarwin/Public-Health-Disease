@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
     $stoolCulture = $_POST['stoolCulture'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['stoolCulture']);
     $organism = $_POST['organism'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
-    $outcome = mysqli_real_escape_string($con, $_POST['outcome']);
-    $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
-    $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
-    $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
+    $outcome = $_POST['outcome'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['outcome']);
+    $dateAdmitted = $_POST['dateAdmitted'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['dateAdmitted']);
+    $morbidityWeek = $_POST['morbidityWeek'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityWeek']);
+    $morbidityMonth = $_POST['morbidityMonth'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['morbidityMonth']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
 
     // check if the data is empty
