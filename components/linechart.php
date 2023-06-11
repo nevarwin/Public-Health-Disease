@@ -1,3 +1,54 @@
+<?php
+// Replace with your database connection code
+include('connection.php');
+
+$patientCount = 0;
+$jsonData = 0;
+
+if (isset($_GET['disease'])) {
+    $selectedDisease = $_GET['disease'];
+    // echo "Selected Disease: $selectedDisease<br>";
+
+    $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
+            FROM patients 
+            WHERE disease = $selectedDisease 
+            GROUP BY YEAR(creationDate)";
+
+    $countResult = mysqli_query($con, $countQuery);
+
+    $data = array();
+    while ($row = $countResult->fetch_assoc()) {
+        $year = $row['creationYear'];
+        $count = $row['patientCount'];
+        $data[$year] = $count;
+    }
+
+    // Echo the counts per year
+    // foreach ($data as $year => $count) {
+    //     echo "Year: $year, Count: $count<br>";
+    // }
+
+    // Encode the PHP array as JSON
+    $jsonData = json_encode($data);
+
+    // Echo the JSON data inside a JavaScript block
+    echo '<script>var selectedDisease = ' . $selectedDisease . ';</script>';
+    echo '<script>var jsonData = ' . $jsonData . ';</script>';
+}
+// Select query for all available creation date in patients table
+$pieYearQuery = "SELECT DISTINCT YEAR(creationDate) AS year FROM patients ORDER BY year ASC";
+$pieYearResult = mysqli_query($con, $pieYearQuery);
+
+// creating html option tag with value base on the result
+$options = '';
+while ($row = mysqli_fetch_assoc($pieYearResult)) {
+    $year = $row['year'];
+    $pieSelectedYear = $_GET['pieYear'] ?? '';
+    $selected = ($year == $pieSelectedYear) ? 'selected' : '';
+    $options .= "<option value=\"$year\" $selected>$year</option>";
+}
+?>
+
 <div class="row">
     <form id="form1" class="col-12 p-0">
         <div class="row col-xl-12 col-lg-12 col-sm-12">
@@ -37,6 +88,7 @@
                     ?>
                 </select>
             </div>
+
             <div class="col">
                 <div class="row justify-content-end">
                     <button type="submit" class="btn btn-primary">Check</button>
@@ -44,6 +96,18 @@
             </div>
         </div>
     </form>
+    <div class="dropdown col">
+        <label for="year">Select Start Year:</label>
+        <select class="custom-select" name="pieYear" id="startYear" onchange="filterData()">
+            <?php echo $options; ?>
+        </select>
+    </div>
+    <div class="dropdown col">
+        <label for="year">Select End Year:</label>
+        <select class="custom-select" name="pieYear" id="endYear" onchange="filterData()">
+            <?php echo $options; ?>
+        </select>
+    </div>
 </div>
 <div class="card shadow">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -55,46 +119,6 @@
         <canvas id="myChart"></canvas>
     </div>
 </div>
-
-
-<?php
-// Replace with your database connection code
-include('connection.php');
-
-$patientCount = 0;
-$jsonData = 0;
-
-if (isset($_GET['disease'])) {
-    $selectedDisease = $_GET['disease'];
-    // echo "Selected Disease: $selectedDisease<br>";
-
-    $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
-            FROM patients 
-            WHERE disease = $selectedDisease 
-            GROUP BY YEAR(creationDate)";
-
-    $countResult = mysqli_query($con, $countQuery);
-
-    $data = array();
-    while ($row = $countResult->fetch_assoc()) {
-        $year = $row['creationYear'];
-        $count = $row['patientCount'];
-        $data[$year] = $count;
-    }
-
-    // Echo the counts per year
-    // foreach ($data as $year => $count) {
-    //     echo "Year: $year, Count: $count<br>";
-    // }
-
-    // Encode the PHP array as JSON
-    $jsonData = json_encode($data);
-
-    // Echo the JSON data inside a JavaScript block
-    echo '<script>var selectedDisease = ' . $selectedDisease . ';</script>';
-    echo '<script>var jsonData = ' . $jsonData . ';</script>';
-}
-?>
 
 <script>
     var diseases = {
@@ -170,7 +194,7 @@ if (isset($_GET['disease'])) {
     };
 
     const config = {
-        type: "line",
+        type: 'line',
         data: data,
         options: {
             responsive: true,
@@ -202,6 +226,32 @@ if (isset($_GET['disease'])) {
     };
 
     const myChart = new Chart(ctx, config);
+
+    function filterData() {
+        const yearsPoints = [...years];
+        const startYear = document.getElementById("startYear");
+        const endYear = document.getElementById("endYear");
+
+        //get the index number in array
+        const startIndex = yearsPoints.indexOf(startYear.value);
+        const endIndex = yearsPoints.indexOf(endYear.value);
+
+        // slice the array only showing the selected section
+        const filteredYears = yearsPoints.slice(startIndex, endIndex + 1);
+
+        // replace the labels in the Chart
+        myChart.config.data.labels = filteredYears;
+
+        // datapoints
+        const countsPoints = [...counts];
+        const filteredCounts = countsPoints.slice(startIndex, endIndex + 1);
+
+        // replace the data in the Chart
+        myChart.config.data.datasets[0].data = filteredCounts;
+
+        myChart.update();
+
+    }
 
     const downloadButton = document.getElementById("downloadButton");
     downloadButton.addEventListener("click", () => {
