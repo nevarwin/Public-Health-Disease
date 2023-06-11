@@ -127,7 +127,7 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Morbidit yWeek</label>
+        <label class="col-sm-3 form-label font-weight-bold">Morbidity Week</label>
         <div class="col-sm-6">
             <p> <?php echo $morbidityWeek; ?></p>
         </div>

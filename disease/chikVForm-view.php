@@ -214,82 +214,82 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">dCollected</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("dCollected") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $dCollected; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">dspecSent</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("dspecSent") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $dspecSent; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">serIgm</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("serIgm") ?></label>
         <div class="col-sm-6">
             <p><?php echo $serIgm; ?></p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">serIgG</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("serIgG") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $serIgG; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">igm_Res</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("igm_Res") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $igm_Res; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">digMres</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("digMres") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $digMres; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">serIgG</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("serIgG") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $serIgG; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">igG_Res</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("igG_Res") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $igG_Res; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">dIgGRes</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("dIgGRes") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $dIgGRes; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">rt_PCR</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("rt_PCR") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $rt_PCR; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">rt_PCRRes</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("rt_PCRRes") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $rt_PCRRes; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">drtPCRRes</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("drtPCRRes") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $drtPCRRes; ?> </p>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold" VirIso</label>
-            <div class="col-sm-6">
-                <p> <?php echo $virIso; ?> </p>
-            </div>
+        <label class="col-sm-3 form-label font-weight-bold">VirIso</label>
+        <div class="col-sm-6">
+            <p> <?php echo $virIso; ?> </p>
+        </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 form-label font-weight-bold">VirIsoRes</label>
@@ -310,7 +310,7 @@ $morbidityWeek = $row['morbidityWeek'];
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">dVirIsoRes</label>
+        <label class="col-sm-3 form-label font-weight-bold"><?php echo ucfirst("dVirIsoRes") ?></label>
         <div class="col-sm-6">
             <p> <?php echo $dVirIsoRes; ?> </p>
         </div>
