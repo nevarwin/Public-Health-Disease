@@ -120,29 +120,33 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                 <ul class="pagination">
                     <?php
                     // Determine the current page number and the starting record for the page
-                    if (isset($_GET['page'])) {
-                        $currentPage = $_GET['page'];
-                    } else {
-                        $currentPage = 1;
-                    }
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                     $startRecord = ($currentPage - 1) * $recordsPerPage;
-                    // Add links to navigate between the pages
+
+                    // Calculate the total number of pages
                     $totalPages = ceil($totalRecords / $recordsPerPage);
+                    $maxPages = 5;
+
+                    // Calculate the starting page for the current set
+                    $startPage = max(1, $currentPage - floor($maxPages / 2));
+                    $endPage = $startPage + $maxPages - 1;
+                    $endPage = min($endPage, $totalPages);
+
+                    // Add links to navigate between the pages
                     if ($totalPages > 1) {
                         if ($currentPage > 1) {
                             echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage - 1) . "\">Previous</a>";
                         }
-                        // old code with class
-                        // if ($currentPage > 1) {
-                        //     echo "<li class='page-item disabled'> <a class='page-link' aria-disabled='true' tabindex='-1' href=\"?page=" . ($currentPage - 1) . "\">Previous</a></li>";
-                        // }
-                        for ($i = 1; $i <= $totalPages; $i++) {
+
+                        // Display the page links for the current set
+                        for ($i = $startPage; $i <= $endPage; $i++) {
                             if ($i == $currentPage) {
                                 echo "<li class='page-item active'><a class='page-link'>" . $i . "</a></li>";
                             } else {
                                 echo "<li class='page-item'><a class='page-link' href=\"?page=" . $i . "\">" . $i . "</a></li>";
                             }
                         }
+
                         if ($currentPage < $totalPages) {
                             echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage + 1) . "\">Next</a>";
                         }
