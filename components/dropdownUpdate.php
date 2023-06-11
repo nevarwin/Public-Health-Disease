@@ -9,7 +9,7 @@ function generateDropdownUpdate($fieldName, $selectedValue) {
 
     $dropdown = '
     <div class="row justify-content-center mb-3">
-        <label class="col-sm-5 col-form-label">' . $fieldName . '</label>
+        <label class="col-sm-5 col-form-label">' . ucfirst($fieldName) . '</label>
         <div class="col-sm-6">
             <select class="custom-select" name="' . $fieldName . '">';
 
