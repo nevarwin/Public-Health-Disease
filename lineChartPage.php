@@ -44,30 +44,5 @@ include('./components/head.php');
         </a>
         <?php
         include('./components/logoutmodal.php');
+        include('./components/script.php');
         ?>
-
-        <!-- <script>
-            // Get references to the form elements
-            var form1 = document.getElementById('form1');
-            var form2 = document.getElementById('form2');
-
-            // Attach event listener for Form 1 submission
-            form1.addEventListener('submit', function(event) {
-                // event.preventDefault(); // Prevent form submission from reloading the page
-
-                // Handle Form 1 submission logic
-                // ...
-
-                // Optionally, you can reset the form after submission
-            });
-
-            // Attach event listener for Form 2 submission
-            form2.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission from reloading the page
-
-                // Handle Form 2 submission logic
-                // ...
-
-                // Optionally, you can reset the form after submission
-            });
-        </script> -->
