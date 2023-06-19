@@ -179,7 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-around">
                 <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
                 <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
-
             </div>
         </form>
     </div>

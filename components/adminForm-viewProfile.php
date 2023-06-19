@@ -50,48 +50,48 @@ $position = $positionRow['position'];
 ?>
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
-        <h2>View Profile</h2>
+        <h2 class="row justify-content-center mb-3">View Profile</h2>
         <form action="" method="post">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Position</label>
                 <div class="col-sm-6">
                     <p> <?= $position ?> </p>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Name</label>
                 <div class="col-sm-6">
                     <p> <?= $name ?> </p>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Email</label>
                 <div class="col-sm-6">
                     <p> <?= $email ?> </p>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
                 <div class="col-sm-6">
                     <p> <?= $contact ?> </p>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
                 <div class="col-sm-6">
                     <p> <?= $municipality ?> </p>
                 </div>
             </div>
             <!-- Barangay Dropdown -->
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
                 <div class="col-sm-6">
                     <p> <?= $barangay ?> </p>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row justify-content-center mb-3">
                 <label for="" class='col-sm-3 col-form-label'>Address</label>
                 <div class="col-sm-6">
                     <p><?= $address ?></p>
@@ -104,10 +104,8 @@ $position = $positionRow['position'];
                 $link = "http://localhost/admin2gh/adminTable.php";
             }
             ?>
-            <div class="row mb-3">
-                <div class="col-sm-3 d-grid">
-                    <a href="<?= $link ?> " class="btn btn-outline-primary" role="button">Back</a>
-                </div>
+            <div class="row justify-content-center mb-3">
+                <a href="<?= $link ?> " class="btn btn-outline-primary" role="button">Back</a>
             </div>
         </form>
     </div>
