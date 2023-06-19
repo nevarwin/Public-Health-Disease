@@ -1,77 +1,78 @@
 <?php
 include('connection.php');
 ?>
+<!DOCTYPE html>
+<html>
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">
-            DataTables Example
-        </h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
-                        <th>Address</th>
-                        <th>Barangay</th>
-                        <th>Municipality</th>
-                        <th>Created At</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
-                        <th>Address</th>
-                        <th>Barangay</th>
-                        <th>Municipality</th>
-                        <th>Created At</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <?php
-                    // read all the data from db table
-                    $sql = "SELECT clients.*, barangay.barangay, municipality.municipality
-                    FROM clients
-                    LEFT JOIN barangay ON clients.barangay = barangay.id 
-                    LEFT JOIN municipality ON clients.municipality = municipality.munId
-                    ";
-                    // LIMIT $startRecord, $recordsPerPage
-                    $result = $con->query($sql);
+<head>
+    <meta charset="UTF-8">
+    <title>DataTable Example</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
-                    // check if there is data in the table
-                    if (!$result) {
-                        die('Invalid Query: ' . $con->error);
-                    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
 
-                    while ($row = $result->fetch_object()) {
-                        echo "
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
                         <tr>
-                        <td>$row->name</td>
-                        <td>$row->email</td>
-                        <td>$row->contact_number</td>
-                        <td>$row->address</td>
-                        <td>$row->barangay</td>
-                        <td>$row->municipality</td>
-                        <td>$row->created_at</td>
-                        <td>
-                            <a class='btn btn-primary btn-sm' href='/phpsandbox/publichealth/editAdmin.php?id=$row->id'>Edit</a>
-                            <a class='btn btn-danger btn-sm' href='/phpsandbox/publichealth/deleteAdmin.php?id=$row->id'>Delete</a>
-                        </td>
+                            <th>Position</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                            <th>Address</th>
+                            <th>Barangay</th>
+                            <th>Municipality</th>
+                            <th>Created At</th>
                         </tr>
-                    ";
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT clients.*, barangay.barangay, municipality.municipality, positions.position
+                            FROM clients
+                            LEFT JOIN positions ON clients.positionId = positions.positionId
+                            LEFT JOIN barangay ON clients.barangay = barangay.id 
+                            LEFT JOIN municipality ON clients.municipality = municipality.munId
+                            WHERE clients.positionId != 1
+                            ORDER BY clients.id DESC
+                            ";
+                        $result = mysqli_query($con, $sql);
+
+                        // check if there is data in the table
+                        if (mysqli_num_rows($result) > 0) {
+                            foreach ($result as $admins) {
+                        ?>
+                                <tr>
+                                    <td><?= $admins['position']; ?></td>
+                                    <td><?= $admins['name']; ?></td>
+                                    <td><?= $admins['email']; ?></td>
+                                    <td><?= $admins['contact_number']; ?></td>
+                                    <td><?= $admins['address']; ?></td>
+                                    <td><?= $admins['barangay']; ?></td>
+                                    <td><?= $admins['municipality']; ?></td>
+                                    <td><?= $admins['created_at']; ?></td>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>
