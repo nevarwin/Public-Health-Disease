@@ -53,17 +53,7 @@
           <p>
             Get the latest updates on disease geomapping and its impact on communities.
           </p>
-          <p><a href="#about" class="btn btn-warning mt-3">Learn More</a></p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/phhome2.jpg" class="d-block w-100" alt="Public Health Disease Geomapping" />
-        <div class="carousel-caption">
-          <h5>Dedicated to Public Health</h5>
-          <p>
-            Discover our commitment to ensuring public health through effective disease geomapping initiatives.
-          </p>
-          <p><a href="" class="btn btn-warning mt-3">Learn More</a></p>
+          <p><a href="#geomapping" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
       <div class="carousel-item">
@@ -73,7 +63,17 @@
           <p>
             Explore how disease geomapping empowers communities in preventing and addressing public health challenges.
           </p>
-          <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+          <p><a href="#services" class="btn btn-warning mt-3">Learn More</a></p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="img/phhome2.jpg" class="d-block w-100" alt="Public Health Disease Geomapping" />
+        <div class="carousel-caption">
+          <h5>Dedicated to Public Health</h5>
+          <p>
+            Discover our commitment to ensuring public health through effective disease geomapping initiatives.
+          </p>
+          <p><a href="#about" class="btn btn-warning mt-3">Learn More</a></p>
         </div>
       </div>
   </div>
@@ -87,7 +87,7 @@
   </button>
   </div>
   <!-- about section starts -->
-  <section id="about" class="about section-padding">
+  <section id="geomapping" class="about section-padding">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
