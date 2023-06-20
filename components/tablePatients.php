@@ -3,12 +3,13 @@
         <div class="row">
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
+            <a href="generate_report.php" class="btn btn-primary"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary ml-auto" role="button">Add new patient</a>
         </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="myTable" width="100%" cellspacing="0">
+            <table class="table cell-border hover" id="myTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Patient Id</th>
@@ -33,7 +34,6 @@
                     LEFT JOIN barangay ON patients.barangay = barangay.id
                     LEFT JOIN municipality ON patients.municipality = municipality.munId
                     LEFT JOIN diseases ON patients.disease = diseases.diseaseId
-                    -- LEFT JOIN outcomes ON patients.outcome = outcomes.outcomeId
                     LEFT JOIN genders ON patients.gender = genders.genderId
                     ORDER BY patientId DESC
                     ";

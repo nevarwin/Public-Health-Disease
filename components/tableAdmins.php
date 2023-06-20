@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table" id="myTable" cellspacing="0" width="100%">
+                <table class="table cell-border hover" id="myTable" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Position</th>
