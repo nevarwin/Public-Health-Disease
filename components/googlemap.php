@@ -141,7 +141,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             heatmap = new google.maps.visualization.HeatmapLayer({
                 data: data.map(item => new google.maps.LatLng(item.lat, item.lng)),
-                map: map
+                map: map,
+                radius: 20,
             });
         }
 

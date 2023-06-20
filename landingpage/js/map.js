@@ -17,6 +17,7 @@ function initMap() {
       (item) => new google.maps.LatLng(item.lat, item.lng)
     ),
     map: map,
+    radius: 20,
   });
 }
 
