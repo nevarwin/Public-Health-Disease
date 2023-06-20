@@ -96,13 +96,13 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
             </div>
         </div>
     </form>
-    <div class="dropdown col">
+    <div class="dropdown col my-2">
         <label for="year">Select Start Year:</label>
         <select class="custom-select" name="pieYear" id="startYear" onchange="filterData()">
             <?php echo $options; ?>
         </select>
     </div>
-    <div class="dropdown col">
+    <div class="dropdown col my-2">
         <label for="year">Select End Year:</label>
         <select class="custom-select" name="pieYear" id="endYear" onchange="filterData()">
             <?php echo $options; ?>
