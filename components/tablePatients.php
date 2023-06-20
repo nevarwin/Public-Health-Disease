@@ -1,33 +1,14 @@
-<?php
-include('connection.php');
-include('search.php');
-
-// Determine the total number of records and the number of records per page
-$totalRecords = mysqli_query($con, "SELECT COUNT(*) FROM patients ")->fetch_array()[0];
-// to edit how many fields in the web
-$recordsPerPage = 10;
-
-// Determine the current page number and the starting record for the page
-if (isset($_GET['page'])) {
-    $currentPage = $_GET['page'];
-} else {
-    $currentPage = 1;
-}
-$startRecord = ($currentPage - 1) * $recordsPerPage;
-?>
-
-<!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="row">
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
-            <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search">
+            <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
             <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary ml-auto" role="button">Add new patient</a>
         </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table" id="myTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Patient Id</th>
@@ -43,21 +24,6 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                         <th>Action</th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
-                    <tr>
-                        <th>Patient Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Gender</th>
-                        <th>Disease</th>
-                        <th>Date of Birth</th>
-                        <th>Age</th>
-                        <th>Barangay</th>
-                        <th>Municipality</th>
-                        <th>Year</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot> -->
                 <tbody>
                     <?php
                     include("connection.php");
@@ -70,7 +36,6 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
                     -- LEFT JOIN outcomes ON patients.outcome = outcomes.outcomeId
                     LEFT JOIN genders ON patients.gender = genders.genderId
                     ORDER BY patientId DESC
-                    LIMIT $startRecord, $recordsPerPage
                     ";
 
                     $result = mysqli_query($con, $sql);
@@ -115,46 +80,5 @@ $startRecord = ($currentPage - 1) * $recordsPerPage;
             </table>
 
         </div>
-        <div class="container my-5">
-            <div class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <?php
-                    // Determine the current page number and the starting record for the page
-                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                    $startRecord = ($currentPage - 1) * $recordsPerPage;
-
-                    // Calculate the total number of pages
-                    $totalPages = ceil($totalRecords / $recordsPerPage);
-                    $maxPages = 5;
-
-                    // Calculate the starting page for the current set
-                    $startPage = max(1, $currentPage - floor($maxPages / 2));
-                    $endPage = $startPage + $maxPages - 1;
-                    $endPage = min($endPage, $totalPages);
-
-                    // Add links to navigate between the pages
-                    if ($totalPages > 1) {
-                        if ($currentPage > 1) {
-                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage - 1) . "\">Previous</a>";
-                        }
-
-                        // Display the page links for the current set
-                        for ($i = $startPage; $i <= $endPage; $i++) {
-                            if ($i == $currentPage) {
-                                echo "<li class='page-item active'><a class='page-link'>" . $i . "</a></li>";
-                            } else {
-                                echo "<li class='page-item'><a class='page-link' href=\"?page=" . $i . "\">" . $i . "</a></li>";
-                            }
-                        }
-
-                        if ($currentPage < $totalPages) {
-                            echo "<li class='page-item'><a class='page-link' href=\"?page=" . ($currentPage + 1) . "\">Next</a>";
-                        }
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
-
     </div>
 </div>
