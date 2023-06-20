@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("./components/connection.php");
-include("./components/function.php");
+include("connection.php");
+include("function.php");
 
 $user_data = check_login($con);
 ?>
@@ -26,5 +26,8 @@ $user_data = check_login($con);
 
     <!-- chart.js cdn -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
 </head>
