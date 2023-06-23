@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Acute Meningitis Form</h2>
         <form method="POST">
             <?php
@@ -156,36 +156,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('fever', $fever); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('behaviorChng', $behaviorChng); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('seizure', $seizure); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('stiffneck', $stiffneck); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('bulgefontanel', $bulgefontanel); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('menSign', $menSign); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('pcv10', $pcv10); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('pcv13', $pcv13); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('meningoVacc', $meningoVacc); ?>
                 </div>
             </div>

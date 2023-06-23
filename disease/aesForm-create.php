@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateAdmitted = mysqli_real_escape_string($con, $_POST['dateAdmitted']);
     $morbidityWeek = mysqli_real_escape_string($con, $_POST['morbidityWeek']);
     $morbidityMonth = mysqli_real_escape_string($con, $_POST['morbidityMonth']);
-    $caseClass = mysqli_real_escape_string($con, $_POST['caseClass']);
+    $caseClass = $_POST['caseClass'] == '' ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
 
     // check if the data is empty

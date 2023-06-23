@@ -123,36 +123,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('fever'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('behaviorChng'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('seizure'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('stiffneck'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('bulgefontanel'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('menSign'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('pcv10'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('pcv13'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('meningoVacc'); ?>
                 </div>
             </div>

@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">dayswithSymp</label>
+                <label class="col-sm-3 col-form-label">Days With Symptom</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. 1" type="text" class="form-control" id="dayswithSymp" name="dayswithSymp">
                 </div>
@@ -234,13 +234,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">otherSymptom</label>
+                <label class="col-sm-3 col-form-label">Other Symptom</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="otherSymptom" name="otherSymptom">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">clinDx</label>
+                <label class="col-sm-3 col-form-label">ClinDx</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="clinDx" name="clinDx">
                 </div>
@@ -301,13 +301,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">placeOfTravel</label>
+                <label class="col-sm-3 col-form-label">Place Of Travel</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="placeOfTravel" name="placeOfTravel">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">caseClass</label>
+                <label class="col-sm-3 col-form-label">Case Class</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. Suspected" type="text" class="form-control" id="caseClass" name="caseClass">
                 </div>

@@ -47,14 +47,14 @@ $caseClass = $row['caseClass'];
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve the form data
-    $labResult = $_POST['labResult'];
-    $organism = $_POST['organism'];
+    $labResult = empty($_POST['labResult']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['labResult']);
+    $organism = empty($_POST['organism']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['organism']);
+    $caseClass = empty($_POST['caseClass']) ? 'N/A' : mysqli_real_escape_string($con, $_POST['caseClass']);
     $outcome = $_POST['outcome'];
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     $dateAdmitted = $_POST['dateAdmitted'];
     $morbidityWeek = $_POST['morbidityWeek'];
     $morbidityMonth = $_POST['morbidityMonth'];
-    $caseClass = $_POST['caseClass'];
 
     // check if the data is empty
     do {
@@ -119,13 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-center mb-3">
                 <label for="stoolCulture" class="col-sm-3 col-form-label">Lab Result</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="labResult" name="labResult" required value='<?php echo $labResult; ?>'>
+                    <input type="text" class="form-control" id="labResult" name="labResult" value='<?php echo $labResult; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
                 <label for="organism" class="col-sm-3 col-form-label">Organism</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="organism" name="organism" required value='<?php echo $organism; ?>'>
+                    <input type="text" class="form-control" id="organism" name="organism" value='<?php echo $organism; ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">

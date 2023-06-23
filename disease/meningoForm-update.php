@@ -157,63 +157,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" value='<?php echo $dateAdmitted; ?>' />
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('fever', $fever); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('seizure', $seizure); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('malaise', $malaise); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('headache', $headache); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('stiffNeck', $stiffNeck); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('cough', $cough); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('rash', $rash); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('vomiting', $vomiting); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('soreThroat', $soreThroat); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('petechia', $petechia); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('sensoriumCh', $sensoriumCh); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('runnyNose', $runnyNose); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('purpura', $purpura); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('drowsiness', $drowsiness); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('dyspnea', $dyspnea); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('bloodSpecimen', $bloodSpecimen); ?>
                 </div>
             </div>

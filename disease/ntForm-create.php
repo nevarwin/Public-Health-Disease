@@ -117,33 +117,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. Juana" type="text" class="form-control" id="mother" name="mother" required>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('first2Days'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('after2Days'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('first2Days'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('trismus'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('clenFis'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('opistho'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('stumpInf'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('cordCut'); ?>
                 </div>
             </div>

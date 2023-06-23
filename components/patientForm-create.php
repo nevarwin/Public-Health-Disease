@@ -300,14 +300,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="input-group my-3">
                         <div class="col">
-
                             <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                                 <option value="">Select municipality</option>
                                 <?php
                                 // Connect to database and fetch municipalities
                                 include("connection.php");
                                 $result = mysqli_query($con, 'SELECT * FROM municipality');
-                                // Display each municipalities in a dropdown option
+                                // Display each municipality in a dropdown option
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
                                 }
@@ -320,8 +319,65 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </select>
                         </div>
                     </div>
+                    <!-- <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="permanentAddress" id="permanentAddressCheckbox">
+                        <label class="form-check-label" for="permanentAddressCheckbox">
+                            Permanent Address
+                        </label>
+                    </div> -->
                 </div>
 
+                <!-- <div id="additionalFields" style="display: none;">
+                    Additional fields go here
+                    <div class="input-group">
+                        <div class="col">
+                            <input placeholder="Building Number" type="text" class='form-control' name='permanentUnitCode'>
+                        </div>
+                        <div class="col">
+                            <input placeholder="Subd/Village" type="text" class='form-control' name='permanentSubd'>
+                        </div>
+                        <div class="col">
+                            <input placeholder="Street" type="text" class='form-control' name='permanentStreet'>
+                        </div>
+                        <div class="col">
+                            <input id="postalCode" placeholder="Postal Code" type="text" class='form-control' name='postalCode' readonly>
+                        </div>
+                        <div class="input-group my-3">
+                            <div class="col">
+                                <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+                                    <option value="">Select municipality</option>
+                                    <?php
+                                    // Connect to database and fetch municipalities
+                                    include("connection.php");
+                                    $result = mysqli_query($con, 'SELECT * FROM municipality');
+                                    // Display each municipality in a dropdown option
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select" id="barangay" name="barangay">
+                                    <option>Select Barangay</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    var checkbox = document.getElementById("permanentAddressCheckbox");
+                    var additionalFields = document.getElementById("additionalFields");
+
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            additionalFields.style.display = "block";
+                        } else {
+                            additionalFields.style.display = "none";
+                        }
+                    });
+                </script> -->
 
                 <!-- Address of DRU -->
                 <span>Address of DRU</span>

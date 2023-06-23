@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-4 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Measles Disease Form</h2>
         <form method="POST">
             <?php
@@ -111,33 +111,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. 1" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('measVacc'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('vitaminA'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('cough'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('koplikSpot'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('runnyNose'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('redEyes'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('arthritisArthralgia'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('swolympNod'); ?>
                 </div>
             </div>
