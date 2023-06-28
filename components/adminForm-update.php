@@ -9,7 +9,7 @@ $strongContent = '';
 
 // Get admin by id
 if (!isset($_GET["id"])) {
-    header('location: /phpsandbox/publichealthd/admin.php');
+    header('location:http://localhost/admin2gh/adminTable.php');
     exit;
 }
 
