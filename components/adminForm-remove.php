@@ -32,7 +32,7 @@ if (isset($_GET['id'])) {
     }
     echo
     "<script>
-    alert('Patient Successfully Removed');
+    alert('Admin Successfully Removed');
     window.location= 'http://localhost/admin2gh/adminTable.php';
     </script>";
 
