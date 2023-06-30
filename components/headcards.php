@@ -1,56 +1,58 @@
 <!-- Content Row -->
-<div class="row gap-0">
-    <?php
-    // Replace with your database connection code
-    include('./components/connection.php');
+<div class="container-fluid">
+    <h1>Dashboard</h1>
+    <div class="row">
+        <?php
+        // Replace with your database connection code
+        include('./components/connection.php');
 
-    $query = "SELECT COUNT(*) AS count, positions.position
+        $query = "SELECT COUNT(*) AS count, positions.position
             FROM clients
             INNER JOIN positions ON clients.positionId = positions.positionId
             GROUP BY clients.positionId, positions.position";
-    $result = mysqli_query($con, $query);
+        $result = mysqli_query($con, $query);
 
-    // Display the counts of admins in different positions
-    while ($row = mysqli_fetch_assoc($result)) {
-        $position = $row['position'];
-        $count = $row['count'];
-    ?>
+        // Display the counts of admins in different positions
+        while ($row = mysqli_fetch_assoc($result)) {
+            $position = $row['position'];
+            $count = $row['count'];
+        ?>
 
-        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
-            <div class="card border-left-primary shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><?= $position ?></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                <div class="card border-left-primary shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><?= $position ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    <?php
-    }
-    ?>
+        <?php
+        }
+        ?>
 
-    <!-- <?php
-            // Replace with your database connection code
-            include('./components/connection.php');
+        <!-- <?php
+                // Replace with your database connection code
+                include('./components/connection.php');
 
-            $query = "SELECT COUNT(*) AS count
+                $query = "SELECT COUNT(*) AS count
             FROM clients
             WHERE positionId = 3";
-            $result = mysqli_query($con, $query);
+                $result = mysqli_query($con, $query);
 
-            // Display the count of authorized users
-            while ($row = mysqli_fetch_assoc($result)) {
-                $count = $row['count'];
-            ?>
+                // Display the count of authorized users
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $count = $row['count'];
+                ?>
 
-        <div class="col-xl-3 col-lg-3 col-md-12">
+        <div class="col-xl-3 col-lg-3 col-md-6">
             <div class="card border-left-primary shadow h-100">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -67,23 +69,23 @@
         </div>
 
     <?php
-            }
+                }
     ?> -->
 
-    <?php
-    // Replace with your database connection code
-    include('./components/connection.php');
+        <?php
+        // Replace with your database connection code
+        include('./components/connection.php');
 
-    // Define the list of diseases
-    $diseases = array(
-        'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
-        'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
-        'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
-    );
+        // Define the list of diseases
+        $diseases = array(
+            'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
+            'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
+            'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
+        );
 
-    $currentYear = date('Y');
+        $currentYear = date('Y');
 
-    $query = "SELECT COUNT(p.patientId) AS count, d.disease
+        $query = "SELECT COUNT(p.patientId) AS count, d.disease
             FROM patients p
             INNER JOIN diseases d ON p.disease = d.diseaseId
             WHERE YEAR(p.creationDate) = '$currentYear'
@@ -91,33 +93,35 @@
             GROUP BY p.disease, d.disease
             ORDER BY count DESC
             LIMIT 4";
-    $result = mysqli_query($con, $query);
+        $result = mysqli_query($con, $query);
 
-    // Display the top 4 diseases
-    while ($row = mysqli_fetch_assoc($result)) {
-        $disease = $row['disease'];
-        $count = $row['count'];
-    ?>
+        // Display the top 4 diseases
+        while ($row = mysqli_fetch_assoc($result)) {
+            $disease = $row['disease'];
+            $count = $row['count'];
+        ?>
 
-        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
-            <div class="card border-left-warning shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $disease ?></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-disease fa-2x text-gray-300"></i>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="card border-left-warning shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $disease ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-disease fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php
-    }
-    ?>
+        <?php
+        }
+        ?>
+    </div>
 </div>
+
 
 <!-- Patient Table Recently Added -->
 <div class="container-fluid my-2">
