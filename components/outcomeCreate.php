@@ -27,7 +27,7 @@
         const outcome = document.getElementById('outcome').value;
         const dateDied = document.getElementById('dateDied');
 
-        if (outcome === 'dead') {
+        if (outcome === 'Dead') {
             dateDied.disabled = false;
         } else {
             dateDied.disabled = true;
