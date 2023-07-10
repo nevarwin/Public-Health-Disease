@@ -22,7 +22,7 @@ include('./components/head.php');
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="col">
-                        <div class="p-3">
+                        <div class="p-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="m-0 font-weight-bold text-primary">View Patient's Data</h2>
                                 <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-primary" role="button">Back</a>
