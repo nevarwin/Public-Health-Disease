@@ -33,10 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dob = mysqli_real_escape_string($con, $_POST['dob']);
     $age = mysqli_real_escape_string($con, $_POST['age']);
     $unitCode = mysqli_real_escape_string($con, $_POST['unitCode']);
-    $subd = mysqli_real_escape_string(
-        $con,
-        $_POST['subd']
-    );
+    $subd = mysqli_real_escape_string($con, $_POST['subd']);
     $street = mysqli_real_escape_string($con, $_POST['street']);
     $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
     $barangay = mysqli_real_escape_string($con, $_POST['barangay']);
@@ -120,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $municipalityValue = $row['municipality'];
 
                 // Create the full address
-                $address = $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode;
+                $address = $unitCode . ', ' . $subd . ', ' .  $street . ', ' . $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode . ', ' . 'Philippines';
 
                 // Format the address for URL encoding
                 $formattedAddress = urlencode($address);
@@ -199,9 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (strcmp($diseaseName, $value) == 0) {
-            echo "
-                <script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';
-            </script>";
+            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
         } else {
             // Handle error
             $errorMessage = "Link does not exists!";
