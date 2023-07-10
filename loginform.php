@@ -203,12 +203,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 50px;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.07);
-            border-radius: 3px;
-            padding: 0 10px;
+            border: .5px #CED4DA solid;
+            border-radius: 10px;
+            padding: 0 20px;
             margin-top: 8px;
             font-size: 14px;
             font-weight: 300;
-            background-color: #e5e5e5;
+            /* background-color: #e5e5e5; */
         }
 
         ::placeholder {
@@ -220,12 +221,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         button {
             margin-top: 50px;
             width: 100%;
-            background-color: #ffffff;
-            color: #697c56;
+            background-color: #3ac162;
+            color: #fff;
             padding: 15px 0;
             font-size: 18px;
             font-weight: 600;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
         }
     </style>
