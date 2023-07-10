@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $alert;
     }
     ?>
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-8 col-sm-4 col-lg-8 col-xl-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Change Password</h2>
         <form action="" method="post" onsubmit="return validateForm(event)">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
