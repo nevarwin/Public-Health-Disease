@@ -82,7 +82,9 @@ $morbidityWeek = $row['morbidityWeek'];
     }
     ?>
     <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
+        <!-- TODO kung pwede e lahat may pl-5 then col-sm-4 -->
+        <!-- Gawing 2 column kapag mahaba -->
+        <label for="" class="pl-5 col-sm-4 form-label font-weight-bold">Date Admitted</label>
         <div class="col-sm-6">
             <p> <?php echo $dateAdmitted; ?> </p>
         </div>

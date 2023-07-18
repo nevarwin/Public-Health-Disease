@@ -221,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('paralysis', $paralysis); ?>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('meningLes', $meningLes); ?>
                 </div>

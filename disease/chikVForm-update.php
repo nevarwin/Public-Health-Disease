@@ -286,19 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('meningoEncep', $meningoEncep); ?>
                 </div>
             </div>
-
-            <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">Other Symptom</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="otherSymptom" name="otherSymptom" value='<?php echo $otherSymptom; ?>'>
-                </div>
-            </div>
-            <div class="row justify-content-center mb-3">
-                <label class="col-sm-3 col-form-label">ClinDx</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="clinDx" name="clinDx" value='<?php echo $clinDx; ?>'>
-                </div>
-            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('dCollected', $dCollected); ?>
@@ -343,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('virIso', $virIso); ?>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('virIsoRes', $virIsoRes); ?>
                 </div>
@@ -354,7 +341,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('dVirIsoRes', $dVirIsoRes); ?>
                 </div>
             </div>
-
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">Other Symptom</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="otherSymptom" name="otherSymptom" value='<?php echo $otherSymptom; ?>'>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <label class="col-sm-3 col-form-label">ClinDx</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="clinDx" name="clinDx" value='<?php echo $clinDx; ?>'>
+                </div>
+            </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Place Of Travel</label>
                 <div class="col-sm-6">

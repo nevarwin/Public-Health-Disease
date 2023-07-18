@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('opistho', $opistho); ?>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('stumpInf', $stumpInf); ?>
                 </div>

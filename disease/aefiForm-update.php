@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" id="case" name="case" value='<?php echo $case; ?>'>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('anaphylactoid', $anaphylactoid); ?>
                 </div>
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('brachialneuritis', $brachialneuritis); ?>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
 
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('dissbcginfect', $dissbcginfect); ?>
@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('injectsiteAbcess', $injectsiteAbcess); ?>
                 </div>
@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('lymphadenitis', $lymphadenitis); ?>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('osteitis', $osteitis); ?>
                 </div>

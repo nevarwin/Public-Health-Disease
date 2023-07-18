@@ -166,73 +166,127 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. 1" type="text" class="form-control" id="dayswithSymp" name="dayswithSymp">
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('fever'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('arthritis'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('hands'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('feet'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('ankles'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('otherSite'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('arthralgia'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('periEdema'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('skinMani'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('skinDesc'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('myalgia'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('backPain'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('headache'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('nausea'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('mucosBleed'); ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('vomiting'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('asthenia'); ?>
                 </div>
-                <div class="col">
+                <div class="col-lg-3">
                     <?php echo generateDropdown('meningoEncep'); ?>
                 </div>
             </div>
-
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('dCol-lg-3lected'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('dspecSent'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('serIgm'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('igm_Res'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('digMres'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('serIgG'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('igG_Res'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('dIgGRes'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('rt_PCR'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('rt_PCRRes'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('drtPCRRes'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('virIso'); ?>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('virIsoRes'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('travHist'); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?php echo generateDropdown('dVirIsoRes'); ?>
+                </div>
+            </div>
             <div class="row justify-content-center mb-3">
                 <label class="col-sm-3 col-form-label">Other Symptom</label>
                 <div class="col-sm-6">
@@ -243,61 +297,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="col-sm-3 col-form-label">ClinDx</label>
                 <div class="col-sm-6">
                     <input placeholder="ex. N/A" type="text" class="form-control" id="clinDx" name="clinDx">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <?php echo generateDropdown('dCollected'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('dspecSent'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('serIgm'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <?php echo generateDropdown('igm_Res'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('digMres'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('serIgG'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <?php echo generateDropdown('igG_Res'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('dIgGRes'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('rt_PCR'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <?php echo generateDropdown('rt_PCRRes'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('drtPCRRes'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('virIso'); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <?php echo generateDropdown('virIsoRes'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('travHist'); ?>
-                </div>
-                <div class="col">
-                    <?php echo generateDropdown('dVirIsoRes'); ?>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">

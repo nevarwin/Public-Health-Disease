@@ -17,7 +17,7 @@ $strongContent = '';
 if (!isset($_GET["patientId"])) {
     echo "User ID is not set.";
     // header('location: http://localhost/admin2gh/patientTable.php');
-    exit;
+    // exit;
 }
 $patientId = $_GET['patientId'];
 
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. N/A" type="text" class="form-control" id="case" name="case">
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('anaphylactoid'); ?>
                 </div>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdown('brachialneuritis'); ?>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('dissbcginfect'); ?>
                 </div>
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdown('encephalopathy'); ?>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('injectsiteAbcess'); ?>
                 </div>
@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdown('lymphadenitis'); ?>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('osteitis'); ?>
                 </div>

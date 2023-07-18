@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input placeholder="ex. N/A" type="date" class="form-control" name="dateAdmitted" max="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
+            <div class="row row-cols-4 justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('fever'); ?>
                 </div>
@@ -172,30 +172,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-lg-3">
                     <?php echo generateDropdown('cough'); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('paralysisatBirth'); ?>
                 </div>
+            </div>
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('diarrheaVomiting'); ?>
                 </div>
                 <div class="col-lg-3">
                     <?php echo generateDropdown('musclePain'); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('mening'); ?>
                 </div>
                 <div class="col-lg-3">
                     <?php echo generateDropdown('brthMusc'); ?>
                 </div>
+            </div>
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('neckMusc'); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('hxDisorder'); ?>
                 </div>
@@ -206,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdown('firststoolSpec'); ?>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdown('paradev'); ?>
                 </div>
@@ -214,23 +212,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdown('facialMusc'); ?>
                 </div>
                 <div class="col-lg-3">
-                    <div class="row justify-content-center mb-3">
-                        <label for="" class="col-sm-5 col-form-label">paradir</label>
-                        <div class="col-sm-6">
-                            <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
-                        </div>
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">paradir</label>
+                        <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
                     </div>
                 </div>
             </div>
-            <div class="row row-cols-4 justify-content-center mb-3">
-
+            <div class="row row-cols-4 justify-content-center mx-1 my-2">
                 <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">rasens</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rasens" />
                     </div>
-                </div>
-                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">lasens</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lasens" />
@@ -241,35 +234,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="" class="col-form-label">rlsens</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlsens" />
                     </div>
-                </div>
-                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">llsens</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llsens" />
                     </div>
+                </div>
+                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">raref</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="raref" />
                     </div>
-                </div>
-                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">laref</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="laref" />
                     </div>
+                </div>
+                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">rlref</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlref" />
                     </div>
-                </div>
-                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">llref</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llref" />
                     </div>
+                </div>
+                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">ramotor</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="ramotor" />
+                    </div>
+                    <div class="justify-content-center">
+                        <label for="" class="col-form-label">rlmotor</label>
+                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlmotor" />
                     </div>
                 </div>
                 <div class="col">
@@ -277,14 +274,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="" class="col-form-label">lamotor</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="lamotor" />
                     </div>
-                </div>
-                <div class="col">
-                    <div class="justify-content-center">
-                        <label for="" class="col-form-label">rlmotor</label>
-                        <input placeholder="ex. 1-Normal" type="text" class="form-control" name="rlmotor" />
-                    </div>
-                </div>
-                <div class="col">
                     <div class="justify-content-center">
                         <label for="" class="col-form-label">llmotor</label>
                         <input placeholder="ex. 1-Normal" type="text" class="form-control" name="llmotor" />
@@ -293,16 +282,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col">
                     <label for="dstool1Taken" class="col-form-label">dstool1Taken</label>
                     <input placeholder="ex. N/A" type="date" class="form-control" id="dstool1Taken" name="dstool1Taken" max="<?php echo date('Y-m-d'); ?>">
-                </div>
-                <div class="col">
+
                     <label for="dstool1Sent" class="col-form-label">dstool1Sent</label>
                     <input placeholder="ex. N/A" type="date" class="form-control" id="dstool1Sent" name="dstool1Sent" max="<?php echo date('Y-m-d'); ?>">
                 </div>
                 <div class="col">
                     <label for="dstool2Taken" class="col-form-label">dstool2Taken</label>
                     <input placeholder="ex. N/A" type="date" class="form-control" id="dstool2Taken" name="dstool2Taken" max="<?php echo date('Y-m-d'); ?>">
-                </div>
-                <div class="col">
+
                     <label for="dstool2Sent" class="col-form-label">dstool2Sent</label>
                     <input placeholder="ex. N/A" type="date" class="form-control" id="dstool2Sent" name="dstool2Sent" max="<?php echo date('Y-m-d'); ?>">
                 </div>

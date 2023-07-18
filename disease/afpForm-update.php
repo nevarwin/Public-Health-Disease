@@ -217,30 +217,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('cough', $cough); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('paralysisatBirth', $paralysisatBirth); ?>
                 </div>
+            </div>
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('diarrheaVomiting', $diarrheaVomiting); ?>
                 </div>
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('musclePain', $musclePain); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('mening', $mening); ?>
                 </div>
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('brthMusc', $brthMusc); ?>
                 </div>
+            </div>
+            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('neckMusc', $neckMusc); ?>
                 </div>
-            </div>
-            <div class="row justify-content-center mb-3">
                 <div class="col-lg-3">
                     <?php echo generateDropdownUpdate('hxDisorder', $hxDisorder); ?>
                 </div>
@@ -259,11 +257,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php echo generateDropdownUpdate('facialMusc', $facialMusc); ?>
                 </div>
                 <div class="col-lg-3">
-                    <div class="row justify-content-center mb-3">
+                    <div class="justify-content-center">
                         <label for="" class="col-sm-5 col-form-label">paradir</label>
-                        <div class="col-sm-6">
-                            <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
-                        </div>
+                        <input placeholder="ex. Ascending" type="text" class="form-control" name="paradir" />
                     </div>
                 </div>
             </div>
