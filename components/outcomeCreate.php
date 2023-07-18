@@ -3,7 +3,7 @@
     <div class="col-sm-6">
         <select class="custom-select" id="outcome" name="outcome" onchange="toggleDateDied()">
             <?php
-            $outcomeOptions = array('Alive', 'Dead', 'Other'); // Add more options if needed
+            $outcomeOptions = array('alive', 'dead', 'other'); // Add more options if needed
             foreach ($outcomeOptions as $option) {
                 $selected = ($outcome === $option) ? 'selected' : '';
                 echo '<option value="' . $option . '" ' . $selected . '>' . ucfirst($option) . '</option>';
@@ -27,7 +27,7 @@
         const outcome = document.getElementById('outcome').value;
         const dateDied = document.getElementById('dateDied');
 
-        if (outcome === 'Dead') {
+        if (outcome === 'dead') {
             dateDied.disabled = false;
         } else {
             dateDied.disabled = true;
