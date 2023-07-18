@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row justify-content-around">
                 <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
                 <?php
-                if ($user_data['positionId'] != 1) {
+                if ($user_data['positionId'] > 2) {
                     $link = "http://localhost/admin2gh/patientTable.php";
                 } else {
                     $link = "http://localhost/admin2gh/adminTable.php";
