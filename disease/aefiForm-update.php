@@ -93,11 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
+
         // Proceed with form submission
         // Insert the data into the aefiinfotbl table
         $query = "UPDATE aefiinfotbl SET

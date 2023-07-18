@@ -47,102 +47,84 @@ $morbidityWeek = $row['morbidityWeek'];
 
 ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateAdmitted; ?> </p>
-        </div>
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Date Admitted</label>
+    <div class="col-sm-6">
+        <p> <?php echo $dateAdmitted; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Lab Result</label>
-        <div class="col-sm-6">
-            <p> <?php echo $labResult; ?></p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Lab Result</label>
+    <div class="col-sm-6">
+        <p> <?php echo $labResult; ?></p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Organism</label>
-        <div class="col-sm-6">
-            <p> <?php echo $organism; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Organism</label>
+    <div class="col-sm-6">
+        <p> <?php echo $organism; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Vaccinated</label>
-        <div class="col-sm-6">
-            <p> <?php echo $vaccinated; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Vaccinated</label>
+    <div class="col-sm-6">
+        <p> <?php echo $vaccinated; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Vaccine Name</label>
-        <div class="col-sm-6">
-            <p> <?php echo $vacName; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Vaccine Name</label>
+    <div class="col-sm-6">
+        <p> <?php echo $vacName; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Vaccination Date 1</label>
-        <div class="col-sm-6">
-            <p> <?php echo $vacDate1; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Vaccination Date 1</label>
+    <div class="col-sm-6">
+        <p> <?php echo $vacDate1; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Vaccination Date 2</label>
-        <div class="col-sm-6">
-            <p> <?php echo $vacDate2; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Vaccination Date 2</label>
+    <div class="col-sm-6">
+        <p> <?php echo $vacDate2; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Booster Name</label>
-        <div class="col-sm-6">
-            <p> <?php echo $boosterName; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Booster Name</label>
+    <div class="col-sm-6">
+        <p> <?php echo $boosterName; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Booster Date</label>
-        <div class="col-sm-6">
-            <p> <?php echo $boosterDate; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Booster Date</label>
+    <div class="col-sm-6">
+        <p> <?php echo $boosterDate; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Sari</label>
-        <div class="col-sm-6">
-            <p> <?php echo $sari; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Sari</label>
+    <div class="col-sm-6">
+        <p> <?php echo $sari; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Case Classification</label>
-        <div class="col-sm-6">
-            <p> <?php echo $caseClass; ?></p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Case Classification</label>
+    <div class="col-sm-6">
+        <p> <?php echo $caseClass; ?></p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityMonth; ?></p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Morbidity Month</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityMonth; ?></p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Morbidity Week</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityWeek; ?></p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Morbidity Week</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityWeek; ?></p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Outcome</label>
-        <div class="col-sm-6">
-            <p> <?php echo ucfirst($outcome); ?>
-            </p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Date Died</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateDied; ?> </p>
-        </div>
-    </div>
-</form>
+</div>
+<?php
+include("./components/outcomeView.php");
+?>

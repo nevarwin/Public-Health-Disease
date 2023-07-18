@@ -40,58 +40,42 @@ $morbidityMonth = $row['morbidityMonth'];
 
 ?>
 
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateAdmitted; ?> </p>
-        </div>
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Date Admitted</label>
+    <div class="col-sm-6">
+        <p> <?php echo $dateAdmitted; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="dptDoses" class="col-sm-3 form-label font-weight-bold">Dpt Doses</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dptDoses; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label for="dptDoses" class="col-sm-4 form-label font-weight-bold">Dpt Doses</label>
+    <div class="col-sm-6">
+        <p> <?php echo $dptDoses; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Date Last Dose</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateLastDose; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Date Last Dose</label>
+    <div class="col-sm-6">
+        <p> <?php echo $dateLastDose; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="caseClass" class="col-sm-3 form-label font-weight-bold">Case Classification</label>
-        <div class="col-sm-6">
-            <p> <?php echo $caseClass; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label for="caseClass" class="col-sm-4 form-label font-weight-bold">Case Classification</label>
+    <div class="col-sm-6">
+        <p> <?php echo $caseClass; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityMonth; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Morbidity Month</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityMonth; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Morbidity Week</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityWeek; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Morbidity Week</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityWeek; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label for="outcome" class="col-sm-3 form-label font-weight-bold">Outcome</label>
-        <div class="col-sm-6">
-            <p> <?php echo ucfirst($outcome); ?> </p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="dateDied" class="col-sm-3 form-label font-weight-bold">Date Died</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateDied; ?> </p>
-        </div>
-    </div>
-</form>
+</div>
+<?php
+include("./components/outcomeView.php");
+?>

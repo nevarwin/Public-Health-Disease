@@ -60,185 +60,169 @@ $morbidityMonth = $row['morbidityMonth'];
 $morbidityWeek = $row['morbidityWeek'];
 
 ?>
-<form method="POST">
-    <?php
-    if (!empty($alert)) {
-        echo $alert;
-    }
-    ?>
-    <div class="row mb-3">
-        <label for="" class="col-sm-3 form-label font-weight-bold">Date Admitted</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateAdmitted; ?> </p>
-        </div>
+
+<div class="row mb-3">
+    <label for="" class="col-sm-4 form-label font-weight-bold">Date Admitted</label>
+    <div class="col-sm-6">
+        <p> <?php echo $dateAdmitted; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Fever</label>
-        <div class="col-sm-6">
-            <p> <?php echo $fever; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Fever</label>
+    <div class="col-sm-6">
+        <p> <?php echo $fever; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Rash Char</label>
-        <div class="col-sm-6">
-            <p> <?php echo $rashChar; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Rash Char</label>
+    <div class="col-sm-6">
+        <p> <?php echo $rashChar; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Rash Sores</label>
-        <div class="col-sm-6">
-            <p> <?php echo $rashSores; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Rash Sores</label>
+    <div class="col-sm-6">
+        <p> <?php echo $rashSores; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Palms</label>
-        <div class="col-sm-6">
-            <p> <?php echo $palms; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Palms</label>
+    <div class="col-sm-6">
+        <p> <?php echo $palms; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Stiff Neck</label>
-        <div class="col-sm-6">
-            <p> <?php echo $fingers; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Stiff Neck</label>
+    <div class="col-sm-6">
+        <p> <?php echo $fingers; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Foot Soles</label>
-        <div class="col-sm-6">
-            <p> <?php echo $footSoles; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Foot Soles</label>
+    <div class="col-sm-6">
+        <p> <?php echo $footSoles; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Buttocks</label>
-        <div class="col-sm-6">
-            <p> <?php echo $buttocks; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Buttocks</label>
+    <div class="col-sm-6">
+        <p> <?php echo $buttocks; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Mouth Ulcers</label>
-        <div class="col-sm-6">
-            <p> <?php echo $mouthUlcers; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Mouth Ulcers</label>
+    <div class="col-sm-6">
+        <p> <?php echo $mouthUlcers; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Pain</label>
-        <div class="col-sm-6">
-            <p> <?php echo $pain; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Pain</label>
+    <div class="col-sm-6">
+        <p> <?php echo $pain; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Anorexia</label>
-        <div class="col-sm-6">
-            <p> <?php echo $anorexia; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Anorexia</label>
+    <div class="col-sm-6">
+        <p> <?php echo $anorexia; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Bm</label>
-        <div class="col-sm-6">
-            <p> <?php echo $bm; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Bm</label>
+    <div class="col-sm-6">
+        <p> <?php echo $bm; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Sore Throat</label>
-        <div class="col-sm-6">
-            <p> <?php echo $soreThroat; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Sore Throat</label>
+    <div class="col-sm-6">
+        <p> <?php echo $soreThroat; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Naus Vom</label>
-        <div class="col-sm-6">
-            <p> <?php echo $nausVom; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Naus Vom</label>
+    <div class="col-sm-6">
+        <p> <?php echo $nausVom; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Diff Breath</label>
-        <div class="col-sm-6">
-            <p> <?php echo $diffBreath; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Diff Breath</label>
+    <div class="col-sm-6">
+        <p> <?php echo $diffBreath; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Paralysis</label>
-        <div class="col-sm-6">
-            <p> <?php echo $paralysis; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Paralysis</label>
+    <div class="col-sm-6">
+        <p> <?php echo $paralysis; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Other Symptoms</label>
-        <div class="col-sm-6">
-            <p> <?php echo $otherSymptoms; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Other Symptoms</label>
+    <div class="col-sm-6">
+        <p> <?php echo $otherSymptoms; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Any Comp</label>
-        <div class="col-sm-6">
-            <p> <?php echo $anyComp; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Any Comp</label>
+    <div class="col-sm-6">
+        <p> <?php echo $anyComp; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Complicated</label>
-        <div class="col-sm-6">
-            <p> <?php echo $complicated; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Complicated</label>
+    <div class="col-sm-6">
+        <p> <?php echo $complicated; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Travel</label>
-        <div class="col-sm-6">
-            <p> <?php echo $travel; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Travel</label>
+    <div class="col-sm-6">
+        <p> <?php echo $travel; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Prob Exposure</label>
-        <div class="col-sm-6">
-            <p> <?php echo $probExposure; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Prob Exposure</label>
+    <div class="col-sm-6">
+        <p> <?php echo $probExposure; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Other Case</label>
-        <div class="col-sm-6">
-            <p> <?php echo $otherCase; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Other Case</label>
+    <div class="col-sm-6">
+        <p> <?php echo $otherCase; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">MeningLes</label>
-        <div class="col-sm-6">
-            <p> <?php echo $meningLes; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">MeningLes</label>
+    <div class="col-sm-6">
+        <p> <?php echo $meningLes; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Wf Diag</label>
-        <div class="col-sm-6">
-            <p> <?php echo $wfDiag; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Wf Diag</label>
+    <div class="col-sm-6">
+        <p> <?php echo $wfDiag; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Case Class</label>
-        <div class="col-sm-6">
-            <p> <?php echo $caseClass; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Case Class</label>
+    <div class="col-sm-6">
+        <p> <?php echo $caseClass; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Morbidity Month</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityMonth; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Morbidity Month</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityMonth; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Morbidity Week</label>
-        <div class="col-sm-6">
-            <p> <?php echo $morbidityWeek; ?> </p>
-        </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 form-label font-weight-bold">Morbidity Week</label>
+    <div class="col-sm-6">
+        <p> <?php echo $morbidityWeek; ?> </p>
     </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Outcome</label>
-        <div class="col-sm-6">
-            <p> <?php echo ucfirst($outcome); ?>
-            </p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 form-label font-weight-bold">Date Died</label>
-        <div class="col-sm-6">
-            <p> <?php echo $dateDied; ?> </p>
-        </div>
-    </div>
-</form>
+</div>
+<?php
+include("./components/outcomeView.php");
+?>

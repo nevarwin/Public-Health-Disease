@@ -80,11 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateDied = ($_POST['outcome'] === 'dead') ? $_POST['dateDied'] : '';
     // check if the data is empty
     do {
-        if (empty($dateAdmitted)) {
-            $errorMessage = "All fields are required!";
-            echo "<script>alert('All fields are required!');</script>";
-            break;
-        }
         // Proceed with form submission
         // Insert the data into the afpinfotbl table
         $query = "UPDATE amesinfotbl SET

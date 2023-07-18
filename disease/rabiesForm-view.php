@@ -61,116 +61,107 @@ $morbidityWeek = $row['morbidityWeek'];
 ?>
 
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Date Admitted</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Date Admitted</label>
     <div class="col-sm-6">
         <p><?php echo $dateAdmitted; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Type Of Exposure</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Type Of Exposure</label>
     <div class="col-sm-6">
         <p><?php echo $typeOfExposure; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Category</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Category</label>
     <div class="col-sm-6">
         <p><?php echo $category; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Bite Site</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Bite Site</label>
     <div class="col-sm-6">
         <p><?php echo $biteSite; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Date Bitten</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Date Bitten</label>
     <div class="col-sm-6">
         <p><?php echo $dateBitten; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Type Of Animal</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Type Of Animal</label>
     <div class="col-sm-6">
         <p><?php echo $typeOfAnimal; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Lab Diagnosis</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Lab Diagnosis</label>
     <div class="col-sm-6">
         <p><?php echo $labDiagnosis; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Lab Result</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Lab Result</label>
     <div class="col-sm-6">
         <p><?php echo $labResult; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Animal Status</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Animal Status</label>
     <div class="col-sm-6">
         <p><?php echo $animalStatus; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Date Vacc Started</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Date Vacc Started</label>
     <div class="col-sm-6">
         <p><?php echo $dateVaccStarted; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Animal Vaccination</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Animal Vaccination</label>
     <div class="col-sm-6">
         <p><?php echo $animalVacc; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Wound Cleaned</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Wound Cleaned</label>
     <div class="col-sm-6">
         <p><?php echo $woundCleaned; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Rabies Vaccine</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Rabies Vaccine</label>
     <div class="col-sm-6">
         <p><?php echo $rabiesVaccine; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Animal Outcome</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Animal Outcome</label>
     <div class="col-sm-6">
         <p><?php echo $animalOutcome; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Case Class</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Case Class</label>
     <div class="col-sm-6">
         <p><?php echo $caseClass; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Morbidity Month</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Morbidity Month</label>
     <div class="col-sm-6">
         <p><?php echo $morbidityMonth; ?></p>
     </div>
 </div>
 <div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Morbidity Week</label>
+    <label for="" class='col-sm-4 form-label font-weight-bold'>Morbidity Week</label>
     <div class="col-sm-6">
         <p><?php echo $morbidityWeek; ?></p>
     </div>
 </div>
-<div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Outcome</label>
-    <div class="col-sm-6">
-        <p><?php echo ucfirst($outcome); ?></p>
-    </div>
-</div>
-<div class="row mb-2">
-    <label for="" class='col-sm form-label font-weight-bold'>Date Died</label>
-    <div class="col-sm-6">
-        <p><?php echo $dateDied; ?></p>
-    </div>
-</div>
+<?php
+include("./components/outcomeView.php");
+?>
