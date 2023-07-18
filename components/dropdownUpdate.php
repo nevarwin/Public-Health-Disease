@@ -8,10 +8,10 @@ function generateDropdownUpdate($fieldName, $selectedValue) {
     ];
 
     $dropdown = '
-    <div class="row justify-content-center mb-3">
-        <label class="col-sm-6 col-form-label">' . ucfirst($fieldName) . '</label>
-        <div class="col-sm-5">
-            <select class="custom-select" name="' . $fieldName . '">';
+    <div class="justify-content-center">
+        <label class="col-sm-6 col-lg-12 col-xl-12 col-form-label">' . ucfirst($fieldName) . '</label>
+        
+            <select class="col-sm-8 col-lg-12 col-md-12 col-xl-12 col-sm-5 custom-select" name="' . $fieldName . '">';
 
     foreach ($options as $option) {
         $selected = ($option === $selectedValue) ? 'selected' : '';
@@ -21,7 +21,7 @@ function generateDropdownUpdate($fieldName, $selectedValue) {
 
     $dropdown .= '
         </select>
-    </div>
+    
 </div>';
 
     return $dropdown;

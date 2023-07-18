@@ -8,15 +8,13 @@ function generateDropdown($name) {
     );
 
     return '
-        <div class="row justify-content-center mb-3">
-            <label class="col-sm-6 col-form-label">' . ucwords($name) . '</label>
-            <div class="col-sm-5">
-                <select class="custom-select" name="' . $name . '">
-                    ' . implode('', array_map(function ($value, $label) {
+            <div class="justify-content-center">
+                <label class="col-sm-6 col-lg-12 col-xl-12 col-form-label">' . ucwords($name) . '</label>
+                    <select class="col-sm-8 col-lg-12 col-md-12 col-xl-12 custom-select" name="' . $name . '">
+                        ' . implode('', array_map(function ($value, $label) {
         return '<option value="' . $value . '">' . $label . '</option>';
     }, array_keys($options), $options)) . '
-                </select>
+                    </select>
             </div>
-        </div>
     ';
 }
