@@ -147,7 +147,7 @@ switch ($disease) {
 <div class="container-fluid">
     <!-- Begin of Row -->
     <div class="row">
-        <div class="col-xl-7 col-md-12 mb-3">
+        <div class="col-xl-8 col-md-12 mb-3">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -155,7 +155,7 @@ switch ($disease) {
                             <div class="text-xs font-weight-bold text-success">PATIENT NAME</div>
                         </div>
                         <div class="col mr-2">
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800 mx-3">
                                 <?php echo $fName . " " . $lName . " " . $mName; ?>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ switch ($disease) {
                             <div class="text-xs font-weight-bold text-success">PATIENT ID</div>
                         </div>
                         <div class="col mr-2">
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800 mx-3">
                                 <?php echo $patientId; ?>
                             </div>
                         </div>
@@ -292,7 +292,7 @@ switch ($disease) {
             </div>
         </div>
         <!-- Second Column -->
-        <div id="findings" class="col-xl-6 col-lg-7">
+        <div id="findings" class="col-lg-8">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
