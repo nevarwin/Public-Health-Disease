@@ -1,6 +1,7 @@
 <!-- Content Row -->
 <div class="container-fluid">
     <h1>Dashboard</h1>
+    <h5 class="my-2">Number of Admins</h5>
     <div class="row">
         <?php
         // Replace with your database connection code
@@ -37,41 +38,10 @@
         <?php
         }
         ?>
+    </div>
 
-        <!-- <?php
-                // Replace with your database connection code
-                include('./components/connection.php');
-
-                $query = "SELECT COUNT(*) AS count
-            FROM clients
-            WHERE positionId = 3";
-                $result = mysqli_query($con, $query);
-
-                // Display the count of authorized users
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $count = $row['count'];
-                ?>
-
-        <div class="col-xl-3 col-lg-3 col-md-6">
-            <div class="card border-left-primary shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Authorized Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <?php
-                }
-    ?> -->
-
+    <h5 class="my-2">Top 4 Disease Cases in Cavite</h5>
+    <div class="row">
         <?php
         // Replace with your database connection code
         include('./components/connection.php');
@@ -108,6 +78,121 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $disease ?></div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-disease fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+
+    <h5 class="my-2">Most Cases per Municipality</h5>
+    <div class="row">
+        <?php
+        // Replace with your database connection code
+        include('./components/connection.php');
+
+        $currentYear = date('Y');
+
+        $query = "SELECT COUNT(p.patientId) AS count, m.municipality
+        FROM patients p
+        INNER JOIN municipality m ON p.municipality = m.munId
+        WHERE YEAR(p.creationDate) = '$currentYear'
+        GROUP BY p.municipality, m.municipality
+        ORDER BY count DESC
+        LIMIT 8";
+        $result = mysqli_query($con, $query);
+
+        // Display the top 4 municipalities
+        while ($row = mysqli_fetch_assoc($result)) {
+            $municipality = $row['municipality'];
+            $count = $row['count'];
+        ?>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="card border-left-warning shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $municipality ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-disease fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+
+    <h5 class="my-2">Municipality Cases per disease</h5>
+    <div class="row">
+        <?php
+        // Replace with your database connection code
+        include('./components/connection.php');
+
+        // Define the list of diseases
+        $diseases = array(
+            'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
+            'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
+            'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
+        );
+
+        $currentYear = date('Y');
+
+        $query = "SELECT COUNT(p.patientId) AS count, m.municipality, d.disease
+            FROM patients p
+            INNER JOIN municipality m ON p.municipality = m.munId
+            INNER JOIN diseases d ON p.disease = d.diseaseId
+            WHERE YEAR(p.creationDate) = '$currentYear'
+                AND d.disease IN ('" . implode("','", $diseases) . "')
+            GROUP BY p.municipality, m.municipality, d.disease
+            ORDER BY m.municipality, count DESC";
+        $result = mysqli_query($con, $query);
+
+        $previousMunicipality = null;
+
+        // Group diseases by municipality
+        $municipalities = array();
+
+        // Collect the top 4 diseases per municipality
+        while ($row = mysqli_fetch_assoc($result)) {
+            $municipality = $row['municipality'];
+            $disease = $row['disease'];
+            $count = $row['count'];
+
+            if (!array_key_exists($municipality, $municipalities)) {
+                $municipalities[$municipality] = array();
+            }
+
+            if (count($municipalities[$municipality]) < 4) {
+                $municipalities[$municipality][] = array("disease" => $disease, "count" => $count);
+            }
+        }
+
+        // Display the cases per municipality
+        foreach ($municipalities as $municipality => $diseases) {
+        ?>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="card border-left-warning shadow h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $municipality ?></div>
+                                <?php foreach ($diseases as $diseaseData) : ?>
+                                    <?php $disease = $diseaseData["disease"]; ?>
+                                    <?php $count = $diseaseData["count"]; ?>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $disease . ': ' . $count ?></div>
+                                <?php endforeach; ?>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-disease fa-2x text-gray-300"></i>
