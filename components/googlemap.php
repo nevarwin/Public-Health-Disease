@@ -119,6 +119,15 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <?php endforeach; ?>
             </select>
         </div>
+        <div class="col">
+            <label>Select Color Vision Deficiency Type:</label>
+            <select id="color-deficiency" class="custom-select" onchange="changeGradientColor()">
+                <option value="default">Default</option>
+                <option value="deuteranomaly">Deuteranomaly</option>
+                <option value="protanomaly">Protanomaly</option>
+                <option value="tritanomaly">Tritanomaly</option>
+            </select>
+        </div>
     </div>
 
     <div id="map"></div>
@@ -135,6 +144,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 },
                 zoom: 11,
                 mapTypeId: "satellite",
+
             });
 
             const data = <?php echo json_encode($data); ?>;
@@ -144,6 +154,64 @@ while ($row = mysqli_fetch_assoc($result)) {
                 map: map,
                 radius: 20,
             });
+        }
+        const deuteranomalyColors = [
+            'rgba(255, 0, 0, 0)',
+            "rgba(255, 136, 0, 1)", // Orange
+            "rgba(0, 221, 0, 1)", // Light green
+            "rgba(0, 0, 255, 1)", // Blue
+            'rgba(255, 0, 0, 1)'
+
+        ];
+        const protanomalyColors = [
+            'rgba(255, 0, 0, 0)',
+            "rgba(255, 187, 0, 1)", // Yellow
+            "rgba(0, 238, 0, 1)", // Lime green
+            "rgba(0, 0, 255, 1)", // Blue
+            'rgba(255, 0, 0, 1)'
+        ];
+        const tritanomalyColors = [
+            'rgba(255, 0, 0, 0)',
+            "rgba(255, 0, 0, 1)", // Red
+            "rgba(0, 255, 204, 1)", // Light turquoise
+            "rgba(0, 0, 255, 1)", // Blue
+            'rgba(255, 0, 0, 1)'
+        ];
+        const
+            defaultColors = [
+                "rgba(0, 255, 255, 0)",
+                "rgba(0, 255, 255, 1)",
+                "rgba(0, 191, 255, 1)",
+                "rgba(0, 127, 255, 1)",
+                "rgba(0, 63, 255, 1)",
+                "rgba(0, 0, 255, 1)",
+                "rgba(0, 0, 223, 1)",
+                "rgba(0, 0, 191, 1)",
+                "rgba(0, 0, 159, 1)",
+                "rgba(0, 0, 127, 1)",
+                "rgba(63, 0, 91, 1)",
+                "rgba(127, 0, 63, 1)",
+                "rgba(191, 0, 31, 1)",
+                "rgba(255, 0, 0, 1)"
+            ];
+
+
+        function changeGradientColor() {
+            var dropdown = document.getElementById("color-deficiency");
+
+            if (dropdown.value === "deuteranomaly") {
+                console.log('deutera');
+                heatmap.set("gradient", deuteranomalyColors);
+            } else if (dropdown.value === "protanomaly") {
+                console.log('prota');
+                heatmap.set("gradient", protanomalyColors);
+            } else if (dropdown.value === "tritanomaly") {
+                console.log('trita');
+                heatmap.set("gradient", tritanomalyColors);
+            } else if (dropdown.value === "default") {
+                console.log('trita');
+                heatmap.set("gradient", heatmap.get("gradient") ? null : defaultColors);
+            }
         }
 
         // Handle changes in the dropdown menus
