@@ -47,6 +47,17 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
     $selected = ($year == $pieSelectedYear) ? 'selected' : '';
     $options .= "<option value=\"$year\" $selected>$year</option>";
 }
+
+// for the municipality dropdown
+$municipality = ["Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas", "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias", "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez", "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay City", "Tanza", "Ternate", "Trece Martires City"];
+
+$municipalityOption = '';
+$selectedMunicipality = $_GET['pieMun'] ?? '';
+
+foreach ($municipality as $municipal) {
+    $selected = ($municipal == $selectedMunicipality) ? 'selected' : '';
+    $municipalityOption .= "<option value=\"$municipal\" $selected>$municipal</option>";
+}
 ?>
 
 <div class="row">
@@ -88,7 +99,13 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
                     ?>
                 </select>
             </div>
-
+            <div class="dropdown col">
+                <label for="year">Select Municipality:</label>
+                <select class="custom-select" name="pieMun">
+                    <option value="">Reset</option>
+                    <?php echo $municipalityOption; ?>
+                </select>
+            </div>
             <div class="col">
                 <div class="row justify-content-end">
                     <button type="submit" class="btn btn-primary">Check</button>
