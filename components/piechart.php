@@ -150,6 +150,7 @@ while ($row = mysqli_fetch_assoc($pieYearResult)) {
   $options .= "<option value=\"$year\" $selected>$year</option>";
 }
 
+// for the municipality dropdown
 $municipality = ["Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas", "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias", "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez", "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay City", "Tanza", "Ternate", "Trece Martires City"];
 
 $municipalityOption = '';
