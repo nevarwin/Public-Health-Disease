@@ -1,16 +1,18 @@
 <?php
 // Replace with your database connection code
 include('connection.php');
+include('alertMessage.php');
 
 $piePatientCount = 0;
 $pieJsonData = 0;
 $totalCount = 0;
+$pieDiseaseMode = True;
+echo '<script>var selectedDisease; </script>';
+echo '<script>var pieDiseaseMode;</script>';
+
 
 if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
-  echo "<script>
-    console.log('PieDisease');
-    </script>
-    ";
+  $pieDiseaseMode = true;
 
   $pieSelectedDisease = $_GET['pieDisease'];
   $pieSelectedYear = $_GET['pieYear'];
@@ -25,11 +27,18 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
   $countResult = mysqli_query($con, $pieCountQuery);
 
   $data = array();
-  while ($row = $countResult->fetch_assoc()) {
-    $municipality = $row['municipality'];
-    $count = $row['piePatientCount'];
-    $data[$municipality] = $count;
-    $totalCount += $count; // Increment the total count
+  if (mysqli_num_rows($countResult) == 0) {
+    $errorMessage = "No data found for the selected disease.";
+    $type = 'warning';
+    $strongContent = 'Holy guacamole!';
+    $alert = generateAlert($type, $strongContent, $errorMessage);
+  } else {
+    while ($row = $countResult->fetch_assoc()) {
+      $municipality = $row['municipality'];
+      $count = $row['piePatientCount'];
+      $data[$municipality] = $count;
+      $totalCount += $count; // Increment the total count
+    }
   }
   // Encode the PHP array as JSON
   $pieJsonData = json_encode($data);
@@ -45,6 +54,8 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
   echo 'var cases = ' . json_encode(array_values($data)) . ';';
   echo '</script>';
 
+  // echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
+
   // // Display the municipalities, their counts, and the total count
   // echo '<ul>';
   // foreach ($data as $municipality => $count) {
@@ -55,12 +66,16 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
 
 // For the municipality dropdown logic
 else if (isset($_GET['pieMun'])) {
-  echo "<script>
-    console.log('PieMun');
-    </script>
-    ";
+  // to show if 'true' or 'false'
+  // echo var_export($pieDiseaseMode);
+  $pieDiseaseMode = false;
+
+  // echo 'pieMun <br>';
+
   $pieSelectedYear = $_GET['pieYear'];
   $pieSelectedMun = $_GET['pieMun'];
+
+  // echo (gettype($pieSelectedMun) . '<br>');
 
   // Selecting the counts of cases per disease in selected municipality
   $diseaseCountQuery = "SELECT p.disease, p.municipality, COUNT(*) AS diseaseCount 
@@ -82,7 +97,10 @@ else if (isset($_GET['pieMun'])) {
 
   // Check if the query has returned any rows
   if (mysqli_num_rows($countResult) == 0) {
-    echo "No data found for the selected municipality.";
+    $errorMessage = "No data found for the selected municipality.";
+    $type = 'warning';
+    $strongContent = 'Holy guacamole!';
+    $alert = generateAlert($type, $strongContent, $errorMessage);
   } else {
     while ($row = $countResult->fetch_assoc()) {
       $disease = $row['disease'];
@@ -92,7 +110,7 @@ else if (isset($_GET['pieMun'])) {
       // Store the disease count for the selected municipality
       $data[$disease] = $count;
 
-      echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
+      // echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
     }
   }
 
@@ -102,11 +120,11 @@ else if (isset($_GET['pieMun'])) {
   //     echo "$disease: $count <br>";
   // }
 
-  // Encode the PHP array as JSON
-  $pieJsonData = json_encode($data);
+  // Encode the PHP variable as JSON before using it in JavaScript
+  $encodedSelectedMun = json_encode($pieSelectedMun);
 
   // Echo the JSON data inside a JavaScript block
-  echo '<script>var selectedDisease = ' . $pieSelectedMun . ';</script>';
+  echo '<script>selectedDisease = ' . $encodedSelectedMun . ';</script>';
   echo '<script>var pieSelectedYear = ' . $pieSelectedYear . ';</script>';
   echo '<script>var pieJsonData = ' . $pieJsonData . ';</script>';
 
@@ -115,6 +133,8 @@ else if (isset($_GET['pieMun'])) {
   echo 'var municipalities = ' . json_encode(array_keys($data)) . ';';
   echo 'var cases = ' . json_encode(array_values($data)) . ';';
   echo '</script>';
+
+  echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
 }
 
 // Select query for all available creation date in patients table
@@ -141,7 +161,11 @@ foreach ($municipality as $municipal) {
 }
 
 ?>
-
+<?php
+if (!empty($errorMessage)) {
+  echo $alert;
+}
+?>
 <div class="row">
   <form id="form2" class="col-12 p-0">
     <div class="row col-xl-12 col-lg-12 col-sm-12">
@@ -190,7 +214,7 @@ foreach ($municipality as $municipal) {
       <div class="dropdown col">
         <label for="year">Select Municipality:</label>
         <select class="custom-select" name="pieMun">
-          <option value="">Select</option>
+          <option value="">Reset</option>
           <?php echo $municipalityOption; ?>
         </select>
       </div>
@@ -249,43 +273,21 @@ foreach ($municipality as $municipal) {
 
   var diseaseName;
   var selectedDisease;
+  console.log(typeof(selectedDisease));
   console.log(selectedDisease);
   if (
     selectedDisease === undefined ||
     selectedDisease === null ||
-    selectedDisease === "" ||
-    selectedDisease === 0
+    selectedDisease === ""
   ) {
+    console.log('first if');
     diseaseName = "Sample Disease";
+  } else if (isNaN(selectedDisease)) {
+    console.log('2nd if');
+    diseaseName = selectedDisease;
   } else {
     diseaseName = diseases[selectedDisease];
   }
-
-  var sampleMun = [
-    "Alfonso",
-    "Amadeo",
-    "Bacoor",
-    "Carmona",
-    "Cavite City",
-    "Dasmariñas",
-    "Gen. Emilio Aguinaldo",
-    "Gen. Mariano Alvarez",
-    "General Trias",
-    "Imus",
-    "Indang",
-    "Kawit",
-    "Magallanes",
-    "Maragondon",
-    "Mendez",
-    "Naic",
-    "Noveleta",
-    "Rosario",
-    "Silang",
-    "Tagaytay City",
-    "Tanza",
-    "Ternate",
-    "Trece Martires City",
-  ];
 
   var municipality = {
     1: "Alfonso",
@@ -315,11 +317,20 @@ foreach ($municipality as $municipal) {
 
   // this translates the municipalities from sql to the corresponding number
   // in the municipality associated array
-  var translatedMunicipality = municipalities.map(function(number) {
-    return municipality[number];
-  });
+  console.log(pieDiseaseMode);
 
-  // console.log(translatedMunicipality);
+  if (pieDiseaseMode != false) {
+    var translatedMunicipality = municipalities.map(function(number) {
+      return municipality[number];
+    });
+
+  } else {
+    var translatedMunicipality = municipalities.map(function(number) {
+      return diseases[number];
+    });
+  }
+
+  console.log(translatedMunicipality);
 
   const pie = document.getElementById("pieChart");
 
@@ -332,8 +343,6 @@ foreach ($municipality as $municipal) {
     const color = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
     colors.push(color);
   }
-  console.log(translatedMunicipality);
-  console.log(cases);
 
   // variables for the values of object translatedMunicipality and cases 
   let munValue = [];
@@ -361,6 +370,9 @@ foreach ($municipality as $municipal) {
     console.log("Arrays must have the same length.");
   }
   console.log(munCasesValues);
+
+
+  // for the pie chart 
   const pieData = {
     labels: translatedMunicipality.length === 0 ? ["Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas", "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias", "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez", "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay City", "Tanza", "Ternate", "Trece Martires City", ] : munCasesValues,
     // label: `Number of ${diseaseName} Cases`, 
@@ -372,6 +384,9 @@ foreach ($municipality as $municipal) {
       borderWidth: 1,
     }, ],
   };
+
+  let title = pieDiseaseMode != false ? 'Municipality' : 'Disease';
+  // for the pie chart configuration
   const pieConfig = {
     type: "pie",
     data: pieData,
@@ -379,7 +394,7 @@ foreach ($municipality as $municipal) {
       plugins: {
         title: {
           display: true,
-          text: `${diseaseName} Cases Per Municipality Year ${pieSelectedYear}`,
+          text: `${diseaseName} Cases Per ${title} Year ${pieSelectedYear}`,
           font: {
             size: 18,
           },
@@ -408,7 +423,10 @@ foreach ($municipality as $municipal) {
     },
   };
 
+  // displaying the pie chart using the data and config
   const pieChart = new Chart(pie, pieConfig);
+
+  // download button to download the generated pie chart
   const downloadButton = document.getElementById("downloadButton");
   downloadButton.addEventListener("click", () => {
     const imageUrl = pieChart.toBase64Image();
