@@ -1,13 +1,20 @@
 <?php
 // Replace with your database connection code
 include('connection.php');
+include('alertMessage.php');
 
 $patientCount = 0;
 $jsonData = 0;
+$disease = '';
 
-if (isset($_GET['disease'])) {
+echo '<script>var pieDiseaseMode;</script>';
+echo '<script>var lineSelectedDisease; </script>';
+
+if (isset($_GET['disease']) && $_GET['pieMun'] == '') {
     $selectedDisease = $_GET['disease'];
     // echo "Selected Disease: $selectedDisease<br>";
+
+    $pieDiseaseMode = true;
 
     $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
             FROM patients 
@@ -34,7 +41,74 @@ if (isset($_GET['disease'])) {
     // Echo the JSON data inside a JavaScript block
     echo '<script>var selectedDisease = ' . $selectedDisease . ';</script>';
     echo '<script>var jsonData = ' . $jsonData . ';</script>';
+    echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 }
+// For the municipality dropdown logic
+else if (isset($_GET['pieMun'])) {
+    $pieSelectedMun = $_GET['pieMun'];
+    $lineSelectedDisease = $_GET['disease'];
+
+    $pieDiseaseMode = false;
+
+
+    $countQuery = " SELECT
+        COUNT(*) AS patientCount,
+        p.municipality,
+        d.disease,
+        YEAR(p.creationDate) AS creationYear
+    FROM
+        patients p
+    JOIN municipality m ON
+        p.municipality = m.munId
+    JOIN diseases d ON
+        p.disease = d.diseaseId
+    WHERE
+        m.municipality = '$pieSelectedMun' AND
+        p.disease = $lineSelectedDisease
+    GROUP BY
+        p.disease, p.municipality, YEAR(p.creationDate);
+    ";
+
+    $countResult = mysqli_query($con, $countQuery);
+
+    $data = array();
+    // Check if the query has returned any rows
+    // TODO modify the error message
+    if (mysqli_num_rows($countResult) == 0) {
+        $errorMessage = "No data found for the selected municipality.";
+        $type = 'warning';
+        $strongContent = 'Holy guacamole!';
+        $alert = generateAlert($type, $strongContent, $errorMessage);
+    } else {
+        while ($row = $countResult->fetch_assoc()) {
+            $year = $row['creationYear'];
+            $municipality = $row['municipality'];
+            $disease = $row['disease'];
+            $count = $row['patientCount'];
+            $data[$year] = $count;
+        }
+    }
+
+
+    // // Echo the counts per year
+    foreach ($data as $year => $count) {
+        echo "Disease: $disease, Year: $year, Count: $count, Municipality: $municipality<br>";
+    }
+
+    // Encode the PHP array as JSON
+    $jsonData = json_encode($data);
+
+    $encodedSelectedMun = json_encode($pieSelectedMun);
+    // $encodedSelectedDisease = json_encode($disease);
+
+    // Echo the JSON data inside a JavaScript block
+    echo '<script>selectedDisease = ' . $encodedSelectedMun . ';</script>';
+    echo '<script>lineSelectedDisease = ' . $disease . ';</script>';
+    echo '<script>var jsonData = ' . $jsonData . ';</script>';
+
+    echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
+}
+
 // Select query for all available creation date in patients table
 $pieYearQuery = "SELECT DISTINCT YEAR(creationDate) AS year FROM patients ORDER BY year ASC";
 $pieYearResult = mysqli_query($con, $pieYearQuery);
@@ -59,7 +133,11 @@ foreach ($municipality as $municipal) {
     $municipalityOption .= "<option value=\"$municipal\" $selected>$municipal</option>";
 }
 ?>
-
+<?php
+if (!empty($errorMessage)) {
+    echo $alert;
+}
+?>
 <div class="row">
     <form id="form1" class="col-12 p-0">
         <div class="row col-xl-12 col-lg-12 col-sm-12">
@@ -164,9 +242,10 @@ foreach ($municipality as $municipal) {
 
     var diseaseName;
     var selectedDisease;
-    if (selectedDisease === undefined || selectedDisease === null || selectedDisease === '' ||
-        selectedDisease === 0) {
+    if (selectedDisease === undefined || selectedDisease === null || selectedDisease === '') {
         diseaseName = 'Sample Disease';
+    } else if (isNaN(selectedDisease)) {
+        diseaseName = selectedDisease;
     } else {
         diseaseName = diseases[selectedDisease];
     }
@@ -194,6 +273,7 @@ foreach ($municipality as $municipal) {
     const ctx = document.getElementById("myChart").getContext('2d');
     let delayed;
 
+    // line chart data
     const data = {
         labels: years === 0 ? ["2018", "2019", "2020", "2021", "2022"] : years,
         datasets: [{
@@ -210,6 +290,10 @@ foreach ($municipality as $municipal) {
         }, ],
     };
 
+    let title = pieDiseaseMode == false ? `of ${lineSelectedDisease}` : '';
+
+    console.log(title);
+    // line chart config
     const config = {
         type: 'line',
         data: data,
@@ -233,7 +317,7 @@ foreach ($municipality as $municipal) {
             plugins: {
                 title: {
                     display: true,
-                    text: `${diseaseName} Cases Per Year`,
+                    text: `${diseaseName} Cases ${title} Per Year`,
                     font: {
                         size: 18
                     }
