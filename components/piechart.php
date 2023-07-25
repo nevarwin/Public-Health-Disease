@@ -2,17 +2,22 @@
 // Replace with your database connection code
 include('connection.php');
 include('alertMessage.php');
+include('adminBarangayScript.php');
 
 $piePatientCount = 0;
 $pieJsonData = 0;
 $totalCount = 0;
 $pieDiseaseMode = True;
+
 echo '<script>var selectedDisease; </script>';
 echo '<script>var pieDiseaseMode;</script>';
 
+if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] != '') {
+  echo 'if statement';
 
-if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
   $pieDiseaseMode = true;
+
+  echo $pieDiseaseMode . '<br>';
 
   $pieSelectedDisease = $_GET['pieDisease'];
   $pieSelectedYear = $_GET['pieYear'];
@@ -54,7 +59,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
   echo 'var cases = ' . json_encode(array_values($data)) . ';';
   echo '</script>';
 
-  // echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
+  echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 
   // // Display the municipalities, their counts, and the total count
   // echo '<ul>';
@@ -64,8 +69,10 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '') {
   // echo '</ul>';
 }
 
-// For the municipality dropdown logic
-else if (isset($_GET['pieMun'])) {
+// For the municipality dropdown logic without the disease
+else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
+  echo '1st else if statement <br>';
+
   // to show if 'true' or 'false'
   // echo var_export($pieDiseaseMode);
   $pieDiseaseMode = false;
@@ -110,7 +117,7 @@ else if (isset($_GET['pieMun'])) {
       // Store the disease count for the selected municipality
       $data[$disease] = $count;
 
-      // echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
+      echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
     }
   }
 
@@ -135,6 +142,102 @@ else if (isset($_GET['pieMun'])) {
   echo '</script>';
 
   echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
+}
+
+// For the municipality dropdown logic that displays the barangay
+else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
+  echo '2nd else if statement <br>';
+
+  // to show if 'true' or 'false'
+  echo '150 <br>';
+  $pieDiseaseMode = false;
+  echo var_export($pieDiseaseMode);
+
+  // echo 'pieMun <br>';
+
+  $pieSelectedYear = $_GET['pieYear'];
+  $pieSelectedMun = $_GET['pieMun'];
+  $pieSelectedDisease = $_GET['pieDisease'];
+
+  // echo (gettype($pieSelectedMun) . '<br>');
+
+  // Selecting the counts of cases per disease in selected municipality
+  $diseaseCountQuery = "SELECT
+    p.disease,
+    p.municipality,
+    b.barangay,
+    COUNT(*) AS diseaseCount
+    FROM
+        patients p
+    JOIN municipality m ON
+        p.municipality = m.munId
+    JOIN barangay b ON
+        p.barangay = b.id
+    WHERE
+        m.municipality = '$pieSelectedMun' 
+    AND 
+        YEAR(p.creationDate) = $pieSelectedYear 
+    AND 
+        p.disease = $pieSelectedDisease
+    GROUP BY
+        p.disease,
+        p.municipality,
+        p.barangay;";
+
+  $countResult = mysqli_query($con, $diseaseCountQuery);
+
+  // Check if there is an error in the query
+  if (!$countResult) {
+    die("Error in the query: " . mysqli_error($con));
+  }
+
+  $data = array();
+  $municipality;
+
+
+  // Check if the query has returned any rows
+  if (mysqli_num_rows($countResult) == 0) {
+    $errorMessage = "No data found for the selected municipality.";
+    $type = 'warning';
+    $strongContent = 'Holy guacamole!';
+    $alert = generateAlert($type, $strongContent, $errorMessage);
+  } else {
+    while ($row = $countResult->fetch_assoc()) {
+      $disease = $row['disease'];
+      $barangay = $row['barangay'];
+      $municipality = $row['municipality'];
+      $count = $row['diseaseCount'];
+
+      // Store the disease count for the selected municipality
+      $data[$barangay] = $count;
+
+      echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
+    }
+  }
+
+  // // Display the disease counts for the selected municipality
+  // echo "<br> Disease Counts for $pieSelectedMun: <br>";
+  // foreach ($data as $disease => $count) {
+  //     echo "$disease: $count <br>";
+  // }
+
+  var_dump($data);
+
+  // Encode the PHP variable as JSON before using it in Javascript
+  $encodedSelectedMun = json_encode($pieSelectedMun);
+
+  // Echo the JSON data inside a JavaScript block
+  echo "<script>selectedDisease = $encodedSelectedMun;</script>";
+  echo "<script>var pieSelectedYear = $pieSelectedYear;</script>";
+  echo "<script>var pieJsonData = $pieJsonData;</script>";
+
+  // Echo the municipality and cases as JavaScript variables
+  echo '<script>';
+  echo 'var municipalities = ' . json_encode(array_keys($data)) . ';';
+  echo 'var cases = ' . json_encode(array_values($data)) . ';';
+  echo '</script>';
+
+  // echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
 }
 
 // Select query for all available creation date in patients table
@@ -173,6 +276,7 @@ if (!empty($errorMessage)) {
       <div class="dropdown col">
         <label for="disease">Select Disease:</label>
         <select class="custom-select" name="pieDisease">
+          <option value="">Reset</option>
           <?php
           $pieDropdown = [
             1 => 'ABD',
@@ -207,18 +311,41 @@ if (!empty($errorMessage)) {
         </select>
       </div>
       <div class="dropdown col">
-        <label for="year">Select Year:</label>
+        <label>Select Year:</label>
         <select class="custom-select" name="pieYear">
           <?php echo $options; ?>
         </select>
       </div>
       <div class="dropdown col">
-        <label for="year">Select Municipality:</label>
+        <label>Select Municipality:</label>
         <select class="custom-select" name="pieMun">
           <option value="">Reset</option>
           <?php echo $municipalityOption; ?>
         </select>
       </div>
+      <!-- <div class="dropdown col">
+        <label>Municipality</label>
+        <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
+          <option>Select Municipality</option>
+          <?php
+          // Connect to database and fetch municipalities
+          include('connection.php');
+          $result = mysqli_query($con, 'SELECT * FROM municipality');
+
+          // Display each municipalities in a dropdown option
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
+          }
+          ?>
+        </select>
+      </div> -->
+      <!-- Barangay Dropdown -->
+      <!-- <div class="dropdown col">
+        <label>Barangay</label>
+        <select class="custom-select" id="barangay" name="barangay">
+          <option>Select Barangay</option>
+        </select>
+      </div> -->
       <div class="col">
         <div class="row justify-content-end">
           <button type="submit" class="btn btn-primary">Check</button>
@@ -241,6 +368,8 @@ if (!empty($errorMessage)) {
 <script>
   var pieJsonData;
   let pieDelayed;
+
+  // console.log(barangay);
 
   if (pieJsonData === undefined || pieJsonData === null || pieJsonData === "") {
     cases = 0;
@@ -320,15 +449,23 @@ if (!empty($errorMessage)) {
   // in the municipality associated array
   console.log(pieDiseaseMode);
 
-  if (pieDiseaseMode != false) {
+  // how to get all the values and store it inside 1 variable
+  console.log(municipalities);
+
+  if (pieDiseaseMode == 1) {
+    console.log('pieDiseaseMode is true');
     var translatedMunicipality = municipalities.map(function(number) {
       return municipality[number];
     });
 
-  } else {
+  } else if (pieDiseaseMode == false) {
+    console.log('pieDiseaseMode is false');
     var translatedMunicipality = municipalities.map(function(number) {
       return diseases[number];
     });
+  } else if (pieDiseaseMode == undefined) {
+    console.log('pieDiseaseMode is undefined');
+    var translatedMunicipality = Object.values(municipalities);
   }
 
   console.log(translatedMunicipality);
