@@ -18,6 +18,7 @@ if (isset($_GET['patientId'])) {
     $fieldValue = $row['patientId'];
 
     // Insert the deleted field into the deleted_fields table
+    // TODO add adminId on who deleted the patient
     $query = "INSERT INTO deleted_fields (patientId) VALUES ('$fieldValue')";
     mysqli_query($con, $query);
 

@@ -117,7 +117,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $municipalityValue = $row['municipality'];
 
                 // Create the full address
-                $address = $unitCode . ', ' . $subd . ', ' .  $street . ', ' . $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . $postalCode . ', ' . 'Philippines';
+                // $address = $unitCode . ', ' . $subd . ', ' .  $street . ', ' . $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . ', ' . $postalCode . ', ' . 'Philippines';
+
+                // TODO baka yung ph ang nagpapagulo try tanggalin
+                // $address = $barangayValue . ', ' . $municipalityValue . ', ' . $postalCode . ', ' . 'Cavite' . ', ' . 'Philippines';
+
+                // medyo accurate at nagana na yung sa naic
+                $address = $barangayValue . ', ' . 'Cavite';
+                // echo $address;
 
                 // Format the address for URL encoding
                 $formattedAddress = urlencode($address);
@@ -143,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $updateSql = "UPDATE patients SET latitude = '$latitude', longitude = '$longitude' WHERE patientId = $insert_id";
 
                         if ($con->query($updateSql) === TRUE) {
-                            echo "Address saved successfully";
+                            // echo "Address saved successfully";
                         } else {
                             $errorMessage = "Error updating address: " .  mysqli_error($con);
                             $type = 'warning';
