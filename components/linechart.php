@@ -73,9 +73,8 @@ else if (isset($_GET['pieMun'])) {
 
     $data = array();
     // Check if the query has returned any rows
-    // TODO modify the error message
     if (mysqli_num_rows($countResult) == 0) {
-        $errorMessage = "No data found for the selected municipality.";
+        $errorMessage = "No data found for the selected disease and municipality.";
         $type = 'warning';
         $strongContent = 'Holy guacamole!';
         $alert = generateAlert($type, $strongContent, $errorMessage);
@@ -90,10 +89,10 @@ else if (isset($_GET['pieMun'])) {
     }
 
 
-    // // Echo the counts per year
-    foreach ($data as $year => $count) {
-        echo "Disease: $disease, Year: $year, Count: $count, Municipality: $municipality<br>";
-    }
+    // Echo the counts per year
+    // foreach ($data as $year => $count) {
+    //     echo "Disease: $disease, Year: $year, Count: $count, Municipality: $municipality<br>";
+    // }
 
     // Encode the PHP array as JSON
     $jsonData = json_encode($data);
