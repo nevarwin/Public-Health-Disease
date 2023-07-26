@@ -10,7 +10,7 @@ $disease = '';
 echo '<script>var pieDiseaseMode;</script>';
 echo '<script>var lineSelectedDisease; </script>';
 
-if (isset($_GET['disease']) && $_GET['pieMun'] == '') {
+if (isset($_GET['disease']) && $_GET['pieMun'] == '' && $_GET['disease'] != '') {
     $selectedDisease = $_GET['disease'];
     // echo "Selected Disease: $selectedDisease<br>";
 
@@ -50,7 +50,6 @@ else if (isset($_GET['pieMun'])) {
 
     $pieDiseaseMode = false;
 
-
     $countQuery = " SELECT
         COUNT(*) AS patientCount,
         p.municipality,
@@ -78,6 +77,7 @@ else if (isset($_GET['pieMun'])) {
         $type = 'warning';
         $strongContent = 'Holy guacamole!';
         $alert = generateAlert($type, $strongContent, $errorMessage);
+        $disease = $lineSelectedDisease;
     } else {
         while ($row = $countResult->fetch_assoc()) {
             $year = $row['creationYear'];
@@ -98,11 +98,11 @@ else if (isset($_GET['pieMun'])) {
     $jsonData = json_encode($data);
 
     $encodedSelectedMun = json_encode($pieSelectedMun);
-    // $encodedSelectedDisease = json_encode($disease);
+    $encodedSelectedDisease = json_encode($disease);
 
     // Echo the JSON data inside a JavaScript block
     echo '<script>selectedDisease = ' . $encodedSelectedMun . ';</script>';
-    echo '<script>lineSelectedDisease = ' . $disease . ';</script>';
+    echo '<script>lineSelectedDisease = ' . $lineSelectedDisease . ';</script>';
     echo '<script>var jsonData = ' . $jsonData . ';</script>';
 
     echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
@@ -143,6 +143,7 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label for="disease">Select Disease:</label>
                 <select id='selectDisease' class="custom-select" name="disease">
+                    <option value="">Reset</option>
                     <?php
                     $diseases = [
                         1 => 'ABD',
@@ -289,7 +290,8 @@ if (!empty($errorMessage)) {
         }, ],
     };
 
-    let title = pieDiseaseMode == false ? `of ${lineSelectedDisease}` : '';
+    var translatedDisease = diseases[lineSelectedDisease];
+    let title = pieDiseaseMode == false ? `of ${translatedDisease}` : '';
 
     console.log(title);
     // line chart config
