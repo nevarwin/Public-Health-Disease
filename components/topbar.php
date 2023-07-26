@@ -29,15 +29,15 @@ $positionValue = $positionRow['position'];
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="http://localhost/admin2gh/adminPage-view.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="/admin2gh/adminPage-view.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
-                <a class="dropdown-item" href="http://localhost/admin2gh/adminPage-updateProfile.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="/admin2gh/adminPage-updateProfile.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                     Update Profile
                 </a>
-                <a class="dropdown-item" href="http://localhost/admin2gh/adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="/admin2gh/adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Change Password
                 </a>
