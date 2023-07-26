@@ -23,7 +23,7 @@ include('./components/head.php');
                     <div class="row justify-content-center">
                         <div class="col-md-6 col-lg-8 py-2 ">
                             <?php
-                            include('./components/piechart.php')
+                            include('./components/controllers/piechart.php')
                             ?>
                         </div>
                     </div>
