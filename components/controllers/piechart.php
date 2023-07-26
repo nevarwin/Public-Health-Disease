@@ -1,6 +1,6 @@
 <?php
 require "components/connection.php";
-require "components/functions/alertMessage.php";
+require "components/alertMessage.php";
 require "components/adminBarangayScript.php";
 
 $piePatientCount = 0;
