@@ -1,6 +1,7 @@
 <?php
 // PHP for the line and pie chart
 include('../components/connection.php');
+// require '../components/alertMessage.php';
 
 $piePatientCount = 0;
 $pieJsonData = 0;
@@ -96,8 +97,16 @@ if (isset($_GET['pieDisease'])) {
   }
 
   $result = mysqli_query($con, $query);
+  // TODO
   if (mysqli_num_rows($result) == 0) {
-    echo "no records";
+    $errorMessage = "No data found for the selected municipality.";
+    $type = 'warning';
+    $strongContent = 'Holy guacamole!';
+    // $alert = generateAlert($type, $strongContent, $errorMessage);
+    // echo "no records";
+    // if (!empty($errorMessage)) {
+    //   echo $alert;
+    // }
   }
 
   // Fetch the data and convert it to JSON
