@@ -6,6 +6,19 @@ include("./js/landingPageChart.php");
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Public Health Disease Geomapping</title>
+    <link rel="shortcut icon" href="../assets/img/caviteLogo.png" type="image/png">
+
+    <!-- chart.js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- All CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <style>
         #map {
             height: 100%;
@@ -19,16 +32,21 @@ include("./js/landingPageChart.php");
 <body>
     <!-- <body> -->
     <script src="./js/map.js"></script>
-    <div class="col">
-        <label>Select Color Vision Deficiency Type:</label>
-        <select id="color-deficiency" class="custom-select" onchange="changeGradientColor()">
-            <option value="default">Default</option>
-            <option value="deuteranomaly">Deuteranomaly</option>
-            <option value="protanomaly">Protanomaly</option>
-            <option value="tritanomaly">Tritanomaly</option>
-        </select>
+    <div class="row py-2">
+        <div class="col-auto d-flex align-items-center">
+            <label for="color-deficiency">Select Color Vision Deficiency Type:</label>
+        </div>
+        <div class="col">
+            <select id="color-deficiency" class="form-select form-select-md" onchange="changeGradientColor()">
+                <option value="default">Default</option>
+                <option value="deuteranomaly">Deuteranomaly</option>
+                <option value="protanomaly">Protanomaly</option>
+                <option value="tritanomaly">Tritanomaly</option>
+            </select>
+        </div>
     </div>
     <div id="map"></div>
+
 </body>
 
 </html>
