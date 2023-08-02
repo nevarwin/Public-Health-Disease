@@ -19,19 +19,31 @@ include("./js/landingPageChart.php");
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization&callback=initMap" async defer></script>
     <style>
         #map {
             height: 100%;
             width: 100%;
         }
+
+        #colorGradient {
+            height: 20px;
+            background: linear-gradient(to right, red, yellow, green);
+        }
+
+        .label {
+            display: inline-block;
+            width: 50px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization&callback=initMap" async defer></script>
 
 </head>
 
 <body>
     <!-- <body> -->
-    <script src="./js/map.js"></script>
     <div class="row py-2">
         <div class="col-auto d-flex align-items-center">
             <label for="color-deficiency">Select Color Vision Deficiency Type:</label>
@@ -46,7 +58,7 @@ include("./js/landingPageChart.php");
         </div>
     </div>
     <div id="map"></div>
-
+    <script src="./js/map.js"></script>
 </body>
 
 </html>

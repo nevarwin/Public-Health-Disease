@@ -15,21 +15,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="css/style.css" />
-
-  <style>
-    .defaultColor {
-      height: 20px;
-      background: linear-gradient(to right, red, yellow, green);
-    }
-
-    .label {
-      display: inline-block;
-      width: 50px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: bold;
-    }
-  </style>
 </head>
 
 <body>
@@ -192,7 +177,7 @@
               <div class="row justify-content-center pt-5">
                 <div class="text-center">
                   <span class=""><strong>Intensity Level</strong></span>
-                  <div class="defaultColor"></div>
+                  <div class="colorGradient" id="colorGradient"></div>
                   <div class="d-flex justify-content-between">
                     <span class="label label-high">High</span>
                     <span class="label label-medium">Medium</span>
