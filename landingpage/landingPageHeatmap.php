@@ -1,7 +1,3 @@
-<?php
-include("./js/landingPageChart.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
