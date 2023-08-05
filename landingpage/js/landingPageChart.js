@@ -1,39 +1,16 @@
 // script for piechart
 var pieJsonData;
-var diseaseName;
-var selectedDisease;
+let pieDelayed;
+
+console.log(pieJsonData);
+console.log(pieDiseaseMode);
+console.log(diseaseTitle);
 
 if (pieJsonData === undefined || pieJsonData === null || pieJsonData === "") {
   cases = 0;
   municipalities = [];
   pieSelectedYear = "Sample Year";
 }
-
-var sampleMun = [
-  "Alfonso",
-  "Amadeo",
-  "Bacoor",
-  "Carmona",
-  "Cavite City",
-  "Dasmariñas",
-  "Gen. Emilio Aguinaldo",
-  "Gen. Mariano Alvarez",
-  "General Trias",
-  "Imus",
-  "Indang",
-  "Kawit",
-  "Magallanes",
-  "Maragondon",
-  "Mendez",
-  "Naic",
-  "Noveleta",
-  "Rosario",
-  "Silang",
-  "Tagaytay City",
-  "Tanza",
-  "Ternate",
-  "Trece Martires City",
-];
 
 var diseases = {
   1: "Amebiasis",
@@ -58,6 +35,25 @@ var diseases = {
   20: "Typhoid",
   21: "Leptospirosis",
 };
+
+var diseaseName;
+var selectedDisease;
+console.log(typeof selectedDisease);
+console.log(selectedDisease);
+if (
+  selectedDisease === undefined ||
+  selectedDisease === null ||
+  selectedDisease === ""
+) {
+  console.log("first if");
+  diseaseName = "Sample Disease";
+} else if (isNaN(selectedDisease)) {
+  console.log("2nd if");
+  // diseaseName = diseases[diseaseTitle];
+  diseaseName = selectedDisease;
+} else {
+  diseaseName = diseases[selectedDisease];
+}
 
 var municipality = {
   1: "Alfonso",
@@ -85,25 +81,30 @@ var municipality = {
   23: "Trece Martires City",
 };
 
-if (
-  selectedDisease === undefined ||
-  selectedDisease === null ||
-  selectedDisease === "" ||
-  selectedDisease === 0
-) {
-  diseaseName = "Sample Disease";
-} else {
-  diseaseName = diseases[selectedDisease];
-}
-
 // this translates the municipalities from sql to the corresponding number
 // in the municipality associated array
-var translatedMunicipality = municipalities.map(function (number) {
-  return municipality[number];
-});
+
+// how to get all the values and store it inside 1 variable
+console.log(municipalities);
+
+if (pieDiseaseMode == 1) {
+  console.log("pieDiseaseMode is true");
+  var translatedMunicipality = municipalities.map(function (number) {
+    return municipality[number];
+  });
+} else if (pieDiseaseMode == false) {
+  console.log("pieDiseaseMode is false");
+  var translatedMunicipality = municipalities.map(function (number) {
+    return diseases[number];
+  });
+} else if (pieDiseaseMode == undefined) {
+  console.log("pieDiseaseMode is undefined");
+  var translatedMunicipality = Object.values(municipalities);
+}
+
+console.log(translatedMunicipality);
 
 const pie = document.getElementById("pieChart");
-let pieDelayed;
 
 const colors = [];
 for (let i = 0; i < 23; i++) {
@@ -115,6 +116,34 @@ for (let i = 0; i < 23; i++) {
   colors.push(color);
 }
 
+// variables for the values of object translatedMunicipality and cases
+let munValue = [];
+let casesValue = [];
+
+// pushing the values of translatedMunicipality and cases to the their respective variables
+for (const key in translatedMunicipality) {
+  const value = translatedMunicipality[key];
+  munValue.push(value);
+}
+for (const key in cases) {
+  const value = cases[key];
+  casesValue.push(value);
+}
+
+// variable for the concat values of mun and cases
+let munCasesValues = [];
+
+// pushing of values
+if (munValue.length === casesValue.length) {
+  for (let i = 0; i < munValue.length; i++) {
+    munCasesValues.push(`${munValue[i]} : ${casesValue[i]}`);
+  }
+} else {
+  console.log("Arrays must have the same length.");
+}
+console.log(munCasesValues);
+
+// for the pie chart
 const pieData = {
   labels:
     translatedMunicipality.length === 0
@@ -143,7 +172,7 @@ const pieData = {
           "Ternate",
           "Trece Martires City",
         ]
-      : translatedMunicipality,
+      : munCasesValues,
   // label: `Number of ${diseaseName} Cases`,
   datasets: [
     {
@@ -162,6 +191,21 @@ const pieData = {
   ],
 };
 
+let title = pieDiseaseMode != false ? "Municipality" : "Disease";
+
+if (pieDiseaseMode == 1) {
+  title = "Municipality";
+} else if (pieDiseaseMode == false) {
+  title = "Disease";
+} else if (pieDiseaseMode == undefined) {
+  if (cases === 0) {
+    title = "Municipality";
+  } else {
+    title = "Barangay";
+  }
+}
+
+// for the pie chart configuration
 const pieConfig = {
   type: "pie",
   data: pieData,
@@ -169,7 +213,7 @@ const pieConfig = {
     plugins: {
       title: {
         display: true,
-        text: `${diseaseName} Cases Per Municipality Year ${pieSelectedYear}`,
+        text: `${diseaseName} Cases Per ${title} Year ${pieSelectedYear}`,
         font: {
           size: 18,
         },
@@ -198,11 +242,14 @@ const pieConfig = {
   },
 };
 
+// displaying the pie chart using the data and config
 const pieChart = new Chart(pie, pieConfig);
 
-// script for line chart
+// SCRIPT FOR LINE CHART
 var diseaseName;
 var selectedDisease;
+console.log("line chart");
+console.log(selectedDisease);
 if (
   selectedDisease === undefined ||
   selectedDisease === null ||
@@ -226,7 +273,13 @@ if (
   years = 0;
   counts = 0;
   diseaseName = "Sample Disease";
+} else if (isNaN(selectedDisease)) {
+  console.log(selectedDisease);
+  diseaseName = diseases[diseaseTitle];
+} else {
+  diseaseName = diseases[selectedDisease];
 }
+
 for (var year in lineJsonData) {
   if (lineJsonData.hasOwnProperty(year)) {
     var count = parseInt(lineJsonData[year]);
