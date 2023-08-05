@@ -6,13 +6,35 @@ $diseaseDesc = [
 
     "Dengue" => "Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. Almost half of the world’s population, about 4 billion people, live in areas with a risk of dengue. Dengue is often a leading cause of illness in areas with risk. Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, and other viruses.Dengue is caused by one of any of four related viruses: Dengue virus 1, 2, 3, and 4.  For this reason, a person can be infected with a dengue virus as many as four times in his or her lifetime.",
 
-    "ChikV" => "Is spread to people by the bite of an infected mosquito. The most common symptoms of infection are fever and joint pain. Other symptoms may include headache, muscle pain, joint swelling, or rash.Outbreaks have occurred in countries in Africa, Americas, Asia, Europe, and the Caribbean, Indian and Pacific Oceans. There is a risk the virus will be spread to unaffected areas by infected travelers. There is currently no vaccine to prevent or medicine to treat chikungunya virus infection.",
+    "Amebiasis" => "Amebiasis is an intestinal (bowel) illness caused by a microscopic (tiny) parasite called Entamoeba histolytica, which is spread through human feces (poop). Often there are no symptoms, but sometimes it causes diarrhea (loose stool/poop), nausea (a feeling of sickness in the stomach), and weight loss.",
+
+    "Cholera" => "Cholera is an acute diarrheal illness caused by infection of the intestine with Vibrio cholerae bacteria. People can get sick when they swallow food or water contaminated with cholera bacteria. The infection is often mild or without symptoms, but can sometimes be severe and life-threatening.",
+
+    "Adverse Event Following Immunization" => "When adverse events following immunisation (AEFIs) do occur, it is important that they are reported, especially if they are serious, even if they are unlikely to have been caused by the vaccine itself. This ongoing surveillance is essential to ensure vaccine safety.",
+
+    "Acute encephalitis syndrome" => "Encephalitis (en-sef-uh-LIE-tis) is inflammation of the brain. There are several causes, including viral infection, autoimmune inflammation, bacterial infection, insect bites and others. When inflammation is caused by an infection in the brain, it's known as infectious encephalitis. And when it's caused by your own immune system attacking the brain, it's known as autoimmune encephalitis. Sometimes there is no known cause.",
+
+    "Alpha-Fetoprotein" => "An AFP tumor marker test is a blood test that measures the level of AFP (alpha-fetoprotein) in a sample of your blood. It's usually used to help diagnose certain types of cancer and to check how well treatment is working.",
+
+    "Diphtheria" => "Diphtheria is a serious infection caused by strains of bacteria called Corynebacterium diphtheriae that make toxins. It can lead to difficulty breathing, heart rhythm problems, and even death. CDC recommends vaccines for infants, children, teens, and adults to prevent diphtheria.",
+
+    "Neonatal Tetanus" => "Tetanus is an acute infectious disease caused by spores of the bacterium Clostridium tetani. The spores are found everywhere in the environment, particularly in soil, ash, intestinal tracts/feces of animals and humans, and on the surfaces of skin and rusty tools like nails, needles, barbed wire, etc. Being very resistant to heat and most antiseptics, the spores can survive for years.",
+
+    "Perthes Disease" => "Perthes' disease is a condition of the hip joint that tends to affect children between the ages of three and 11 years. The top end of the thigh bone (femur) is shaped like a ball so that it can fit snugly into the hip socket. In the case of Perthes' disease, this ball (femoral head) is softened and eventually damaged due to an inadequate blood supply to the bone cells. Boys are more likely to develop Perthes’s disease than girls. In most cases only one hip joint is affected.",
+
+    "Number Needed to Treat" => "The Number Needed to Treat (NNT) is the number of patients you need to treat to prevent one additional bad outcome (death, stroke, etc.). For example, if a drug has an NNT of 5, it means you have to treat 5 people with the drug to prevent one additional bad outcome.",
+
+    "Acute Meningitis" => "Meningitis is an infection and inflammation of the fluid and membranes surrounding the brain and spinal cord. These membranes are called meninges. The inflammation from meningitis typically triggers symptoms such as headache, fever and a stiff neck.",
+
+    "Chikungunya Virus" => "Is spread to people by the bite of an infected mosquito. The most common symptoms of infection are fever and joint pain. Other symptoms may include headache, muscle pain, joint swelling, or rash.Outbreaks have occurred in countries in Africa, Americas, Asia, Europe, and the Caribbean, Indian and Pacific Oceans. There is a risk the virus will be spread to unaffected areas by infected travelers. There is currently no vaccine to prevent or medicine to treat chikungunya virus infection.",
 
     "Hepatitis" => "Hepatitis means inflammation of the liver. The liver is a vital organ that processes nutrients, filters the blood, and fights infections. When the liver is inflamed or damaged, its function can be affected. Heavy alcohol use, toxins, some medications, and certain medical conditions can cause hepatitis. The most common types of viral hepatitis are hepatitis A, hepatitis B, and hepatitis C.",
 
     "Influenza" => "Influenza (flu) can cause mild to severe illness, and at times can lead to death. Flu symptoms usually come on suddenly.",
 
     "HFMD" => "Hand, foot, and mouth disease is common in children under 5 years old, but anyone can get it. The illness is usually not serious, but it is very contagious. It spreads quickly at schools and day care centers. Transmission. Hand, foot, and mouth disease spreads easily.",
+
+    "Meningo" => "Meningococcal disease refers to any illness caused by bacteria called Neisseria meningitidis. These illnesses are often severe, can be deadly, and include infections of the lining of the brain and spinal cord (meningitis) and bloodstream. ",
 
     "Leptospirosis" => "Leptospirosis is a bacterial disease that affects humans and animals. It is caused by bacteria of the genus Leptospira. In humans, it can cause a wide range of symptoms, some of which may be mistaken for other diseases. Some infected persons, however, may have no symptoms at all.",
 
@@ -36,7 +58,7 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
     <div class="row align-items-center">
         <form id="form2">
             <div class="btn-group col-xl-12 col-lg-12  col-sm-8 my-2">
-                <div class="dropdown mx-2">
+                <div class="dropdown mx-1">
                     <select class="form-select" name="pieDisease">
                         <?php
                         $pieDropdown = [
@@ -69,7 +91,6 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                         //     echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
                         // }
 
-                        include("connection.php");
                         $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
 
                         // Display each disease in a dropdown option
@@ -85,12 +106,18 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                         ?>
                     </select>
                 </div>
-                <div class="dropdown mx-2">
+                <div class="dropdown mx-1">
                     <select class="form-select" name="pieYear">
                         <?= $options ?>
                     </select>
                 </div>
-                <button type="submit" class='btn btn-primary mx-2'>Check</button>
+                <div class="dropdown mx-1">
+                    <select class="form-select" name="pieMun">
+                        <option value="">Reset</option>
+                        <?php echo $municipalityOption; ?>
+                    </select>
+                </div>
+                <button type="submit" class='btn btn-primary mx-1'>Check</button>
             </div>
         </form>
     </div>
