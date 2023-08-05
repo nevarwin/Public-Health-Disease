@@ -56,29 +56,7 @@ if (!empty($errorMessage)) {
                     <?php echo $municipalityOption; ?>
                 </select>
             </div>
-            <!-- <div class="dropdown col">
-        <label>Municipality</label>
-        <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
-          <option>Select Municipality</option>
-          <?php
-            // Connect to database and fetch municipalities
-            include('connection.php');
-            $result = mysqli_query($con, 'SELECT * FROM municipality');
 
-            // Display each municipalities in a dropdown option
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<option value="' . $row['munId'] . '">' . $row['municipality'] . '</option>';
-            }
-            ?>
-        </select>
-      </div> -->
-            <!-- Barangay Dropdown -->
-            <!-- <div class="dropdown col">
-        <label>Barangay</label>
-        <select class="custom-select" id="barangay" name="barangay">
-          <option>Select Barangay</option>
-        </select>
-      </div> -->
             <div class="col">
                 <div class="row justify-content-end">
                     <button type="submit" class="btn btn-primary">Check</button>
@@ -281,7 +259,18 @@ if (!empty($errorMessage)) {
         }, ],
     };
 
-    let title = pieDiseaseMode != false ? "Municipality" : "Disease";
+    let title = 'Sample Disease';
+    if (pieDiseaseMode == 1) {
+        title = 'Municipality';
+    } else if (pieDiseaseMode == false) {
+        title = 'Disease';
+    } else if (pieDiseaseMode == undefined) {
+        if (cases === 0) {
+            title = "Municipality";
+        } else {
+            title = 'Barangay';
+        }
+    }
     // for the pie chart configuration
     const pieConfig = {
         type: "pie",
