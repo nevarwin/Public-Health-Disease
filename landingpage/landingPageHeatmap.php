@@ -11,12 +11,13 @@
 
     <!-- chart.js cdn -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- $apiKey = 'AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI'; -->
 
     <!-- All CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI&libraries=visualization&callback=initMap" async defer></script>
     <style>
         #map {
             height: 100%;

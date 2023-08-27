@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $formattedAddress = urlencode($address);
 
             // Create the geocoding API URL
-            $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E";
+            $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key=AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI";
 
             // Send a GET request to the geocoding API
             $geocodingResponse = file_get_contents($geocodingUrl);

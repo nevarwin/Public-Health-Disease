@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             width: 100%;
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E&libraries=visualization"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI&libraries=visualization"></script>
 </head>
 
 <body>
@@ -143,7 +143,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     lng: 120.88505851514495
                 },
                 zoom: 11,
-                mapTypeId: "satellite",
+                mapTypeId: "roadmap",
 
             });
 
@@ -157,43 +157,69 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
         const deuteranomalyColors = [
             'rgba(255, 0, 0, 0)',
-            "rgba(255, 136, 0, 1)", // Orange
-            "rgba(0, 221, 0, 1)", // Light green
-            "rgba(0, 0, 255, 1)", // Blue
-            'rgba(255, 0, 0, 1)'
-
+            'rgba(255, 140, 0, 1)', // Dark Orange
+            'rgba(255, 165, 0, 1)', // Medium Orange
+            'rgba(255, 200, 100, 1)', // Light Orange
+            'rgba(144, 238, 144, 1)', // Light Green
+            'rgba(0, 192, 0, 1)', // Medium Green
+            'rgba(0, 128, 0, 1)', // Dark Green
+            'rgba(173, 216, 230, 1)', // Light Blue
+            'rgba(0, 0, 255, 1)', // Medium Blue
+            'rgba(0, 0, 128, 1)', // Dark Blue
+            'rgba(0, 0, 0, 1)'
         ];
         const protanomalyColors = [
             'rgba(255, 0, 0, 0)',
-            "rgba(255, 187, 0, 1)", // Yellow
-            "rgba(0, 238, 0, 1)", // Lime green
-            "rgba(0, 0, 255, 1)", // Blue
-            'rgba(255, 0, 0, 1)'
+            // Yellow Shades
+            'rgba(255, 255, 153, 1)', // Light Yellow
+            'rgba(255, 255, 102, 1)', // Medium Yellow
+            'rgba(255, 255, 0, 1)', // Dark Yellow
+
+            // Lime Green Shades
+            'rgba(50, 205, 50, 1)', // Dark Lime Green
+            'rgba(124, 252, 0, 1)', // Medium Lime Green
+            'rgba(144, 238, 144, 1)', // Light Lime Green
+
+            // Blue Shades
+            'rgba(173, 216, 230, 1)', // Light Blue
+            'rgba(0, 0, 255, 1)', // Medium Blue
+            'rgba(0, 0, 128, 1)', // Dark Blue
+            'rgba(0, 0, 0, 1)'
         ];
         const tritanomalyColors = [
             'rgba(255, 0, 0, 0)',
-            "rgba(255, 0, 0, 1)", // Red
-            "rgba(0, 255, 204, 1)", // Light turquoise
-            "rgba(0, 0, 255, 1)", // Blue
-            'rgba(255, 0, 0, 1)'
+            // Red Shades
+            'rgba(255, 0, 0, 1)', // Dark Red
+            'rgba(255, 69, 0, 1)', // Medium Red
+            'rgba(255, 99, 71, 1)', // Light Red
+
+            // Light Turquoise Shades
+            'rgba(64, 224, 208, 1)', // Dark Light Turquoise
+            'rgba(0, 255, 255, 1)', // Medium Light Turquoise
+            'rgba(175, 238, 238, 1)', // Light Light Turquoise
+
+            // Blue Shades
+            'rgba(173, 216, 230, 1)', // Light Blue
+            'rgba(0, 0, 255, 1)', // Medium Blue
+            'rgba(0, 0, 128, 1)', // Dark Blue
+            'rgba(0, 0, 0, 1)',
         ];
-        const
-            defaultColors = [
-                "rgba(0, 255, 255, 0)",
-                "rgba(0, 255, 255, 1)",
-                "rgba(0, 191, 255, 1)",
-                "rgba(0, 127, 255, 1)",
-                "rgba(0, 63, 255, 1)",
-                "rgba(0, 0, 255, 1)",
-                "rgba(0, 0, 223, 1)",
-                "rgba(0, 0, 191, 1)",
-                "rgba(0, 0, 159, 1)",
-                "rgba(0, 0, 127, 1)",
-                "rgba(63, 0, 91, 1)",
-                "rgba(127, 0, 63, 1)",
-                "rgba(191, 0, 31, 1)",
-                "rgba(255, 0, 0, 1)"
-            ];
+        const defaultColors = [
+            "rgba(0, 255, 255, 0)",
+            "rgba(0, 255, 255, 1)",
+            "rgba(0, 191, 255, 1)",
+            "rgba(0, 127, 255, 1)",
+            "rgba(0, 63, 255, 1)",
+            "rgba(0, 0, 255, 1)",
+            "rgba(0, 0, 223, 1)",
+            "rgba(0, 0, 191, 1)",
+            "rgba(0, 0, 159, 1)",
+            "rgba(0, 0, 127, 1)",
+            "rgba(63, 0, 91, 1)",
+            "rgba(127, 0, 63, 1)",
+            "rgba(191, 0, 31, 1)",
+            "rgba(255, 0, 0, 1)"
+        ];
 
 
         function changeGradientColor() {
@@ -209,8 +235,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                 console.log('trita');
                 heatmap.set("gradient", tritanomalyColors);
             } else if (dropdown.value === "default") {
-                console.log('trita');
+                console.log('default');
                 heatmap.set("gradient", heatmap.get("gradient") ? null : defaultColors);
+                console.log(defaultColors);
             }
         }
 
