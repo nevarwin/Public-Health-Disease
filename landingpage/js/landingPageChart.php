@@ -10,6 +10,7 @@ $pieDiseaseMode = True;
 echo '<script>var selectedDisease; </script>';
 echo '<script>var diseaseTitle; </script>';
 echo '<script>var pieDiseaseMode;</script>';
+echo '<script>var defaultGradient = [];</script>';
 
 // GETTER for the form 
 if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] != '') {
@@ -128,6 +129,8 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   }
 
   echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
+
+  heatmapGradient($pieSelectedDisease);
 }
 // For the municipality dropdown logic without the disease
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
@@ -277,6 +280,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   }
 
   echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
+  heatmapGradient($pieSelectedDisease);
 }
 
 // For the municipality dropdown logic that displays the barangay
@@ -440,6 +444,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   }
 
   echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
+  heatmapGradient($pieSelectedDisease);
 }
 
 // Select query for all available creation date in patients table
@@ -469,11 +474,110 @@ foreach ($municipality as $municipal) {
   $selected = ($municipal == $selectedMunicipality) ? 'selected' : '';
   $municipalityOption .= "<option value=\"$municipal\" $selected>$municipal</option>";
 }
+?>
 
-// echo "
-//   <script>
-//     // console.log(pieDiseaseMode);
-//     console.log('line 467');
-//     console.log(selectedDisease);
-//   </script>
-// ";
+<?php
+function heatmapGradient($pieSelectedDisease) {
+  echo $pieSelectedDisease;
+  switch ($pieSelectedDisease) {
+    case 1:
+    case 7:
+    case 8:
+    case 12:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+      // code... (default case)
+      echo 'warm';
+      echo " 
+      <script>
+      const warmColors = [
+          'rgba(0, 0, 0, 0)',
+
+          'rgba(144, 238, 144, 1)',
+          'rgba(0, 128, 0, 1)',
+          'rgba(0, 100, 0, 1)',
+
+          'rgba(255, 255, 153, 1)',
+          'rgba(255, 255, 0, 1)',
+          'rgba(184, 134, 11, 1)',
+          
+          'rgba(255, 128, 128, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(139, 0, 0, 1)',
+
+          'rgba(0, 0, 0, 1)',
+          ];
+          
+          defaultGradient = warmColors;
+          var isWarm = true;
+          console.log(isWarm);
+      </script>
+    ";
+      break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 9:
+    case 10:
+    case 11:
+    case 13:
+    case 14:
+    case 15:
+    case 21:
+      // code... (cool case)
+      echo 'cool';
+      echo "
+          <script>
+          const coolColors = [
+            'rgba(0, 0, 0, 0)',
+            // Teal Shades
+            'rgba(0, 128, 128, 1)',     // Dark Teal
+            'rgba(0, 128, 128, 1)',     // Medium Teal
+            'rgba(0, 206, 209, 1)',     // Light Teal
+            
+            // Purple Shades
+            'rgba(128, 0, 128, 1)',     // Dark Purple
+            'rgba(148, 0, 211, 1)',     // Medium Purple
+            'rgba(218, 112, 214, 1)',   // Light Purple
+            
+            'rgba(173, 216, 230, 1)',   // Light Blue
+            'rgba(0, 0, 255, 1)',       // Medium Blue
+            'rgba(0, 0, 128, 1)',       // Dark Blue
+            'rgba(0, 0, 0, 1)',
+            ];
+
+            defaultGradient = coolColors;
+            var gradientColors = 'blue, purple, teal';
+            var isWarm = false;
+          </script>
+          ";
+      break;
+    default:
+      echo " <script>
+            const warmColors = [
+                'rgba(0, 0, 0, 0)',
+                'rgba(255, 128, 128, 1)',
+                'rgba(255, 0, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(255, 255, 153, 1)',
+                'rgba(255, 255, 0, 1)',
+                'rgba(184, 134, 11, 1)',
+                'rgba(144, 238, 144, 1)',
+                'rgba(0, 128, 0, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(0, 0, 0, 1)',
+                ];
+            defaultGradient = warmColors;
+            var isWarm = true;
+            console.log(isWarm);
+            </script>
+            ";
+      break;
+  }
+}
+?>
