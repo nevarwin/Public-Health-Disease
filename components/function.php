@@ -15,3 +15,11 @@ function check_login($con) {
     header('Location: http://localhost/admin2gh/adminTable.php');
     exit();
 }
+
+function isUrl($value) {
+    return $_SERVER['REQUEST_URI'] === $value;
+}
+
+function diseaseUrl($value, $id) {
+    return "{$value}Page-create.php?patientId={$id}";
+}
