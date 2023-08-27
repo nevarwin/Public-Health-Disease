@@ -1,4 +1,5 @@
 <?php
+// include 'function.php';
 include("connection.php");
 include('barangayScript.php');
 include('alertMessage.php');
@@ -14,6 +15,8 @@ $address = '';
 $addressDRU = '';
 
 $alert = '';
+
+$apiKey = 'AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI';
 
 // check if the form is submitted using the post method
 // initialize data above into the post
@@ -123,14 +126,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // $address = $barangayValue . ', ' . $municipalityValue . ', ' . $postalCode . ', ' . 'Cavite' . ', ' . 'Philippines';
 
                 // medyo accurate at nagana na yung sa naic
-                $address = $barangayValue . ', ' . 'Cavite';
-                // echo $address;
+                // $address = $barangayValue . ', ' . 'Cavite';
+                $address = $unitCode . ' ' . $subd . ' ' .  $street . ', ' . $barangayValue . ' ' . $municipalityValue . ' Cavite ';
+                echo $address;
 
-                // Format the address for URL encoding
+                // Format the address for URL encoding 
                 $formattedAddress = urlencode($address);
 
                 // Create the geocoding API URL
-                $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key=AIzaSyAGlIP94SkG0lgQw2Hc7OOGhrZosODfQ1E";
+                $geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$formattedAddress}&key={$apiKey}";
 
                 // Send a GET request to the geocoding API
                 $geocodingResponse = file_get_contents($geocodingUrl);
@@ -203,7 +207,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (strcmp($diseaseName, $value) == 0) {
-            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            // echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            // echo diseaseUrl($diseaseValue, $insert_id);
         } else {
             // Handle error
             $errorMessage = "Link does not exists!";
