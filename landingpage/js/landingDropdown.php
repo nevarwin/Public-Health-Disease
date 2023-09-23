@@ -130,7 +130,26 @@ if (isset($diseaseDesc[$diseaseTitle])) {
 } else if ($diseaseDesc['Disease Information']) {
     $diseaseInfo = $diseaseDesc['Disease Information'];
 }
+
+if ($totalCount > 10 && $totalCount < 19) {
+    $level = 'warning';
+    $visibility = 'visible';
+    $trigger = 'show';
+} else if ($totalCount > 20) {
+    $level = 'danger';
+    $visibility = 'visible';
+    $trigger = 'show';
+} else {
+    $level = '';
+    $visibility = 'invisible';
+    $trigger = null;
+}
 ?>
+
+<div class="alert alert-<?= $level ?> alert-dismissible fade show <?= $visibility ?>" role="alert">
+    <strong>Holy guacamole!</strong> <?= $diseaseTitle ?> has <?= $totalCount ?> cases on year <?= $pieSelectedYear ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=" Close"></button>
+</div>
 
 <div class="row align-items-center card text-dark bg-light">
     <h5 class="card-header"><?= $diseaseTitle ?></h5>
