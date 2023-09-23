@@ -6,7 +6,28 @@ require_once('tcpdf/tcpdf.php');
 include('./components/connection.php');
 
 // Fetch the data from the patients table
-$sql = "SELECT `patientId`, `firstName`, `lastName`, `gender`, `disease`, `dob`, `age`, `barangay`, `municipality`, YEAR(`creationDate`) AS `year` FROM patients";
+$sql = "SELECT
+    `patientId`,
+    `firstName`,
+    `lastName`,
+    genders.`gender`,
+    diseases.`disease`,
+    `dob`,
+    `age`,
+    barangay.`barangay`,
+    municipality.`municipality`,
+    `postalCode`,
+    YEAR(`creationDate`) AS `year`
+FROM
+    patients
+JOIN
+	genders ON patients.gender = genders.genderId
+JOIN
+	diseases ON patients.disease = diseases.diseaseId
+JOIN
+	barangay ON patients.barangay = barangay.id
+JOIN
+	municipality ON patients.municipality = municipality.munId";
 $result = mysqli_query($con, $sql);
 
 // Create a new PDF instance
@@ -25,8 +46,24 @@ $pdf->SetFont('helvetica', '', 8);
 // Add a page
 $pdf->AddPage();
 
+// Define your logo file path
+$logoPath = 'C:\xampp\htdocs\admin2gh\assets\img\caviteLogo.png';
+
+// Set title text
+$titleText = 'Cavite Province Patient Report';
+
+// Set font for the title
+// $pdf->SetFont('helvetica', 'B', 12);
+
+// Set logo
+$pdf->Image($logoPath, 100, 10, 30,); // Adjust the coordinates and size as needed
+
+// Center the title horizontally
+// $pdf->SetX(0);
+$pdf->Cell(0, 30, $titleText, 0, 1, 'C');
+
 // Set table header values
-$header = array('Patient Id', 'First Name', 'Last Name', 'Gender', 'Disease', 'Date of Birth', 'Age', 'Barangay', 'Municipality', 'Year');
+$header = array('Patient Id', 'First Name', 'Last Name', 'Gender', 'Disease', 'Date of Birth', 'Age', 'Barangay', 'Municipality', 'Postal Code', 'Year');
 
 // Set table header styling
 $pdf->SetFillColor(230, 230, 230);
@@ -34,9 +71,9 @@ $pdf->SetTextColor(0);
 $pdf->SetDrawColor(0, 0, 0);
 $pdf->SetLineWidth(0.1);
 $pdf->SetFont('', 'B');
-$pdf->Cell(15, 7, '#', 1, 0, 'C', 1);
+$pdf->Cell(17, 7, '#', 1, 0, 'C', 1);
 foreach ($header as $col) {
-    $pdf->Cell(20, 7, $col, 1, 0, 'C', 1);
+    $pdf->Cell(24, 7, $col, 1, 0, 'C', 1);
 }
 $pdf->Ln();
 
@@ -50,9 +87,9 @@ $rowCount = 1;
 
 // Iterate over the result set and add table rows
 while ($row = mysqli_fetch_assoc($result)) {
-    $pdf->Cell(15, 7, $rowCount, 1, 0, 'C', 1);
+    $pdf->Cell(17, 7, $rowCount, 1, 0, 'C', 1);
     foreach ($row as $column) {
-        $pdf->Cell(20, 7, $column, 1, 0, 'C', 1);
+        $pdf->Cell(24, 7, $column, 1, 0, 'C', 1);
     }
     $pdf->Ln();
     $rowCount++;
