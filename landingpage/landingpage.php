@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Public Health Disease Geomapping</title>
+  <title>Public Health Disease Geomapping for Cavite</title>
   <link rel="shortcut icon" href="../assets/img/caviteLogo.png" type="image/png">
 
   <!-- chart.js cdn -->
@@ -20,7 +20,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" style='color:white' ; href="#"><span class="text-success">Public </span>Health <span class="text-warning">Disease </span>Geomapping</a>
+      <a class="navbar-brand" style='color:white' ; href="#"><span class="text-success">Public </span>Health <span class="text-warning">Disease </span>Geomapping for Cavite</a>
     </div>
   </nav>
 
@@ -89,12 +89,12 @@
         </div>
         <div class="col-lg-6 col-md-12 col-12 ps-lg-5 mt-md-5">
           <div class="about-text">
-            <p>
+            <h5>
               Geomapping is a powerful tool that can be used to track and control diseases. By overlaying data on a map, public health officials can identify areas where diseases are most prevalent and take steps to prevent the spread of disease.
               <br>
               <br>
               For example, geomapping can be used to track the spread of influenza. This information can be used to warn residents about areas where the virus is present and to take steps to prevent the spread of the virus.
-            </p>
+            </h5>
           </div>
         </div>
       </div>

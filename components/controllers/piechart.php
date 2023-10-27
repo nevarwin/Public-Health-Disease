@@ -12,11 +12,11 @@ echo '<script>var selectedDisease; </script>';
 echo '<script>var pieDiseaseMode;</script>';
 
 if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] != '') {
-  echo 'if statement';
+  // echo 'if statement';
 
   $pieDiseaseMode = true;
 
-  echo $pieDiseaseMode . '<br>';
+  // echo $pieDiseaseMode . '<br>';
 
   $pieSelectedDisease = $_GET['pieDisease'];
   $pieSelectedYear = $_GET['pieYear'];
@@ -145,12 +145,12 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
 
 // For the municipality dropdown logic that displays the barangay
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
-  echo '2nd else if statement <br>';
+  // echo '2nd else if statement <br>';
 
   // to show if 'true' or 'false'
-  echo '150 <br>';
+  // echo '150 <br>';
   $pieDiseaseMode = false;
-  echo var_export($pieDiseaseMode);
+  // echo var_export($pieDiseaseMode);
 
   // echo 'pieMun <br>';
 
@@ -210,7 +210,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
       // Store the disease count for the selected municipality
       $data[$barangay] = $count;
 
-      echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
+      // echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
     }
   }
 
@@ -220,7 +220,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   //     echo "$disease: $count <br>";
   // }
 
-  var_dump($data);
+  // var_dump($data);
 
   // Encode the PHP variable as JSON before using it in Javascript
   $encodedSelectedMun = json_encode($pieSelectedMun);

@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
             <img src="./assets/img/caviteLogo.png" alt="Logo" style="height:50px; width:50px;">
         </div>
-        <div class="sidebar-brand-text ">Public Health Disease Geomapping</div>
+        <div class="sidebar-brand-text ">Cavite Disease Mapping</div>
     </a>
 
     <!-- Divider -->

@@ -86,18 +86,18 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                         ];
                         $pieSelectedDisease = $_GET['pieDisease'] ?? '';
 
-                        // foreach ($pieDropdown as $key => $value) {
-                        //     $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
-                        //     echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
-                        // }
+                        foreach ($pieDropdown as $key => $value) {
+                            $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
+                            echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+                        }
 
                         $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
 
-                        // Display each disease in a dropdown option
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $selected = ($row['diseaseId'] == $pieSelectedDisease) ? 'selected' : '';
-                            echo '<option value="' . $row['diseaseId'] . '" ' . $selected . '>' . $row['disease'] . '</option>';
-                        }
+                        // // Display each disease in a dropdown option
+                        // while ($row = mysqli_fetch_assoc($result)) {
+                        //     $selected = ($row['diseaseId'] == $pieSelectedDisease) ? 'selected' : '';
+                        //     echo '<option value="' . $row['diseaseId'] . '" ' . $selected . '>' . $row['disease'] . '</option>';
+                        // }
                         if (isset($pieDropdown[$pieSelectedDisease])) {
                             $diseaseTitle = $pieDropdown[$pieSelectedDisease];
                         } else {

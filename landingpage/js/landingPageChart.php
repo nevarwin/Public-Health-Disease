@@ -15,7 +15,7 @@ echo '<script>var defaultGradient = [];</script>';
 // GETTER for the form 
 if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] != '') {
 
-  echo 'first if statement';
+  // echo 'first if statement';
 
   $pieSelectedDisease = $_GET['pieDisease'];
   $pieSelectedYear = $_GET['pieYear'];
@@ -134,7 +134,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
 }
 // For the municipality dropdown logic without the disease
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
-  echo 'else if statement without the disease <br>';
+  // echo 'else if statement without the disease <br>';
 
   // to show if 'true' or 'false'
   // echo var_export($pieDiseaseMode);
@@ -288,7 +288,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   $pieSelectedYear = $_GET['pieYear'];
   $pieSelectedMun = $_GET['pieMun'];
   $pieSelectedDisease = $_GET['pieDisease'];
-  echo 'else if statement displays barangay <br>';
+  // echo 'else if statement displays barangay <br>';
 
   // Query for the line chart
   $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
@@ -308,7 +308,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // Encode the PHP array as JSON
   $lineJsonData = json_encode($data);
 
-  echo $pieSelectedDisease . ' -pieselecteddisease in linechart <br>';
+  // echo $pieSelectedDisease . ' -pieselecteddisease in linechart <br>';
 
   // Echo the JSON data inside a JavaScript block
   echo '<script>var diseaseTitle = ' . $pieSelectedDisease . ';</script>';
@@ -333,7 +333,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // Start of PIE CHART Logic and query
   // to show if 'true' or 'false'
   $pieDiseaseMode = '';
-  echo var_export($pieDiseaseMode) . "<br>";
+  // echo var_export($pieDiseaseMode) . "<br>";
 
   // echo 'pieMun <br>';
 
@@ -388,7 +388,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
     // Store the disease count for the selected municipality
     $data[$barangay] = $count;
 
-    echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
+    // echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
   }
   // }
 
@@ -397,12 +397,12 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // foreach ($data as $disease => $count) {
   //     echo "$disease: $count <br>";
   // }
-  echo 'below is vardump data <br>';
-  var_dump($data);
+  // echo 'below is vardump data <br>';
+  // var_dump($data);
 
   // Encode the PHP variable as JSON before using it in Javascript
   $encodedSelectedMun = json_encode($pieSelectedMun);
-  echo  '<br>' . $encodedSelectedMun . ' encodedselectedmun';
+  // echo  '<br>' . $encodedSelectedMun . ' encodedselectedmun';
 
   // Echo the JSON data inside a JavaScript block
   echo "<script>selectedDisease = $encodedSelectedMun;</script>";
@@ -478,7 +478,7 @@ foreach ($municipality as $municipal) {
 
 <?php
 function heatmapGradient($pieSelectedDisease) {
-  echo $pieSelectedDisease;
+  // echo $pieSelectedDisease;
   switch ($pieSelectedDisease) {
     case 1:
     case 7:
@@ -490,7 +490,7 @@ function heatmapGradient($pieSelectedDisease) {
     case 19:
     case 20:
       // code... (default case)
-      echo 'warm';
+      // echo 'warm';
       echo " 
       <script>
       const warmColors = [
@@ -530,7 +530,7 @@ function heatmapGradient($pieSelectedDisease) {
     case 15:
     case 21:
       // code... (cool case)
-      echo 'cool';
+      // echo 'cool';
       echo "
           <script>
           const coolColors = [
