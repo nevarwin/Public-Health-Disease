@@ -6,7 +6,7 @@ $diseaseDesc = [
 
     "Dengue" => "Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. Almost half of the world’s population, about 4 billion people, live in areas with a risk of dengue. Dengue is often a leading cause of illness in areas with risk. Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, and other viruses.Dengue is caused by one of any of four related viruses: Dengue virus 1, 2, 3, and 4.  For this reason, a person can be infected with a dengue virus as many as four times in his or her lifetime.",
 
-    "Amebiasis" => "Amebiasis is an intestinal (bowel) illness caused by a microscopic (tiny) parasite called Entamoeba histolytica, which is spread through human feces (poop). Often there are no symptoms, but sometimes it causes diarrhea (loose stool/poop), nausea (a feeling of sickness in the stomach), and weight loss.",
+    "Amoebiasis" => "Amoebiasis is an intestinal (bowel) illness caused by a microscopic (tiny) parasite called Entamoeba histolytica, which is spread through human feces (poop). Often there are no symptoms, but sometimes it causes diarrhea (loose stool/poop), nausea (a feeling of sickness in the stomach), and weight loss.",
 
     "Cholera" => "Cholera is an acute diarrheal illness caused by infection of the intestine with Vibrio cholerae bacteria. People can get sick when they swallow food or water contaminated with cholera bacteria. The infection is often mild or without symptoms, but can sometimes be severe and life-threatening.",
 
@@ -62,7 +62,7 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                     <select class="form-select" name="pieDisease">
                         <?php
                         $pieDropdown = [
-                            1 => 'Amebiasis',
+                            1 => 'Amoebiasis',
                             2 => 'Adverse Event Following Immunization',
                             3 => 'Acute encephalitis syndrome',
                             4 => 'Alpha-Fetoprotein',

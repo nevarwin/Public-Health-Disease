@@ -79,7 +79,7 @@ $fullName = "";
 
 switch ($disease) {
     case "ABD":
-        $fullName = "Amebiasis";
+        $fullName = "Amoebiasis";
         break;
     case "AEFI":
         $fullName = "Adverse Event Following Immunization";

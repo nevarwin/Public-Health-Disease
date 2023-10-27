@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <option value="">All</option>
                 <?php
                 $pieDropdown = [
-                    1 => 'Amebiasis',
+                    1 => 'Amoebiasis',
                     2 => 'Adverse Event Following Immunization',
                     3 => 'Acute encephalitis syndrome',
                     4 => 'Alpha-Fetoprotein',

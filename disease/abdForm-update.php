@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <div class="row d-flex justify-content-center">
     <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
-        <h2 class="row justify-content-center mb-3">Update Amebiasis Disease Form</h2>
+        <h2 class="row justify-content-center mb-3">Update Amoebiasis Disease Form</h2>
         <form method="POST">
             <?php
             if (!empty($alert)) {
