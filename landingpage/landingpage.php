@@ -199,17 +199,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="section-header text-center pb-5">
+          <div class="section-header text-center">
             <h2>About Us</h2>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-12 col-12">
+        <!-- <div class="col-lg-6 col-md-12 col-12">
           <div class="about-img">
             <img src="img/phabout.jpg" alt="" class="img-fluid" />
           </div>
-        </div>
+        </div> -->
         <div class="col-lg-6 col-md-12 col-12 ps-lg-5 mt-md-5">
           <div class="about-text">
             <p>
