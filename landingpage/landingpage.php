@@ -210,7 +210,7 @@
             <img src="img/phabout.jpg" alt="" class="img-fluid" />
           </div>
         </div> -->
-        <div class="col-lg-6 col-md-12 col-12 ps-lg-5 mt-md-5">
+        <div class="col-lg-12 col-md-12 col-12 ps-lg-5">
           <div class="about-text">
             <p>
               Our Public Health Disease Geomapping website is a detailed online resource made to offer engaging and educational representations of disease data on maps of Cavite. For information on the geographic distribution of diseases and their effects on various locations, public health authorities, researchers, and the general public can all benefit from visiting our website.
@@ -220,6 +220,54 @@
       </div>
     </div>
   </section>
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="my-2">Most Cases Per Municipality</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <?php
+
+        $currentYear = date('Y');
+
+        $query = "SELECT COUNT(p.patientId) AS count, m.municipality
+                                FROM patients p
+                                INNER JOIN municipality m ON p.municipality = m.munId
+                                WHERE YEAR(p.creationDate) = '$currentYear'
+                                GROUP BY p.municipality, m.municipality
+                                ORDER BY count DESC
+                                LIMIT 8";
+        $result = mysqli_query($con, $query);
+
+        // Display the top 4 municipalities
+        while ($row = mysqli_fetch_assoc($result)) {
+          $municipality = $row['municipality'];
+          $count = $row['count'];
+        ?>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card border-left-warning shadow h-100">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $municipality ?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-disease fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php
+        }
+        ?>
+      </div>
+    </div>
+  </div>
   <!-- about section Ends -->
   <!-- footer starts -->
   <footer class="bg-dark p-2 text-center">
