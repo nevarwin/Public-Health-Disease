@@ -51,6 +51,11 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Pie Chart</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="http://localhost/admin2gh/ageLineChartPage.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Age Chart</span></a>
+    </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
