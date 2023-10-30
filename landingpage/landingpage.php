@@ -218,7 +218,7 @@
       <div class="card-header" id="headingFour">
         <h2 class="mb-0 text-center"> <!-- Center the heading -->
           <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#municipalityCollapse" aria-expanded="true" aria-controls="municipalityCollapse">
-            Municipality Cases Per Disease
+            Municipality Cases Per Disease on Current Year
           </button>
         </h2>
       </div>
