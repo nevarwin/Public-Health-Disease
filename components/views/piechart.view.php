@@ -195,6 +195,7 @@ if (!empty($errorMessage)) {
     // variables for the values of object translatedMunicipality and cases
     let munValue = [];
     let casesValue = [];
+    let casesTotal = 0;
 
     // pushing the values of translatedMunicipality and cases to the their respective variables
     for (const key in translatedMunicipality) {
@@ -203,8 +204,11 @@ if (!empty($errorMessage)) {
     }
     for (const key in cases) {
         const value = cases[key];
+        const intValue = parseInt(cases[key]);
+        casesTotal += intValue;
         casesValue.push(value);
     }
+    console.log(casesTotal);
 
     // variable for the concat values of mun and cases
     let munCasesValues = [];
@@ -279,7 +283,7 @@ if (!empty($errorMessage)) {
             plugins: {
                 title: {
                     display: true,
-                    text: `${diseaseName} Cases Per ${title} Year ${pieSelectedYear}`,
+                    text: `${diseaseName} Cases Per ${title} Year ${pieSelectedYear}: Total of ${casesTotal}`,
                     font: {
                         size: 18,
                     },
