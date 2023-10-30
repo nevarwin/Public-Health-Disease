@@ -70,7 +70,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
 
 // For the municipality dropdown logic without the disease
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
-  echo '1st else if statement <br>';
+  // echo '1st else if statement <br>';
 
   // to show if 'true' or 'false'
   // echo var_export($pieDiseaseMode);
@@ -116,7 +116,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
       // Store the disease count for the selected municipality
       $data[$disease] = $count;
 
-      echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
+      // echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
     }
   }
 
