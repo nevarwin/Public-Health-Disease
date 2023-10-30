@@ -299,6 +299,20 @@ if (!empty($errorMessage)) {
         type: 'line',
         data: data,
         options: {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Counts'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Age'
+                    }
+                }
+            },
             responsive: true,
             animation: {
                 onComplete: () => {
