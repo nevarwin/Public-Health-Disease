@@ -213,54 +213,91 @@
       </div>
     </div>
   </section>
+  <div class="accordion" id="municipalityAccordion">
+    <div class="card">
+      <div class="card-header" id="headingFour">
+        <h2 class="mb-0 text-center"> <!-- Center the heading -->
+          <button class="btn btn-link text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#municipalityCollapse" aria-expanded="true" aria-controls="municipalityCollapse">
+            Municipality Cases Per Disease
+          </button>
+        </h2>
+      </div>
 
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="my-2">Most Cases Per Municipality</h5>
-    </div>
+      <div id="municipalityCollapse" class="collapse show" aria-labelledby="headingFour" data-parent="#municipalityAccordion">
+        <div class="card-body">
+          <div class="row">
+            <?php
+            // Your PHP code remains unchanged
+            // Define the list of diseases
+            $diseases = array(
+              'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
+              'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
+              'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
+            );
 
-    <div class="card-body">
-      <div class="row">
-        <?php
+            $currentYear = date('Y');
 
-        $currentYear = date('Y');
-
-        $query = "SELECT COUNT(p.patientId) AS count, m.municipality
+            $query = "SELECT COUNT(p.patientId) AS count, m.municipality, d.disease
                                 FROM patients p
                                 INNER JOIN municipality m ON p.municipality = m.munId
+                                INNER JOIN diseases d ON p.disease = d.diseaseId
                                 WHERE YEAR(p.creationDate) = '$currentYear'
-                                GROUP BY p.municipality, m.municipality
-                                ORDER BY count DESC
-                                LIMIT 8";
-        $result = mysqli_query($con, $query);
+                                    AND d.disease IN ('" . implode("','", $diseases) . "')
+                                GROUP BY p.municipality, m.municipality, d.disease
+                                ORDER BY m.municipality, count DESC";
+            $result = mysqli_query($con, $query);
 
-        // Display the top 4 municipalities
-        while ($row = mysqli_fetch_assoc($result)) {
-          $municipality = $row['municipality'];
-          $count = $row['count'];
-        ?>
+            $previousMunicipality = null;
 
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-            <div class="card border-left-warning shadow h-100">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $municipality ?></div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-disease fa-2x text-gray-300"></i>
+            // Group diseases by municipality
+            $municipalities = array();
+
+            // Collect the top 4 diseases per municipality
+            while ($row = mysqli_fetch_assoc($result)) {
+              $municipality = $row['municipality'];
+              $disease = $row['disease'];
+              $count = $row['count'];
+
+              if (!array_key_exists($municipality, $municipalities)) {
+                $municipalities[$municipality] = array();
+              }
+
+              if (count($municipalities[$municipality]) < 4) {
+                $municipalities[$municipality][] = array("disease" => $disease, "count" => $count);
+              }
+            }
+
+            // Display the cases per municipality
+            foreach ($municipalities as $municipality => $diseases) {
+            ?>
+              <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="card border border-warning shadow mb-3">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <h6 class="text-warning text-uppercase mb-2"><?= $municipality ?></h6>
+                        <?php foreach ($diseases as $diseaseData) : ?>
+                          <?php $disease = $diseaseData["disease"]; ?>
+                          <?php $count = $diseaseData["count"]; ?>
+                          <p class="mb-2"><?= $disease . ': ' . $count ?></p>
+                        <?php endforeach; ?>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-disease fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            <?php
+            }
+            ?>
           </div>
-        <?php
-        }
-        ?>
+        </div>
       </div>
     </div>
   </div>
+
   <!-- about section Ends -->
   <!-- footer starts -->
   <footer class="bg-dark p-2 text-center">
