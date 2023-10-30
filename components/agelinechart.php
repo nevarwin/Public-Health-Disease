@@ -50,6 +50,7 @@ if (isset($_GET['disease']) && $_GET['pieMun'] == '' && $_GET['disease'] != '') 
 else if (isset($_GET['pieMun']) && $_GET['disease'] != '') {
     $pieSelectedMun = $_GET['pieMun'];
     $lineSelectedDisease = $_GET['disease'];
+    $selectedYear = $_GET['ageLineYear'];
 
     $pieDiseaseMode = false;
 
@@ -57,8 +58,9 @@ else if (isset($_GET['pieMun']) && $_GET['disease'] != '') {
         COUNT(*) AS patientCount,
         p.municipality,
         d.disease,
-        YEAR(p.creationDate) AS creationYear
-    FROM
+        YEAR(p.creationDate) AS creationYear,
+        age
+    from
         patients p
     JOIN municipality m ON
         p.municipality = m.munId
@@ -66,9 +68,10 @@ else if (isset($_GET['pieMun']) && $_GET['disease'] != '') {
         p.disease = d.diseaseId
     WHERE
         m.municipality = '$pieSelectedMun' AND
-        p.disease = $lineSelectedDisease
+        p.disease = $lineSelectedDisease AND 
+        YEAR(creationDate) = $selectedYear
     GROUP BY
-        p.disease, p.municipality, YEAR(p.creationDate);
+        p.disease, p.municipality, YEAR(p.creationDate), age;
     ";
 
     $countResult = mysqli_query($con, $countQuery);
@@ -83,7 +86,7 @@ else if (isset($_GET['pieMun']) && $_GET['disease'] != '') {
         $disease = $lineSelectedDisease;
     } else {
         while ($row = $countResult->fetch_assoc()) {
-            $year = $row['creationYear'];
+            $year = $row['age'];
             $municipality = $row['municipality'];
             $disease = $row['disease'];
             $count = $row['patientCount'];
@@ -183,7 +186,6 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label>Select Year:</label>
                 <select class="custom-select" name="ageLineYear">
-                    <option value="">Reset</option>
                     <?= $options ?>
                 </select>
             </div>
@@ -201,18 +203,6 @@ if (!empty($errorMessage)) {
             </div>
         </div>
     </form>
-    <div class="dropdown col my-2">
-        <label for="year">Select Start Year:</label>
-        <select class="custom-select" name="pieYear" id="startYear" onchange="filterData()">
-            <?php echo $options; ?>
-        </select>
-    </div>
-    <div class="dropdown col my-2">
-        <label for="year">Select End Year:</label>
-        <select class="custom-select" name="pieYear" id="endYear" onchange="filterData()">
-            <?php echo $options; ?>
-        </select>
-    </div>
 </div>
 <div class="card shadow">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -285,7 +275,7 @@ if (!empty($errorMessage)) {
 
     // line chart data
     const data = {
-        labels: years === 0 ? ["2018", "2019", "2020", "2021", "2022"] : years,
+        labels: years === 0 ? ["5", "10", "15", "20", "25"] : years,
         datasets: [{
             fill: true,
             label: `Number of ${diseaseName} Cases`,
@@ -328,7 +318,7 @@ if (!empty($errorMessage)) {
             plugins: {
                 title: {
                     display: true,
-                    text: `${diseaseName} Cases ${title}Per Year`,
+                    text: `${diseaseName} Cases ${title} Per Age`,
                     font: {
                         size: 18
                     }
