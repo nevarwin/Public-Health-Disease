@@ -118,11 +118,6 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="section-header text-center pt-4">
-            <h2>Heatmap</h2>
-          </div>
-        </div>
         <div class="row">
           <div class="col-md-12 col-lg-12">
             <div class="row">
@@ -131,8 +126,8 @@
               </div>
               <div class="col-sm-12 col-md-12 col-lg-4 py-5">
                 <div class="card-body">
-                  <h5 class="card-title">Cavite Health Disease Heatmap</h5>
-                  <p class="card-text" style="text-align: justify;"> A disease heatmap is a graphic that shows the severity or incidence of an illness across several geographic areas using color gradients. In general, larger illness rates or concentrations are represented by darker, warmer colors, whereas lower rates are depicted by lighter, cooler colors. The heatmap makes it simple and quick to locate hotspots with higher disease activity, which helps public health professionals better understand disease trends and carry out focused interventions.</p>
+                  <h5 class="card-title">Disease Heatmap: Visualizing Geographic Disease Incidence</h5>
+                  <p class="card-text" style="text-align: justify;"> A disease heatmap is a visual representation of illness severity or incidence across geographic areas, using color gradients. Darker, warmer colors indicate higher rates, while lighter, cooler colors represent lower rates. This visualization helps identify disease hotspots, aiding public health professionals in understanding and targeting disease trends</p>
                 </div>
                 <div class="row justify-content-center pt-5">
                   <div class="text-center">
@@ -160,24 +155,42 @@
           </div>
           <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <div class="card-body text-center">
-              <h5 class="card-title">Line Chart</h5>
-              <p class="card-text" style="text-align: justify;">The number of disease cases reported each year is depicted in a line chart. The vertical axis shows the number of disease cases, and the horizontal axis reflects the years under consideration. A vertical bar is used to represent each year, and its length reflects how many cases were reported during that particular year. The graph makes it simple to compare different years by clearly visualizing the annual fluctuations in disease incidence.</p>
+              <h5 class="card-title">Disease count per year chart</h5>
+              <p class="card-text" style="text-align: justify;">This chart displays the annual count of a specific disease, making it easy to track changes and trends in disease prevalence over time.</p>
             </div>
           </div>
         </div>
-        <!-- Pie Chart -->
-        <div class="row my-4">
-          <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
-            <div class="card-body text-center">
-              <h5 class="card-title">Pie Chart</h5>
-              <p class="card-text" style="text-align: justify;">The pie chart is a graphical tool that shows the proportion of disease cases in various municipalities. The chart is divided into segments, each corresponding to a different municipality. The larger the segment, the more disease cases there are in that municipality. The pie chart helps to compare the disease situation across different regions and identify the areas with the highest or lowest disease prevalence.</p>
+
+        <!-- Age Bar Chart -->
+        <div class="row mt-2">
+          <div class="col-sm-12 col-md-12 col-lg-8">
+            <div class="card shadow">
+              <div class="card-body">
+                <canvas id="ageChart"></canvas>
+              </div>
             </div>
           </div>
+          <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card-body text-center">
+              <h5 class="card-title">Age distribution of disease</h5>
+              <p class="card-text" style="text-align: justify;">This chart shows how a disease is distributed among different age groups, helping to identify trends and at-risk age categories.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="row mt-2">
           <div class="col-sm-12 col-md-12 col-lg-8">
             <div class="card shadow">
               <div class="card-body">
                 <canvas id="pieChart"></canvas>
               </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card-body text-center">
+              <h5 class="card-title">Municipality-wise Disease Case Distribution</h5>
+              <p class="card-text" style="text-align: justify;">This pie chart depicts disease cases across municipalities. Each segment represents a different municipality, with larger segments indicating higher disease cases. It facilitates regional disease comparisons and highlights areas with varying disease prevalence.</p>
             </div>
           </div>
         </div>
@@ -227,24 +240,42 @@
         <div class="card-body">
           <div class="row">
             <?php
-            // Your PHP code remains unchanged
-            // Define the list of diseases
-            $diseases = array(
-              'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
-              'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
-              'Hepatitis', 'Measles', 'Meningitis', 'Meningo', 'Typhoid', 'Leptospirosis'
+            // Define the list of diseases with abbreviations
+            $diseasesAbbreviations = array(
+              'ABD' => 'Amoebiasis',
+              'AEFI' => 'Adverse Event Following Immunization',
+              'AES' => 'Acute encephalitis syndrome',
+              'AFP' => 'Alpha-Fetoprotein',
+              'AMES' => 'Acute Meningitis',
+              'ChikV' => 'Chikungunya Virus',
+              'DIPH' => 'Diphtheria',
+              'HFMD' => 'Hand, Foot, and Mouth Disease',
+              'NNT' => 'Number Needed to Treat',
+              'NT' => 'Neonatal Tetanus',
+              'PERT' => 'Perthes Disease',
+              'Influenza' => 'Influenza',
+              'Dengue' => 'Dengue',
+              'Rabies' => 'Rabies',
+              'Cholera' => 'Cholera',
+              'Hepatitis' => 'Hepatitis',
+              'Measles' => 'Measles',
+              'Meningitis' => 'Meningitis',
+              'Meningo' => 'Meningo',
+              'Typhoid' => 'Typhoid',
+              'Leptospirosis' => 'Leptospirosis'
             );
 
             $currentYear = date('Y');
 
             $query = "SELECT COUNT(p.patientId) AS count, m.municipality, d.disease
-                                FROM patients p
-                                INNER JOIN municipality m ON p.municipality = m.munId
-                                INNER JOIN diseases d ON p.disease = d.diseaseId
-                                WHERE YEAR(p.creationDate) = '$currentYear'
-                                    AND d.disease IN ('" . implode("','", $diseases) . "')
-                                GROUP BY p.municipality, m.municipality, d.disease
-                                ORDER BY m.municipality, count DESC";
+                      FROM patients p
+                      INNER JOIN municipality m ON p.municipality = m.munId
+                      INNER JOIN diseases d ON p.disease = d.diseaseId
+                      WHERE YEAR(p.creationDate) = '$currentYear'
+                      AND d.disease IN ('" . implode("','", array_keys($diseasesAbbreviations)) . "')
+                      GROUP BY p.municipality, m.municipality, d.disease
+                      ORDER BY m.municipality, count DESC";
+
             $result = mysqli_query($con, $query);
 
             $previousMunicipality = null;
@@ -255,7 +286,7 @@
             // Collect the top 4 diseases per municipality
             while ($row = mysqli_fetch_assoc($result)) {
               $municipality = $row['municipality'];
-              $disease = $row['disease'];
+              $diseaseAbbreviation = $row['disease'];
               $count = $row['count'];
 
               if (!array_key_exists($municipality, $municipalities)) {
@@ -263,6 +294,8 @@
               }
 
               if (count($municipalities[$municipality]) < 4) {
+                // Use the disease mapping to get the full disease name
+                $disease = $diseasesAbbreviations[$diseaseAbbreviation];
                 $municipalities[$municipality][] = array("disease" => $disease, "count" => $count);
               }
             }
