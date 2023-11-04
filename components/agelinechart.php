@@ -11,11 +11,11 @@ echo '<script>var pieDiseaseMode;</script>';
 echo '<script>var lineSelectedDisease; </script>';
 
 
-if (isset($_GET['disease']) && $_GET['pieMun'] == '' && $_GET['disease'] != '') {
+if (isset($_GET['disease']) && $_GET['disease'] != '') {
     $selectedDisease = $_GET['disease'];
     $selectedYear = $_GET['ageLineYear'];
 
-    // echo "Selected Disease: $selectedDisease<br>";
+    // echo "Selected Disease: $selectedDisease<br>";   
 
     $pieDiseaseMode = true;
 
@@ -189,13 +189,13 @@ if (!empty($errorMessage)) {
                     <?= $options ?>
                 </select>
             </div>
-            <div class="dropdown col">
+            <!-- <div class="dropdown col">
                 <label>Select Municipality:</label>
                 <select class="custom-select" name="pieMun">
                     <option value="">Reset</option>
                     <?php echo $municipalityOption; ?>
                 </select>
-            </div>
+            </div> -->
             <div class="col">
                 <div class="row justify-content-end">
                     <button type="submit" class="btn btn-primary">Check</button>
