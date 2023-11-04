@@ -341,6 +341,20 @@ const config = {
   type: "line",
   data: data,
   options: {
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Counts",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Years",
+        },
+      },
+    },
     maintainAspectRation: true,
     responsive: true,
     animation: {
@@ -361,7 +375,7 @@ const config = {
     plugins: {
       title: {
         display: true,
-        text: `${diseaseName} Cases Per Year`,
+        text: `${diseaseName} Cases Per Year on all Municipality`,
         font: {
           size: 18,
         },
@@ -372,3 +386,108 @@ const config = {
 };
 
 const myChart = new Chart(ctx, config);
+
+// age line chart
+var diseaseName;
+var selectedDisease;
+if (
+  selectedDisease === undefined ||
+  selectedDisease === null ||
+  selectedDisease === ""
+) {
+  diseaseName = "Sample Disease";
+} else if (isNaN(selectedDisease)) {
+  diseaseName = selectedDisease;
+} else {
+  diseaseName = diseases[selectedDisease];
+}
+
+var years = [];
+var counts = [];
+var jsonData;
+
+if (jsonData === undefined || jsonData === null || jsonData === "") {
+  years = 0;
+  counts = 0;
+  diseaseName = "Sample Disease";
+}
+for (var year in jsonData) {
+  if (jsonData.hasOwnProperty(year)) {
+    var count = parseInt(jsonData[year]);
+    console.log("Year: " + year + ", Count: " + count);
+    years.push(year);
+    counts.push(count);
+  }
+}
+console.log(typeof counts);
+console.log(years);
+
+const agectx = document.getElementById("ageChart").getContext("2d");
+let agedelayed;
+
+// line chart data
+const agedata = {
+  labels: years === 0 ? ["5", "10", "15", "20", "25"] : years,
+  datasets: [
+    {
+      fill: true,
+      label: `Number of ${diseaseName} Cases`,
+      data: counts === 0 ? [2358, 3877, 2850, 3504, 5885] : counts,
+      borderWidth: 1,
+      backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+      borderColor: ["rgb(255, 99, 132)"],
+    },
+  ],
+};
+
+// var translatedDisease = diseases[pieSelectedDisease];
+// let agetitle = pieDiseaseMode == false ? `of ${translatedDisease}` : "";
+
+// line chart config
+const ageconfig = {
+  type: "line",
+  data: agedata,
+  options: {
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Counts",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Age",
+        },
+      },
+    },
+    responsive: true,
+    animation: {
+      onComplete: () => {
+        delayed = true;
+      },
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === "data" && context.mode === "default" && !delayed) {
+          delay = context.dataIndex * 300 + context.datasetIndex * 100;
+        }
+        return delay;
+      },
+    },
+    radius: 5,
+    hitRadius: 20,
+    hoverRadius: 12,
+    plugins: {
+      title: {
+        display: true,
+        text: `${diseaseName} Cases Per Age: Year ${pieSelectedYear}`,
+        font: {
+          size: 18,
+        },
+      },
+    },
+  },
+};
+
+const ageChart = new Chart(agectx, ageconfig);
