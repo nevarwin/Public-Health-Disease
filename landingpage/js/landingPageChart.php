@@ -131,21 +131,37 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
 
   heatmapGradient($pieSelectedDisease);
+
+
+  // age line chart
+  $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear, age
+            FROM patients 
+            WHERE disease = $pieSelectedDisease AND YEAR(creationDate) = $pieSelectedYear
+            GROUP BY age";
+
+  $countResult = mysqli_query($con, $countQuery);
+
+  $data = array();
+  while ($row = $countResult->fetch_assoc()) {
+    $year = $row['age'];
+    $count = $row['patientCount'];
+    $data[$year] = $count;
+  }
+
+  // Encode the PHP array as JSON
+  $ageJsonData = json_encode($data);
+
+  // Echo the JSON data inside a JavaScript block
+  echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
+  echo '<script>var jsonData = ' . $ageJsonData . ';</script>';
+  echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 }
 // For the municipality dropdown logic without the disease
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
-  // echo 'else if statement without the disease <br>';
-
-  // to show if 'true' or 'false'
-  // echo var_export($pieDiseaseMode);
   $pieDiseaseMode = false;
-
-  // echo 'pieMun <br>';
 
   $pieSelectedYear = $_GET['pieYear'];
   $pieSelectedMun = $_GET['pieMun'];
-
-  // echo (gettype($pieSelectedMun) . '<br>');
 
   // Selecting the counts of cases per disease in selected municipality
   $diseaseCountQuery = "SELECT p.disease, p.municipality, COUNT(*) AS diseaseCount 
@@ -165,13 +181,6 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   $data = array();
   $municipality;
 
-  // Check if the query has returned any rows
-  // if (mysqli_num_rows($countResult) == 0) {
-  //   $errorMessage = "No data found for the selected municipality.";
-  //   $type = 'warning';
-  //   $strongContent = 'Holy guacamole!';
-  //   $alert = generateAlert($type, $strongContent, $errorMessage);
-  // } else {
   while ($row = $countResult->fetch_assoc()) {
     $disease = $row['disease'];
     $municipality = $row['municipality'];
@@ -182,13 +191,6 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
 
     echo "Disease: $disease, Count: $count, Municipality: $municipality <br>";
   }
-  // }
-
-  // // Display the disease counts for the selected municipality
-  // echo "<br> Disease Counts for $pieSelectedMun: <br>";
-  // foreach ($data as $disease => $count) {
-  //     echo "$disease: $count <br>";
-  // }
 
   // Encode the PHP variable as JSON before using it in JavaScript
   $encodedSelectedMun = json_encode($pieSelectedMun);
@@ -445,6 +447,29 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
 
   echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
   heatmapGradient($pieSelectedDisease);
+
+  // age line chart
+  $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear, age
+            FROM patients 
+            WHERE disease = $pieSelectedDisease AND YEAR(creationDate) = $pieSelectedYear
+            GROUP BY age";
+
+  $countResult = mysqli_query($con, $countQuery);
+
+  $data = array();
+  while ($row = $countResult->fetch_assoc()) {
+    $year = $row['age'];
+    $count = $row['patientCount'];
+    $data[$year] = $count;
+  }
+
+  // Encode the PHP array as JSON
+  $ageJsonData = json_encode($data);
+
+  // Echo the JSON data inside a JavaScript block
+  echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
+  echo '<script>var jsonData = ' . $ageJsonData . ';</script>';
+  echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 }
 
 // Select query for all available creation date in patients table
