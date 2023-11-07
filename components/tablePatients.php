@@ -86,14 +86,33 @@
                     <?php
                     include("connection.php");
                     // read all the data from db table
-                    $sql = "SELECT *
-                    FROM patients
-                    LEFT JOIN barangay ON patients.barangay = barangay.id
-                    LEFT JOIN municipality ON patients.municipality = municipality.munId
-                    LEFT JOIN diseases ON patients.disease = diseases.diseaseId
-                    LEFT JOIN genders ON patients.gender = genders.genderId
-                    ORDER BY patientId DESC
-                    ";
+
+                    if ($user_data['positionId'] == 1 || $user_data['positionId'] == 2) {
+                        $deptid = $user_data['id'];
+                    } else {
+                        $deptid = $user_data['createdby_id'];
+                    }
+
+                    if ($user_data['positionId'] == 1) {
+                        $sql = "SELECT *
+                        FROM patients
+                        LEFT JOIN barangay ON patients.barangay = barangay.id
+                        LEFT JOIN municipality ON patients.municipality = municipality.munId
+                        LEFT JOIN diseases ON patients.disease = diseases.diseaseId
+                        LEFT JOIN genders ON patients.gender = genders.genderId
+                        ORDER BY patientId DESC
+                        ";
+                    } else {
+                        $sql = "SELECT *
+                        FROM patients
+                        LEFT JOIN barangay ON patients.barangay = barangay.id
+                        LEFT JOIN municipality ON patients.municipality = municipality.munId
+                        LEFT JOIN diseases ON patients.disease = diseases.diseaseId
+                        LEFT JOIN genders ON patients.gender = genders.genderId
+                        WHERE createdby_id = $deptid
+                        ORDER BY patientId DESC
+                        ";
+                    }
 
                     $result = mysqli_query($con, $sql);
 
@@ -121,8 +140,6 @@
                             </tr>
                     <?php
                         }
-                    } else {
-                        echo "No data found";
                     }
                     ?>
                 </tbody>
