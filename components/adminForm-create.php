@@ -7,6 +7,12 @@ $message = '';
 $type = '';
 $strongContent = '';
 
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    // $_SESSION['createdby_id'] = $id;
+    echo ($id);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     do {
         $position = mysqli_real_escape_string($con, $_POST['position']);
@@ -27,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
 
-        $sql = "INSERT INTO clients (name, email, municipality, barangay, password, contact_number, address, positionId) VALUES ('$name', '$email', '$municipality', '$barangay', '$password', '$contact', '$address', '$position')";
+        $sql = "INSERT INTO clients (name, createdby_id ,email, municipality, barangay, password, contact_number, address, positionId) VALUES ('$name', '$id', '$email', '$municipality', '$barangay', '$password', '$contact', '$address', '$position')";
 
         $result = mysqli_query($con, $sql);
 
