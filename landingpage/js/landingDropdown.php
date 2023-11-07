@@ -113,7 +113,7 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                 </div>
                 <div class="dropdown mx-1">
                     <select class="form-select" name="pieMun">
-                        <option value="">Reset</option>
+                        <option value="">all</option>
                         <?php echo $municipalityOption; ?>
                     </select>
                 </div>

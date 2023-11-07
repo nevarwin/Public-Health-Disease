@@ -9,7 +9,6 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label for="disease">Select Disease:</label>
                 <select class="custom-select" name="pieDisease">
-                    <option value="">Reset</option>
                     <?php
                     $pieDropdown = [
                         1 => 'ABD',
@@ -52,7 +51,7 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label>Select Municipality:</label>
                 <select class="custom-select" name="pieMun">
-                    <option value="">Reset</option>
+                    <option value="">all</option>
                     <?php echo $municipalityOption; ?>
                 </select>
             </div>

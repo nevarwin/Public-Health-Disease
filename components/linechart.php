@@ -143,7 +143,6 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label for="disease">Select Disease:</label>
                 <select id='selectDisease' class="custom-select" name="disease">
-                    <option value="">Reset</option>
                     <?php
                     $diseases = [
                         1 => 'ABD',
@@ -180,7 +179,7 @@ if (!empty($errorMessage)) {
             <div class="dropdown col">
                 <label for="year">Select Municipality:</label>
                 <select class="custom-select" name="pieMun">
-                    <option value="">Reset</option>
+                    <option value="">all</option>
                     <?php echo $municipalityOption; ?>
                 </select>
             </div>
