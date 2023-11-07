@@ -18,6 +18,15 @@ $alert = '';
 
 $apiKey = 'AIzaSyBDCpppcL179vukeD8LAeMYSS-WamNfzgI';
 
+if ($user_data['positionId'] == 1 || $user_data['positionId'] == 2) {
+    $deptid = $user_data['id'];
+} else {
+    $deptid = $user_data['createdby_id'];
+}
+
+$nurseid = $user_data['id'];
+
+
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -61,7 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Store the values in the patients table
             $sql = "INSERT INTO patients
                     (
-                        `creationDate`, 
+                        `creationDate`,
+                        `createdby_id`,
+                        `nurse_id`,
                         `firstName`, 
                         `lastName`, 
                         `middleName`, 
@@ -82,7 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ) 
                     VALUES 
                     (
-                        '$currentDate', 
+                        '$currentDate',
+                        '$deptid',
+                        '$nurseid',
                         '$fName', 
                         '$lName', 
                         '$mName', 
@@ -128,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // medyo accurate at nagana na yung sa naic
                 // $address = $barangayValue . ', ' . 'Cavite';
                 $address = $unitCode . ' ' . $subd . ' ' .  $street . ', ' . $barangayValue . ' ' . $municipalityValue . ' Cavite ';
-                echo $address;
+                // echo $address;
 
                 // Format the address for URL encoding 
                 $formattedAddress = urlencode($address);
@@ -207,8 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (strcmp($diseaseName, $value) == 0) {
-            // echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
-            // echo diseaseUrl($diseaseValue, $insert_id);
+            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+            echo diseaseUrl($diseaseValue, $insert_id);
         } else {
             // Handle error
             $errorMessage = "Link does not exists!";
