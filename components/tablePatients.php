@@ -117,14 +117,6 @@
                                 <td class="text-center">
                                     <a class="btn btn-info btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
                                     <a class="btn btn-primary btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Update</a>
-
-                                    <?php
-                                    if ($user_data['positionId'] == 1 or $user_data['positionId'] == 2) {
-                                    ?>
-                                        <a class="btn btn-danger btn-sm btn-block my-1" href="http://localhost/admin2gh/components/patientForm-remove.php?patientId=<?= $patients['patientId']; ?>">Remove</a>
-                                    <?php
-                                    }
-                                    ?>
                                 </td>
                             </tr>
                     <?php
