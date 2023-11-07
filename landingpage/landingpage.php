@@ -236,7 +236,7 @@
         </h2>
       </div>
 
-      <div id="municipalityCollapse" class="collapse show" aria-labelledby="headingFour" data-parent="#municipalityAccordion">
+      <div id="municipalityCollapse" class="collapse" aria-labelledby="headingFour" data-parent="#municipalityAccordion">
         <div class="card-body">
           <div class="row">
             <?php
