@@ -28,7 +28,7 @@ $row = mysqli_fetch_assoc($result);
 
 if (!$row) {
     // header('location: http://localhost/admin2gh/patientTable.php');
-    echo 'error in row';
+    echo "No information Available";
     exit;
 }
 

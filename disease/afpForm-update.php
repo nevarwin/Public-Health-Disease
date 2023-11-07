@@ -30,8 +30,7 @@ $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (!$row) {
-    // header('location: http://localhost/admin2gh/patientTable.php');
-    echo mysqli_error($con);
+    echo "No information available";
     exit;
 }
 

@@ -25,8 +25,7 @@ $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
 
 if (!$row) {
-    echo "error in row";
-    header('location: http://localhost/admin2gh/patientTable.php');
+    echo "No information Available";;
     exit;
 }
 $labResult = $row['labResult'];

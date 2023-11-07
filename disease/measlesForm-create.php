@@ -21,7 +21,7 @@ if (!isset($_GET["patientId"])) {
 $patientId = $_GET['patientId'];
 
 if (empty($patientId)) {
-    echo 'patiend Id emtpy';
+    echo "No information Available";
 }
 
 // check if the form is submitted using the post method

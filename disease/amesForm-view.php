@@ -25,7 +25,7 @@ $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
 
 if (!$row) {
-    header('location: http://localhost/admin2gh/patientTable.php');
+    echo "No information available";
     exit;
 }
 $fever = $row['fever'];
