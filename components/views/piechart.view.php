@@ -67,7 +67,7 @@ if (!empty($errorMessage)) {
 <div class="card shadow">
     <!-- Card Header -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Disease cases per municipality pie chart</h6>
         <button id="downloadButton" class="btn btn-primary">Download Chart</button>
     </div>
     <div class="card-body">

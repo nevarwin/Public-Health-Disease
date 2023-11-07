@@ -205,7 +205,7 @@ if (!empty($errorMessage)) {
 </div>
 <div class="card shadow">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Line Chart</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Yearly disease count line chart</h6>
         <button id="downloadButton" class="btn btn-primary">Download Chart</button>
 
     </div>
