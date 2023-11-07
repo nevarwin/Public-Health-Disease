@@ -25,6 +25,9 @@
             $('#myTable').DataTable({
                 order: [
                     [0, 'desc']
+                ],
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
         });
