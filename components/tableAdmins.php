@@ -1,3 +1,10 @@
+<?php
+if (isset($_SESSION['id'])) {
+    $deptid = $_SESSION['id'];
+    // echo ($deptid);
+}
+?>
+
 <style>
     label {
         display: flex;
@@ -88,7 +95,7 @@
                             LEFT JOIN positions ON clients.positionId = positions.positionId
                             LEFT JOIN barangay ON clients.barangay = barangay.id 
                             LEFT JOIN municipality ON clients.municipality = municipality.munId
-                            WHERE clients.positionId != 1
+                            WHERE clients.positionId != 1 AND clients.createdby_id = $deptid
                             ORDER BY clients.id DESC
                             ";
                             $result = mysqli_query($con, $sql);
@@ -98,7 +105,7 @@
                             LEFT JOIN positions ON clients.positionId = positions.positionId
                             LEFT JOIN barangay ON clients.barangay = barangay.id 
                             LEFT JOIN municipality ON clients.municipality = municipality.munId
-                            WHERE clients.positionId >= 3
+                            WHERE clients.positionId >= 3 AND clients.createdby_id = $deptid
                             ORDER BY clients.id DESC
                             ";
                             $result = mysqli_query($con, $sql);
