@@ -87,9 +87,9 @@
                 text: 'Generate PDF',
                 className: 'btn btn-primary',
                 exportOptions: {
+                    columns: ':not(.no-export)',
                     modifier: {
                         page: 'current',
-                        columns: ':not(.no-export)'
                     }
                 }
             }],
