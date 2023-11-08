@@ -79,7 +79,7 @@
                         <th>Barangay</th>
                         <th>Municipality</th>
                         <th>Year</th>
-                        <th>Action</th>
+                        <th class="no-export">Action</th>
                     </tr>
                 </thead>
                 <tbody>
