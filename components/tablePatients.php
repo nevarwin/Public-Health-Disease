@@ -66,7 +66,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table cell-border hover" id="myTable" width="100%" cellspacing="0">
+            <table class="table cell-border hover display" id="tablePatients" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Patient Id</th>
@@ -74,7 +74,7 @@
                         <th>Last Name</th>
                         <th>Gender</th>
                         <th>Disease</th>
-                        <th>Date of Birth</th>
+                        <th>Dob</th>
                         <th>Age</th>
                         <th>Barangay</th>
                         <th>Municipality</th>
@@ -143,6 +143,21 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Patient Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Disease</th>
+                        <th>Dob</th>
+                        <th>Age</th>
+                        <th>Barangay</th>
+                        <th>Municipality</th>
+                        <th>Year</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
