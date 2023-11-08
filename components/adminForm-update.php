@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
             $message = "All fields are required";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
             break;
         }
@@ -67,12 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result) {
             $message = "Profile Successfully Update";
             $type = 'success';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
         } else {
             $message = "Invalid query: " . $result;
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
             break;
         }

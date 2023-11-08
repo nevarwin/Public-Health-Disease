@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($position == "Select Position" or empty($name) or empty($email) or empty($password) or empty($contact) or empty($address) or $municipality  == "Select Municipality" or $barangay == "Select Barangay") {
             $message = "All fields are required";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
             break;
         }
@@ -40,12 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result) {
             $message = "Admin Successfully Created";
             $type = 'success';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
         } else {
             $message = "Invalid query: " . $result;
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
             break;
         }

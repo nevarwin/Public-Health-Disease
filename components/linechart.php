@@ -75,7 +75,7 @@ else if (isset($_GET['pieMun'])) {
     if (mysqli_num_rows($countResult) == 0) {
         $errorMessage = "No data found for the selected disease and municipality.";
         $type = 'warning';
-        $strongContent = 'Holy guacamole!';
+        $strongContent = 'Oh no!';
         $alert = generateAlert($type, $strongContent, $errorMessage);
         $disease = $lineSelectedDisease;
     } else {

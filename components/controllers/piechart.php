@@ -34,7 +34,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   if (mysqli_num_rows($countResult) == 0) {
     $errorMessage = "No data found for the selected disease.";
     $type = 'warning';
-    $strongContent = 'Holy guacamole!';
+    $strongContent = 'Oh no!';
     $alert = generateAlert($type, $strongContent, $errorMessage);
   } else {
     while ($row = $countResult->fetch_assoc()) {
@@ -105,7 +105,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   if (mysqli_num_rows($countResult) == 0) {
     $errorMessage = "No data found for the selected municipality.";
     $type = 'warning';
-    $strongContent = 'Holy guacamole!';
+    $strongContent = 'Oh no!';
     $alert = generateAlert($type, $strongContent, $errorMessage);
   } else {
     while ($row = $countResult->fetch_assoc()) {
@@ -198,7 +198,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   if (mysqli_num_rows($countResult) == 0) {
     $errorMessage = "No data found for the selected municipality.";
     $type = 'warning';
-    $strongContent = 'Holy guacamole!';
+    $strongContent = 'Oh no!';
     $alert = generateAlert($type, $strongContent, $errorMessage);
   } else {
     while ($row = $countResult->fetch_assoc()) {

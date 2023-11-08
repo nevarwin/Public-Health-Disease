@@ -41,7 +41,7 @@ $result = mysqli_query($con, $query);
 if (mysqli_num_rows($result) == 0) {
     $message = "No records found!";
     $type = 'warning';
-    $strongContent = 'Holy guacamole!';
+    $strongContent = 'Oh no!';
     $alert = generateAlert($type, $strongContent, $message);
 }
 

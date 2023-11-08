@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
             $errorMessage = "All fields are required";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
             // Handle the error or display the alert message
@@ -171,25 +171,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         } else {
                             $errorMessage = "Error updating address: " .  mysqli_error($con);
                             $type = 'warning';
-                            $strongContent = 'Holy guacamole!';
+                            $strongContent = 'Oh no!';
                             $alert = generateAlert($type, $strongContent, $errorMessage);
                         }
                     } else {
                         $errorMessage = "Geocoding failed: " . $geocodingData['status'];
                         $type = 'warning';
-                        $strongContent = 'Holy guacamole!';
+                        $strongContent = 'Oh no!';
                         $alert = generateAlert($type, $strongContent, $errorMessage);
                     }
                 } else {
                     $errorMessage = "Failed to fetch geocoding data";
                     $type = 'warning';
-                    $strongContent = 'Holy guacamole!';
+                    $strongContent = 'Oh no!';
                     $alert = generateAlert($type, $strongContent, $errorMessage);
                 }
             } else {
                 $errorMessage = "Error saving address: " .  mysqli_error($con);
                 $type = 'warning';
-                $strongContent = 'Holy guacamole!';
+                $strongContent = 'Oh no!';
                 $alert = generateAlert($type, $strongContent, $errorMessage);
             }
         }
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$result) {
             $errorMessage = mysqli_error($con);
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$addDiseaseResult) {
             $errorMessage = "Error: " . mysqli_error($con);
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
         }
 
@@ -226,11 +226,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Handle error
             $errorMessage = "Link does not exists!";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
         }
         $type = 'success';
-        $strongContent = 'Holy guacamole!';
+        $strongContent = 'Oh no!';
         $successMessage = "Patient added correctly";
         $alert = generateAlert($type, $strongContent, $successMessage);
     } while (false);

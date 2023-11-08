@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result) {
             $message = "Meningo info successfully updated!";
             $type = 'success';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert
                 = generateAlert($type, $strongContent, $message);
 
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $message = "Error submitting form! " . mysqli_error($con);
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $message);
         }
     } while (false);

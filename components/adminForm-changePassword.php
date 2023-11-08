@@ -52,14 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($password)) {
             $errorMessage = "All fields are required";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
         if ($password != $confirmPassword) {
             $errorMessage = "Password and Confirm Password must be the same";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($hashedPassword == $user_data['password']) {
             $errorMessage = "New password must be different from the previous password";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
         }
@@ -80,12 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($con->query($sql) === TRUE) {
             $successMessage = "Password updated successfully";
             $type = 'success';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $successMessage);
         } else {
             $errorMessage = "Error updating password";
             $type = 'warning';
-            $strongContent = 'Holy guacamole!';
+            $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
         }
 
