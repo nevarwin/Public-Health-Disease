@@ -57,8 +57,6 @@
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
             <div class="ml-auto">
-                <a href="generate.php" class="btn btn-primary"><i class="fas fa-download fa-sm text-white-50 mr-auto"></i> Generate Report</a>
-                &nbsp;
                 <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary" role="button">Add new patient</a>
             </div>
         </div>
