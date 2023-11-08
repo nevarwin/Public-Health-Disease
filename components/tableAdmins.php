@@ -72,7 +72,7 @@ if (isset($_SESSION['id'])) {
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table cell-border hover" id="myTable" cellspacing="0" width="100%">
+                <table class="table cell-border hover" id="tableAdmins" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Position</th>
@@ -83,7 +83,7 @@ if (isset($_SESSION['id'])) {
                             <th>Barangay</th>
                             <th>Municipality</th>
                             <th>Created At</th>
-                            <th>Action</th>
+                            <th class="no-export">Action</th>
                         </tr>
                     </thead>
                     <tbody>
