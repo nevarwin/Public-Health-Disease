@@ -37,6 +37,16 @@ $positionValue = $positionRow['position'];
                     <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                     Update Profile
                 </a>
+                <?php if ($user_data['positionId'] == 1) { ?>
+                    <a class="dropdown-item" href="/admin2gh/adminPage-disease.php">
+                        <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Disease
+                    </a>
+                    <a class="dropdown-item" href="/admin2gh/adminPage-diseaseUpdate.php">
+                        <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Update Disease
+                    </a>
+                <?php } ?>
                 <a class="dropdown-item" href="/admin2gh/adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Change Password
