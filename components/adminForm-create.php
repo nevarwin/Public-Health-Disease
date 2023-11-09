@@ -9,8 +9,6 @@ $strongContent = '';
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    // $_SESSION['createdby_id'] = $id;
-    echo ($id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
