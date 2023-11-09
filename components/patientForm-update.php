@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $type = 'success';
-        $strongContent = 'Oh no!';
+        $strongContent = 'Yay!';
         $successMessage = "Patient added correctly";
         $alert = generateAlert($type, $strongContent, $successMessage);
 
