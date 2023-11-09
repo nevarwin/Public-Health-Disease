@@ -38,10 +38,6 @@ $positionValue = $positionRow['position'];
                     Update Profile
                 </a>
                 <?php if ($user_data['positionId'] == 1) { ?>
-                    <a class="dropdown-item" href="/admin2gh/adminPage-disease.php">
-                        <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Disease
-                    </a>
                     <a class="dropdown-item" href="/admin2gh/adminPage-diseaseUpdate.php">
                         <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                         Update Disease
