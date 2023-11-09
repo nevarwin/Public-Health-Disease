@@ -144,33 +144,21 @@ if (!empty($errorMessage)) {
                 <label for="disease">Select Disease:</label>
                 <select id='selectDisease' class="custom-select" name="disease">
                     <?php
-                    $diseases = [
-                        1 => 'ABD',
-                        2 => 'AEFI',
-                        3 => 'AES',
-                        4 => 'AFP',
-                        5 => 'AMES',
-                        6 => 'ChikV',
-                        7 => 'DIPH',
-                        8 => 'HFMD',
-                        9 => 'NNT',
-                        10 => 'NT',
-                        11 => 'PERT',
-                        12 => 'Influenza',
-                        13 => 'Dengue',
-                        14 => 'Rabies',
-                        15 => 'Cholera',
-                        16 => 'Hepatitis',
-                        17 => 'Measles',
-                        18 => 'Meningitis',
-                        19 => 'Meningo',
-                        20 => 'Typhoid',
-                        21 => 'Leptospirosis',
-                    ];
-                    $selectedDisease = $_GET['disease'] ?? '';
+                    $sql = "SELECT diseaseId, disease FROM diseases";
+                    $result = $con->query($sql);
 
-                    foreach ($diseases as $key => $value) {
-                        $selected = ($key == $selectedDisease) ? 'selected' : '';
+                    $pieDropdown = [];
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $pieDropdown[$row['diseaseId']] = $row['disease'];
+                        }
+                    }
+
+                    $pieSelectedDisease = $_GET['pieDisease'] ?? '';
+
+                    foreach ($pieDropdown as $key => $value) {
+                        $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
                         echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
                     }
                     ?>

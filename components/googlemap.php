@@ -81,33 +81,24 @@ while ($row = mysqli_fetch_assoc($result)) {
             <select name="disease" id="disease" class="custom-select">
                 <option value="">All</option>
                 <?php
-                $pieDropdown = [
-                    1 => 'Amoebiasis',
-                    2 => 'Adverse Event Following Immunization',
-                    3 => 'Acute encephalitis syndrome',
-                    4 => 'Alpha-Fetoprotein',
-                    5 => 'Acute Meningitis',
-                    6 => 'ChikV',
-                    7 => 'Diphtheria',
-                    8 => 'Hand, Foot, and Mouth Disease',
-                    9 => 'Number Needed to Treat',
-                    10 => 'Neonatal Tetanus',
-                    11 => 'Perthes Disease',
-                    12 => 'Influenza',
-                    13 => 'Dengue',
-                    14 => 'Rabies',
-                    15 => 'Cholera',
-                    16 => 'Hepatitis',
-                    17 => 'Measles',
-                    18 => 'Meningitis',
-                    19 => 'Meningo',
-                    20 => 'Typhoid',
-                    21 => 'Leptospirosis',
-                ];
+                $sql = "SELECT diseaseId, disease FROM diseases";
+                $result = $con->query($sql);
+
+                $pieDropdown = [];
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $pieDropdown[$row['diseaseId']] = $row['disease'];
+                    }
+                }
+
+                $pieSelectedDisease = $_GET['pieDisease'] ?? '';
+
+                foreach ($pieDropdown as $key => $value) {
+                    $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
+                    echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+                }
                 ?>
-                <?php foreach ($pieDropdown as $key => $disease) : ?>
-                    <option value="<?php echo $key; ?>" <?php echo $key == $selectedDisease ? 'selected' : ''; ?>><?php echo $disease; ?></option>
-                <?php endforeach; ?>
             </select>
         </div>
         <div class="col">
