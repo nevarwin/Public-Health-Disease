@@ -140,9 +140,13 @@ switch ($disease) {
         break;
 }
 
+$update_page_path = strtolower($disease) . "Page-update.php";
 
-
-
+if (is_file($update_page_path)) {
+    $hreflink = "{$disease}Page-update.php?patientId={$patientId}";
+} else {
+    $hreflink = "";
+}
 ?>
 <div class="container-fluid">
     <!-- Begin of Row -->
@@ -298,7 +302,7 @@ switch ($disease) {
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-success"><?= $disease ?> Disease Information
                     </h6>
-                    <a style="text-decoration:none;" class="text-secondary" href="<?php echo "{$disease}Page-update.php?patientId={$patientId}"; ?>">
+                    <a style="text-decoration:none;" class="text-secondary" href="<?= $hreflink ?>">
                         <i class="fa fa-edit"></i>
                     </a>
                 </div>
@@ -306,7 +310,13 @@ switch ($disease) {
                 <div class="card-body">
                     <div class="col-sm-12">
                         <?php
-                        include("./disease/{$disease}Form-view.php");
+                        $file_path = "./disease/{$disease}Form-view.php";
+
+                        if (file_exists($file_path)) {
+                            include($file_path);
+                        } else {
+                            echo 'No information Available';
+                        }
                         ?>
                     </div>
                 </div>
