@@ -210,27 +210,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $value = $row['diseaseId'];
         $diseaseValue = strtolower($row['disease']);
 
-        $addDiseaseSql = "INSERT INTO " . $diseaseValue . "infotbl (patientId) VALUES ($insert_id)";
-        $addDiseaseResult = mysqli_query($con, $addDiseaseSql);
-        if (!$addDiseaseResult) {
-            $errorMessage = "Error: " . mysqli_error($con);
-            $type = 'warning';
-            $strongContent = 'Oh no!';
-            $alert = generateAlert($type, $strongContent, $errorMessage);
+        $tableExistsQuery = "SHOW TABLES LIKE '" . $diseaseValue . "infotbl'";
+        $tableExistsResult = mysqli_query($con, $tableExistsQuery);
+
+        if ($tableExistsResult) {
+            $rowCount = mysqli_num_rows($tableExistsResult);
+
+            if ($rowCount > 0) {
+                // Table exists, proceed with the insertion
+                $addDiseaseSql = "INSERT INTO " . $diseaseValue . "infotbl (patientId) VALUES ($insert_id)";
+
+                // error in here if new disease
+                $addDiseaseResult = mysqli_query($con, $addDiseaseSql);
+                if (strcmp($diseaseName, $value) == 0) {
+                    echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
+                    echo diseaseUrl($diseaseValue, $insert_id);
+                } else {
+                    // Handle error
+                    $errorMessage = "Link does not exists!";
+                    $type = 'warning';
+                    $strongContent = 'Oh no!';
+                    $alert = generateAlert($type, $strongContent, $errorMessage);
+                }
+            } else {
+            }
+
+            mysqli_free_result($tableExistsResult);
+        } else {
+            // Error in querying table existence, handle accordingly
+            echo "Error checking table existence: " . mysqli_error($connection);
         }
 
-        if (strcmp($diseaseName, $value) == 0) {
-            echo "<script>window.location = '{$diseaseValue}Page-create.php?patientId={$insert_id}';</script>";
-            echo diseaseUrl($diseaseValue, $insert_id);
-        } else {
-            // Handle error
-            $errorMessage = "Link does not exists!";
-            $type = 'warning';
-            $strongContent = 'Oh no!';
-            $alert = generateAlert($type, $strongContent, $errorMessage);
-        }
         $type = 'success';
-        $strongContent = 'Oh no!';
+        $strongContent = 'Yay!';
         $successMessage = "Patient added correctly";
         $alert = generateAlert($type, $strongContent, $successMessage);
     } while (false);
