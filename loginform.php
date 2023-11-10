@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // User not found
             echo "<script>alert('User not found. Please try again.');</script>";
-            echo "<script>window.location.href = 'http://localhost/login.php';</script>";
+            echo "<script>window.location.href = 'http://localhost/admin2gh/loginForm.php';</script>";
         }
 
         // $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";

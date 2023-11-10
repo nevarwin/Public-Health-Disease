@@ -95,7 +95,7 @@ if (isset($_SESSION['id'])) {
                             LEFT JOIN positions ON clients.positionId = positions.positionId
                             LEFT JOIN barangay ON clients.barangay = barangay.id 
                             LEFT JOIN municipality ON clients.municipality = municipality.munId
-                            WHERE clients.positionId != 1 AND clients.createdby_id = $deptid
+                            WHERE clients.positionId != 1
                             ORDER BY clients.id DESC
                             ";
                             $result = mysqli_query($con, $sql);
