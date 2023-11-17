@@ -56,11 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contact = mysqli_real_escape_string($con, $_POST['contact']);
     $addressDRU = mysqli_real_escape_string($con, $_POST['addressDRU']);
     $currentDate = date("Y-m-d H:i:s");
+    $currentYear = date('Y');
+
+    $queryDuplicate = "SELECT * FROM patients WHERE contact = $contact AND disease = $disease AND creationDate = $currentYear";
+    $resultDuplicate = $con->query($queryDuplicate);
 
     // check if the data is empty
     do {
         if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($disease) or empty($contact) or empty($gender)) {
             $errorMessage = "All fields are required";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+            // Handle the error or display the alert message
+        } else if ($resultDuplicate) {
+            // Contact number and disease already exist in the database
+            $errorMessage = "Patient already exists";
             $type = 'warning';
             $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
@@ -114,7 +126,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         '$barangayDRU', 
                         '$contact'
                     )";
-
 
             if ($con->query($sql) === TRUE) {
                 $insert_id = mysqli_insert_id($con);
