@@ -61,6 +61,13 @@ $subd = $row['subd'];
 $postalCode = $row['postalCode'];
 $addressDRU = $row['addressOfDRU'];
 
+if ($user_data['positionId'] == 1 || $user_data['positionId'] == 2) {
+    $deptid = $user_data['id'];
+} else {
+    $deptid = $user_data['createdby_id'];
+}
+$nurseid = $user_data['id'];
+
 // check if the form is submitted using the post method
 // initialize data above into the post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -90,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
     $postalCode = mysqli_real_escape_string($con, $_POST['postalCode']);
     $addressDRU = mysqli_real_escape_string($con, $_POST['addressDRU']);
-
+    $updatedAt = date("Y-m-d H:i:s");
 
     // check if the data is empty
     do {
@@ -104,7 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "UPDATE patients 
                         SET `firstName`='$fName', 
                         `lastName`='$lName', 
-                        `middleName`='$mName', 
+                        `middleName`='$mName',
+                        `nurse_id`='$nurseid',
                         `munCityOfDRU`='$municipalityDRU', 
                         `brgyOfDRU`='$barangayDRU', 
                         `addressOfDRU`='$addressDRU', 
@@ -117,7 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         `unitCode`='$unitCode',
                         `postalCode`='$postalCode',
                         `subd`='$subd',
-                        `contact`='$contact'
+                        `contact`='$contact',
+                        `updated_at`='$updatedAt'
                         WHERE patientId=$patientId";
         }
         if ($con->query($sql) === TRUE) {
@@ -161,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $updateSql = "UPDATE patients SET latitude = '$latitude', longitude = '$longitude' WHERE patientId = $patientId";
 
                     if ($con->query($updateSql) === TRUE) {
-                        echo "Address saved successfully";
+                        // echo "Address saved successfully";
                     } else {
                         $errorMessage = "Error updating address: " . mysqli_error($con);
                         $type = 'warning';
