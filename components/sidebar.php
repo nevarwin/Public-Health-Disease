@@ -18,6 +18,18 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li> -->
+    <?php
+    if ($user_data['positionId'] == 1) {
+    ?>
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="http://localhost/admin2gh/logsTable.php">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Logs Tables</span></a>
+        </li>
+    <?php
+    }
+    ?>
 
     <?php
     if ($user_data['positionId'] != 3) {
