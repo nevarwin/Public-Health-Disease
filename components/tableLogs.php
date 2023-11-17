@@ -64,7 +64,7 @@ if (isset($_SESSION['id'])) {
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
-                <h2 class="m-0 font-weight-bold text-primary">Admin's Data</h2>
+                <h2 class="m-0 font-weight-bold text-primary">Update Logs</h2>
 
             </div>
         </div>
@@ -89,7 +89,7 @@ if (isset($_SESSION['id'])) {
                             $sql = "SELECT *
                             FROM patients
                             LEFT JOIN clients ON id = nurse_id
-                            ORDER BY patientId DESC
+                            ORDER BY updated_at DESC
                             ";
                             $result = mysqli_query($con, $sql);
                         }
