@@ -66,13 +66,20 @@
             dom: 'lBftrip',
             buttons: [{
                 extend: 'pdfHtml5',
-                text: 'Generate PDF',
-                className: 'btn btn-primary',
+                text: 'Generate PDF per page',
+                className: 'btn btn-primary mx-3',
                 exportOptions: {
                     columns: ':not(.no-export)',
                     modifier: {
                         page: 'current',
                     }
+                }
+            }, {
+                extend: 'pdfHtml5',
+                text: 'Generate PDF',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: ':not(.no-export)',
                 }
             }],
             initComplete: function() {
