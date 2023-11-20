@@ -93,6 +93,16 @@ if (isset($_SESSION['id'])) {
                             ";
                             $result = mysqli_query($con, $sql);
                         }
+                        if ($user_data['positionId'] == 2) {
+                            // read all the data from db table
+                            $sql = "SELECT *
+                            FROM patients
+                            LEFT JOIN clients ON id = nurse_id
+                            WHERE patients.createdby_id = $deptid
+                            ORDER BY updated_at DESC
+                            ";
+                            $result = mysqli_query($con, $sql);
+                        }
 
                         // check if there is data in the table
                         if (mysqli_num_rows($result) > 0) {
