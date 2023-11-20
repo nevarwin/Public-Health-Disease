@@ -19,7 +19,7 @@
             <span>Dashboard</span></a>
     </li> -->
     <?php
-    if ($user_data['positionId'] == 1) {
+    if ($user_data['positionId'] == 1 || $user_data['positionId'] == 2) {
     ?>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
