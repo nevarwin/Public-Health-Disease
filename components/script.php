@@ -67,7 +67,7 @@
             buttons: [{
                 extend: 'pdfHtml5',
                 text: 'Generate PDF per page',
-                className: 'btn btn-primary mx-3',
+                className: 'btn btn-primary',
                 exportOptions: {
                     columns: ':not(.no-export)',
                     modifier: {
@@ -77,6 +77,13 @@
             }, {
                 extend: 'pdfHtml5',
                 text: 'Generate PDF',
+                className: 'btn btn-primary mx-1',
+                exportOptions: {
+                    columns: ':not(.no-export)',
+                }
+            }, {
+                extend: 'excelHtml5',
+                text: 'Generate Excel',
                 className: 'btn btn-primary',
                 exportOptions: {
                     columns: ':not(.no-export)',
