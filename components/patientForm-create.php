@@ -58,8 +58,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $currentDate = date("Y-m-d H:i:s");
     $currentYear = date('Y');
 
-    $queryDuplicate = "SELECT * FROM patients WHERE contact = $contact AND disease = $disease AND creationDate = $currentYear";
-    $resultDuplicate = $con->query($queryDuplicate);
+    $stmt = $con->prepare("SELECT COUNT(*)
+                        FROM patients 
+                        WHERE 
+                            firstName = ?
+                            AND lastName = ?
+                            AND contact = ?
+                            AND disease = ?
+                            AND YEAR(creationDate) = ?
+                        GROUP BY contact, disease
+                        HAVING COUNT(*) > 1");
+
+    $stmt->bind_param("ssisi", $fName, $lName, $contact, $disease, $currentYear);
+    $stmt->execute();
+    $stmt->bind_result($duplicateCount);
+    $stmt->fetch();
+    $stmt->close();
 
     // check if the data is empty
     do {
@@ -70,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
             // Handle the error or display the alert message
-        } else if ($resultDuplicate) {
+        } else if ($duplicateCount > 0) {
             // Contact number and disease already exist in the database
             $errorMessage = "Patient already exists";
             $type = 'warning';
