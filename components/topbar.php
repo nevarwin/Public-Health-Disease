@@ -14,9 +14,6 @@ $positionValue = $positionRow['position'];
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <!-- Topbar Search -->
-    <!--  TODO GENERATE REPORT -->
-    <!-- <a href="generate_report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - User Information -->
@@ -29,21 +26,21 @@ $positionValue = $positionRow['position'];
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/admin2gh/adminPage-view.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="adminPage-view.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
-                <a class="dropdown-item" href="/admin2gh/adminPage-updateProfile.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="adminPage-updateProfile.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                     Update Profile
                 </a>
                 <?php if ($user_data['positionId'] == 1) { ?>
-                    <a class="dropdown-item" href="/admin2gh/adminPage-diseaseUpdate.php">
+                    <a class="dropdown-item" href="adminPage-diseaseUpdate.php">
                         <i class="fas fa-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                         Update Disease
                     </a>
                 <?php } ?>
-                <a class="dropdown-item" href="/admin2gh/adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
+                <a class="dropdown-item" href="adminPage-changePassword.php?id=<?= $user_data['id']; ?>">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Change Password
                 </a>
