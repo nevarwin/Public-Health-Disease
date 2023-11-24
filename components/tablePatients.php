@@ -57,7 +57,7 @@
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
             <div class="ml-auto">
-                <a href="http://localhost/admin2gh/patientPage-create.php" class="btn btn-primary" role="button">Add new patient</a>
+                <a href="patientPage-create.php" class="btn btn-primary" role="button">Add new patient</a>
             </div>
         </div>
 
@@ -132,8 +132,8 @@
                                 <td><?= $patients['municipality'] ?></td>
                                 <td><?= $year ?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-info btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
-                                    <a class="btn btn-primary btn-sm btn-block my-1" href="http://localhost/admin2gh/patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Update</a>
+                                    <a class="btn btn-info btn-sm btn-block my-1" href="patientPage-view.php?patientId=<?= $patients['patientId']; ?>">View</a>
+                                    <a class="btn btn-primary btn-sm btn-block my-1" href="patientPage-update.php?patientId=<?= $patients['patientId']; ?>">Update</a>
                                 </td>
                             </tr>
                     <?php
