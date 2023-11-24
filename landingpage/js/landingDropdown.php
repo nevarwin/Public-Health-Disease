@@ -2,7 +2,7 @@
 include('landingPageChart.php');
 
 $diseaseDesc = [
-    "Disease Information" => "Here, you'll find valuable insights into a wide range of diseases that impact human health. Our mission is to empower individuals with knowledge, enabling them to make informed decisions about their well-being. We strive to provide accurate and reliable information to help you stay informed and take charge of your health journey.",
+    "Disease Information" => "Welcome to a repository of valuable insights covering various diseases affecting human health. Our mission is to empower individuals by providing knowledge that aids informed decision-making about their well-being. We are dedicated to delivering precise, dependable information to assist you in staying informed and taking charge of your health management.",
 
     "Dengue" => "Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. Almost half of the world’s population, about 4 billion people, live in areas with a risk of dengue. Dengue is often a leading cause of illness in areas with risk. Dengue viruses are spread to people through the bite of an infected Aedes species (Ae. aegypti or Ae. albopictus) mosquito. These mosquitoes also spread Zika, chikungunya, and other viruses.Dengue is caused by one of any of four related viruses: Dengue virus 1, 2, 3, and 4.  For this reason, a person can be infected with a dengue virus as many as four times in his or her lifetime.",
 
