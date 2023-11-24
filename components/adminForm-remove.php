@@ -27,14 +27,14 @@ if (isset($_GET['id'])) {
         echo "
         <script> 
         alert('Admin Not Removed');
-        window.location= 'http://localhost/admin2gh/adminTable.php';
+        window.location= 'adminTable.php';
         </script>
         ";
     }
     echo
     "<script>
     alert('Admin Successfully Removed');
-    window.location= 'http://localhost/admin2gh/adminTable.php';
+    window.location= 'adminTable.php';
     </script>";
 
     // '<script>
