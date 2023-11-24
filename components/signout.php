@@ -9,5 +9,5 @@ $_SESSION = array();
 session_destroy();
 
 // redirect to the login page
-header("Location: http://localhost/admin2gh/loginForm.php");
+header("Location: loginForm.php");
 exit;
