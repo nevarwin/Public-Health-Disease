@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "
             <script>
                 alert('Invalid email format!');
-                window.location = 'http://localhost/admin2gh/loginForm.php';
+                window.location = 'loginForm.php';
             </script>
             ";
             die;
@@ -50,18 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //     echo "<script>alert('Log In Successfully!');</script>";
                 //     die;
                 // }
-                header('location: http://localhost/admin2gh/homepage.php');
+                header('location: homepage.php');
                 echo "<script>alert('Log In Successfully!');</script>";
                 die;
             } else {
                 // Incorrect password
                 echo "<script>alert('Incorrect password. Please try again.');</script>";
-                echo "<script>window.location.href = 'http://localhost/admin2gh/loginForm.php';</script>";
+                echo "<script>window.location.href = 'loginForm.php';</script>";
             }
         } else {
             // User not found
             echo "<script>alert('User not found. Please try again.');</script>";
-            echo "<script>window.location.href = 'http://localhost/admin2gh/loginForm.php';</script>";
+            echo "<script>window.location.href = 'loginForm.php';</script>";
         }
 
         // $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
