@@ -22,6 +22,7 @@
                         $query = "SELECT COUNT(*) AS count, positions.position
                         FROM clients
                         INNER JOIN positions ON clients.positionId = positions.positionId
+                        WHERE clients.positionId != 1
                         GROUP BY clients.positionId, positions.position";
                         $result = mysqli_query($con, $query);
 
@@ -31,7 +32,7 @@
                             $count = $row['count'];
                         ?>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="card border-left-primary shadow h-100">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
