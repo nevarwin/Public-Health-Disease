@@ -23,7 +23,7 @@
     ?>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="http://localhost/admin2gh/logsTable.php">
+            <a class="nav-link" href="logsTable.php">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Logs Tables</span></a>
         </li>
@@ -36,7 +36,7 @@
     ?>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="http://localhost/admin2gh/adminTable.php">
+            <a class="nav-link" href="adminTable.php">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Admin Tables</span></a>
         </li>
@@ -47,31 +47,31 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/patientTable.php">
+        <a class="nav-link" href="patientTable.php">
             <i class="fas fa-fw fa-table"></i>
             <span>Patient Tables</span></a>
     </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/lineChartPage.php">
+        <a class="nav-link" href="lineChartPage.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Yearly disease count line chart</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/pieChartPage.php">
+        <a class="nav-link" href="pieChartPage.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Disease cases per municipality pie chart</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/ageLineChartPage.php">
+        <a class="nav-link" href="ageLineChartPage.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Yearly age distribution per disease line chart</span></a>
     </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="http://localhost/admin2gh/map.php">
+        <a class="nav-link" href="map.php">
             <i class="fas fa-fw fa-map"></i>
             <span>Heatmap per disease</span></a>
     </li>
