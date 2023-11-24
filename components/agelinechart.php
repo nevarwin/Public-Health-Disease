@@ -122,7 +122,7 @@ $pieYearResult = mysqli_query($con, $pieYearQuery);
 $options = '';
 while ($row = mysqli_fetch_assoc($pieYearResult)) {
     $year = $row['year'];
-    $pieSelectedYear = $_GET['pieYear'] ?? '';
+    $pieSelectedYear = $_GET['ageLineYear'] ?? '';
     $selected = ($year == $pieSelectedYear) ? 'selected' : '';
     $options .= "<option value=\"$year\" $selected>$year</option>";
 }
