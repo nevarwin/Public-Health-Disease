@@ -432,10 +432,10 @@ const agedata = {
     {
       fill: true,
       label: `Number of ${diseaseName} Cases`,
-      data: counts === 0 ? [2358, 3877, 2850, 3504, 5885] : counts,
+      data: counts === 0 ? [23, 38, 20, 34, 55] : counts,
       borderWidth: 1,
-      backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-      borderColor: ["rgb(255, 99, 132)"],
+      backgroundColor: ["rgba(75, 192, 192, 0.2)"],
+      borderColor: ["rgb(75, 192, 192)"],
     },
   ],
 };
