@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             echo "<script>
                 alert('AES form submitted successfully!');
-                window.location = 'http://localhost/admin2gh/patientTable.php';
+                window.location = 'patientTable.php';
             </script>";
             exit;
         } else {

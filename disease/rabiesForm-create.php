@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $successMessage = "Rabies info successfully added!";
       echo "<script>
       alert('Rabies form submitted successfully!');
-      window.location = 'http://localhost/admin2gh/patientTable.php';
+      window.location = 'patientTable.php';
       </script>";
       exit;
     } else {

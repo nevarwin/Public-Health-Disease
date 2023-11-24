@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             echo "<script>
                 alert('ABD info successfully updated!');
-                window.location = 'http://localhost/admin2gh/patientPage-view.php?patientId=$patientId';
+                window.location = 'patientPage-view.php?patientId=$patientId';
             </script>";
             exit;
         } else {
