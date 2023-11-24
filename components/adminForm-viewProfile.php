@@ -6,7 +6,7 @@ include('barangayScript.php');
 
 // Get admin by id
 if (!isset($_GET["id"])) {
-    header('location: /phpsandbox/publichealthd/admin.php');
+    header('location:adminTable.php');
     exit;
 }
 
@@ -49,59 +49,59 @@ $position = $positionRow['position'];
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-6 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">View Profile</h2>
         <form action="" method="post">
             <input type="hidden" class='form-control' name='id' value='<?= $id ?>'>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Position</label>
+                <label class='col-sm-3 col-form-label font-weight-bold'>Position:</label>
                 <div class="col-sm-6">
                     <p> <?= $position ?> </p>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Name</label>
+                <label class='col-sm-3 col-form-label font-weight-bold'>Name:</label>
                 <div class="col-sm-6">
                     <p> <?= $name ?> </p>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Email</label>
+                <label class='col-sm-3 col-form-label font-weight-bold'>Email:</label>
                 <div class="col-sm-6">
                     <p> <?= $email ?> </p>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
+                <label class='col-sm-3 col-form-label font-weight-bold'>Contact Number:</label>
                 <div class="col-sm-6">
                     <p> <?= $contact ?> </p>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="municipality">Municipality:</label>
                 <div class="col-sm-6">
                     <p> <?= $municipality ?> </p>
                 </div>
             </div>
             <!-- Barangay Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="barangay">Barangay:</label>
                 <div class="col-sm-6">
                     <p> <?= $barangay ?> </p>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <label class='col-sm-3 col-form-label font-weight-bold'>Address:</label>
                 <div class="col-sm-6">
                     <p><?= $address ?></p>
                 </div>
             </div>
             <?php
             if ($user_data['positionId'] != 1) {
-                $link = "http://localhost/admin2gh/patientTable.php";
+                $link = "patientTable.php";
             } else {
-                $link = "http://localhost/admin2gh/adminTable.php";
+                $link = "adminTable.php";
             }
             ?>
             <div class="row justify-content-center mb-3">
