@@ -10,7 +10,7 @@ function initMap() {
       lng: 120.88505851514495,
     },
     zoom: 11,
-    mapTypeId: "satellite",
+    mapTypeId: "hybrid",
   });
 
   heatmap = new google.maps.visualization.HeatmapLayer({
