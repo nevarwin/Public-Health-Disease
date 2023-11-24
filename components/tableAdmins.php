@@ -66,7 +66,7 @@ if (isset($_SESSION['id'])) {
             <div class="row">
                 <h2 class="m-0 font-weight-bold text-primary">Admin's Data</h2>
                 <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
-                <a href="http://localhost/admin2gh/adminPage-create.php" class="btn btn-primary ml-auto">Add new Admin</a>
+                <a href="adminPage-create.php" class="btn btn-primary ml-auto">Add new Admin</a>
             </div>
         </div>
 
@@ -126,11 +126,11 @@ if (isset($_SESSION['id'])) {
                                     <td><?= $admins['municipality']; ?></td>
                                     <td><?= $admins['created_at']; ?></td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm btn-block my-1" href="http://localhost/admin2gh/adminPage-update.php?id=<?= $admins['id']; ?>">Update</a>
+                                        <a class="btn btn-primary btn-sm btn-block my-1" href="adminPage-update.php?id=<?= $admins['id']; ?>">Update</a>
                                         <?php
                                         if ($user_data['positionId'] == 1) {
                                         ?>
-                                            <a class="btn btn-danger btn-sm btn-block my-1" href="http://localhost/admin2gh/components/adminForm-remove.php?id=<?= $admins['id']; ?>">Remove</a>
+                                            <a class="btn btn-danger btn-sm btn-block my-1" href="adminPage-remove.php?id=<?= $admins['id']; ?>">Remove</a>
                                         <?php
                                         }
                                         ?>
