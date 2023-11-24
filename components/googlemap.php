@@ -62,7 +62,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
     <style>
         #map {
-            height: 100%;
+            height: 77%;
             width: 100%;
         }
     </style>
@@ -92,7 +92,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     }
                 }
 
-                $pieSelectedDisease = $_GET['pieDisease'] ?? '';
+                $pieSelectedDisease = $_GET['disease'] ?? '';
 
                 foreach ($pieDropdown as $key => $value) {
                     $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
@@ -106,7 +106,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <select name="year" id="year" class="custom-select">
                 <option value="">All</option>
                 <?php foreach ($years as $year) : ?>
-                    <option value="<?php echo $year; ?>" <?php echo $year == $selectedYear ? 'selected' : ''; ?>><?php echo $year; ?></option>
+                    <option value="<?php echo $year; ?>" <?= $year == $selectedYear ? 'selected' : '' ?>><?php echo $year; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
