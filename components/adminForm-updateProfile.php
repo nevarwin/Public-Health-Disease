@@ -9,14 +9,14 @@ $strongContent = '';
 
 // Get admin by id
 if (!isset($_GET["id"])) {
-    header('location: /phpsandbox/publichealthd/admin.php');
+    header('location:adminTable.php');
     exit;
 }
 
 if ($user_data['positionId'] != 1) {
-    $link = "http://localhost/admin2gh/patientTable.php";
+    $link = "patientTable.php";
 } else {
-    $link = "http://localhost/admin2gh/adminTable.php";
+    $link = "adminTable.php";
 }
 
 $id = $_GET['id'];
@@ -83,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if ($user_data['positionId'] != 1) {
-            $link = "http://localhost/admin2gh/patientTable.php";
+            $link = "patientTable.php";
         } else {
-            $link = "http://localhost/admin2gh/adminTable.php";
+            $link = "adminTable.php";
         }
 
         echo "
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-6 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Profile</h2>
         <?php
         if (!empty($alert)) {
