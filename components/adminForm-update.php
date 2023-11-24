@@ -9,7 +9,7 @@ $strongContent = '';
 
 // Get admin by id
 if (!isset($_GET["id"])) {
-    header('location:http://localhost/admin2gh/adminTable.php');
+    header('location:adminTable.php');
     exit;
 }
 
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script> 
             alert('Admin Successfully Updated');
-            window.location= 'http://localhost/admin2gh/adminTable.php';
+            window.location= 'adminTable.php';
         </script>
         ";
     } while (false);
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-6 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Update Admin Information</h2>
         <?php
         if (!empty($alert)) {
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($user_data['positionId'] < 2) {
             ?>
                 <div class="row justify-content-center mb-3">
-                    <label for="" class='col-sm-3 col-form-label'>Position</label>
+                    <label for="" class='col-sm-3 col-form-label font-weight-bold'>Position</label>
                     <div class="col-sm-6">
                         <select class="custom-select" id="position" name="position">
                             <?php
@@ -132,26 +132,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Name</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Name</label>
                 <div class="col-sm-6">
                     <input type="text" class='form-control' name='name' value='<?= $name ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Email</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Email</label>
                 <div class="col-sm-6">
                     <input id="email" type="text" class='form-control' name='email' value='<?= $email ?>'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Contact Number</label>
                 <div class="col-sm-6">
                     <input id="contact" type="text" class='form-control' name='contact' value='<?= $contact ?>'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="municipality">Municipality</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                         <?php
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <!-- Barangay Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="barangay">Barangay</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="barangay" name="barangay">
                         <?php
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Address</label>
                 <div class="col-sm-6">
                     <input type="text" class='form-control' name='address' title="address" value="<?= $address ?>">
                 </div>
@@ -203,9 +203,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class='btn btn-primary' name="updateAdmin">Submit</button>
                 <?php
                 if ($user_data['positionId'] > 2) {
-                    $link = "http://localhost/admin2gh/patientTable.php";
+                    $link = "patientTable.php";
                 } else {
-                    $link = "http://localhost/admin2gh/adminTable.php";
+                    $link = "adminTable.php";
                 }
                 ?>
                 <a href="<?= $link ?>" class="btn btn-outline-primary" role="button">Cancel</a>
