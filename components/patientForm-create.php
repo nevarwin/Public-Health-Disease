@@ -157,14 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $barangayValue = $row['barangay'];
                 $municipalityValue = $row['municipality'];
 
-                // Create the full address
-                // $address = $unitCode . ', ' . $subd . ', ' .  $street . ', ' . $barangayValue . ', ' . $municipalityValue . ', ' . 'Cavite ' . ', ' . $postalCode . ', ' . 'Philippines';
-
-                // TODO baka yung ph ang nagpapagulo try tanggalin
-                // $address = $barangayValue . ', ' . $municipalityValue . ', ' . $postalCode . ', ' . 'Cavite' . ', ' . 'Philippines';
-
-                // medyo accurate at nagana na yung sa naic
-                // $address = $barangayValue . ', ' . 'Cavite';
                 $address = $unitCode . ' ' . $subd . ' ' .  $street . ', ' . $barangayValue . ' ' . $municipalityValue . ' Cavite ';
                 // echo $address;
 
@@ -492,7 +484,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
                     </div>
                     <div class="text-center">
-                        <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                        <a href="patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
                     </div>
                 </div>
             </div>
