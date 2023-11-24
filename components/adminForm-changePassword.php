@@ -6,14 +6,14 @@ include('alertMessage.php');
 // $user_data = check_login($con);
 // Get admin by id
 if (!isset($_GET["id"])) {
-    header('location: /phpsandbox/publichealthd/admin.php');
+    header('location:adminTable.php');
     exit;
 }
 
 if ($user_data['positionId'] != 1) {
-    $link = "http://localhost/admin2gh/patientTable.php";
+    $link = "patientTable.php";
 } else {
-    $link = "http://localhost/admin2gh/adminTable.php";
+    $link = "adminTable.php";
 }
 
 $id = $_GET['id'];
@@ -90,9 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if ($user_data['positionId'] != 1) {
-            $link = "http://localhost/admin2gh/patientTable.php";
+            $link = "patientTable.php";
         } else {
-            $link = "http://localhost/admin2gh/adminTable.php";
+            $link = "adminTable.php";
         }
 
         echo "
