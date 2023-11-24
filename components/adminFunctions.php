@@ -19,12 +19,12 @@ if (isset($_POST['createAdmin'])) {
 
     if ($result) {
         $_SESSION['message'] = "Admin Successfully Created";
-        header('Location: http://localhost/admin2gh/adminTable.php');
+        header('Location: adminTable.php');
         exit(0);
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($con);
         $_SESSION['message'] = "Admin Not Created";
-        header('Location: http://localhost/admin2gh/adminTable.php');
+        header('Location: adminTable.php');
         exit(0);
     }
 }
@@ -45,12 +45,12 @@ if (isset($_POST['updateAdmin'])) {
 
     if ($result) {
         $_SESSION['message'] = "Admin Successfully Updated";
-        header('Location: http://localhost/admin2gh/adminTable.php');
+        header('Location: adminTable.php');
         exit(0);
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($con);
         $_SESSION['message'] = "Admin Not Updated";
-        header('Location: http://localhost/admin2gh/adminTable.php');
+        header('Location: adminTable.php');
         exit(0);
     }
 }
