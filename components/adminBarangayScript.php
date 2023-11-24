@@ -23,7 +23,7 @@
       };
       xhr.open(
         "GET",
-        "http://localhost/admin2gh/components/get_barangay.php?municipality=" +
+        "./components/get_barangay.php?municipality=" +
         selectedMunicipality,
         true
       );
