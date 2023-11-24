@@ -78,4 +78,7 @@
             ?>
         </tbody>
     </table>
+    <div class="row justify-content-center mb-3">
+        <a href="adminTable.php" class="btn btn-outline-primary" role="button">Back</a>
+    </div>
 </div>
