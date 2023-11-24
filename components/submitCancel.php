@@ -3,6 +3,6 @@
         <button type="submit" class='btn btn-primary'>Submit</button>
     </div>
     <div class="row justify-content-center">
-        <a href="http://localhost/admin2gh/patientPage-view.php?patientId=<?php echo $patientId; ?>" class="btn btn-outline-primary" role="button">Cancel</a>
+        <a href="patientPage-view.php?patientId=<?php echo $patientId; ?>" class="btn btn-outline-primary" role="button">Cancel</a>
     </div>
 </div>

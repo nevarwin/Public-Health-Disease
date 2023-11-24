@@ -18,7 +18,7 @@ $successMessage = '';
 // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 //GET Method: show the data of the client
 if (!isset($_GET["patientId"])) {
-    header('location: http://localhost/admin2gh/patientTable.php');
+    header('location: patientTable.php');
     exit;
 }
 
@@ -193,11 +193,7 @@ if (is_file($update_page_path)) {
             <!-- Details -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-success">Details
-                        <!-- <a style="margin-left: 225px; text-decoration:none;" class="text-secondary" href="http://localhost/admin2gh/patientPage-viewupdate.php?patientId=<?= $patientId ?>">
-                            <i class="fa fa-edit"></i>
-                        </a> -->
-                    </h6>
+                    <h6 class="m-0 font-weight-bold text-success">Details</h6>
                 </div>
                 <div class="card-body mx-4"> <!--Card Body begin tag  -->
                     <div style="margin-bottom:17px;">

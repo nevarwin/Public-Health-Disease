@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script> 
             alert('Patient Successfully Updated');
-            window.location= 'http://localhost/admin2gh/patientTable.php';
+            window.location= 'patientTable.php';
         </script>
         ";
         exit;
@@ -416,7 +416,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" class='btn btn-primary' name="createPatient">Submit</button>
                     </div>
                     <div class="col text-center">
-                        <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                        <a href="patientTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
                     </div>
                 </div>
             </div>

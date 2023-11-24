@@ -23,7 +23,7 @@ $successMessage = '';
 // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 //GET Method: show the data of the client
 if (!isset($_GET["patientId"])) {
-    header('location:/phpsandbox/publichealthd/patient.php');
+    header('location: patientTable.php');
     exit;
 }
 
@@ -35,7 +35,7 @@ $result = mysqli_query($con, $sql);
 $row = $result->fetch_assoc();
 
 if (!$row) {
-    header('location: /phpsandbox/publichealth/patient.php');
+    header('location: patientTable.php');
     exit;
 }
 
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script> 
         alert('Patient Successfully Updated');
-        window.location= 'http://localhost/admin2gh/patientTable.php';
+        window.location= 'patientTable.php';
         </script>
         ";
         exit;

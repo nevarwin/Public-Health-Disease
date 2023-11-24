@@ -26,7 +26,7 @@ include('./components/head.php');
                             <h2 class="m-0 font-weight-bold text-primary">
                                 View Patient's Data
                             </h2>
-                            <a href="http://localhost/admin2gh/patientTable.php" class="btn btn-primary" role="button">Back</a>
+                            <a href="patientTable.php" class="btn btn-primary" role="button">Back</a>
                         </div>
                     </div>
                     <?php

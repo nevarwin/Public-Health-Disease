@@ -30,7 +30,7 @@ if (isset($_GET['patientId'])) {
         echo "
         <script> 
         alert('Patient Not Removed');
-        window.location= 'http://localhost/admin2gh/adminTable.php';
+        window.location= 'adminTable.php';
         </script>
         ";
     }
@@ -39,6 +39,6 @@ if (isset($_GET['patientId'])) {
     echo
     "<script>
     alert('Patient Successfully Removed');
-    window.location= 'http://localhost/admin2gh/patientTable.php';
+    window.location= 'patientTable.php';
     </script>";
 }
