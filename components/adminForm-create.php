@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="row d-flex justify-content-center">
-    <div class="card shadow col-md-12 col-sm-4 col-lg-6" style="padding: 30px">
+    <div class="card shadow col-md-12 col-sm-6 col-lg-8" style="padding: 30px">
         <h2 class="row justify-content-center mb-3">Create New Admin</h2>
         <?php
         if (!empty($alert)) {
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($user_data['positionId'] < 2) {
             ?>
                 <div class=" row justify-content-center mb-3">
-                    <label for="" class='col-sm-3 col-form-label'>Position</label>
+                    <label for="" class='col-sm-3 col-form-label font-weight-bold'>Position</label>
                     <div class="col-sm-6">
                         <select class="custom-select" id="position" name="position">
                             <option>Select Position</option>
@@ -97,38 +97,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Name</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Name</label>
                 <div class="col-sm-6">
                     <input placeholder="Name" type="text" class='form-control' name='name'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Email</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Email</label>
                 <div class="col-sm-6">
                     <input placeholder="Email" autocomplete=false type="email" class='form-control' name='email' id='email'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Password</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Password</label>
                 <div class="col-sm-6">
                     <input placeholder="Password" autocomplete=false type="password" class='form-control' name='password' id='password'>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Contact Number</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Contact Number</label>
                 <div class="col-sm-6">
                     <input placeholder="Contact Number" type="text" class='form-control' name='contact' id="contact">
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
-                <label for="" class='col-sm-3 col-form-label'>Address</label>
+                <label for="" class='col-sm-3 col-form-label font-weight-bold'>Address</label>
                 <div class="col-sm-6">
                     <input placeholder="Address" type="text" class='form-control' name='address'>
                 </div>
             </div>
             <!-- Municipality Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="municipality">Municipality</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="municipality">Municipality</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="municipality" onchange="updateBarangays()" name="municipality">
                         <option>Select Municipality</option>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <!-- Barangay Dropdown -->
             <div class="row justify-content-center mb-3">
-                <label class='col-sm-3 col-form-label' for="barangay">Barangay</label>
+                <label class='col-sm-3 col-form-label font-weight-bold' for="barangay">Barangay</label>
                 <div class="col-sm-6">
                     <select class="custom-select" id="barangay" name="barangay">
                         <option>Select Barangay</option>
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="row justify-content-around">
                 <button type="submit" class='btn btn-primary' name="createAdmin">Submit</button>
-                <a href="http://localhost/admin2gh/adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                <a href="adminTable.php" class="btn btn-outline-primary" role="button">Cancel</a>
             </div>
         </form>
     </div>
