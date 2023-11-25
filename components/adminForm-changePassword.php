@@ -1,6 +1,5 @@
 <?php
 include('connection.php');
-include('barangayScript.php');
 include('alertMessage.php');
 
 // $user_data = check_login($con);
@@ -33,13 +32,6 @@ $row = mysqli_fetch_assoc($result);
 if (!$row) {
     exit;
 }
-
-$name = $row['name'];
-$email = $row['email'];
-$contact = $row['contact_number'];
-$address = $row['address'];
-$municipality = $row['municipality'];
-$barangay = $row['barangay'];
 
 $oldHashedPassword = md5($row['password']);
 // POST Method: Update the data of the client
