@@ -67,7 +67,7 @@
             buttons: [{
                 extend: 'pdfHtml5',
                 text: 'Generate PDF per page',
-                className: 'btn btn-primary',
+                className: 'btn btn-primary mr-1',
                 exportOptions: {
                     columns: ':not(.no-export)',
                     modifier: {
@@ -77,21 +77,65 @@
             }, {
                 extend: 'pdfHtml5',
                 text: 'Generate PDF',
-                className: 'btn btn-primary mx-1',
+                className: 'btn btn-primary mr-1',
                 exportOptions: {
                     columns: ':not(.no-export)',
                 }
             }, {
                 extend: 'excelHtml5',
                 text: 'Generate Excel',
-                className: 'btn btn-primary',
+                className: 'btn btn-primary mr-1',
                 exportOptions: {
                     columns: ':not(.no-export)',
                 }
+            }, {
+                extend: 'excelHtml5',
+                text: 'Generate Excel per page',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: ':not(.no-export)',
+                    modifier: {
+                        page: 'current',
+                    }
+                }
             }],
+            // initComplete: function() {
+            //     var table = this;
+
+            //     table.api().columns([3, 4, 6, 7, 8, 9]).every(function() {
+            //         var column = this;
+            //         var uniqueValues = column.data().unique().sort().toArray();
+            //         var select = $('<select class="custom-select"><option value="">All</option></select>');
+
+            //         $.each(uniqueValues, function(_, value) {
+            //             $('<option></option>').attr('value', value).text(value).appendTo(select);
+            //         });
+
+            //         select.on('change', function() {
+            //             var val = this.value !== '' ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '';
+            //             column.search(val, true, false).draw();
+            //         });
+
+            //         $(column.header()).empty().append(select);
+            //     });
+
+            //     table.on('preXhr.dt', function(e, settings, data) {
+            //         table.api().columns([3, 4, 6, 7, 8, 9]).every(function() {
+            //             var column = this;
+            //             var select = $(column.header()).find('select')[0];
+            //             var uniqueValues = column.data().unique().sort().toArray();
+
+            //             $(select).empty().append('<option value="">All</option>');
+
+            //             $.each(uniqueValues, function(_, value) {
+            //                 $('<option></option>').attr('value', value).text(value).appendTo(select);
+            //             });
+            //         });
+            //     });
+            // }
             initComplete: function() {
                 this.api()
-                    .columns([3, 4, 6, 7, 8, 9])
+                    .columns([4, 6, 7, 8, 9])
                     .every(function() {
                         var column = this;
                         var theadname = column.header().textContent; // Get the column header name
@@ -128,6 +172,25 @@
                                 .draw();
                         });
                     });
+                var table = this;
+
+                table.api().columns([3]).every(function() {
+                    var column = this;
+                    var uniqueValues = column.data().unique().sort().toArray();
+                    var select = $('<select class="custom-select" style="width: 100px;"><option value="">All</option></select>');
+
+                    $.each(uniqueValues, function(_, value) {
+                        $('<option></option>').attr('value', value).text(value).appendTo(select);
+                    });
+
+                    select.on('change', function() {
+                        var val = this.value !== '' ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '';
+                        column.search(val, true, false).draw();
+                    });
+
+                    $(column.header()).append(select);
+                });
+
             },
         });
     </script>
