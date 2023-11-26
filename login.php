@@ -214,8 +214,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         ::placeholder {
             color: black;
-
-
         }
 
         button {
@@ -244,6 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password" name="password">
         <button>Log In</button>
+        <!-- <a href="./forgotPassword.php" class="btn w-100">Forgot Password?</a> -->
         <a href="./landingpage/landingpage.php" class="btn w-100">Cancel</a>
     </form>
 
