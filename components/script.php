@@ -57,7 +57,7 @@
     </script> -->
 
     <script>
-        new DataTable('#tablePatients', {
+        var table = new DataTable('#tablePatients', {
             order: [],
             columnDefs: [{
                 targets: '_all',
@@ -65,40 +65,61 @@
             }],
             dom: 'lBftrip',
             buttons: [{
-                extend: 'pdfHtml5',
-                text: 'Generate PDF per page',
-                className: 'btn btn-primary mr-1',
-                exportOptions: {
-                    columns: ':not(.no-export)',
-                    modifier: {
-                        page: 'current',
+                    extend: 'pdfHtml5',
+                    text: 'Generate PDF per page',
+                    className: 'btn btn-primary mr-1',
+                    exportOptions: {
+                        columns: ':not(.no-export)',
+                        modifier: {
+                            page: 'current',
+                        },
+                        format: {
+                            body: function(data, row, col, node) {
+                                if (col == 3) {
+                                    return table
+                                        .cell({
+                                            row: row,
+                                            column: col
+                                        })
+                                        .nodes()
+                                        .to$()
+                                        .find(':selected')
+                                        .text()
+                                } else {
+                                    return data;
+                                }
+                            }
+                        }
+                    },
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'Generate PDF',
+                    className: 'btn btn-primary mr-1',
+                    exportOptions: {
+                        columns: ':not(.no-export)',
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Generate Excel',
+                    className: 'btn btn-primary mr-1',
+                    exportOptions: {
+                        columns: ':not(.no-export)',
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Generate Excel per page',
+                    className: 'btn btn-primary',
+                    exportOptions: {
+                        columns: ':not(.no-export)',
+                        modifier: {
+                            page: 'current',
+                        }
                     }
                 }
-            }, {
-                extend: 'pdfHtml5',
-                text: 'Generate PDF',
-                className: 'btn btn-primary mr-1',
-                exportOptions: {
-                    columns: ':not(.no-export)',
-                }
-            }, {
-                extend: 'excelHtml5',
-                text: 'Generate Excel',
-                className: 'btn btn-primary mr-1',
-                exportOptions: {
-                    columns: ':not(.no-export)',
-                }
-            }, {
-                extend: 'excelHtml5',
-                text: 'Generate Excel per page',
-                className: 'btn btn-primary',
-                exportOptions: {
-                    columns: ':not(.no-export)',
-                    modifier: {
-                        page: 'current',
-                    }
-                }
-            }],
+            ],
             // initComplete: function() {
             //     var table = this;
 
@@ -177,7 +198,7 @@
                 table.api().columns([3]).every(function() {
                     var column = this;
                     var uniqueValues = column.data().unique().sort().toArray();
-                    var select = $('<select class="custom-select" style="width: 100px;"><option value="">All</option></select>');
+                    var select = $('<select class="custom-select" style="width: 100px;"><option value="All">All</option></select>');
 
                     $.each(uniqueValues, function(_, value) {
                         $('<option></option>').attr('value', value).text(value).appendTo(select);
