@@ -1,10 +1,10 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\src\PHPMailer.php;
+use PHPMailer\src\Exception.php;
 
-require 'Exception.php';
-require 'PHPMailer.php';
-require 'SMTP.php';
+require 'PHPMailer\src\Exception.php';
+require 'PHPMailer\src\PHPMailer.php';
+require 'PHPMailer\src\SMTP.php';
 
 include('connection.php');
 
