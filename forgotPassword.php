@@ -1,11 +1,11 @@
 <?php
-use PHPMailer\src\PHPMailer;
-use PHPMailer\src\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 include("./components/connection.php");
-require 'PHPMailer\src\Exception.php';
-require 'PHPMailer\src\PHPMailer.php';
-require 'PHPMailer\src\SMTP.php';
+require 'Exception.php';
+require 'PHPMailer.php';
+require 'SMTP.php';
 
 $randomText = substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
 
@@ -213,11 +213,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h3>Forgot Password</h3>
         <label>Enter your email:</label>
         <input type="text" placeholder="Email" id="email" name="email">
-        <!-- New password fields -->
+        <!-- New password fields
         <label>New Password:</label>
         <input type="password" placeholder="New Password" id="newPassword" name="newPassword">
         <label>Confirm New Password:</label>
-        <input type="password" placeholder="Confirm New Password" id="confirmPassword" name="confirmPassword">
+        <input type="password" placeholder="Confirm New Password" id="confirmPassword" name="confirmPassword"> -->
         <button type="submit">Reset Password</button>
         <a class="btn w-100" href="login.php">Back to Login</a>
     </form>
