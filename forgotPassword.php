@@ -1,42 +1,77 @@
 <?php
-include("./components/connection.php");
-include("./components/alertmessage.php");
+use PHPMailer\src\PHPMailer;
+use PHPMailer\src\Exception;
 
-// POST Method: Update the data of the client
+include("./components/connection.php");
+require 'PHPMailer\src\Exception.php';
+require 'PHPMailer\src\PHPMailer.php';
+require 'PHPMailer\src\SMTP.php';
+
+$randomText = substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
-    $password = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Invalid email format. Please enter a valid email address.');</script>";
-        // Redirect or handle the error as needed
-        // For example:
-        echo "<script>window.location.href = 'forgot_password.php';</script>";
-        exit; // Stop further execution
+    // Use prepared statement to avoid SQL injection
+    $stmt = $con->prepare("SELECT * FROM clients WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $fname = $row['email'];
+
+        $mail = new PHPMailer(true);
+
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ravencsolis@gmail.com';
+        $mail->Password = 'rnwvlycyznlqugmc';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->setFrom('ravencsolis@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+
+        $mail->Subject = "Confirmation for password reset. [$randomText]";
+        $mail->Body = "
+        We have received a request to reset the password associated with your account. To proceed with the password reset, please follow the instructions below:
+        <br><br>Confirmation Code: <b>$randomText</b><br><br>
+
+        If you did not request a password reset or have any concerns about the security of your account, please contact our clinic admin immediately.<br>
+
+        Thank you for your prompt attention to this matter.<br><br><br>
+
+        <b>Best regards,</b><br><br>
+
+        <i>Cavite State University - CCAT | Clinic</i><br>
+        <b>Admin Nurse</b>
+";
+
+
+        $mail->send();
+
+        $reset_password_sql = "UPDATE clients SET otp = '$randomText' WHERE email = ?";
+        $stmt_reset_password = $con->prepare($reset_password_sql);
+        $stmt_reset_password->bind_param("s", $email);
+        $result_reset_password = $stmt_reset_password->execute();
+        $stmt_reset_password->close();
+
+        if ($result_reset_password) {
+            echo "<script>alert('Confirmation sent to $email. Please check your email'); 
+      window.location='confirm_code.php?fname=$fname&lname=$lname&email=$email'</script>";
+
+        } else {
+            echo "We can't process your request right now, try again later. " . mysqli_error($con);
+        }
+    } else {
+        echo "No account found associated on that email.";
     }
 
-    // check if the data is empty
-    do {
-        // Add MD5 encryption to the password
-        $hashedPassword = md5($password);
-        // Update data in the database
-        $sql = "UPDATE `clients` SET `password` = '$hashedPassword' WHERE `email` = '$email'";
-        $result = mysqli_query($con, $sql);
-        if ($result) {
-            echo "<script>alert('Password updated successfully.');</script>";
-            // Redirect or handle success as needed
-            // For example:
-            echo "<script>window.location.href = 'login.php';</script>";
-            exit; // Stop further execution
-        } else {
-            echo "<script>alert('Error updating password. Please try again.');</script>";
-            // Redirect or handle the error as needed
-            // For example:
-            echo "<script>window.location.href = 'forgotPassword.php';</script>";
-            exit; // Stop further execution
-        }
-    } while (false);
+    $stmt->close();
 }
 ?>
 
