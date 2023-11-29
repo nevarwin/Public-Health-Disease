@@ -31,12 +31,12 @@ if (isset($_POST['send']) && isset($_POST['email'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'iversonlomat03@gmail.com';
-        $mail->Password = 'xclp qhyp qbdt knkg';
+        $mail->Username = 'ravencsolis@gmail.com';
+        $mail->Password = 'rnwvlycyznlqugmc';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
-        $mail->setFrom('iversonlomat03@gmail.com');
+        $mail->setFrom('ravencsolis@gmail.com');
         $mail->addAddress($email);
         $mail->isHTML(true);
 
