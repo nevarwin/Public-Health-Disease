@@ -1,11 +1,15 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+
 
 include("./components/connection.php");
-require 'Exception.php';
-require 'PHPMailer.php';
-require 'SMTP.php';
+// require 'Exception.php';
+// require 'PHPMailer.php';
+// require 'SMTP.php';
+
+require "vendor/autoload.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 $randomText = substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
 
@@ -24,11 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mail = new PHPMailer(true);
 
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'ravencsolis@gmail.com';
-        $mail->Password = 'rnwvlycyznlqugmc';
+
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Username = 'rukaxkazuya@gmail.com';
+        $mail->Password = 'mzpx othb pvge arkw';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
@@ -51,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <b>Admin Nurse</b>
 ";
 
-
         $mail->send();
 
         $reset_password_sql = "UPDATE clients SET otp = '$randomText' WHERE email = ?";
@@ -63,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result_reset_password) {
             echo "<script>alert('Confirmation sent to $email. Please check your email'); 
       window.location='confirm_code.php?fname=$fname&lname=$lname&email=$email'</script>";
-
         } else {
             echo "We can't process your request right now, try again later. " . mysqli_error($con);
         }
