@@ -73,23 +73,23 @@
                         modifier: {
                             page: 'current',
                         },
-                        format: {
-                            body: function(data, row, col, node) {
-                                if (col == 3) {
-                                    return table
-                                        .cell({
-                                            row: row,
-                                            column: col
-                                        })
-                                        .nodes()
-                                        .to$()
-                                        .find(':selected')
-                                        .text()
-                                } else {
-                                    return data;
-                                }
-                            }
-                        }
+                        // format: {
+                        //     body: function(data, row, col, node) {
+                        //         if (col == 3) {
+                        //             return table
+                        //                 .cell({
+                        //                     row: row,
+                        //                     column: col
+                        //                 })
+                        //                 .nodes()
+                        //                 .to$()
+                        //                 .find(':selected')
+                        //                 .text()
+                        //         } else {
+                        //             return data;
+                        //         }
+                        //     }
+                        // }
                     },
                 },
                 {
