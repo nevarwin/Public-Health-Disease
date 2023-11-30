@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result_reset_password) {
             echo "<script>alert('Confirmation sent to $email. Please check your email'); 
-      window.location='confirm_code.php?fname=$fname&lname=$lname&email=$email'</script>";
+      window.location='confirm_code.php?&email=$email'</script>";
         } else {
             echo "We can't process your request right now, try again later. " . mysqli_error($con);
         }
