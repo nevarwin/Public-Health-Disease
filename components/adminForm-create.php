@@ -23,6 +23,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $contact = mysqli_real_escape_string($con, $_POST['contact']);
         $address = mysqli_real_escape_string($con, $_POST['address']);
 
+        function checkDuplicate($field, $value, $con) {
+            $count = 0;
+
+            $stmt = $con->prepare("SELECT COUNT(*) FROM clients WHERE $field = ?");
+            $stmt->bind_param("s", $value);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+
+            return $count;
+        }
+
+        $emailDuplicateCount = checkDuplicate('email', $email, $con);
+        $contactDuplicateCount = checkDuplicate('contact_number', $contact, $con);
+
+        if ($emailDuplicateCount > 0) {
+            $errorMessage = "Email already exists";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
+
+        if ($contactDuplicateCount > 0) {
+            $errorMessage = "Contact number already exists";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
+
+
         if ($position == "Select Position" or empty($name) or empty($email) or empty($password) or empty($contact) or empty($address) or $municipality  == "Select Municipality" or $barangay == "Select Barangay") {
             $message = "All fields are required";
             $type = 'warning';
@@ -50,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
         <script> 
         alert('Admin Successfully Created');
-        window.location= 'adminTable.php';
+        window.location = 'adminTable.php';
         </script>
         ";
         // exit(header("Location: /patientTable.php"));
