@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); 
+        $row = $result->fetch_assoc();
         $id = $row['id'];
         $sql_otp = $row['otp'];
 
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: update_password.php?id=$id");
             exit();
         }
-    } else {        
+    } else {
         echo "<script>alert('Invalid OTP. Please try again.'); 
               window.location='confirm_code.php'</script>";
     }
@@ -38,128 +38,267 @@ $con->close();
 <html lang="en">
 
 <head>
-    <link rel="icon" href="images/logo.png">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Login</title>
+    <link rel="shortcut icon" href="./assets/img/caviteLogo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CCMS Login</title>
+    <!-- Bootstrap v5.1.3 CDNs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <style>
-    body {
-        background-color: whitesmoke;
-    }
-    .cell {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 500px; /* Adjust this value to your desired maximum width */
-    }
-    th {background-color: #BFFFCD; color: black;}
-    .create-post {
-      max-width: 500px;
-      
-      margin-top: 20px;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #fff;
-    }
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-    .create-post textarea {
-      resize: none;
-    }
-    .cvgreen {
-    background-color: #006B38;
-    }
-    .side-image {
-    background-image: url('images/ccat.jpg');
-    background-size: cover; /* or 'contain' depending on your preference */
-    background-position: center center; /* or adjust as needed */
-    
-}
+        body {
+            background-color: #EFF3EB;
+        }
 
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(#00ff87,
+                    #60efff);
+            left: -80px;
+            top: -70px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right,
+                    #0061ff,
+                    #60efff);
+            right: -60px;
+            bottom: -60px;
+        }
+
+        form {
+            height: 450px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #080710;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            color: #697c56;
+        }
+
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #697c56;
+
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border: .5px #CED4DA solid;
+            border-radius: 10px;
+            padding: 0 20px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+            /* background-color: #e5e5e5; */
+        }
+
+        ::placeholder {
+            color: black;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #3ac162;
+            color: #fff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* Media query for small to large screens (s-l) */
+        @media only screen and (max-width: 768px) {
+            .background {
+                width: 300px;
+                /* Adjust width for smaller screens */
+                height: 400px;
+                /* Adjust height for smaller screens */
+            }
+
+            .background .shape {
+                height: 150px;
+                /* Adjust shape height for smaller screens */
+                width: 150px;
+                /* Adjust shape width for smaller screens */
+            }
+
+            .shape:first-child {
+                left: -40px;
+                /* Adjust positioning for smaller screens */
+                top: -60px;
+                /* Adjust positioning for smaller screens */
+            }
+
+            .shape:last-child {
+                right: -30px;
+                /* Adjust positioning for smaller screens */
+                bottom: -40px;
+                /* Adjust positioning for smaller screens */
+            }
+
+            form {
+                width: 300px;
+                /* Adjust form width for smaller screens */
+                height: auto;
+                /* Let the height adjust based on content for smaller screens */
+                padding: 30px;
+                /* Adjust padding for smaller screens */
+            }
+
+            form {
+                padding: 20px;
+                /* Adjust padding for smaller screens */
+            }
+
+            input {
+                height: 40px;
+                /* Adjust input height for smaller screens */
+                font-size: 12px;
+                /* Adjust font size for smaller screens */
+            }
+
+            label {
+                font-size: 14px;
+                /* Adjust label font size for smaller screens */
+            }
+
+            button {
+                margin-top: 30px;
+                /* Adjust margin-top for smaller screens */
+                padding: 12px 0;
+                /* Adjust button padding for smaller screens */
+                font-size: 16px;
+                /* Adjust button font size for smaller screens */
+            }
+        }
     </style>
 </head>
 
-<body class="">
-
-<div class="container">
-
-<!-- Outer Row -->
-<div class="row justify-content-center">
-
-    <div class="col-xl-10 col-lg-12 col-md-9">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-6 d-none d-lg-block side-image"></div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-2">Enter your Confirmation Code</h1>
-                                <p class="mb-4">An email confirmation has been sent to your inbox. Please take a moment to check and access your email.
-                                <?php echo $fname, $lname;?>
-
-                                </p>
-                            </div>
-                            
-                            <form class="user" method="post">
-
-                                <div class="form-group">
-                                    <input type="text" name="user_otp" class="form-control form-control-user" maxlength="6" minlength="6" placeholder="Enter Code">
-                                </div>
-                                
-                                <input type="submit" name="send" class="btn btn-success btn-user btn-block" value="Confirm">
-                                    
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="user_signup.php">Create an Account!</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="user_loginpage.php">Already have an account? Login!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
     </div>
+    <form action="" method="post" onsubmit="return validateLoginForm()">
+        <h3>Change Password</h3>
+        <!-- New password fields -->
+        <label>New Password:</label>
+        <input type="password" placeholder="New Password" id="newPassword" name="newPassword">
+        <label>Confirm New Password:</label>
+        <input type="password" placeholder="Confirm New Password" id="confirmPassword" name="confirmPassword">
+        <button>Log In</button>
+    </form>
 
-</div>
+    <script>
+        function validateForgotPasswordForm() {
+            var email = document.getElementById('email').value;
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var errors = [];
 
-</div>
-        
+            // Check if email is empty
+            if (email.trim() === '') {
+                alert('Please enter your email.');
+                return false;
+            }
 
+            // Check if new password is empty
+            if (newPassword.trim() === '') {
+                alert('Please enter your new password.');
+                return false;
+            }
 
+            // Check if confirm password is empty
+            if (confirmPassword.trim() === '') {
+                alert('Please enter confirm password.');
+                return false;
+            }
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            // Check if new password and confirm password match
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match.');
+                return false;
+            }
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            if (
+                newPassword.length < 8 ||
+                !newPassword.match(/[A-Z]/) ||
+                !newPassword.match(/[a-z]/) ||
+                !newPassword.match(/[0-9]/) ||
+                !newPassword.match(/[\W]/)
+            ) {
+                errors.push(
+                    "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character."
+                );
+            }
+            // Check if there are any errors
+            if (errors.length > 0) {
+                // Display error messages
+                var errorString = "";
+                for (var i = 0; i < errors.length; i++) {
+                    errorString += errors[i] + "\n";
+                }
+                alert(errorString);
+                return false;
+            }
+            return true;
+        }
+    </script>
 
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
 </body>
+
 </html>
