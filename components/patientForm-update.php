@@ -99,6 +99,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $addressDRU = mysqli_real_escape_string($con, $_POST['addressDRU']);
     $updatedAt = date("Y-m-d H:i:s");
 
+    $stmt = $con->prepare("SELECT COUNT(*)
+                        FROM patients 
+                        WHERE 
+                            firstName = ?
+                            AND lastName = ?
+                            AND contact = ?
+                            AND disease = ?
+                            AND YEAR(creationDate) = ?
+                        GROUP BY contact, disease
+                        HAVING COUNT(*) > 1");
+
+    $stmt->bind_param(
+        "ssisi",
+        $fName,
+        $lName,
+        $contact,
+        $disease,
+        $currentYear
+    );
+    $stmt->execute();
+    $stmt->bind_result($duplicateCount);
+    $stmt->fetch();
+    $stmt->close();
+
     // check if the data is empty
     do {
         if (empty($fName) or empty($lName) or empty($municipality) or empty($barangay) or empty($municipalityDRU) or empty($barangayDRU) or empty($contact) or empty($postalCode) or empty($gender)) {
@@ -107,6 +131,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $errorMessage);
             break;
+        } else if ($duplicateCount > 0) {
+            // Contact number and disease already exist in the database
+            $errorMessage = "Patient already exists";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+            // Handle the error or display the alert message
         } else {
             $sql = "UPDATE patients 
                         SET `firstName`='$fName', 
