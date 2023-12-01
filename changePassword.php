@@ -1,34 +1,83 @@
 <?php
-session_start();
 include("components/connection.php");
+include('components/alertMessage.php');
 
-$email = isset($_GET['email']) ? $_GET['email'] : '';
+if (!isset($_GET["id"])) {
+    header('location:adminTable.php');
+    exit;
+}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$id = $_GET['id'];
+// read row 
+$sql = "SELECT *
+        FROM clients
+        WHERE clients.id = $id";
 
-    $sql = "SELECT id, otp FROM client WHERE email = ?";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// execute the sql query
+$result = mysqli_query($con, $sql);
+if (!$result) {
+    echo 'error in result' . mysqli_error($con);;
+}
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $id = $row['id'];
-        $sql_otp = $row['otp'];
+$row = mysqli_fetch_assoc($result);
 
-        $user_otp = $_POST['user_otp'];
+if (!$row) {
+    exit;
+}
 
-        if ($sql_otp === $user_otp) {
-            header("Location: changePassword.php?id=$id");
-            exit();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // check if the data is empty
+    do {
+        if (empty($password)) {
+            $errorMessage = "All fields are required";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
         }
-    } else {
-        echo "<script>alert('Invalid OTP. Please try again.'); 
-              window.location='otp.php'</script>";
-    }
+        if ($password != $confirmPassword) {
+            $errorMessage = "Password and Confirm Password must be the same";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
 
-    $stmt->close();
+        // Add MD5 encryption to the password
+        $hashedPassword = md5($password);
+
+        // if ($hashedPassword == $user_data['password']) {
+        //     $errorMessage = "New password must be different from the previous password";
+        //     $type = 'warning';
+        //     $strongContent = 'Oh no!';
+        //     $alert = generateAlert($type, $strongContent, $errorMessage);
+        //     break;
+        // }
+        // Update data in the database
+        $sql = "UPDATE `clients` SET `password` = '$hashedPassword' WHERE id = $id";
+
+        if ($con->query($sql) === TRUE) {
+            $successMessage = "Password updated successfully";
+            $type = 'success';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $successMessage);
+        } else {
+            $errorMessage = "Error updating password";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+        }
+
+        echo "
+    <script> 
+        alert('Admin Successfully Updated');
+        window.location= 'login.php';
+    </script>
+    ";
+    } while (false);
 }
 
 $con->close();
@@ -237,10 +286,10 @@ $con->close();
         <h3>Change Password</h3>
         <!-- New password fields -->
         <label>New Password:</label>
-        <input type="password" placeholder="New Password" id="newPassword" name="newPassword">
+        <input type="password" placeholder="New Password" id="newPassword" name="password">
         <label>Confirm New Password:</label>
         <input type="password" placeholder="Confirm New Password" id="confirmPassword" name="confirmPassword">
-        <button>Log In</button>
+        <button>Change Password</button>
     </form>
 
     <script>
