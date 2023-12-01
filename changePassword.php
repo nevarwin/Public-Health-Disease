@@ -64,6 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $type = 'success';
             $strongContent = 'Oh no!';
             $alert = generateAlert($type, $strongContent, $successMessage);
+
+            $resetOtp = "UPDATE clients SET otp = null WHERE id = ?";
+            $stmt_reset_otp = $con->prepare($resetOtp);
+            $stmt_reset_otp->bind_param("s", $id);
+            $stmt_reset_otp->execute();
+            $stmt_reset_otp->close();
         } else {
             $errorMessage = "Error updating password";
             $type = 'warning';
@@ -73,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo "
     <script> 
-        alert('Admin Successfully Updated');
+        alert('Password successfully updated');
         window.location= 'login.php';
     </script>
     ";
