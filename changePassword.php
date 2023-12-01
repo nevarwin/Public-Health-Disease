@@ -20,12 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_otp = $_POST['user_otp'];
 
         if ($sql_otp === $user_otp) {
-            header("Location: update_password.php?id=$id");
+            header("Location: changePassword.php?id=$id");
             exit();
         }
     } else {
         echo "<script>alert('Invalid OTP. Please try again.'); 
-              window.location='confirm_code.php'</script>";
+              window.location='otp.php'</script>";
     }
 
     $stmt->close();
