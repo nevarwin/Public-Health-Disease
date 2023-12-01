@@ -6,7 +6,7 @@ $email = isset($_GET['email']) ? $_GET['email'] : '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $sql = "SELECT id, otp FROM client WHERE email = ?";
+    $sql = "SELECT id, otp FROM clients WHERE email = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -17,15 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $row['id'];
         $sql_otp = $row['otp'];
 
-        $user_otp = $_POST['user_otp'];
+        $otp = $_POST['otp'];
 
-        if ($sql_otp === $user_otp) {
-            header("Location: update_password.php?id=$id");
+        if ($sql_otp === $otp) {
+            header("Location: changePassword.php?id=$id");
             exit();
         }
     } else {
         echo "<script>alert('Invalid OTP. Please try again.'); 
-              window.location='confirm_code.php'</script>";
+              window.location='forgotPassword.php'</script>";
     }
 
     $stmt->close();
@@ -234,13 +234,11 @@ $con->close();
         <div class="shape"></div>
     </div>
     <form action="" method="post" onsubmit="return validateLoginForm()">
-        <h3>Change Password</h3>
-        <!-- New password fields -->
-        <label>New Password:</label>
-        <input type="password" placeholder="New Password" id="newPassword" name="newPassword">
-        <label>Confirm New Password:</label>
-        <input type="password" placeholder="Confirm New Password" id="confirmPassword" name="confirmPassword">
-        <button>Log In</button>
+        <h3>Input One-Time Pin</h3>
+        <label>Your one time pin</label>
+        <input type="text" placeholder="OTP" id="otp" name="otp">
+        <button>Submit</button>
+        <a href="forgotPassword.php" class="btn w-100">Cancel</a>
     </form>
 
 </body>
