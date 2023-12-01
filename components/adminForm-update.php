@@ -51,6 +51,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check if the data is empty
     do {
+        function checkDuplicate($field, $value, $con) {
+            $count = 0;
+            $stmt = $con->prepare("SELECT COUNT(*) FROM clients WHERE $field = ?");
+            $stmt->bind_param("s", $value);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+
+            return $count;
+        }
+
+        $emailDuplicateCount = checkDuplicate('email', $email, $con);
+        $contactDuplicateCount = checkDuplicate('contact_number', $contact, $con);
+
+        if ($emailDuplicateCount > 0) {
+            $errorMessage = "Email already exists";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
+
+        if ($contactDuplicateCount > 0) {
+            $errorMessage = "Contact number already exists";
+            $type = 'warning';
+            $strongContent = 'Oh no!';
+            $alert = generateAlert($type, $strongContent, $errorMessage);
+            break;
+        }
 
         if (empty($name) or empty($email) or empty($contact) or empty($address) or empty($municipality) or empty($barangay)) {
             $message = "All fields are required";
