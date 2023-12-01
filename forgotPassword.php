@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <b>Best regards,</b><br><br>
 
-        <i>Cavite State University - CCAT | Clinic</i><br>
-        <b>Admin Nurse</b>
+        <i>Regional Health Office</i><br>
+        <b>Administrator</b>
 ";
 
         $mail->send();
@@ -125,19 +125,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: linear-gradient(#00ff87,
                     #60efff);
             left: -80px;
-            top: -90px;
+            top: -40px;
         }
 
         .shape:last-child {
             background: linear-gradient(to right,
                     #0061ff,
                     #60efff);
-            right: -60px;
-            bottom: -80px;
+            right: -85px;
+            bottom: -40px;
         }
 
         form {
-            height: 600px;
+            height: 400px;
             width: 400px;
             background-color: rgba(255, 255, 255, 0.13);
             position: absolute;
@@ -204,6 +204,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
+        }
+
+        /* Media query for small to large screens (s-l) */
+        @media only screen and (max-width: 768px) {
+            .background {
+                width: 300px;
+                /* Adjust width for smaller screens */
+                height: 400px;
+                /* Adjust height for smaller screens */
+            }
+
+            .background .shape {
+                height: 150px;
+                /* Adjust shape height for smaller screens */
+                width: 150px;
+                /* Adjust shape width for smaller screens */
+            }
+
+            .shape:first-child {
+                left: -40px;
+                /* Adjust positioning for smaller screens */
+                top: -60px;
+                /* Adjust positioning for smaller screens */
+            }
+
+            .shape:last-child {
+                right: -30px;
+                /* Adjust positioning for smaller screens */
+                bottom: -40px;
+                /* Adjust positioning for smaller screens */
+            }
+
+            form {
+                width: 300px;
+                /* Adjust form width for smaller screens */
+                height: auto;
+                /* Let the height adjust based on content for smaller screens */
+                padding: 30px;
+                /* Adjust padding for smaller screens */
+            }
+
+            form {
+                padding: 20px;
+                /* Adjust padding for smaller screens */
+            }
+
+            input {
+                height: 40px;
+                /* Adjust input height for smaller screens */
+                font-size: 12px;
+                /* Adjust font size for smaller screens */
+            }
+
+            label {
+                font-size: 14px;
+                /* Adjust label font size for smaller screens */
+            }
+
+            button {
+                margin-top: 30px;
+                /* Adjust margin-top for smaller screens */
+                padding: 12px 0;
+                /* Adjust button padding for smaller screens */
+                font-size: 16px;
+                /* Adjust button font size for smaller screens */
+            }
         }
     </style>
 </head>
