@@ -146,6 +146,7 @@ if ($totalCount > 10 && $totalCount < 19) {
 }
 ?>
 
+<!-- Category disease cases -->
 <div class="alert alert-<?= $level ?> alert-dismissible fade show <?= $visibility ?>" role="alert">
     <strong>Oh no!</strong> <?= $diseaseTitle ?> has <?= $totalCount ?> cases on year <?= $pieSelectedYear ?>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=" Close"></button>
