@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($con->query($sql) === TRUE) {
             $successMessage = "Password updated successfully";
             $type = 'success';
-            $strongContent = 'Oh no!';
+            $strongContent = 'Yay!';
             $alert = generateAlert($type, $strongContent, $successMessage);
 
             $resetOtp = "UPDATE clients SET otp = null WHERE id = ?";
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "
     <script> 
         alert('Password successfully updated');
-        window.location= 'login.php';
+        window.location = 'login.php';
     </script>
     ";
     } while (false);
