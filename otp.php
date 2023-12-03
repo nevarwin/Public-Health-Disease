@@ -11,22 +11,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
+    $otp = $_POST['otp'];
+
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $id = $row['id'];
         $sql_otp = $row['otp'];
 
-        $otp = $_POST['otp'];
-
         if ($sql_otp === $otp) {
-            header("Location: changePassword.php?id=$id");
-            exit();
+            echo "<script>
+                alert('Correct OTP!'); 
+                window.location.href='changePassword.php?id=$id';
+            </script>";
         }
-    } else {
-        echo "<script>alert('Invalid OTP. Please try again.'); 
-              window.location='forgotPassword.php'</script>";
     }
+    echo "<script>
+        alert('Invalid OTP. Please try again.'); 
+    </script>";
+
 
     $stmt->close();
 }
