@@ -56,7 +56,7 @@
         </div>
     </div>
     <div id="map"></div>
-    <script src="./js/map.js"></script>
+    <script src="js/map.js"></script>
 </body>
 
 </html>
