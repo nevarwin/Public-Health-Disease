@@ -186,136 +186,206 @@ if (is_file($update_page_path)) {
         </div>
 
 
-    </div><!-- End of Row -->
-    <div class="row"><!-- Begin Row -->
+    </div>
+    <div class="row">
         <!-- First Column -->
-        <div class="col-lg-4">
-            <!-- Details -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-success">Details</h6>
+        <?php if (file_exists($update_page_path)) { ?>
+            <div class="col-lg-4">
+                <!-- Details -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-success">Details</h6>
+                    </div>
+                    <div class="card-body mx-4"> <!--Card Body begin tag  -->
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $fullName  ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?> years old</div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Birthday</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $dob ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Building Number</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $unitCode ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Subdivision/Village</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $subd ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Street</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $street ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangay ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Postal Code</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $postalCode ?></div>
+                        </div>
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Gender</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $gender ?></div>
+                        </div>
+                        <div style="margin-bottom:18px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Contact Number</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $contact ?></div>
+                        </div>
+                        <div style="margin-bottom:18px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality of DRU</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipalityDRU ?></div>
+                        </div>
+                        <div style="margin-bottom:18px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay of DRU</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangayDRU ?></div>
+                        </div>
+
+                        <div style="margin-bottom:17px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address of DRU</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $addressDRU ?></div>
+                        </div>
+
+                        <div style="margin-bottom:18px;">
+                            <div class="row no-gutters">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date Added</div>
+                            </div>
+                            <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $creationDate; ?></div>
+                        </div>
+                    </div><!--Card body end tag -->
                 </div>
-                <div class="card-body mx-4"> <!--Card Body begin tag  -->
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $fullName  ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?> years old</div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Birthday</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $dob ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Building Number</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $unitCode ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Subdivision/Village</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $subd ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Street</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $street ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangay ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Postal Code</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $postalCode ?></div>
-                    </div>
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Gender</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $gender ?></div>
-                    </div>
-                    <div style="margin-bottom:18px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Contact Number</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $contact ?></div>
-                    </div>
-                    <div style="margin-bottom:18px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality of DRU</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipalityDRU ?></div>
-                    </div>
-                    <div style="margin-bottom:18px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay of DRU</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangayDRU ?></div>
-                    </div>
-
-                    <div style="margin-bottom:17px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address of DRU</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $addressDRU ?></div>
-                    </div>
-
-                    <div style="margin-bottom:18px;">
-                        <div class="row no-gutters">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date Added</div>
-                        </div>
-                        <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $creationDate; ?></div>
-                    </div>
-                </div><!--Card body end tag -->
             </div>
-        </div>
-        <!-- Second Column -->
-        <div id="findings" class="col-lg-8">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-success"><?= $disease ?> Disease Information
-                    </h6>
-                    <a style="text-decoration:none;" class="text-secondary" href="<?= $hreflink ?>">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="col-sm-12">
-                        <?php
-                        $file_path = "./disease/{$disease}Form-view.php";
+            <!-- Second Column -->
+            <div id="findings" class="col-lg-8">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-success"><?= $disease ?> Disease Information
+                        </h6>
+                        <a style="text-decoration:none;" class="text-secondary" href="<?= $hreflink ?>">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <?php
+                            $file_path = "./disease/{$disease}Form-view.php";
 
-                        if (file_exists($file_path)) {
-                            include($file_path);
-                        } else {
-                            echo 'No information Available';
-                        }
-                        ?>
+                            if (file_exists($file_path)) {
+                                include($file_path);
+                            } else {
+                                echo 'No information Available';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div><!-- End of Row -->
-        </div>
+            </div>
+        <?php } else { ?>
+            <!-- Landscape of patient details card -->
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-success">Details</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Disease</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $fullName ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $age ?> years old</div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date of birth</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $dob ?> </div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Contact number</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $contact ?> </div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Gender</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $gender ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality DRU</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipalityDRU ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay DRU</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangayDRU ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address of DRU</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $addressDRU ?></div>
+
+
+
+                                <!-- Add more details as needed -->
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Municipality</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $municipality ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Barangay</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $barangay ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Postal code</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $postalCode ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Subdivision/Village</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $subd ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Building Number</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $unitCode ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Street</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $street ?></div>
+
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date Added</div>
+                                <div class="h5 mb-1 font-weight-bold text-gray-800"><?php echo $creationDate ?></div>
+
+                                <!-- Add more details as needed -->
+                            </div>
+                        </div>
+                        <!-- Continue adding details in a similar grid layout -->
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
