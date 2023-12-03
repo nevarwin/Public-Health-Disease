@@ -27,9 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $fname = $row['email'];
 
         $mail = new PHPMailer(true);
-
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-
         $mail->isSMTP();
         $mail->SMTPAuth = true;
 
