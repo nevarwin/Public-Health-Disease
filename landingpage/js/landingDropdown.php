@@ -57,8 +57,8 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
 <div class="d-flex justify-content-center">
     <div class="row align-items-center">
         <form id="form2">
-            <div class="btn-group col-xl-12 col-lg-12  col-sm-8 my-2">
-                <div class="dropdown mx-1">
+            <div class="btn-group col-xl-12 col-lg-12 col-md-12 col-sm-12 my-2">
+                <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
                     <select class="form-select" name="pieDisease">
                         <?php
                         $pieDropdown = [
@@ -106,12 +106,12 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                         ?>
                     </select>
                 </div>
-                <div class="dropdown mx-1">
+                <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
                     <select class="form-select" name="pieYear">
                         <?= $options ?>
                     </select>
                 </div>
-                <div class="dropdown mx-1">
+                <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
                     <select class="form-select" name="pieMun">
                         <option value="">all</option>
                         <?php echo $municipalityOption; ?>
