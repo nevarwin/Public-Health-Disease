@@ -1,3 +1,3 @@
 <?php
-require 'landingpage.php';
-// require 'login.php';
+// require 'landingpage.php';
+require 'login.php';
