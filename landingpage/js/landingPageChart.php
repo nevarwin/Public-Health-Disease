@@ -2,7 +2,7 @@
 // PHP for the line and pie chart
 // '../components/connection.php' for the landingpage/landingPage.php
 // for the login.php
-require_once('components/connection.php');
+require_once('../components/connection.php');
 // require '../components/alertMessage.php';
 $piePatientCount = 0;
 $pieJsonData = 0;
