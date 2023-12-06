@@ -456,6 +456,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
+<?php
+include('ageScript.php');
+?>
+
 <script>
     function validateForm(event) {
         var contactNumber = document.getElementById('contact').value;
