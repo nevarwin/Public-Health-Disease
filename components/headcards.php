@@ -85,7 +85,7 @@
                         $query = "SELECT COUNT(p.patientId) AS count, d.disease
                                 FROM patients p
                                 INNER JOIN diseases d ON p.disease = d.diseaseId
-                                WHERE YEAR(p.creationDate) = '$currentYear'
+                                WHERE YEAR(p.creationDate) = '2023'
                                     AND d.disease IN ('" . implode("','", $diseases) . "')
                                 GROUP BY p.disease, d.disease
                                 ORDER BY count DESC
@@ -210,7 +210,7 @@
                                 FROM patients p
                                 INNER JOIN municipality m ON p.municipality = m.munId
                                 INNER JOIN diseases d ON p.disease = d.diseaseId
-                                WHERE YEAR(p.creationDate) = '$currentYear'
+                                WHERE YEAR(p.creationDate) = '2023'
                                     AND d.disease IN ('" . implode("','", $diseases) . "')
                                 GROUP BY p.municipality, m.municipality, d.disease
                                 ORDER BY m.municipality, count DESC";
