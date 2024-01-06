@@ -246,14 +246,31 @@ const pieConfig = {
   },
 };
 
+// Function to add dynamic content to the description
+function addPieDynamicContent(municipalityArray, countsArray) {
+  const pieChartDescription = document.getElementById("pieChartDescription");
+  let content = "";
+
+  if (municipalityArray.length === 0 || countsArray.length === 0) {
+    content = " No data available for the specified municipality.";
+  } else {
+    for (let i = 0; i < municipalityArray.length; i++) {
+      content += ` For the municipality of ${municipalityArray[i]}, the total count is ${countsArray[i]}. `;
+    }
+  }
+
+  pieChartDescription.textContent += content;
+}
+addPieDynamicContent(translatedMunicipality, munCasesValues);
+
 // displaying the pie chart using the data and config
 const pieChart = new Chart(pie, pieConfig);
 
 // SCRIPT FOR LINE CHART
 var diseaseName;
 var selectedDisease;
-console.log("line chart");
-console.log(selectedDisease);
+// console.log("line chart");
+// console.log(selectedDisease);
 if (
   selectedDisease === undefined ||
   selectedDisease === null ||
@@ -384,6 +401,23 @@ const config = {
   },
   plugis: [hoverline],
 };
+// Function to add dynamic content to the description
+function addLineDynamicContent(yearsArray, countsArray) {
+  const lineChartDescription = document.getElementById("lineChartDescription");
+  console.log(countsArray);
+  let content = "";
+
+  if (yearsArray.length === 0 || countsArray.length === 0) {
+    content = " No data available for the specified year.";
+  } else {
+    for (let i = 0; i < yearsArray.length; i++) {
+      content += ` For the year of ${yearsArray[i]}, the total count is ${countsArray[i]}. `;
+    }
+  }
+
+  lineChartDescription.textContent += content;
+}
+addLineDynamicContent(years, counts);
 
 const myChart = new Chart(ctx, config);
 
@@ -414,13 +448,13 @@ if (jsonData === undefined || jsonData === null || jsonData === "") {
 for (var year in jsonData) {
   if (jsonData.hasOwnProperty(year)) {
     var count = parseInt(jsonData[year]);
-    console.log("Year: " + year + ", Count: " + count);
+    // console.log("Year: " + year + ", Count: " + count);
     years.push(year);
     counts.push(count);
   }
 }
-console.log(typeof counts);
-console.log(years);
+// console.log(typeof counts);
+// console.log(years);
 
 const agectx = document.getElementById("ageChart").getContext("2d");
 let agedelayed;
@@ -489,5 +523,24 @@ const ageconfig = {
     },
   },
 };
+
+// Function to add dynamic content to the description
+function addAgeDynamicContent(ageArray, countsArray) {
+  const ageLineChartDescription = document.getElementById(
+    "ageLineChartDescription"
+  );
+  let content = "";
+
+  if (ageArray.length === 0 || countsArray.length === 0) {
+    content = " No data available for the age distribution.";
+  } else {
+    for (let i = 0; i < ageArray.length; i++) {
+      content += ` for the age of ${ageArray[i]}, the total count is ${countsArray[i]}. `;
+    }
+  }
+
+  ageLineChartDescription.textContent += content;
+}
+addAgeDynamicContent(years, counts);
 
 const ageChart = new Chart(agectx, ageconfig);

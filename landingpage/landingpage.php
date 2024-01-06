@@ -156,7 +156,7 @@
           <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <div class="card-body text-center">
               <h5 class="card-title">Disease count per year chart</h5>
-              <p class="card-text" style="text-align: justify;">This chart displays the annual count of a specific disease, making it easy to track changes and trends in disease prevalence over time.</p>
+              <p class="card-text" id="lineChartDescription" style="text-align: justify;">This chart displays the annual count of a specific disease, making it easy to track changes and trends in disease prevalence over time.</p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@
           <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <div class="card-body text-center">
               <h5 class="card-title">Age distribution of disease</h5>
-              <p class="card-text" style="text-align: justify;">This chart shows how a disease is distributed among different age groups, helping to identify trends and at-risk age categories.</p>
+              <p class="card-text" id="ageLineChartDescription" style="text-align: justify;">This chart shows how a disease is distributed among different age groups, helping to identify trends and at-risk age categories.</p>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@
           <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <div class="card-body text-center">
               <h5 class="card-title">Municipality-wise Disease Case Distribution</h5>
-              <p class="card-text" style="text-align: justify;">This pie chart depicts disease cases across municipalities. Each segment represents a different municipality, with larger segments indicating higher disease cases. It facilitates regional disease comparisons and highlights areas with varying disease prevalence.</p>
+              <p class="card-text" id="pieChartDescription" style="text-align: justify;">This pie chart depicts disease cases across municipalities. Each segment represents a different municipality, with larger segments indicating higher disease cases. It facilitates regional disease comparisons and highlights areas with varying disease prevalence.</p>
             </div>
           </div>
         </div>
