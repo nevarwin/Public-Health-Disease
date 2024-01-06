@@ -79,22 +79,6 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
 
-  if ($totalCount > 0) {
-    echo '<script>
-    window.onload = function() {
-      const scrollTarget = document.getElementById("scroll-target");
-      const scrollOptions = {
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      };
-      setTimeout(function() {
-        scrollTarget.scrollIntoView(scrollOptions);
-      }, 300);
-    }
-  </script>';
-  }
-
   // heatmap
   $query = "SELECT latitude, longitude FROM patients";
 
@@ -232,22 +216,6 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
 
-  if ($totalCount > 0) {
-    echo '<script>
-    window.onload = function() {
-      const scrollTarget = document.getElementById("scroll-target");
-      const scrollOptions = {
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      };
-      setTimeout(function() {
-        scrollTarget.scrollIntoView(scrollOptions);
-      }, 300);
-    }
-  </script>';
-  }
-
   // heatmap
   $query = "SELECT latitude, longitude FROM patients";
 
@@ -317,22 +285,6 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // Echo the JSON data inside a JavaScript block
   echo '<script>var diseaseTitle = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
-
-  if ($totalCount > 0) {
-    echo '<script>
-    window.onload = function() {
-      const scrollTarget = document.getElementById("scroll-target");
-      const scrollOptions = {
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      };
-      setTimeout(function() {
-        scrollTarget.scrollIntoView(scrollOptions);
-      }, 300);
-    }
-  </script>';
-  }
 
   // Start of PIE CHART Logic and query
   // to show if 'true' or 'false'
@@ -472,6 +424,22 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var jsonData = ' . $ageJsonData . ';</script>';
   echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
+}
+
+if (isset($_GET['pieDisease']) > 0) {
+  echo '<script>
+    window.onload = function() {
+      const scrollTarget = document.getElementById("scroll-target");
+      const scrollOptions = {
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      };
+      setTimeout(function() {
+        scrollTarget.scrollIntoView(scrollOptions);
+      }, 300);
+    }
+  </script>';
 }
 
 // Select query for all available creation date in patients table
