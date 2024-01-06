@@ -142,6 +142,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   echo '<script>var jsonData = ' . $ageJsonData . ';</script>';
   echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 }
+
 // For the municipality dropdown logic without the disease
 else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   $pieDiseaseMode = false;
@@ -426,6 +427,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   echo '<script>pieDiseaseMode =' . $pieDiseaseMode . ';</script>';
 }
 
+// For smooth scrolling after the submit button is clicked
 if (isset($_GET['pieDisease']) > 0) {
   echo '<script>
     window.onload = function() {
