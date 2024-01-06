@@ -56,10 +56,11 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
 <!-- form dropdown for both line and pie chart -->
 <div class="d-flex justify-content-center">
     <div class="row align-items-center">
-        <form id="form2">
+        <form id="form2" action="">
             <div class="btn-group col-xl-12 col-lg-12 col-md-12 col-sm-12 my-2">
                 <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
-                    <select class="form-select" name="pieDisease">
+                    <!-- Original Dropdown -->
+                    <!-- <select class="form-select" name="pieDisease">
                         <?php
                         $pieDropdown = [
                             1 => 'Amoebiasis',
@@ -93,17 +94,83 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
 
                         $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
 
-                        // // Display each disease in a dropdown option
-                        // while ($row = mysqli_fetch_assoc($result)) {
-                        //     $selected = ($row['diseaseId'] == $pieSelectedDisease) ? 'selected' : '';
-                        //     echo '<option value="' . $row['diseaseId'] . '" ' . $selected . '>' . $row['disease'] . '</option>';
-                        // }
                         if (isset($pieDropdown[$pieSelectedDisease])) {
                             $diseaseTitle = $pieDropdown[$pieSelectedDisease];
                         } else {
                             $diseaseTitle = 'Disease Information';
                         }
                         ?>
+                    </select> -->
+
+                    <!-- optiongroup -->
+                    <!--  -->
+                    <!--  -->
+                    <?php
+                    // Fetch diseases with classifications from the database
+                    $result = mysqli_query($con, 'SELECT * FROM diseases ORDER BY disease ASC');
+
+
+                    $pieSelectedDisease = $_GET['pieDisease'] ?? '';
+
+                    // Function to generate dropdown options with disease names and classifications grouped by classification
+                    function generateGroupedDropdownOptions($result, $pieSelectedDisease) {
+                        $pieDropdown = [
+                            1 => 'Amoebiasis',
+                            2 => 'Adverse Event Following Immunization',
+                            3 => 'Acute encephalitis syndrome',
+                            4 => 'Alpha-Fetoprotein',
+                            5 => 'Acute Meningitis',
+                            6 => 'Chikungunya Virus',
+                            7 => 'Diphtheria',
+                            8 => 'Hand, Foot, and Mouth Disease',
+                            9 => 'Number Needed to Treat',
+                            10 => 'Neonatal Tetanus',
+                            11 => 'Perthes Disease',
+                            12 => 'Influenza',
+                            13 => 'Dengue',
+                            14 => 'Rabies',
+                            15 => 'Cholera',
+                            16 => 'Hepatitis',
+                            17 => 'Measles',
+                            18 => 'Meningitis',
+                            19 => 'Meningo',
+                            20 => 'Typhoid',
+                            21 => 'Leptospirosis',
+                        ];
+                        $options = '';
+                        $classifications = ['Communicable', 'Treatable', 'Respiratory', 'Viral', 'NonCommunicable', 'NotTreatable'];
+
+                        foreach ($classifications as $classification) {
+                            // Create an optgroup for each classification
+                            $options .= '<optgroup label="' . $classification . '">';
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Check if the disease belongs to the current classification
+                                if ($row['is_' . strtolower($classification)] == 1) {
+                                    $selected = ($row['diseaseId'] == $pieSelectedDisease) ? 'selected' : '';
+
+                                    // Construct the option with disease name
+                                    $options .= '<option value="' . $row['diseaseId'] . '" ' . $selected . '>' . $row['disease'] . '</option>';
+                                }
+                            }
+
+                            // Close the optgroup for the current classification
+                            $options .= '</optgroup>';
+
+                            // Move the pointer to the start for the next classification
+                            mysqli_data_seek($result, 0);
+                        }
+
+                        return $options;
+                    }
+
+                    // Dropdown generation with grouped options
+                    $pieDropdown = generateGroupedDropdownOptions($result, $pieSelectedDisease);
+                    ?>
+
+                    <!-- HTML Dropdown with grouped options -->
+                    <select class="form-select" name="pieDisease">
+                        <?php echo $pieDropdown; ?>
                     </select>
                 </div>
                 <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
