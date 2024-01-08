@@ -79,7 +79,11 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
 
-  // heatmap
+  //
+  //
+  // H E A T M A P   L O G I C
+  //
+  //
   $query = "SELECT latitude, longitude FROM patients";
 
   if (!empty($pieSelectedDisease)) {
@@ -217,7 +221,11 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   echo '<script>var selectedDisease = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
 
-  // heatmap
+  //
+  //
+  // H E A T M A P   L O G I C
+  //
+  //
   $query = "SELECT latitude, longitude FROM patients";
 
   if (!empty($pieSelectedDisease)) {
@@ -376,7 +384,11 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
 
   // echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
 
-  // heatmap
+  //
+  //
+  // H E A T M A P   L O G I C
+  //
+  //
   $query = "SELECT latitude, longitude FROM patients";
 
   if (!empty($pieSelectedDisease)) {

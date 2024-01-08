@@ -72,22 +72,6 @@ const tritanomalyColors = [
   "rgba(0, 0, 128, 1)", // Dark Blue
   "rgba(0, 0, 0, 1)",
 ];
-// const warmColors = [
-//   "rgba(0, 0, 0, 0)",
-//   "rgb(255, 0, 0)", // Red
-//   "rgb(255, 255, 0)", // Yellow
-//   "rgb(0, 128, 0)", // Green
-//   "rgba(0, 0, 0, 1)",
-// ];
-
-// const coolors = [
-//   "rgba(0, 0, 0, 0)",
-//   "rgb(0, 102, 204)", // Blue
-//   "rgb(102, 0, 102)", // Purple
-//   "rgb(0, 204, 102)", // Teal
-//   "rgba(0, 0, 0, 1)",
-// ];
-console.log(isWarm);
 var gradientColors;
 
 var warmGradient = "red, yellow, green";
