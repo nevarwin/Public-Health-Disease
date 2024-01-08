@@ -25,16 +25,16 @@ while ($yearRow = mysqli_fetch_assoc($yearResult)) {
 $selectedDisease = $_GET['disease'] ?? '';
 $selectedYear = $_GET['year'] ?? '';
 
-$query = "SELECT latitude, longitude FROM patients";
+$query = "SELECT latitude, longitude, creationDate FROM patients";
 
 if (!empty($selectedDisease)) {
     // echo "Disease Only";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$selectedDisease'";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$selectedDisease'";
 }
 
 if (!empty($selectedDisease) && !empty($selectedYear)) {
     // echo "This is triggered";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$selectedDisease' AND YEAR(creationDate) = $selectedYear";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$selectedDisease' AND YEAR(creationDate) = $selectedYear";
 }
 
 $result = mysqli_query($con, $query);
@@ -50,7 +50,8 @@ $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
         'lat' => floatval($row['latitude']),
-        'lng' => floatval($row['longitude'])
+        'lng' => floatval($row['longitude']),
+        'creationDate' => $row['creationDate']
     ];
 }
 
