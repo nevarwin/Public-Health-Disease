@@ -525,7 +525,6 @@ function heatmapGradient($pieSelectedDisease) {
           
           defaultGradient = warmColors;
           var isWarm = true;
-          console.log(isWarm);
       </script>
     ";
       break;
@@ -586,7 +585,6 @@ function heatmapGradient($pieSelectedDisease) {
                 ];
             defaultGradient = warmColors;
             var isWarm = true;
-            console.log(isWarm);
             </script>
             ";
       break;
