@@ -101,8 +101,8 @@ if (!empty($errorMessage)) {
 
     var diseaseName;
     var selectedDisease;
-    console.log(typeof selectedDisease);
-    console.log(selectedDisease);
+    // console.log(typeof selectedDisease);
+    // console.log(selectedDisease);
     if (
         selectedDisease === undefined ||
         selectedDisease === null ||
@@ -148,24 +148,24 @@ if (!empty($errorMessage)) {
     console.log(pieDiseaseMode);
 
     // how to get all the values and store it inside 1 variable
-    console.log(municipalities);
+    // console.log(municipalities);
 
     if (pieDiseaseMode == 1) {
-        console.log("pieDiseaseMode is true");
+        // console.log("pieDiseaseMode is true");
         var translatedMunicipality = municipalities.map(function(number) {
             return municipality[number];
         });
     } else if (pieDiseaseMode == false) {
-        console.log("pieDiseaseMode is false");
+        // console.log("pieDiseaseMode is false");
         var translatedMunicipality = municipalities.map(function(number) {
             return diseases[number];
         });
     } else if (pieDiseaseMode == undefined) {
-        console.log("pieDiseaseMode is undefined");
+        // console.log("pieDiseaseMode is undefined");
         var translatedMunicipality = Object.values(municipalities);
     }
 
-    console.log(translatedMunicipality);
+    // console.log(translatedMunicipality);
 
     const pie = document.getElementById("pieChart");
 
@@ -195,7 +195,7 @@ if (!empty($errorMessage)) {
         casesTotal += intValue;
         casesValue.push(value);
     }
-    console.log(casesTotal);
+    // console.log(casesTotal);
 
     // variable for the concat values of mun and cases
     let munCasesValues = [];
@@ -208,7 +208,7 @@ if (!empty($errorMessage)) {
     } else {
         console.log("Arrays must have the same length.");
     }
-    console.log(munCasesValues);
+    // console.log(munCasesValues);
 
     // for the pie chart
     const pieData = {
