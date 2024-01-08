@@ -451,7 +451,7 @@ if (isset($_GET['pieDisease']) > 0) {
       };
       setTimeout(function() {
         scrollTarget.scrollIntoView(scrollOptions);
-      }, 300);
+      }, 50);
     }
   </script>';
 }
