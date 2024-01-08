@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 05:45 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- Generation Time: Jan 08, 2024 at 06:45 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -169,7 +169,8 @@ INSERT INTO `abdinfotbl` (`amebiasisld`, `patientId`, `stoolCulture`, `organism`
 (132, 836, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0),
 (133, 837, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0),
 (134, 838, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0),
-(135, 839, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0);
+(135, 839, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0),
+(136, 861, 'N/A', 'N/A', 'alive', '0000-00-00 00:00:00', '0000-00-00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1741,38 +1742,41 @@ INSERT INTO `diphinfotbl` (`diphld`, `patientId`, `dptDoses`, `dateLastDose`, `c
 
 CREATE TABLE `diseases` (
   `diseaseId` int(11) NOT NULL,
-  `disease` varchar(50) NOT NULL
+  `disease` varchar(50) NOT NULL,
+  `is_communicable` tinyint(1) DEFAULT 1,
+  `is_treatable` tinyint(1) DEFAULT 1,
+  `is_respiratory` tinyint(1) DEFAULT 0,
+  `is_viral` tinyint(1) DEFAULT 0,
+  `is_noncommunicable` tinyint(4) DEFAULT 0,
+  `is_nottreatable` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `diseases`
 --
 
-INSERT INTO `diseases` (`diseaseId`, `disease`) VALUES
-(1, 'ABD'),
-(2, 'AEFI'),
-(3, 'AES'),
-(4, 'AFP'),
-(5, 'AMES'),
-(6, 'ChikV'),
-(7, 'DIPH'),
-(8, 'HFMD'),
-(9, 'NNT'),
-(10, 'NT'),
-(11, 'PERT'),
-(12, 'Influenza'),
-(13, 'Dengue'),
-(14, 'Rabies'),
-(15, 'Cholera'),
-(16, 'Hepatitis'),
-(17, 'Measles'),
-(18, 'Meningitis'),
-(19, 'Meningo'),
-(20, 'Typhoid'),
-(21, 'Leptospirosis'),
-(24, 'Leptos'),
-(25, 'newer disease'),
-(26, 'Try disease');
+INSERT INTO `diseases` (`diseaseId`, `disease`, `is_communicable`, `is_treatable`, `is_respiratory`, `is_viral`, `is_noncommunicable`, `is_nottreatable`) VALUES
+(1, 'ABD', 1, 0, 0, 0, 1, 1),
+(2, 'AEFI', 1, 1, 1, 1, 0, 0),
+(3, 'AES', 1, 0, 0, 1, 1, 1),
+(4, 'AFP', 0, 0, 0, 0, 1, 1),
+(5, 'AMES', 1, 1, 1, 1, 0, 0),
+(6, 'ChikV', 1, 0, 0, 1, 1, 1),
+(7, 'DIPH', 1, 1, 0, 0, 0, 0),
+(8, 'HFMD', 1, 1, 0, 0, 0, 0),
+(9, 'NNT', 1, 0, 0, 0, 1, 1),
+(10, 'NT', 1, 1, 0, 0, 0, 0),
+(11, 'PERT', 0, 0, 0, 0, 1, 1),
+(12, 'Influenza', 1, 1, 1, 1, 0, 0),
+(13, 'Dengue', 1, 1, 0, 1, 0, 0),
+(14, 'Rabies', 1, 1, 1, 1, 0, 0),
+(15, 'Cholera', 1, 1, 0, 0, 0, 0),
+(16, 'Hepatitis', 1, 1, 0, 1, 0, 0),
+(17, 'Measles', 1, 1, 1, 1, 0, 0),
+(18, 'Meningitis', 1, 1, 1, 1, 0, 0),
+(19, 'Meningo', 1, 1, 0, 0, 1, 1),
+(20, 'Typhoid', 1, 1, 0, 1, 0, 0),
+(21, 'Leptospirosis', 1, 1, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2771,7 +2775,8 @@ INSERT INTO `patients` (`patientId`, `createdby_id`, `nurse_id`, `latitude`, `lo
 (857, 36, 36, 14.4523293, 120.9180653, '2024-01-04 10:23:44', 'Hannah', 'Victoria', 'Martinez', '09457845475', 6, 230, '4', 1, '2000-01-01', 23, 12, 512, '', '', '', '4104', 2, '2024-01-04 10:23:44'),
 (858, 36, 36, 14.4142587, 120.8480999, '2024-01-04 10:24:55', 'Mason', 'Easton', 'Thompson', '09457845476', 17, 632, '10', 2, '2000-01-01', 23, 18, 666, '', '', '', '4106', 26, '2024-01-04 10:24:55'),
 (859, 36, 36, 14.4523293, 120.9180653, '2024-01-04 10:26:07', 'Amelia', 'Paisley', 'Garcia', '09457845477', 6, 230, '1', 1, '2000-01-01', 23, 12, 512, '', '', '', '4104', 2, '2024-01-04 10:26:07'),
-(860, 36, 36, 14.4142587, 120.8480999, '2024-01-04 10:15:22', 'Elijah', 'Owen', 'Smith', '09457845468', 17, 632, '5', 1, '2000-01-01', 23, 18, 666, '', '', '', '4106', 26, '2024-01-04 10:15:22');
+(860, 36, 36, 14.4142587, 120.8480999, '2024-01-04 10:15:22', 'Elijah', 'Owen', 'Smith', '09457845468', 17, 632, '5', 1, '2000-01-01', 23, 18, 666, '', '', '', '4106', 26, '2024-01-04 10:15:22'),
+(861, 135, 135, 14.4220844, 120.8678378, '2024-01-05 04:53:07', 'juan', 'Dela cruz', '', '09897654637', 18, 648, 'wawa', 1, '2000-01-01', 24, 18, 648, '', '', '', '4106', 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -3132,7 +3137,7 @@ ALTER TABLE `typhoidinfotbl`
 -- AUTO_INCREMENT for table `abdinfotbl`
 --
 ALTER TABLE `abdinfotbl`
-  MODIFY `amebiasisld` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `amebiasisld` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `aefiinfotbl`
@@ -3294,7 +3299,7 @@ ALTER TABLE `outcomes`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=861;
+  MODIFY `patientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=862;
 
 --
 -- AUTO_INCREMENT for table `pertinfotbl`
