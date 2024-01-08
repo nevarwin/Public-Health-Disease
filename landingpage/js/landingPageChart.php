@@ -84,16 +84,16 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   // H E A T M A P   L O G I C
   //
   //
-  $query = "SELECT latitude, longitude FROM patients";
+  $query = "SELECT latitude, longitude, creationDate FROM patients";
 
   if (!empty($pieSelectedDisease)) {
     // echo "Disease Only";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease'";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease'";
   }
 
   if (!empty($pieSelectedDisease) && !empty($pieSelectedYear)) {
     // echo "This is triggered";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
   }
 
   $result = mysqli_query($con, $query);
@@ -114,7 +114,8 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
   while ($row = mysqli_fetch_assoc($result)) {
     $locationData[] = [
       'lat' => floatval($row['latitude']),
-      'lng' => floatval($row['longitude'])
+      'lng' => floatval($row['longitude']),
+      'creationDate' => $row['creationDate']
     ];
   }
 
@@ -226,16 +227,16 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   // H E A T M A P   L O G I C
   //
   //
-  $query = "SELECT latitude, longitude FROM patients";
+  $query = "SELECT latitude, longitude, creationDate FROM patients";
 
   if (!empty($pieSelectedDisease)) {
     // echo "Disease Only";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease'";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease'";
   }
 
   if (!empty($pieSelectedDisease) && !empty($pieSelectedYear)) {
     // echo "This is triggered";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
   }
 
   $result = mysqli_query($con, $query);
@@ -256,7 +257,8 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   while ($row = mysqli_fetch_assoc($result)) {
     $locationData[] = [
       'lat' => floatval($row['latitude']),
-      'lng' => floatval($row['longitude'])
+      'lng' => floatval($row['longitude']),
+      'creationDate' => $row['creationDate']
     ];
   }
 
@@ -389,16 +391,16 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // H E A T M A P   L O G I C
   //
   //
-  $query = "SELECT latitude, longitude FROM patients";
+  $query = "SELECT latitude, longitude, creationDate FROM patients";
 
   if (!empty($pieSelectedDisease)) {
     // echo "Disease Only";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease'";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease'";
   }
 
   if (!empty($pieSelectedDisease) && !empty($pieSelectedYear)) {
     // echo "This is triggered";
-    $query = "SELECT latitude, longitude FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
+    $query = "SELECT latitude, longitude, creationDate FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
   }
 
   $result = mysqli_query($con, $query);
@@ -408,7 +410,8 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   while ($row = mysqli_fetch_assoc($result)) {
     $locationData[] = [
       'lat' => floatval($row['latitude']),
-      'lng' => floatval($row['longitude'])
+      'lng' => floatval($row['longitude']),
+      'creationDate' => $row['creationDate']
     ];
   }
 
