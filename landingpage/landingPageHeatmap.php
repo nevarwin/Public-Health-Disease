@@ -56,40 +56,49 @@
         </div>
     </div>
     <div class="row py-2">
-        <div class="col-auto d-flex align-items-center">
-            <label for="month-selection">Select Month:</label>
-        </div>
-        <div class="col">
-            <select id="month-selection" class="form-select form-select-md">
-                <option value="0">All</option>
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        </div>
-        <div class="col-auto d-flex align-items-center">
-            <label for="week-selection">Select Week:</label>
-        </div>
-        <div class="col">
-            <select id="week-selection" class="form-select form-select-md">
-                <option value="0">All</option>
-                <option value="1">Week 1</option>
-                <option value="2">Week 2</option>
-                <option value="3">Week 3</option>
-                <option value="4">Week 4</option>
-            </select>
-        </div>
-        <div class="col">
-            <button onclick="applyFilter()" class="btn btn-primary">Apply Filter</button>
+        <div class="row">
+            <div class="col text-center">
+                <label for="quarter-selection">Select Quarterly:</label>
+                <select id="quarter-selection" class="form-select form-select-md">
+                    <option value="0">All</option>
+                    <option value="1">First Quarter</option>
+                    <option value="2">Second Quarter</option>
+                    <option value="3">Third Quarter</option>
+                    <option value="4">Fourth Quarter</option>
+                </select>
+            </div>
+            <div class="col text-center">
+                <label for="month-selection">Select Month:</label>
+                <select id="month-selection" class="form-select form-select-md">
+                    <option value="0">All</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="col text-center">
+                <label for="week-selection">Select Week:</label>
+                <select id="week-selection" class="form-select form-select-md">
+                    <option value="0">All</option>
+                    <option value="1">Week 1</option>
+                    <option value="2">Week 2</option>
+                    <option value="3">Week 3</option>
+                    <option value="4">Week 4</option>
+                </select>
+            </div>
+            <div class="col text-center">
+                <label for=""></label>
+                <button onclick="applyFilter()" class="form-select form-select-md btn btn-primary">Apply Filter</button>
+            </div>
         </div>
     </div>
     <div id="map"></div>
