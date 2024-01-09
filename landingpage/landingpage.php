@@ -145,7 +145,7 @@
           </div>
         </div>
         <!-- Bar Chart -->
-        <div class="row">
+        <div class="row mt-5">
           <div class="col-sm-12 col-md-12 col-lg-8">
             <div class="card shadow">
               <div class="card-body">
