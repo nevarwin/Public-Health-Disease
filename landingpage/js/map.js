@@ -66,10 +66,6 @@ function applyFilter() {
     const isQuarterlySelection = selectedQuarter === monthConverted;
     const isMonthlySelection =
       selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
-    const isWeeklySelection =
-      selectedQuarter === 0 &&
-      selectedMonth === 0 &&
-      selectedWeek === dateConverted;
     const isMonthlyAndWeeklySelection =
       selectedMonth === month && selectedWeek === dateConverted;
     const isAll =
@@ -78,7 +74,6 @@ function applyFilter() {
     if (
       isQuarterlySelection ||
       isMonthlySelection ||
-      isWeeklySelection ||
       isMonthlyAndWeeklySelection
     ) {
       filteredData.push(item);
@@ -113,7 +108,6 @@ function initMap() {
   });
 
   if (useFilteredData) {
-    console.log("filteredData is used");
     heatmap = new google.maps.visualization.HeatmapLayer({
       // Old data
       // data: locationData.map(
@@ -137,7 +131,6 @@ function initMap() {
       gradient: defaultGradient,
     });
   } else {
-    console.log("locationData is used");
     heatmap = new google.maps.visualization.HeatmapLayer({
       // Old data
       // data: locationData.map(
@@ -216,7 +209,7 @@ var gradientColors;
 
 var warmGradient = "red, yellow, green";
 var coolGradient = "blue, purple, teal";
-var isWarm = true;
+// var isWarm = true;
 isWarm ? (gradientColors = warmGradient) : (gradientColors = coolGradient);
 document.getElementById("colorGradient").style.background =
   "linear-gradient(to right, " + gradientColors + ")";
