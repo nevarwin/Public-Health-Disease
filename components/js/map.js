@@ -31,6 +31,101 @@ function dateConversion(date, dateConverted) {
   return dateConverted;
 }
 
+// Handle changes in the dropdown menus
+const diseaseSelect = document.getElementById("disease");
+const yearSelect = document.getElementById("year");
+
+diseaseSelect.addEventListener("change", updateHeatmap);
+yearSelect.addEventListener("change", updateHeatmap);
+
+const quarterSelect = document.getElementById("quarter-selection");
+const monthSelect = document.getElementById("month-selection");
+const weekSelect = document.getElementById("week-selection");
+
+quarterSelect.addEventListener("change", updateHeatmap);
+monthSelect.addEventListener("change", updateHeatmap);
+weekSelect.addEventListener("change", updateHeatmap);
+
+function updateHeatmap() {
+  const selectedDisease = diseaseSelect.value;
+  const selectedYear = yearSelect.value;
+  const selectedQuarter = quarterSelect.value;
+  const selectedMonth = monthSelect.value;
+  const selectedWeek = weekSelect.value;
+
+  // // Redirect to the same page with updated query parameters
+  // window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
+
+  // Filter the data based on the month and week
+  if (selectedQuarter != 0 && selectedMonth != 0 && selectedWeek != 0) {
+    applyFilter();
+  }
+
+  // Construct the URL with updated query parameters
+  const baseUrl = "map.php";
+  const queryParams = new URLSearchParams({
+    disease: selectedDisease,
+    year: selectedYear,
+    quarter: selectedQuarter,
+    month: selectedMonth,
+    week: selectedWeek,
+  });
+
+  // Redirect to the same page with updated query parameters
+  window.location.href = `${baseUrl}?${queryParams.toString()}`;
+
+  initMap();
+}
+
+function applyFilter() {
+  for (let i = 0; i < locationData.length; i++) {
+    filteredData = [];
+    const item = locationData[i];
+    // console.log(item);
+    const creationDate = new Date(item.creationDate);
+    const month = creationDate.getMonth() + 1;
+    // console.log("month", month);
+    const date = creationDate.getDate();
+    // console.log("date", date);
+    let dateConverted;
+    let monthConverted;
+
+    dateConverted = dateConversion(date, dateConverted);
+    monthConverted = monthConversion(month, monthConverted);
+
+    const isQuarterlySelection = selectedQuarter === monthConverted;
+    const isMonthlySelection =
+      selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
+    const isMonthlyAndWeeklySelection =
+      selectedMonth === month && selectedWeek === dateConverted;
+    const isAll =
+      selectedQuarter === 0 && selectedMonth === 0 && selectedWeek === 0;
+
+    if (
+      isQuarterlySelection ||
+      isMonthlySelection ||
+      isMonthlyAndWeeklySelection
+    ) {
+      filteredData.push(item);
+    } else {
+      useFilteredData = true;
+    }
+
+    if (isAll) {
+      useFilteredData = false;
+    }
+  }
+
+  // console.log("filteredData", Object.values(filteredData));
+
+  // Clear previous heatmap
+  if (heatmap) {
+    heatmap.setMap(null);
+  }
+
+  initMap();
+}
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
@@ -57,6 +152,7 @@ function initMap() {
     radius: 20,
   });
 }
+
 const deuteranomalyColors = [
   "rgba(255, 0, 0, 0)",
   "rgba(255, 140, 0, 1)", // Dark Orange
@@ -142,89 +238,4 @@ function changeGradientColor() {
   }
 }
 
-// Handle changes in the dropdown menus
-const diseaseSelect = document.getElementById("disease");
-const yearSelect = document.getElementById("year");
-
-diseaseSelect.addEventListener("change", updateHeatmap);
-yearSelect.addEventListener("change", updateHeatmap);
-
-const quarterSelect = document.getElementById("quarter-selection");
-const monthSelect = document.getElementById("month-selection");
-const weekSelect = document.getElementById("week-selection");
-
-quarterSelect.addEventListener("change", updateHeatmap);
-monthSelect.addEventListener("change", updateHeatmap);
-weekSelect.addEventListener("change", updateHeatmap);
-
-function updateHeatmap() {
-  const selectedDisease = diseaseSelect.value;
-  const selectedYear = yearSelect.value;
-  const selectedQuarter = quarterSelect.value;
-  const selectedMonth = monthSelect.value;
-  const selectedWeek = weekSelect.value;
-
-  // // Redirect to the same page with updated query parameters
-  // window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
-
-  // Filter the data based on the month and week
-  for (let i = 0; i < locationData.length; i++) {
-    filteredData = [];
-    const item = locationData[i];
-    // console.log(item);
-    const creationDate = new Date(item.creationDate);
-    const month = creationDate.getMonth() + 1;
-    // console.log("month", month);
-    const date = creationDate.getDate();
-    // console.log("date", date);
-
-    let dateConverted;
-    let monthConverted;
-
-    dateConverted = dateConversion(date, dateConverted);
-    monthConverted = monthConversion(month, monthConverted);
-
-    const isQuarterlySelection = selectedQuarter === monthConverted;
-    const isMonthlySelection =
-      selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
-    const isMonthlyAndWeeklySelection =
-      selectedMonth === month && selectedWeek === dateConverted;
-    const isAll =
-      selectedQuarter === 0 && selectedMonth === 0 && selectedWeek === 0;
-
-    if (
-      isQuarterlySelection ||
-      isMonthlySelection ||
-      isMonthlyAndWeeklySelection
-    ) {
-      filteredData.push(item);
-    } else {
-      useFilteredData = true;
-    }
-
-    if (isAll) {
-      useFilteredData = false;
-    }
-  }
-
-  // Construct the URL with updated query parameters
-  const baseUrl = "map.php";
-  const queryParams = new URLSearchParams({
-    disease: selectedDisease,
-    year: selectedYear,
-    quarter: selectedQuarter,
-    month: selectedMonth,
-    week: selectedWeek,
-  });
-
-  // Redirect to the same page with updated query parameters
-  window.location.href = `${baseUrl}?${queryParams.toString()}`;
-
-  // console.log("filteredData", Object.values(filteredData));
-
-  // Clear previous heatmap
-  if (heatmap) {
-    heatmap.setMap(null);
-  }
-}
 initMap();
