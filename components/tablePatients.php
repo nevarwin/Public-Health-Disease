@@ -1,3 +1,88 @@
+<?php
+include("connection.php");
+
+// PHP code handling the file upload and processing
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    $targetDir = "uploads/"; // Directory where files will be uploaded
+    $targetFile = $targetDir . basename($_FILES["file"]["name"]);
+    $uploadOk = 1;
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if file already exists
+    if (file_exists($targetFile)) {
+        echo json_encode(['error' => 'File already exists']);
+        $uploadOk = 0;
+    }
+
+    // Check file size (adjust as needed)
+    if ($_FILES["file"]["size"] > 500000) {
+        echo json_encode(['error' => 'File is too large']);
+        $uploadOk = 0;
+    }
+
+    // Allow only CSV files
+    if ($fileType !== "csv") {
+        echo json_encode(['error' => 'Only CSV files are allowed']);
+        $uploadOk = 0;
+    }
+
+    // If no errors, try to upload the file and import data to the database
+    if ($uploadOk === 1) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+            // File uploaded successfully, process the CSV file and import data to database
+            $csvFile = fopen($targetFile, "r");
+
+            // Skip the header row if needed
+            // fgetcsv($csvFile); 
+
+            while (($data = fgetcsv($csvFile)) !== false) {
+                // Assuming the CSV file columns correspond to the table columns (adjust as needed)
+                $createdby_id = $data[1];
+                $nurse_id = $data[2];
+                $latitude = $data[3];
+                $longitude = $data[4];
+                $creationDate = $data[5];
+                $firstName = $data[6];
+                $lastName = $data[7];
+                $middleName = $data[8];
+                $contact = $data[9];
+                $munCityOfDRU = $data[10];
+                $brgyOfDRU = $data[11];
+                $addressOfDRU = $data[12];
+                $gender = $data[13];
+                $dob = $data[14];
+                $age = $data[15];
+                $municipality = $data[16];
+                $barangay = $data[17];
+                $street = $data[18];
+                $unitCode = $data[19];
+                $subd = $data[20];
+                $postalCode = $data[21];
+                $disease = $data[22];
+
+                // Insert data into the 'patients' table
+                $sql = "INSERT INTO patients (createdby_id, nurse_id, latitude, longitude, creationDate, firstName, lastName, middleName, contact, munCityOfDRU, brgyOfDRU, addressOfDRU, gender, dob, age, municipality, barangay, street, unitCode, subd, postalCode, disease, updated_at) 
+                        VALUES ('$createdby_id', '$nurse_id', '$latitude', '$longitude', '$creationDate', '$firstName', '$lastName', '$middleName', '$contact', '$munCityOfDRU', '$brgyOfDRU', '$addressOfDRU', '$gender', '$dob', '$age', '$municipality', '$barangay', '$street', '$unitCode', '$subd', '$postalCode', '$disease', NOW())";
+
+                if ($con->query($sql) === TRUE) {
+                    // Data inserted successfully
+                    echo json_encode(['success' => 'Data imported successfully']);
+                } else {
+                    // Error during data insertion
+                    echo json_encode(['error' => 'Error importing data: ' . $con->error]);
+                }
+            }
+            fclose($csvFile);
+        } else {
+            echo json_encode(['error' => 'Error uploading file']);
+        }
+    }
+    exit; // Terminate the PHP script after handling the file upload and data insertion
+}
+// Close the database connection at the end
+$con->close();
+?>
+
 <style>
     label {
         display: flex;
@@ -57,10 +142,21 @@
             <h2 class="m-0 font-weight-bold text-primary">Patient's Data</h2>
             <!-- <input class="col-sm-3 form-control" type="text" id="searchInput" placeholder="Search"> -->
             <div class="ml-auto">
-                <a href="patientPage-create.php" class="btn btn-primary" role="button">Add new patient</a>
+                <a href="patientPage-create.php" class="btn btn-primary mb-2" role="button">Add new patient</a>
+                <form method="post" name="upload_excel" enctype="multipart/form-data">
+                    <div class="input-group mb-2">
+                        <div class="custom-file">
+                            <input type="file" id="fileInput" class="custom-file-input" name="file">
+                            <label class="custom-file-label" for="fileInput">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="importButton">Import CSV</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
 
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -160,3 +256,43 @@
         </div>
     </div>
 </div>
+<!-- <script>
+    // Function to handle CSV file selection and upload
+    document.getElementById('importButton').addEventListener('click', function() {
+        // Trigger file input click
+        document.getElementById('fileInput').click();
+    });
+
+    // Handle file selection and upload
+    document.getElementById('fileInput').addEventListener('change', function() {
+        // Get the selected file
+        const file = this.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            // Create a FormData object
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Use fetch to send the file data to the server
+            fetch('', { // Sending POST request to the same file
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Data processed successfully
+                        alert(data.success);
+                    } else {
+                        // Error during processing
+                        alert(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while uploading the file.');
+                });
+        }
+    });
+</script> -->
