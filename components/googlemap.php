@@ -46,15 +46,15 @@ if (mysqli_num_rows($result) == 0) {
 }
 
 // Fetch the data and convert it to JSON
-$data = [];
+$locationData = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = [
+    $locationData[] = [
         'lat' => floatval($row['latitude']),
         'lng' => floatval($row['longitude']),
         'creationDate' => $row['creationDate']
     ];
 }
-
+echo '<script>var locationData = ' . json_encode($locationData) . ';</script>';
 ?>
 
 <!DOCTYPE html>
@@ -112,12 +112,50 @@ while ($row = mysqli_fetch_assoc($result)) {
             </select>
         </div>
         <div class="col">
-            <label>Select Color Vision Deficiency Type:</label>
+            <label>Select Color Vision Deficiency:</label>
             <select id="color-deficiency" class="custom-select" onchange="changeGradientColor()">
                 <option value="default">Default</option>
                 <option value="deuteranomaly">Deuteranomaly</option>
                 <option value="protanomaly">Protanomaly</option>
                 <option value="tritanomaly">Tritanomaly</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="quarter-selection">Select Quarterly:</label>
+            <select id="quarter-selection" class="custom-select">
+                <option value="0">All</option>
+                <option value="1">First Quarter</option>
+                <option value="2">Second Quarter</option>
+                <option value="3">Third Quarter</option>
+                <option value="4">Fourth Quarter</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="month-selection">Select Month:</label>
+            <select id="month-selection" class="custom-select">
+                <option value="0">All</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="week-selection">Select Week:</label>
+            <select id="week-selection" class="custom-select">
+                <option value="0">All</option>
+                <option value="1">Week 1</option>
+                <option value="2">Week 2</option>
+                <option value="3">Week 3</option>
+                <option value="4">Week 4</option>
             </select>
         </div>
     </div>
@@ -127,6 +165,36 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script>
         let map;
         let heatmap;
+        let filteredData = [];
+        let useFilteredData = false;
+
+        function monthConversion(month, monthConverted) {
+            if (month >= 1 && month <= 3) {
+                monthConverted = 1;
+            } else if (month >= 4 && month <= 6) {
+                monthConverted = 2;
+            } else if (month >= 7 && month <= 9) {
+                monthConverted = 3;
+            } else if (month >= 10 && month <= 12) {
+                monthConverted = 4;
+            }
+            // console.log("monthConverted", monthConverted, "month", month);
+            return monthConverted;
+        }
+
+        function dateConversion(date, dateConverted) {
+            if (date >= 1 && date <= 7) {
+                dateConverted = 1;
+            } else if (date <= 14 && date >= 8) {
+                dateConverted = 2;
+            } else if (date <= 21 && date >= 15) {
+                dateConverted = 3;
+            } else if (date <= 31 && date >= 22) {
+                dateConverted = 4;
+            }
+            // console.log("dateConverted", dateConverted, "date", date);
+            return dateConverted;
+        }
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -136,13 +204,20 @@ while ($row = mysqli_fetch_assoc($result)) {
                 },
                 zoom: 11,
                 mapTypeId: "roadmap",
-
             });
 
-            const data = <?php echo json_encode($data); ?>;
-
             heatmap = new google.maps.visualization.HeatmapLayer({
-                data: data.map(item => new google.maps.LatLng(item.lat, item.lng)),
+                data: locationData.map((item) => {
+                    // FOR LOGGING
+                    //
+                    //
+                    console.log(item.creationDate);
+                    console.log(new Date(item.creationDate).getDate());
+                    return {
+                        location: new google.maps.LatLng(item.lat, item.lng),
+                        weight: new Date(item.creationDate).getDate(),
+                    };
+                }),
                 map: map,
                 radius: 20,
             });
@@ -240,14 +315,86 @@ while ($row = mysqli_fetch_assoc($result)) {
         diseaseSelect.addEventListener('change', updateHeatmap);
         yearSelect.addEventListener('change', updateHeatmap);
 
+        const quarterSelect = document.getElementById('quarter-selection');
+        const monthSelect = document.getElementById('month-selection');
+        const weekSelect = document.getElementById('week-selection');
+
+        quarterSelect.addEventListener('change', updateHeatmap);
+        monthSelect.addEventListener('change', updateHeatmap);
+        weekSelect.addEventListener('change', updateHeatmap);
+
         function updateHeatmap() {
             const selectedDisease = diseaseSelect.value;
             const selectedYear = yearSelect.value;
+            const selectedQuarter = quarterSelect.value;
+            const selectedMonth = monthSelect.value;
+            const selectedWeek = weekSelect.value;
+
+            // // Redirect to the same page with updated query parameters
+            // window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
+
+            // Filter the data based on the month and week
+            for (let i = 0; i < locationData.length; i++) {
+                filteredData = [];
+                const item = locationData[i];
+                // console.log(item);
+                const creationDate = new Date(item.creationDate);
+                const month = creationDate.getMonth() + 1;
+                // console.log("month", month);
+                const date = creationDate.getDate();
+                // console.log("date", date);
+
+                let dateConverted;
+                let monthConverted;
+
+                dateConverted = dateConversion(date, dateConverted);
+                monthConverted = monthConversion(month, monthConverted);
+
+                const isQuarterlySelection = selectedQuarter === monthConverted;
+                const isMonthlySelection =
+                    selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
+                const isMonthlyAndWeeklySelection =
+                    selectedMonth === month && selectedWeek === dateConverted;
+                const isAll =
+                    selectedQuarter === 0 && selectedMonth === 0 && selectedWeek === 0;
+
+                if (
+                    isQuarterlySelection ||
+                    isMonthlySelection ||
+                    isMonthlyAndWeeklySelection
+                ) {
+                    filteredData.push(item);
+                } else {
+                    useFilteredData = true;
+                }
+
+                if (isAll) {
+                    useFilteredData = false;
+                }
+            }
+
+
+            // Construct the URL with updated query parameters
+            const baseUrl = 'map.php';
+            const queryParams = new URLSearchParams({
+                disease: selectedDisease,
+                year: selectedYear,
+                quarter: selectedQuarter,
+                month: selectedMonth,
+                week: selectedWeek
+            });
 
             // Redirect to the same page with updated query parameters
-            window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
-        }
+            window.location.href = `${baseUrl}?${queryParams.toString()}`;
 
+            // console.log("filteredData", Object.values(filteredData));
+
+            // Clear previous heatmap
+            if (heatmap) {
+                heatmap.setMap(null);
+            }
+            initMap();
+        }
         initMap();
     </script>
 </body>
