@@ -127,7 +127,7 @@
               <div class="col-sm-12 col-md-12 col-lg-4 py-5">
                 <div class="card-body">
                   <h5 class="card-title">Disease Heatmap: Visualizing Geographic Disease Incidence</h5>
-                  <p class="card-text" style="text-align: justify;"> A disease heatmap is a visual representation of illness severity or incidence across geographic areas, using color gradients. Darker, warmer colors indicate higher rates, while lighter, cooler colors represent lower rates. This visualization helps identify disease hotspots, aiding public health professionals in understanding and targeting disease trends</p>
+                  <p class="card-text" style="text-align: justify;"> A disease heatmap is a visual representation of illness severity or incidence across geographic areas, using color gradients. Darker, warmer colors indicate higher rates, while lighter, cooler colors represent lower rates. This visualization helps identify disease hotspots, aiding public health professionals in understanding and targeting disease trends.</p>
                 </div>
                 <div class="row justify-content-center pt-5">
                   <div class="text-center">
