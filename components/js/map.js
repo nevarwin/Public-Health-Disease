@@ -1,6 +1,6 @@
 let map;
 let heatmap;
-let filteredData = [];
+let filteredData;
 let useFilteredData = false;
 
 function monthConversion(month, monthConverted) {
@@ -73,7 +73,7 @@ function updateHeatmap() {
 }
 
 function applyFilter() {
-  let filteredData = [];
+  // let filteredData = [];
   const selectedQuarter = quarterSelect.value;
   console.log("selectedQuarter", selectedQuarter);
   const selectedMonth = monthSelect.value;
@@ -111,6 +111,10 @@ function applyFilter() {
 
     console.log(isQuarterlySelection);
 
+    if (!filteredData) {
+      filteredData = []; // Initialize data if it's undefined
+    }
+
     if (
       isQuarterlySelection ||
       isMonthlySelection ||
@@ -118,6 +122,7 @@ function applyFilter() {
     ) {
       filteredData.push(item);
     } else {
+      console.log("false in this bullshit");
       useFilteredData = true;
     }
 
@@ -148,7 +153,7 @@ function initMap() {
   });
 
   if (useFilteredData) {
-    console.log("filteredData", filteredData);
+    console.log("filteredData", Object.values(filteredData));
     heatmap = new google.maps.visualization.HeatmapLayer({
       // Old data
       // data: locationData.map(
@@ -160,8 +165,8 @@ function initMap() {
         // FOR LOGGING
         //
         //
-        console.log(item.creationDate);
-        console.log(new Date(item.creationDate).getDate());
+        // console.log(item.creationDate);
+        // console.log(new Date(item.creationDate).getDate());
         return {
           location: new google.maps.LatLng(item.lat, item.lng),
           weight: new Date(item.creationDate).getDate(),
@@ -169,25 +174,24 @@ function initMap() {
       }),
       map: map,
       radius: 20,
-      gradient: defaultGradient,
+    });
+  } else {
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: locationData.map((item) => {
+        // FOR LOGGING
+        //
+        //
+        // console.log(item.creationDate);
+        // console.log(new Date(item.creationDate).getDate());
+        return {
+          location: new google.maps.LatLng(item.lat, item.lng),
+          weight: new Date(item.creationDate).getDate(),
+        };
+      }),
+      map: map,
+      radius: 20,
     });
   }
-
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: locationData.map((item) => {
-      // FOR LOGGING
-      //
-      //
-      // console.log(item.creationDate);
-      // console.log(new Date(item.creationDate).getDate());
-      return {
-        location: new google.maps.LatLng(item.lat, item.lng),
-        weight: new Date(item.creationDate).getDate(),
-      };
-    }),
-    map: map,
-    radius: 20,
-  });
 }
 
 const deuteranomalyColors = [
