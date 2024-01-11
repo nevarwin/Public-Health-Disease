@@ -19,13 +19,13 @@ function monthConversion(month, monthConverted) {
 
 function dateConversion(date, dateConverted) {
   if (date >= 1 && date <= 7) {
-    dateConverted = "1";
+    dateConverted = 1;
   } else if (date <= 14 && date >= 8) {
-    dateConverted = "2";
+    dateConverted = 2;
   } else if (date <= 21 && date >= 15) {
-    dateConverted = "3";
+    dateConverted = 3;
   } else if (date <= 31 && date >= 22) {
-    dateConverted = "4";
+    dateConverted = 4;
   }
   // console.log("dateConverted", dateConverted, "date", date);
   return dateConverted;
@@ -73,7 +73,7 @@ function updateHeatmap() {
 }
 
 function applyFilter() {
-  // let filteredData = [];
+  filteredData = [];
   const selectedQuarter = quarterSelect.value;
   console.log("selectedQuarter", selectedQuarter);
   const selectedMonth = monthSelect.value;
@@ -99,21 +99,22 @@ function applyFilter() {
       "monthConverted",
       monthConverted,
       typeof monthConverted,
-      typeof selectedQuarter
+      typeof selectedQuarter,
+      typeof selectedMonth,
+      typeof selectedWeek
     );
 
     const isQuarterlySelection = selectedQuarter === monthConverted;
-    const isMonthlySelection = selectedMonth === month && selectedWeek === 0;
+    const isMonthlySelection =
+      parseInt(selectedMonth) === month && parseInt(selectedWeek) === 0;
     const isMonthlyAndWeeklySelection =
-      selectedMonth === month && selectedWeek === dateConverted;
+      parseInt(selectedMonth) === month &&
+      parseInt(selectedWeek) === dateConverted;
     const isAll =
-      selectedQuarter === 0 && selectedMonth === 0 && selectedWeek === 0;
+      selectedQuarter === "0" && selectedMonth === "0" && selectedWeek === "0";
 
     console.log(isQuarterlySelection);
-
-    if (!filteredData) {
-      filteredData = []; // Initialize data if it's undefined
-    }
+    console.log(isAll);
 
     if (
       isQuarterlySelection ||
