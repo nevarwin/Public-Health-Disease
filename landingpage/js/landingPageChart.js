@@ -255,11 +255,11 @@ function addPieDynamicContent(municipalityArray, countsArray) {
     content = " No data available for the specified municipality.";
   } else {
     for (let i = 0; i < municipalityArray.length; i++) {
-      content += ` For the municipality of ${municipalityArray[i]}, the total count is ${countsArray[i]}. `;
+      content += `For the municipality of ${countsArray[i]}.<br>`;
     }
   }
 
-  pieChartDescription.textContent += content;
+  pieChartDescription.innerHTML += content;
 }
 addPieDynamicContent(translatedMunicipality, munCasesValues);
 
@@ -411,11 +411,11 @@ function addLineDynamicContent(yearsArray, countsArray) {
     content = " No data available for the specified year.";
   } else {
     for (let i = 0; i < yearsArray.length; i++) {
-      content += ` For the year of ${yearsArray[i]}, the total count is ${countsArray[i]}. `;
+      content += `For the year of ${yearsArray[i]}, the total count is ${countsArray[i]}.<br>`;
     }
   }
 
-  lineChartDescription.textContent += content;
+  lineChartDescription.innerHTML += content;
 }
 addLineDynamicContent(years, counts);
 
@@ -535,11 +535,11 @@ function addAgeDynamicContent(ageArray, countsArray) {
     content = " No data available for the age distribution.";
   } else {
     for (let i = 0; i < ageArray.length; i++) {
-      content += ` for the age of ${ageArray[i]}, the total count is ${countsArray[i]}. `;
+      content += `For the age of ${ageArray[i]}, the total count is ${countsArray[i]}.<br>`;
     }
   }
 
-  ageLineChartDescription.textContent += content;
+  ageLineChartDescription.innerHTML += content;
 }
 addAgeDynamicContent(years, counts);
 
