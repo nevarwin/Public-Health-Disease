@@ -64,8 +64,7 @@ function applyFilter() {
     monthConverted = monthConversion(month, monthConverted);
 
     const isQuarterlySelection = selectedQuarter === monthConverted;
-    const isMonthlySelection =
-      selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
+    const isMonthlySelection = selectedMonth === month;
     const isMonthlyAndWeeklySelection =
       selectedMonth === month && selectedWeek === dateConverted;
     const isAll =
