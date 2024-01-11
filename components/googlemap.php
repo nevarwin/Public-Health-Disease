@@ -102,10 +102,6 @@ include('js/heatmap.php');
                 <option value="4">Week 4</option>
             </select>
         </div>
-        <div class="col text-center">
-            <label for=""></label>
-            <button onclick="applyFilter()" class="form-select form-select-md btn btn-primary">Apply Filter</button>
-        </div>
     </div>
 
     <div id="map"></div>
