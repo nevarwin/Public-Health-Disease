@@ -446,7 +446,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
 if (isset($_GET['pieDisease']) > 0) {
   echo '
     <script>
-          window.location.href = "#scroll-target";
+          window.location.href = "#Heatmap";
     </script>';
 }
 
