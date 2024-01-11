@@ -444,19 +444,10 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
 
 // For smooth scrolling after the submit button is clicked
 if (isset($_GET['pieDisease']) > 0) {
-  echo '<script>
-    window.onload = function() {
-      const scrollTarget = document.getElementById("scroll-target");
-      const scrollOptions = {
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      };
-      setTimeout(function() {
-        scrollTarget.scrollIntoView(scrollOptions);
-      }, 50);
-    }
-  </script>';
+  echo '
+    <script>
+          window.location.href = "#scroll-target";
+    </script>';
 }
 
 // Select query for all available creation date in patients table
