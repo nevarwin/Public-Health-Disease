@@ -5,13 +5,13 @@ let useFilteredData = false;
 
 function monthConversion(month, monthConverted) {
   if (month >= 1 && month <= 3) {
-    monthConverted = 1;
+    monthConverted = "1";
   } else if (month >= 4 && month <= 6) {
-    monthConverted = 2;
+    monthConverted = "2";
   } else if (month >= 7 && month <= 9) {
-    monthConverted = 3;
+    monthConverted = "3";
   } else if (month >= 10 && month <= 12) {
-    monthConverted = 4;
+    monthConverted = "4";
   }
   // console.log("monthConverted", monthConverted, "month", month);
   return monthConverted;
@@ -19,13 +19,13 @@ function monthConversion(month, monthConverted) {
 
 function dateConversion(date, dateConverted) {
   if (date >= 1 && date <= 7) {
-    dateConverted = 1;
+    dateConverted = "1";
   } else if (date <= 14 && date >= 8) {
-    dateConverted = 2;
+    dateConverted = "2";
   } else if (date <= 21 && date >= 15) {
-    dateConverted = 3;
+    dateConverted = "3";
   } else if (date <= 31 && date >= 22) {
-    dateConverted = 4;
+    dateConverted = "4";
   }
   // console.log("dateConverted", dateConverted, "date", date);
   return dateConverted;
@@ -42,64 +42,74 @@ const quarterSelect = document.getElementById("quarter-selection");
 const monthSelect = document.getElementById("month-selection");
 const weekSelect = document.getElementById("week-selection");
 
-quarterSelect.addEventListener("change", updateHeatmap);
-monthSelect.addEventListener("change", updateHeatmap);
-weekSelect.addEventListener("change", updateHeatmap);
+quarterSelect.addEventListener("change", applyFilter);
+monthSelect.addEventListener("change", applyFilter);
+weekSelect.addEventListener("change", applyFilter);
 
 function updateHeatmap() {
   const selectedDisease = diseaseSelect.value;
+  console.log("selectedDisease", selectedDisease);
   const selectedYear = yearSelect.value;
-  const selectedQuarter = quarterSelect.value;
-  const selectedMonth = monthSelect.value;
-  const selectedWeek = weekSelect.value;
+  console.log("selectedYear", selectedYear);
 
   // // Redirect to the same page with updated query parameters
   // window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
-
-  // Filter the data based on the month and week
-  if (selectedQuarter != 0 && selectedMonth != 0 && selectedWeek != 0) {
-    applyFilter();
-  }
 
   // Construct the URL with updated query parameters
   const baseUrl = "map.php";
   const queryParams = new URLSearchParams({
     disease: selectedDisease,
     year: selectedYear,
-    quarter: selectedQuarter,
-    month: selectedMonth,
-    week: selectedWeek,
   });
-
   // Redirect to the same page with updated query parameters
   window.location.href = `${baseUrl}?${queryParams.toString()}`;
 
+  if (heatmap) {
+    heatmap.setMap(null);
+  }
+
   initMap();
+  console.log("updateHeatmap");
 }
 
 function applyFilter() {
+  let filteredData = [];
+  const selectedQuarter = quarterSelect.value;
+  console.log("selectedQuarter", selectedQuarter);
+  const selectedMonth = monthSelect.value;
+  console.log("selectedMonth", selectedMonth);
+  const selectedWeek = weekSelect.value;
+  console.log("selectedWeek", selectedWeek);
+
   for (let i = 0; i < locationData.length; i++) {
-    filteredData = [];
     const item = locationData[i];
-    // console.log(item);
     const creationDate = new Date(item.creationDate);
     const month = creationDate.getMonth() + 1;
-    // console.log("month", month);
     const date = creationDate.getDate();
-    // console.log("date", date);
+
     let dateConverted;
     let monthConverted;
 
     dateConverted = dateConversion(date, dateConverted);
     monthConverted = monthConversion(month, monthConverted);
 
+    console.log(
+      "selectedQuarter",
+      selectedQuarter,
+      "monthConverted",
+      monthConverted,
+      typeof monthConverted,
+      typeof selectedQuarter
+    );
+
     const isQuarterlySelection = selectedQuarter === monthConverted;
-    const isMonthlySelection =
-      selectedQuarter === 0 && selectedMonth === month && selectedWeek === 0;
+    const isMonthlySelection = selectedMonth === month && selectedWeek === 0;
     const isMonthlyAndWeeklySelection =
       selectedMonth === month && selectedWeek === dateConverted;
     const isAll =
       selectedQuarter === 0 && selectedMonth === 0 && selectedWeek === 0;
+
+    console.log(isQuarterlySelection);
 
     if (
       isQuarterlySelection ||
@@ -127,6 +137,7 @@ function applyFilter() {
 }
 
 function initMap() {
+  console.log("initMap");
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
       lat: 14.278023306102497,
@@ -136,13 +147,39 @@ function initMap() {
     mapTypeId: "roadmap",
   });
 
+  if (useFilteredData) {
+    console.log("filteredData", filteredData);
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      // Old data
+      // data: locationData.map(
+      //   (item) => new google.maps.LatLng(item.lat, item.lng)
+      // ),
+
+      // New data
+      data: filteredData.map((item) => {
+        // FOR LOGGING
+        //
+        //
+        console.log(item.creationDate);
+        console.log(new Date(item.creationDate).getDate());
+        return {
+          location: new google.maps.LatLng(item.lat, item.lng),
+          weight: new Date(item.creationDate).getDate(),
+        };
+      }),
+      map: map,
+      radius: 20,
+      gradient: defaultGradient,
+    });
+  }
+
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: locationData.map((item) => {
       // FOR LOGGING
       //
       //
-      console.log(item.creationDate);
-      console.log(new Date(item.creationDate).getDate());
+      // console.log(item.creationDate);
+      // console.log(new Date(item.creationDate).getDate());
       return {
         location: new google.maps.LatLng(item.lat, item.lng),
         weight: new Date(item.creationDate).getDate(),
