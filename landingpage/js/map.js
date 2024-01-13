@@ -5,6 +5,14 @@ let useFilteredData = false;
 // console.log(defaultGradient);
 // var locationData;
 
+const quarterSelect = document.getElementById("quarter-selection");
+const monthSelect = document.getElementById("month-selection");
+const weekSelect = document.getElementById("week-selection");
+
+quarterSelect.addEventListener("change", applyFilter);
+monthSelect.addEventListener("change", applyFilter);
+weekSelect.addEventListener("change", applyFilter);
+
 function monthConversion(month, monthConverted) {
   if (month >= 1 && month <= 3) {
     monthConverted = 1;
