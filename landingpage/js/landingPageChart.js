@@ -399,7 +399,7 @@ const config = {
       },
     },
   },
-  plugis: [hoverline],
+  plugins: [hoverline],
 };
 // Function to add dynamic content to the description
 function addLineDynamicContent(yearsArray, countsArray) {
