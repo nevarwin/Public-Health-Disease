@@ -372,7 +372,7 @@ const config = {
         },
       },
     },
-    maintainAspectRation: true,
+    maintainAspectRatio: true,
     responsive: true,
     animation: {
       onComplete: () => {
