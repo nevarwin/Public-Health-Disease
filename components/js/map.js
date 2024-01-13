@@ -48,9 +48,7 @@ weekSelect.addEventListener("change", applyFilter);
 
 function updateHeatmap() {
   const selectedDisease = diseaseSelect.value;
-  console.log("selectedDisease", selectedDisease);
   const selectedYear = yearSelect.value;
-  console.log("selectedYear", selectedYear);
 
   // // Redirect to the same page with updated query parameters
   // window.location.href = `map.php?disease=${selectedDisease}&year=${selectedYear}`;
@@ -69,17 +67,13 @@ function updateHeatmap() {
   }
 
   initMap();
-  console.log("updateHeatmap");
 }
 
 function applyFilter() {
   filteredData = [];
   const selectedQuarter = quarterSelect.value;
-  console.log("selectedQuarter", selectedQuarter);
   const selectedMonth = monthSelect.value;
-  console.log("selectedMonth", selectedMonth);
   const selectedWeek = weekSelect.value;
-  console.log("selectedWeek", selectedWeek);
 
   for (let i = 0; i < locationData.length; i++) {
     const item = locationData[i];
@@ -92,17 +86,6 @@ function applyFilter() {
 
     dateConverted = dateConversion(date, dateConverted);
     monthConverted = monthConversion(month, monthConverted);
-
-    console.log(
-      "selectedQuarter",
-      selectedQuarter,
-      "monthConverted",
-      monthConverted,
-      typeof monthConverted,
-      typeof selectedQuarter,
-      typeof selectedMonth,
-      typeof selectedWeek
-    );
 
     const isQuarterlySelection = selectedQuarter === monthConverted;
     const isMonthlySelection =
@@ -123,7 +106,6 @@ function applyFilter() {
     ) {
       filteredData.push(item);
     } else {
-      console.log("false in this bullshit");
       useFilteredData = true;
     }
 
@@ -154,7 +136,6 @@ function initMap() {
   });
 
   if (useFilteredData) {
-    console.log("filteredData", Object.values(filteredData));
     heatmap = new google.maps.visualization.HeatmapLayer({
       // Old data
       // data: locationData.map(
