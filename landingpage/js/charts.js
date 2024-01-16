@@ -40,7 +40,7 @@ function addData(chart, label, newData) {
 }
 
 function applyFilter() {
-  console.log("from the charts.js");
+  // console.log("from the charts.js");
   filteredData = [];
   dataCountsPerMonth = {};
 
@@ -57,7 +57,7 @@ function applyFilter() {
     }
 
     dataCountsPerMonth[month]++;
-    console.log("dataCountsPerMonth", dataCountsPerMonth);
+    // console.log("dataCountsPerMonth", dataCountsPerMonth);
   }
 
   const newData = Object.values(dataCountsPerMonth);
@@ -96,7 +96,7 @@ function addLineDynamicContent(monthArray, countsArray) {
   monthlyChartDescription.innerHTML += content;
 }
 
-console.log(monthArray);
+// console.log(monthArray);
 
 // For the quarterly chart
 const quarterlyCtx = document.getElementById("quarterlyChart").getContext("2d");
