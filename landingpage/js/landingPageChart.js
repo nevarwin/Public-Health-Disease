@@ -2,10 +2,6 @@
 var pieJsonData;
 let pieDelayed;
 
-// console.log(pieJsonData);
-// console.log(pieDiseaseMode);
-// console.log(diseaseTitle);
-
 if (pieJsonData === undefined || pieJsonData === null || pieJsonData === "") {
   cases = 0;
   municipalities = [];
@@ -38,8 +34,6 @@ var diseases = {
 
 var diseaseName;
 var selectedDisease;
-// console.log(typeof selectedDisease);
-// console.log(selectedDisease);
 if (
   selectedDisease === undefined ||
   selectedDisease === null ||
@@ -81,28 +75,17 @@ var municipality = {
   23: "Trece Martires City",
 };
 
-// this translates the municipalities from sql to the corresponding number
-// in the municipality associated array
-
-// how to get all the values and store it inside 1 variable
-// console.log(municipalities);
-
 if (pieDiseaseMode == 1) {
-  // console.log("pieDiseaseMode is true");
   var translatedMunicipality = municipalities.map(function (number) {
     return municipality[number];
   });
 } else if (pieDiseaseMode == false) {
-  // console.log("pieDiseaseMode is false");
   var translatedMunicipality = municipalities.map(function (number) {
     return diseases[number];
   });
 } else if (pieDiseaseMode == undefined) {
-  // console.log("pieDiseaseMode is undefined");
   var translatedMunicipality = Object.values(municipalities);
 }
-
-// console.log(translatedMunicipality);
 
 const pie = document.getElementById("pieChart");
 
@@ -130,7 +113,6 @@ for (const key in cases) {
   const value = cases[key];
   const intValue = parseInt(cases[key]);
   casesTotal += intValue;
-  // console.log(casesTotal);
   casesValue.push(value);
 }
 
@@ -145,7 +127,6 @@ if (munValue.length === casesValue.length) {
 } else {
   console.log("Arrays must have the same length.");
 }
-// console.log(munCasesValues);
 
 // for the pie chart
 const pieData = {
@@ -269,8 +250,6 @@ const pieChart = new Chart(pie, pieConfig);
 // SCRIPT FOR LINE CHART
 var diseaseName;
 var selectedDisease;
-// console.log("line chart");
-// console.log(selectedDisease);
 if (
   selectedDisease === undefined ||
   selectedDisease === null ||
@@ -448,13 +427,10 @@ if (jsonData === undefined || jsonData === null || jsonData === "") {
 for (var year in jsonData) {
   if (jsonData.hasOwnProperty(year)) {
     var count = parseInt(jsonData[year]);
-    // console.log("Year: " + year + ", Count: " + count);
     years.push(year);
     counts.push(count);
   }
 }
-// console.log(typeof counts);
-// console.log(years);
 
 const agectx = document.getElementById("ageChart").getContext("2d");
 let agedelayed;
@@ -473,9 +449,6 @@ const agedata = {
     },
   ],
 };
-
-// var translatedDisease = diseases[pieSelectedDisease];
-// let agetitle = pieDiseaseMode == false ? `of ${translatedDisease}` : "";
 
 // line chart config
 const ageconfig = {

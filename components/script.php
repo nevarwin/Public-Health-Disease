@@ -46,16 +46,6 @@
         });
     </script>
 
-    <!-- <script>
-        $(document).ready(function() {
-            $('#tablePatients').DataTable({
-                order: [
-                    [0, 'desc']
-                ],
-            });
-        });
-    </script> -->
-
     <script>
         var table = new DataTable('#tablePatients', {
             order: [],
@@ -73,23 +63,6 @@
                         modifier: {
                             page: 'current',
                         },
-                        // format: {
-                        //     body: function(data, row, col, node) {
-                        //         if (col == 3) {
-                        //             return table
-                        //                 .cell({
-                        //                     row: row,
-                        //                     column: col
-                        //                 })
-                        //                 .nodes()
-                        //                 .to$()
-                        //                 .find(':selected')
-                        //                 .text()
-                        //         } else {
-                        //             return data;
-                        //         }
-                        //     }
-                        // }
                     },
                 },
                 {
@@ -120,40 +93,6 @@
                     }
                 }
             ],
-            // initComplete: function() {
-            //     var table = this;
-
-            //     table.api().columns([3, 4, 6, 7, 8, 9]).every(function() {
-            //         var column = this;
-            //         var uniqueValues = column.data().unique().sort().toArray();
-            //         var select = $('<select class="custom-select"><option value="">All</option></select>');
-
-            //         $.each(uniqueValues, function(_, value) {
-            //             $('<option></option>').attr('value', value).text(value).appendTo(select);
-            //         });
-
-            //         select.on('change', function() {
-            //             var val = this.value !== '' ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '';
-            //             column.search(val, true, false).draw();
-            //         });
-
-            //         $(column.header()).empty().append(select);
-            //     });
-
-            //     table.on('preXhr.dt', function(e, settings, data) {
-            //         table.api().columns([3, 4, 6, 7, 8, 9]).every(function() {
-            //             var column = this;
-            //             var select = $(column.header()).find('select')[0];
-            //             var uniqueValues = column.data().unique().sort().toArray();
-
-            //             $(select).empty().append('<option value="">All</option>');
-
-            //             $.each(uniqueValues, function(_, value) {
-            //                 $('<option></option>').attr('value', value).text(value).appendTo(select);
-            //             });
-            //         });
-            //     });
-            // }
             initComplete: function() {
                 this.api()
                     .columns([4, 6, 7, 8, 9])
@@ -194,24 +133,6 @@
                         });
                     });
                 var table = this;
-
-                table.api().columns([3]).every(function() {
-                    var column = this;
-                    var uniqueValues = column.data().unique().sort().toArray();
-                    var select = $('<select class="custom-select" style="width: 100px;"><option value="All">All</option></select>');
-
-                    $.each(uniqueValues, function(_, value) {
-                        $('<option></option>').attr('value', value).text(value).appendTo(select);
-                    });
-
-                    select.on('change', function() {
-                        var val = this.value !== '' ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '';
-                        column.search(val, true, false).draw();
-                    });
-
-                    $(column.header()).append(select);
-                });
-
             },
         });
     </script>

@@ -36,18 +36,4 @@ if (isset($_GET['id'])) {
     alert('Admin Successfully Removed');
     window.location= 'adminTable.php';
     </script>";
-
-    // '<script>
-    //         if(confirm("Are you sure you want to delete this data?")) {
-    //             window.location.href = "http://localhost/admin2gh/components/adminForm-remove.php?id=' . $id . '";
-    //         } else {
-    //             window.location.href = "http://localhost/admin2gh/adminTable.php";
-    //         }
-    //     </script>';
-    // echo "
-    //     <script> 
-    //     alert('Admin Successfully Removed');
-    //     window.location= 'http://localhost/admin2gh/adminTable.php';
-    //     </script>
-    //     ";
 }

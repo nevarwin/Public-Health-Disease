@@ -40,16 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Passwords match
                 $_SESSION['logged_in'] = true;
                 $_SESSION['id'] = $user_data['id'];
-
-                // if ($user_data['positionId'] == 1) {
-                //     header('location: http://localhost/admin2gh/adminTable.php');
-                //     echo "<script>alert('Log In Successfully!');</script>";
-                //     die;
-                // } else {
-                //     header('location: http://localhost/admin2gh/patientTable.php');
-                //     echo "<script>alert('Log In Successfully!');</script>";
-                //     die;
-                // }
                 header('location: homepage.php');
                 echo "<script>alert('Log In Successfully!');</script>";
                 die;
@@ -63,33 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>alert('User not found. Please try again.');</script>";
             echo "<script>window.location.href = 'login.php';</script>";
         }
-
-        // $query = "SELECT * FROM clients WHERE email = '$email' LIMIT 1";
-        // $result = mysqli_query($con, $query);
-
-        // if ($result && mysqli_num_rows($result) > 0) {
-        //     $user_data = mysqli_fetch_assoc($result);
-        //     if ($user_data['password'] === $password) {
-        //         $_SESSION['logged_in'] = true;
-        //         $_SESSION['id'] = $user_data['id'];
-        //         if ($user_data['positionId'] == 1) {
-        //             echo "
-        //             <script>
-        //                 alert('Log In Successfully!');
-        //             </script>
-        //             ";
-        //             header('location: http://localhost/admin2gh/adminTable.php');
-        //             die;
-        //         }
-        //         echo "
-        //             <script>
-        //                 alert('Log In Successfully!');
-        //             </script>
-        //             ";
-        //         header('location: http://localhost/admin2gh/patientTable.php');
-        //         die;
-        //     }
-        // }
         echo "
         <script>
             alert('Invalid Email or Password!');

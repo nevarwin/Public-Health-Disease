@@ -59,56 +59,48 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
         <form id="form2" action="">
             <div class="btn-group col-xl-12 col-lg-12 col-md-12 col-sm-12 my-2">
                 <div class="dropdown mx-1 col-lg-4 col-md-4 col-sm-4">
-                    <!-- Original Dropdown -->
-                    <!-- <select class="form-select" name="pieDisease">
-                        <?php
-                        $pieDropdown = [
-                            1 => 'Amoebiasis',
-                            2 => 'Adverse Event Following Immunization',
-                            3 => 'Acute encephalitis syndrome',
-                            4 => 'Alpha-Fetoprotein',
-                            5 => 'Acute Meningitis',
-                            6 => 'Chikungunya Virus',
-                            7 => 'Diphtheria',
-                            8 => 'Hand, Foot, and Mouth Disease',
-                            9 => 'Number Needed to Treat',
-                            10 => 'Neonatal Tetanus',
-                            11 => 'Perthes Disease',
-                            12 => 'Influenza',
-                            13 => 'Dengue',
-                            14 => 'Rabies',
-                            15 => 'Cholera',
-                            16 => 'Hepatitis',
-                            17 => 'Measles',
-                            18 => 'Meningitis',
-                            19 => 'Meningo',
-                            20 => 'Typhoid',
-                            21 => 'Leptospirosis',
-                        ];
-                        $pieSelectedDisease = $_GET['pieDisease'] ?? '';
-
-                        foreach ($pieDropdown as $key => $value) {
-                            $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
-                            echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
-                        }
-
-                        $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
-
-                        if (isset($pieDropdown[$pieSelectedDisease])) {
-                            $diseaseTitle = $pieDropdown[$pieSelectedDisease];
-                        } else {
-                            $diseaseTitle = 'Disease Information';
-                        }
-                        ?>
-                    </select> -->
-
-                    <!-- optiongroup -->
-                    <!--  -->
-                    <!--  -->
                     <?php
-                    // Fetch diseases with classifications from the database
-                    $result = mysqli_query($con, 'SELECT * FROM diseases ORDER BY disease ASC');
+                    $pieDropdown = [
+                        1 => 'Amoebiasis',
+                        2 => 'Adverse Event Following Immunization',
+                        3 => 'Acute encephalitis syndrome',
+                        4 => 'Alpha-Fetoprotein',
+                        5 => 'Acute Meningitis',
+                        6 => 'Chikungunya Virus',
+                        7 => 'Diphtheria',
+                        8 => 'Hand, Foot, and Mouth Disease',
+                        9 => 'Number Needed to Treat',
+                        10 => 'Neonatal Tetanus',
+                        11 => 'Perthes Disease',
+                        12 => 'Influenza',
+                        13 => 'Dengue',
+                        14 => 'Rabies',
+                        15 => 'Cholera',
+                        16 => 'Hepatitis',
+                        17 => 'Measles',
+                        18 => 'Meningitis',
+                        19 => 'Meningo',
+                        20 => 'Typhoid',
+                        21 => 'Leptospirosis',
+                    ];
+                    $pieSelectedDisease = $_GET['pieDisease'] ?? '';
 
+                    foreach ($pieDropdown as $key => $value) {
+                        $selected = ($key == $pieSelectedDisease) ? 'selected' : '';
+                        echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+                    }
+
+                    $result = mysqli_query($con, 'SELECT * FROM diseases GROUP BY disease ASC');
+
+                    if (isset($pieDropdown[$pieSelectedDisease])) {
+                        $diseaseTitle = $pieDropdown[$pieSelectedDisease];
+                    } else {
+                        $diseaseTitle = 'Disease Information';
+                    }
+                    ?>
+                    </select>
+                    <?php
+                    $result = mysqli_query($con, 'SELECT * FROM diseases ORDER BY disease ASC');
 
                     $pieSelectedDisease = $_GET['pieDisease'] ?? '';
 
@@ -168,7 +160,6 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
                     $pieDropdown = generateGroupedDropdownOptions($result, $pieSelectedDisease);
                     ?>
 
-                    <!-- HTML Dropdown with grouped options -->
                     <select class="form-select" name="pieDisease">
                         <?php echo $pieDropdown; ?>
                     </select>
@@ -190,8 +181,6 @@ $diseaseInfo = 'you\'ll find concise and reliable descriptions of various diseas
     </div>
 </div>
 <?php
-// echo gettype($diseaseDesc[$diseaseTitle]);
-
 if (isset($diseaseDesc[$diseaseTitle])) {
     $diseaseInfo = $diseaseDesc[$diseaseTitle];
 } else if ($diseaseDesc['Disease Information']) {
