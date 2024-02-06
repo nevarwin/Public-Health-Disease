@@ -254,8 +254,6 @@ if (!empty($errorMessage)) {
             counts.push(count);
         }
     }
-    console.log(typeof counts);
-    console.log(years);
 
     const ctx = document.getElementById("myChart").getContext('2d');
     let delayed;
@@ -280,7 +278,6 @@ if (!empty($errorMessage)) {
     var translatedDisease = diseases[lineSelectedDisease];
     let title = pieDiseaseMode == false ? `of ${translatedDisease}` : '';
 
-    console.log(title);
     // line chart config
     const config = {
         type: 'line',
@@ -334,26 +331,19 @@ if (!empty($errorMessage)) {
         const yearsPoints = [...years];
         const startYear = document.getElementById("startYear");
         const endYear = document.getElementById("endYear");
-
         //get the index number in array
         const startIndex = yearsPoints.indexOf(startYear.value);
         const endIndex = yearsPoints.indexOf(endYear.value);
-
         // slice the array only showing the selected section
         const filteredYears = yearsPoints.slice(startIndex, endIndex + 1);
-
         // replace the labels in the Chart
         myChart.config.data.labels = filteredYears;
-
         // datapoints
         const countsPoints = [...counts];
         const filteredCounts = countsPoints.slice(startIndex, endIndex + 1);
-
         // replace the data in the Chart
         myChart.config.data.datasets[0].data = filteredCounts;
-
         myChart.update();
-
     }
 
     const downloadButton = document.getElementById("downloadButton");

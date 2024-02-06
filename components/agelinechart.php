@@ -254,8 +254,8 @@ if (!empty($errorMessage)) {
             counts.push(count);
         }
     }
-    console.log(typeof counts);
-    console.log(years);
+    var translatedDisease = diseases[lineSelectedDisease];
+    let title = pieDiseaseMode == false ? `of ${translatedDisease}` : '';
 
     const ctx = document.getElementById("myChart").getContext('2d');
     let delayed;
@@ -276,11 +276,6 @@ if (!empty($errorMessage)) {
             ],
         }, ],
     };
-
-    var translatedDisease = diseases[lineSelectedDisease];
-    let title = pieDiseaseMode == false ? `of ${translatedDisease}` : '';
-
-    console.log(title);
     // line chart config
     const config = {
         type: 'line',

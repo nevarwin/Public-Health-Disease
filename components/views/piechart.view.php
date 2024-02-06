@@ -192,46 +192,6 @@ if (!empty($errorMessage)) {
     } else {
         console.log("Arrays must have the same length.");
     }
-
-    // for the pie chart
-    const pieData = {
-        labels: translatedMunicipality.length === 0 ? [
-            "Alfonso",
-            "Amadeo",
-            "Bacoor",
-            "Carmona",
-            "Cavite City",
-            "Dasmariñas",
-            "Gen. Emilio Aguinaldo",
-            "Gen. Mariano Alvarez",
-            "General Trias",
-            "Imus",
-            "Indang",
-            "Kawit",
-            "Magallanes",
-            "Maragondon",
-            "Mendez",
-            "Naic",
-            "Noveleta",
-            "Rosario",
-            "Silang",
-            "Tagaytay City",
-            "Tanza",
-            "Ternate",
-            "Trece Martires City",
-        ] : munCasesValues,
-        datasets: [{
-            label: "Cases",
-            data: cases === 0 ? [
-                66, 50, 1362, 33, 9, 133, 16, 109, 207, 2809, 6, 108, 2, 72, 81,
-                14, 10, 17, 190, 301, 59, 215, 16,
-            ] : cases,
-            backgroundColor: colors,
-            borderColor: colors,
-            borderWidth: 1,
-        }, ],
-    };
-
     let title = 'Sample Disease';
     if (pieDiseaseMode == 1) {
         title = 'Municipality';
@@ -244,7 +204,27 @@ if (!empty($errorMessage)) {
             title = 'Barangay';
         }
     }
-    // for the pie chart configuration
+
+    // for the pie chart
+    const pieData = {
+        labels: translatedMunicipality.length === 0 ? [
+            "Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite City", "Dasmariñas",
+            "Gen. Emilio Aguinaldo", "Gen. Mariano Alvarez", "General Trias",
+            "Imus", "Indang", "Kawit", "Magallanes", "Maragondon",
+            "Mendez", "Naic", "Noveleta", "Rosario", "Silang",
+            "Tagaytay City", "Tanza", "Ternate", "Trece Martires City",
+        ] : munCasesValues,
+        datasets: [{
+            label: "Cases",
+            data: cases === 0 ? [
+                66, 50, 1362, 33, 9, 133, 16, 109, 207, 2809,
+                6, 108, 2, 72, 81, 14, 10, 17, 190, 301, 59, 215, 16,
+            ] : cases,
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+        }, ],
+    };
     const pieConfig = {
         type: "pie",
         data: pieData,
