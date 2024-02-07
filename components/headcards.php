@@ -16,6 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <?php
+                        // Replace with your database connection code
                         include('./components/connection.php');
 
                         $query = "SELECT COUNT(*) AS count, positions.position
@@ -69,8 +70,10 @@
                 <div class="card-body">
                     <div class="row">
                         <?php
+                        // Replace with your database connection code
                         include('./components/connection.php');
 
+                        // Define the list of diseases
                         $diseases = array(
                             'ABD', 'AEFI', 'AES', 'AFP', 'AMES', 'ChikV', 'DIPH', 'HFMD',
                             'NNT', 'NT', 'PERT', 'Influenza', 'Dengue', 'Rabies', 'Cholera',
@@ -118,6 +121,65 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <h5 class="my-2">Most Cases Per Municipality</h5>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="row">
+                        <?php
+                        // Replace with your database connection code
+                        include('./components/connection.php');
+
+                        $currentYear = date('Y');
+
+                        $query = "SELECT COUNT(p.patientId) AS count, m.municipality
+                                FROM patients p
+                                INNER JOIN municipality m ON p.municipality = m.munId
+                                WHERE YEAR(p.creationDate) = '$currentYear'
+                                GROUP BY p.municipality, m.municipality
+                                ORDER BY count DESC
+                                LIMIT 8";
+                        $result = mysqli_query($con, $query);
+
+                        // Display the top 4 municipalities
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $municipality = $row['municipality'];
+                            $count = $row['count'];
+                        ?>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                <div class="card border-left-warning shadow h-100">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><?= $municipality ?></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $count ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-disease fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     <div class="accordion" id="accordionExample">
         <div class="card">
             <div class="card-header" id="headingFour">
@@ -230,6 +292,7 @@
                             </thead>
                             <tbody>
                                 <?php
+                                // Replace with your database connection code
                                 include('./components/connection.php');
 
                                 // Fetch the newly added patients from the patients table

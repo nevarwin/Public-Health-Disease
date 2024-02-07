@@ -29,8 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     // If no errors, try to upload the file and import data to the database
     if ($uploadOk === 1) {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+            // File uploaded successfully, process the CSV file and import data to database
             $csvFile = fopen($targetFile, "r");
+
+            // Skip the header row if needed
+            // fgetcsv($csvFile); 
+
             while (($data = fgetcsv($csvFile)) !== false) {
+                // Assuming the CSV file columns correspond to the table columns (adjust as needed)
                 $createdby_id = $data[1];
                 $nurse_id = $data[2];
                 $latitude = $data[3];
@@ -71,8 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
             echo json_encode(['error' => 'Error uploading file']);
         }
     }
-    exit;
+    exit; // Terminate the PHP script after handling the file upload and data insertion
 }
+// Close the database connection at the end
 $con->close();
 ?>
 
@@ -148,6 +155,7 @@ $con->close();
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
     <div class="card-body">
@@ -172,11 +180,13 @@ $con->close();
                     <?php
                     include("connection.php");
                     // read all the data from db table
+
                     if ($user_data['positionId'] == 1 || $user_data['positionId'] == 2) {
                         $deptid = $user_data['id'];
                     } else {
                         $deptid = $user_data['createdby_id'];
                     }
+
                     if ($user_data['positionId'] == 1) {
                         $sql = "SELECT *
                         FROM patients
@@ -197,7 +207,9 @@ $con->close();
                         ORDER BY patientId DESC
                         ";
                     }
+
                     $result = mysqli_query($con, $sql);
+
                     // check if there is data in the table
                     if (mysqli_num_rows($result) > 0) {
                         foreach ($result as $patients) {
@@ -244,3 +256,43 @@ $con->close();
         </div>
     </div>
 </div>
+<!-- <script>
+    // Function to handle CSV file selection and upload
+    document.getElementById('importButton').addEventListener('click', function() {
+        // Trigger file input click
+        document.getElementById('fileInput').click();
+    });
+
+    // Handle file selection and upload
+    document.getElementById('fileInput').addEventListener('change', function() {
+        // Get the selected file
+        const file = this.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            // Create a FormData object
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Use fetch to send the file data to the server
+            fetch('', { // Sending POST request to the same file
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Data processed successfully
+                        alert(data.success);
+                    } else {
+                        // Error during processing
+                        alert(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while uploading the file.');
+                });
+        }
+    });
+</script> -->
