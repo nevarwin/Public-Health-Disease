@@ -67,6 +67,8 @@ if (!empty($errorMessage)) {
     var pieJsonData;
     let pieDelayed;
 
+    // console.log(barangay);
+
     if (pieJsonData === undefined || pieJsonData === null || pieJsonData === "") {
         cases = 0;
         municipalities = [];
@@ -99,6 +101,8 @@ if (!empty($errorMessage)) {
 
     var diseaseName;
     var selectedDisease;
+    // console.log(typeof selectedDisease);
+    // console.log(selectedDisease);
     if (
         selectedDisease === undefined ||
         selectedDisease === null ||
@@ -138,19 +142,30 @@ if (!empty($errorMessage)) {
         22: "Ternate",
         23: "Trece Martires City",
     };
+
+    // this translates the municipalities from sql to the corresponding number
+    // in the municipality associated array
     console.log(pieDiseaseMode);
 
+    // how to get all the values and store it inside 1 variable
+    // console.log(municipalities);
+
     if (pieDiseaseMode == 1) {
+        // console.log("pieDiseaseMode is true");
         var translatedMunicipality = municipalities.map(function(number) {
             return municipality[number];
         });
     } else if (pieDiseaseMode == false) {
+        // console.log("pieDiseaseMode is false");
         var translatedMunicipality = municipalities.map(function(number) {
             return diseases[number];
         });
     } else if (pieDiseaseMode == undefined) {
+        // console.log("pieDiseaseMode is undefined");
         var translatedMunicipality = Object.values(municipalities);
     }
+
+    // console.log(translatedMunicipality);
 
     const pie = document.getElementById("pieChart");
 
@@ -159,7 +174,7 @@ if (!empty($errorMessage)) {
         const red = Math.floor(Math.random() * 256);
         const green = Math.floor(Math.random() * 256);
         const blue = Math.floor(Math.random() * 256);
-        const alpha = (Math.floor(Math.random() * 9) + 1) / 10;
+        const alpha = (Math.floor(Math.random() * 9) + 1) / 10; // Random alpha value between 0.1 and 0.9
         const color = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
         colors.push(color);
     }
@@ -180,6 +195,7 @@ if (!empty($errorMessage)) {
         casesTotal += intValue;
         casesValue.push(value);
     }
+    // console.log(casesTotal);
 
     // variable for the concat values of mun and cases
     let munCasesValues = [];
@@ -192,6 +208,48 @@ if (!empty($errorMessage)) {
     } else {
         console.log("Arrays must have the same length.");
     }
+    // console.log(munCasesValues);
+
+    // for the pie chart
+    const pieData = {
+        labels: translatedMunicipality.length === 0 ? [
+            "Alfonso",
+            "Amadeo",
+            "Bacoor",
+            "Carmona",
+            "Cavite City",
+            "Dasmariñas",
+            "Gen. Emilio Aguinaldo",
+            "Gen. Mariano Alvarez",
+            "General Trias",
+            "Imus",
+            "Indang",
+            "Kawit",
+            "Magallanes",
+            "Maragondon",
+            "Mendez",
+            "Naic",
+            "Noveleta",
+            "Rosario",
+            "Silang",
+            "Tagaytay City",
+            "Tanza",
+            "Ternate",
+            "Trece Martires City",
+        ] : munCasesValues,
+        // label: `Number of ${diseaseName} Cases`,
+        datasets: [{
+            label: "Cases",
+            data: cases === 0 ? [
+                66, 50, 1362, 33, 9, 133, 16, 109, 207, 2809, 6, 108, 2, 72, 81,
+                14, 10, 17, 190, 301, 59, 215, 16,
+            ] : cases,
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+        }, ],
+    };
+
     let title = 'Sample Disease';
     if (pieDiseaseMode == 1) {
         title = 'Municipality';

@@ -1,5 +1,9 @@
 <?php
+// PHP for the line and pie chart
+// '../components/connection.php' for the landingpage/landingPage.php
+// for the login.php
 require_once('../components/connection.php');
+// require '../components/alertMessage.php';
 $piePatientCount = 0;
 $pieJsonData = 0;
 $totalCount = 0;
@@ -12,8 +16,13 @@ echo '<script>var defaultGradient = [];</script>';
 
 // GETTER for the form 
 if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] != '') {
+
+  // echo 'first if statement';
+
   $pieSelectedDisease = $_GET['pieDisease'];
   $pieSelectedYear = $_GET['pieYear'];
+  // echo "Selected Disease: $pieSelectedDisease<br>";
+  // echo "Selected Year: $pieSelectedYear<br>";
 
   // Query for the pie chart
   $pieCountQuery = "SELECT municipality, 
@@ -30,7 +39,7 @@ if (isset($_GET['pieDisease']) && $_GET['pieMun'] == '' && $_GET['pieDisease'] !
     $municipality = $row['municipality'];
     $count = $row['piePatientCount'];
     $data[$municipality] = $count;
-    $totalCount += $count;
+    $totalCount += $count; // Increment the total count
   }
   // Encode the PHP array as JSON
   $pieJsonData = json_encode($data);
@@ -190,6 +199,8 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   echo 'var cases = ' . json_encode(array_values($data)) . ';';
   echo '</script>';
 
+  // echo '<script>pieDiseaseMode =' . var_export($pieDiseaseMode, true) . ';</script>';
+
   // Query for the line chart
   $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
               FROM patients 
@@ -220,10 +231,12 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
   $query = "SELECT latitude, longitude, creationDate, age FROM patients";
 
   if (!empty($pieSelectedDisease)) {
+    // echo "Disease Only";
     $query = "SELECT latitude, longitude, creationDate, age FROM patients WHERE disease = '$pieSelectedDisease'";
   }
 
   if (!empty($pieSelectedDisease) && !empty($pieSelectedYear)) {
+    // echo "This is triggered";
     $query = "SELECT latitude, longitude, creationDate, age FROM patients WHERE disease = '$pieSelectedDisease' AND YEAR(creationDate) = $pieSelectedYear";
   }
 
@@ -233,6 +246,11 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] == '') {
     $errorMessage = "No data found for the selected municipality.";
     $type = 'warning';
     $strongContent = 'Oh no!';
+    // $alert = generateAlert($type, $strongContent, $errorMessage);
+    // echo "no records";
+    // if (!empty($errorMessage)) {
+    //   echo $alert;
+    // }
   }
 
   // Fetch the data and convert it to JSON
@@ -255,6 +273,7 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   $pieSelectedYear = $_GET['pieYear'];
   $pieSelectedMun = $_GET['pieMun'];
   $pieSelectedDisease = $_GET['pieDisease'];
+  // echo 'else if statement displays barangay <br>';
 
   // Query for the line chart
   $countQuery = "SELECT COUNT(*) AS patientCount, YEAR(creationDate) AS creationYear 
@@ -274,6 +293,8 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // Encode the PHP array as JSON
   $lineJsonData = json_encode($data);
 
+  // echo $pieSelectedDisease . ' -pieselecteddisease in linechart <br>';
+
   // Echo the JSON data inside a JavaScript block
   echo '<script>var diseaseTitle = ' . $pieSelectedDisease . ';</script>';
   echo '<script>var lineJsonData = ' . $lineJsonData . ';</script>';
@@ -281,6 +302,11 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   // Start of PIE CHART Logic and query
   // to show if 'true' or 'false'
   $pieDiseaseMode = '';
+  // echo var_export($pieDiseaseMode) . "<br>";
+
+  // echo 'pieMun <br>';
+
+  // echo (gettype($pieSelectedMun) . '<br>');
 
   // Selecting the counts of cases per disease in selected municipality
   $diseaseCountQuery = "SELECT
@@ -316,6 +342,12 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
   $municipality;
 
   // Check if the query has returned any rows
+  // if (mysqli_num_rows($countResult) == 0) {
+  //   $errorMessage = "No data found for the selected municipality.";
+  //   $type = 'warning';
+  //   $strongContent = 'Oh no!';
+  //   $alert = generateAlert($type, $strongContent, $errorMessage);
+  // } else {
   while ($row = $countResult->fetch_assoc()) {
     $disease = $row['disease'];
     $barangay = $row['barangay'];
@@ -324,10 +356,22 @@ else if (isset($_GET['pieMun']) && $_GET['pieDisease'] != '') {
 
     // Store the disease count for the selected municipality
     $data[$barangay] = $count;
+
+    // echo "Disease: $disease, Count: $count, Municipality: $municipality, Barangay: $barangay <br>";
   }
+  // }
+
+  // // Display the disease counts for the selected municipality
+  // echo "<br> Disease Counts for $pieSelectedMun: <br>";
+  // foreach ($data as $disease => $count) {
+  //     echo "$disease: $count <br>";
+  // }
+  // echo 'below is vardump data <br>';
+  // var_dump($data);
 
   // Encode the PHP variable as JSON before using it in Javascript
   $encodedSelectedMun = json_encode($pieSelectedMun);
+  // echo  '<br>' . $encodedSelectedMun . ' encodedselectedmun';
 
   // Echo the JSON data inside a JavaScript block
   echo "<script>selectedDisease = $encodedSelectedMun;</script>";
