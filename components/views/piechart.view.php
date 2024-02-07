@@ -208,10 +208,7 @@ if (!empty($errorMessage)) {
     } else {
         console.log("Arrays must have the same length.");
     }
-<<<<<<< HEAD
     // console.log(munCasesValues);
-=======
->>>>>>> parent of e95c228 (removed comments)
 
     // for the pie chart
     const pieData = {
@@ -240,10 +237,12 @@ if (!empty($errorMessage)) {
             "Ternate",
             "Trece Martires City",
         ] : munCasesValues,
-<<<<<<< HEAD
+        <<
+        << << < HEAD
         // label: `Number of ${diseaseName} Cases`,
-=======
->>>>>>> parent of e95c228 (removed comments)
+        ===
+        === = >>>
+        >>> > parent of e95c228(removed comments)
         datasets: [{
             label: "Cases",
             data: cases === 0 ? [
